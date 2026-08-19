@@ -9,7 +9,7 @@
 
 ## Global Constraints
 
-- Work only on main; preserve 71b966c docs(design): define InvariantAudit research workflow and the existing plan commit 9b43278.
+- Work only on main; preserve 71b966c docs(design): define InvariantAudit research workflow and the existing plan commits.
 - This turn changes only this plan locally; do not execute tasks, authenticate gh, create a repository, push, or cause any other external side effect.
 - README and Markdown records own narrative; state/workspace.yaml owns state; research-state.yaml only points to that canonical state; CSV/JSONL owns row data.
 - Protocol Markdown must be committed before any result/data commit; each result must reference its protocol commit and pass git merge-base --is-ancestor.
@@ -33,9 +33,9 @@
 - [ ] **Step 1: Confirm branch, history, cleanliness, and remote.**
     git status --short --branch
     git branch --show-current
-    git log --format=%H%x09%s -n 3
+    git log --format=%H%x09%s -n 4
     git remote -v
-  Expected: clean main; HEAD is 9b43278 followed by 71b966c; no remote output.
+  Expected: clean main; history contains design commit 71b966c and the current plan commits; no remote output.
 - [ ] **Step 2: Run privacy and artifact scans.**
     git diff --check
     git ls-files -oi --exclude-standard
@@ -49,7 +49,7 @@
 
 - [ ] **Step 1: Ensure gh authentication without assuming an account.**
     command -v gh || brew install gh
-    gh auth status --hostname github.com || gh auth login --hostname github.com --git-protocol ssh --web
+    gh auth status --hostname github.com || gh auth login --hostname github.com --git-protocol https --web
   Expected: gh auth status succeeds for github.com.
 - [ ] **Step 2: Resolve the exact owner and reject an ambiguous same-name lookup.**
     github_owner="$(gh api user --jq .login)"
@@ -73,7 +73,7 @@
   .gitignore must contain exactly .DS_Store, .env, .env.*, .venv/, __pycache__/, *.py[cod], .pytest_cache/, .mypy_cache/, build/, dist/, coverage/, and .coverage.
   research-state.yaml must contain schema_version: 1, canonical_state_path: state/workspace.yaml, and pointer_only: true, with no duplicated research state.
   research-log.md starts with # Research log and records that bootstrap has no experiment or result. findings.md starts with # Findings and records that no public claim is eligible before verification.
-- [ ] **Step 2: Write canonical license and every index role.** Require non-empty git config user.name; LICENSE line 1 is Copyright (c) 2026 followed by that exact value, followed by the canonical MIT text unchanged. Each index contains the stated role and source of truth:
+- [ ] **Step 2: Write canonical license and every index role.** Require non-empty git config user.name; LICENSE begins with MIT License, then a blank line, then Copyright (c) 2026 followed by that exact value, followed by the canonical MIT text unchanged. Each index contains the stated role and source of truth:
   milestones/README.md: milestone records and verification evidence; Markdown records are the source of truth and YAML mirrors status.
   experiments/README.md: protocols, runs, results, and linked data; Markdown is narrative source and CSV/JSONL is row-data source.
   literature/README.md: literature notes and citations; Markdown notes and cited sources are the source of truth.
@@ -121,8 +121,8 @@
     find . -type f -not -path './.git/*' -exec stat -f '%z %N' {} + | awk '$1 >= 52428800 {print}'
     for commit in $(git rev-list 71b966c..HEAD); do test -n "$(git diff-tree --no-commit-id --name-only -r "$commit")" || exit 1; done
   Expected: every new path exists, main is clean before the verification edit, no secret/large-file output, and every post-design commit is non-empty. For any future result, run git merge-base --is-ancestor with its recorded protocol and result commits.
-- [ ] **Step 2: Verify M00 and update every new path.** Change M00 and state status to verified, add validation paths and the verification commit reference to M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md; stage only those paths; commit research(reflect): verify M00 research direction; push origin main; record the exact git rev-parse HEAD before ARA.
-- [ ] **Step 3: Run ARA once, only after the final research push.** Invoke ara-research-manager at session end. Let the skill inspect actual conversation evidence and existing ara/; create or update only files its procedure requires, never fabricate empty research artifacts, and preserve provenance tags. Validate every created YAML, stage only the changed M00/state/log/finding files plus actual ara/ changes, require a non-empty staged diff, commit research(reflect): record end-of-session ARA provenance, and push origin main only when that diff exists.
+- [ ] **Step 2: Verify M00 without a self-referential hash.** Before the verification commit, change M00 and state status to verified, add validation paths, and record only the planned subject research(reflect): verify M00 research direction in M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md. Do not write the verification hash before the commit. Stage only those paths, commit research(reflect): verify M00 research direction, push origin main, then capture verification_commit with git rev-parse HEAD for Step 3.
+- [ ] **Step 3: Run ARA once, only after the final research push.** Append the exact verification_commit captured after Step 2 to M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md in this ARA provenance commit; never create a self-referential hash. Invoke ara-research-manager at session end. Let the skill inspect actual conversation evidence and existing ara/; create or update only files its procedure requires, never fabricate empty research artifacts, and preserve provenance tags. Validate every created YAML, stage only the changed M00/state/log/finding files plus actual ara/ changes, require a non-empty staged diff, commit research(reflect): record end-of-session ARA provenance, and push origin main only when that diff exists.
     find ara -type f -name '*.yaml' -print0 | xargs -0 ruby -e 'require "yaml"; ARGV.each { |p| YAML.load_file(p) }; puts "valid YAML"'
     git add milestones/M00-research-direction.md research-state.yaml state/workspace.yaml research-log.md findings.md ara/
     test -n "$(git diff --cached --name-only)"
