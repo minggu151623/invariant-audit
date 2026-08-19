@@ -8,9 +8,10 @@ M01
 
 active
 
-This milestone is active for documentary protocol design only. It is not
-verified experimental evidence, does not contain a run or result, and does not
-grant public-claim eligibility.
+This milestone is active for documentary protocol design only. Its documentary
+protocol-locking step is complete locally, but it is not verified experimental
+evidence, does not contain a run or result, and does not grant public-claim
+eligibility.
 
 ## Relationship to M00
 
@@ -36,8 +37,10 @@ instruction. That initial allowlist was `literature/survey.md`,
 remediation brief separately limits edits to this milestone, protocol, state,
 log, and findings set.
 
-**Draft date:** The draft was completed locally on 2026-08-20. No commit, push,
-run, or public action was performed.
+**Draft date:** The initial draft was completed locally on 2026-08-20. The
+protocol was subsequently locked locally in commit
+`d8b26d21e9692ace19436d78461460940043f5c7`. No push, run, or public action was
+performed.
 
 **Sourced foundation:** [literature/survey.md](../literature/survey.md) links
 the primary papers and official documentation used to ground terminology and
@@ -56,7 +59,9 @@ claims that the method will work or that the design is novel.
 - Protocol path: `experiments/E001-synthetic-invariant-calibration/protocol.md`
 - Protocol version: `E001-v1`
 - Planned protocol commit subject: `research(protocol): lock E001 synthetic invariant calibration`
-- Protocol commit hash: intentionally absent until the required commit exists.
+- Protocol commit hash: `d8b26d21e9692ace19436d78461460940043f5c7`
+- Protocol-lock status: complete locally; the commit has not been pushed or
+  published.
 - Run/result/data status: none created; no run is authorized by this record.
 
 The protocol-before-results gate remains active: the dedicated protocol commit
@@ -65,11 +70,11 @@ the exact commit and pass the ancestor check.
 
 ## Documentary completion criteria
 
-M01 may be considered for later documentary review only when the protocol is
-committed separately, its state/log/index pointers are consistent, and a
-read-only review confirms that no result or data has been created before that
-commit. Experimental verification would be a separate milestone decision with
-separate evidence.
+The documentary protocol-locking step is complete locally: the protocol is
+committed separately, the state/log/index pointers record the exact commit, and
+the read-only review confirms that no result or data was created before it.
+M01 remains active and documentary; experimental verification would be a
+separate milestone decision with separate evidence.
 
 ## Limitations and eligibility
 
@@ -80,7 +85,6 @@ external-facing content.
 
 ## Next gate
 
-After an authorized future protocol commit with the planned subject, a worker
-may separately evaluate whether a run is authorized. Any run must follow E001
-exactly, record deviations and invalid outcomes, and keep confirmatory and
-exploratory evidence separate.
+With the protocol commit in place, a worker may separately evaluate whether a
+run is authorized. Any run must follow E001 exactly, record deviations and
+invalid outcomes, and keep confirmatory and exploratory evidence separate.

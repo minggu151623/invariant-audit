@@ -88,12 +88,23 @@ design generalizes.
 
 ### Protocol-before-results gate
 
-The planned protocol subject is
-`research(protocol): lock E001 synthetic invariant calibration`. No protocol
-commit hash is recorded because the orchestrator-bounded worker brief withheld
-commit authority. No run, result, metric, figure, data, or code may be created
-before that dedicated protocol commit; a future result must reference its exact
-hash and pass the ancestor check.
+The E001-v1 protocol was locked locally in commit
+`d8b26d21e9692ace19436d78461460940043f5c7` with subject
+`research(protocol): lock E001 synthetic invariant calibration`. This lock is
+temporal protocol evidence, not result evidence: it establishes the
+protocol-before-results boundary but does not establish performance,
+calibration, generalization, novelty, safety, or public-claim eligibility. The
+commit has not been pushed. No run, result, metric, figure, data, or code may
+be created without a separately authorized run, and any future result must
+reference this exact hash and pass the ancestor check.
+
+## Post-lock protocol evidence
+
+The local protocol lock is the only new evidence recorded here. M01 remains
+active and documentary/protocol-only; it is not verified experimental evidence
+and is not eligible to source public claims. The metadata update records the
+commit identity and validation boundary only, not an observation or measured
+outcome.
 
 ### Open questions and limitations
 

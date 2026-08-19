@@ -77,7 +77,9 @@ M01:
       path: literature/survey.md
   verification:
     scope: documentary_protocol_design_only
-    status: not_verified
+    status: protocol_locked_locally
+    protocol_commit: d8b26d21e9692ace19436d78461460940043f5c7
+    lock_scope: local_only
     experimental_evidence: false
     public_claim_eligibility: false
     validation_paths:
@@ -90,10 +92,9 @@ M01:
       - research-log.md
       - findings.md
     planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
-    protocol_commit: null
 E001:
   path: experiments/E001-synthetic-invariant-calibration/protocol.md
-  status: protocol_drafted_pending_commit
+  status: protocol_locked
   milestone: M01
   protocol_version: E001-v1
   literature_path: literature/survey.md
@@ -101,4 +102,5 @@ E001:
   data: absent
   run_authorized: false
   planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
-  protocol_commit: null
+  protocol_commit: d8b26d21e9692ace19436d78461460940043f5c7
+  protocol_lock_scope: local_only
