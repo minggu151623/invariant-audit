@@ -23,3 +23,18 @@ Bootstrap has no experiment or result.
 - Push result: `pending-until-publication`
 - Verification method: after publication, compare
   `git ls-remote origin refs/heads/main | cut -f1` with `git rev-parse HEAD`.
+
+## 2026-08-19 — M00 documentary verification planned
+
+- Verification scope: documentary direction/provenance only. This does not
+  establish experiments, results/data, calibrated metrics, or public-claim
+  eligibility.
+- Validation paths: `milestones/M00-research-direction.md`,
+  `research-state.yaml`, `state/workspace.yaml`, `research-log.md`, and
+  `findings.md`.
+- Planned commit message: `research(reflect): verify M00 research direction`
+- Verification commit hash: intentionally pending until after the verification
+  commit is pushed; it will be recorded in the later ARA provenance update.
+- Push command: `git push origin main`
+- Push target: `origin/main`
+- Push result: `pending-until-publication`

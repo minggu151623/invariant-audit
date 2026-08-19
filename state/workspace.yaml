@@ -9,7 +9,7 @@ scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
 M00:
   path: milestones/M00-research-direction.md
-  status: active
+  status: verified
   provenance:
     source: user
     date: 2026-08-19
@@ -25,3 +25,13 @@ M00:
         - research-state.yaml
         - research-log.md
         - findings.md
+  verification:
+    scope: documentary_direction_and_provenance_only
+    public_claim_eligibility: false
+    validation_paths:
+      - milestones/M00-research-direction.md
+      - research-state.yaml
+      - state/workspace.yaml
+      - research-log.md
+      - findings.md
+    planned_commit_subject: "research(reflect): verify M00 research direction"

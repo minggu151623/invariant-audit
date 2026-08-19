@@ -6,7 +6,12 @@ M00
 
 ## Status
 
-active
+verified
+
+This status is verified only for documentary review of the M00 research
+direction and its separated provenance. It is not experimental verification,
+does not establish research results, and does not grant public-claim
+eligibility.
 
 ## User decision
 
@@ -35,6 +40,22 @@ and false-positive/false-negative calibration are explicit prerequisites for
 interpretable claims. This interpretation does not establish performance and
 must not be presented as a result.
 
+## Verification
+
+**Scope: documentary direction/provenance only.** The verification review
+checked that the direction, source boundary, user decision, and limitations
+are recorded consistently across the following paths:
+
+- `milestones/M00-research-direction.md`
+- `research-state.yaml`
+- `state/workspace.yaml`
+- `research-log.md`
+- `findings.md`
+
+Planned verification commit subject: `research(reflect): verify M00 research direction`.
+The verification commit hash is intentionally recorded only after that commit
+is pushed, in the later ARA provenance update.
+
 ## Goal
 
 Define the initial research direction for validating semantic and state
@@ -43,7 +64,8 @@ chain from protocol to run, result, data, reflection, and milestone evidence.
 
 ## Completion criteria
 
-- M00 remains `active` until its evidence has been produced and reviewed.
+- M00's documentary direction and provenance review is complete and recorded as
+  `verified`; this status is not experimental evidence.
 - A protocol Markdown record is written and committed before any experiment,
   run, result, or data record is created.
 - The protocol specifies the research question or hypothesis, inputs, method,
@@ -57,9 +79,9 @@ chain from protocol to run, result, data, reflection, and milestone evidence.
 ## Limitations
 
 There are no experiments yet, no results/data, no calibrated metrics, and no
-public claim eligibility. This record documents a direction decision only; it
-does not support a robustness, invariant-validity, or calibration claim. The
-reviewer inference above is not evidence.
+public claim eligibility. This record documents a direction and provenance
+verification only; it does not support a robustness, invariant-validity, or
+calibration claim. The reviewer inference above is not evidence.
 
 ## Next gate
 
@@ -67,5 +89,5 @@ Before any run, create and commit the protocol Markdown record. Before any
 result or data commit, verify the protocol-before-results gate with
 `git merge-base --is-ancestor <protocol_commit> <results_commit>`. A future
 milestone must be reviewed with complete provenance and evidence before it can
-be used for public-facing content; M00 is currently active and has no public
-claim eligibility.
+be used for public-facing content; M00's documentary verification does not
+create public claim eligibility.

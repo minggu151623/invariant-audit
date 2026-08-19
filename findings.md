@@ -1,13 +1,14 @@
 # Findings
 
-No public claim is eligible before verification.
+No public claim is eligible from M00. Its documentary verification does not
+establish public-claim eligibility.
 
 ## M00 research direction
 
 The user-approved pivot, with **Provenance: user**, is from a generic
 metamorphic robustness benchmark to validating semantic/state invariants and
-false-positive/false-negative calibration. M00 is an active direction record,
-not a verified result.
+false-positive/false-negative calibration. M00 is verified only as a
+documentary direction/provenance record, not as an experimental result.
 
 ### Evidence boundary
 
@@ -30,3 +31,18 @@ parameters, evaluation metrics, expected outputs, stopping criteria, data
 recording, and limitations. A result must reference that protocol commit, and
 the protocol commit must be an ancestor of the result commit. Public-facing
 content remains gated on a verified milestone and human review.
+
+## M00 documentary verification
+
+The verification scope is limited to documentary direction and provenance
+consistency. Validation paths are `milestones/M00-research-direction.md`,
+`research-state.yaml`, `state/workspace.yaml`, `research-log.md`, and
+`findings.md`.
+
+Planned verification commit subject: `research(reflect): verify M00 research direction`.
+The verification hash is intentionally omitted until after the verification
+commit is pushed and is recorded only in the later ARA provenance update.
+
+There are still no experiments, no results/data, no calibrated metrics, and no
+public claim eligibility. No robustness, invariant-validity, or calibration
+performance claim is supported by this documentary verification.
