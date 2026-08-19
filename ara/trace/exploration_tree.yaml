@@ -7,6 +7,19 @@ tree:
     from: "generic metamorphic robustness benchmarking"
     to: "semantic/state invariant validation with false-positive/false-negative calibration"
     trigger: "The user approved this research-direction pivot; no experimental result or quantitative evidence motivated it."
+    children:
+      - id: N07
+        type: question
+        title: "Can the locked E001-v1 method comparison support H1 under its pre-specified confirmatory rule?"
+        provenance: ai-suggested
+        timestamp: "2026-08-20T00:32:20+0700"
+        description: >
+          In a future separately authorized local evaluation, test whether M1
+          versus B0 satisfies the locked requirements that the balanced-
+          accuracy M1-B0 95% CI is entirely > 0, the FPR M1-B0 95% CI is
+          entirely < 0, and the confirmatory FNR point difference M1-B0 is <=
+          0. No run or result has occurred, and the user did not confirm this
+          E001 design or hypothesis.
 
   - id: N02
     type: decision

@@ -11,3 +11,10 @@ sessions:
     events_count: 1
     claims_touched: []
     open_threads: 2
+  - id: "2026-08-20_003"
+    date: "2026-08-20"
+    summary: "Recorded the AI-suggested untested E001 H1/C01, the local protocol and metadata commits, and the protocol-design provenance boundary; no experiments, results, calibrated metrics, or supported claims were produced."
+    events_count: 1
+    claims_touched:
+      - C01
+    open_threads: 3

@@ -1,0 +1,87 @@
+session:
+  id: "2026-08-20_003"
+  timestamp: "2026-08-20T00:32:20+0700"
+  ended: "2026-08-20T00:32:20+0700"
+  summary: >
+    Recorded the E001-v1 protocol lock and post-lock metadata as local
+    provenance actions, added the untested AI-suggested H1/C01 and N07, and
+    preserved the zero-evidence boundary.
+
+events_logged:
+  - type: claim
+    id: C01
+    provenance: ai-suggested
+    summary: >
+      Added E001 H1 as an untested hypothesis: M1 must have a confirmatory
+      balanced-accuracy M1-B0 95% CI entirely > 0, an FPR M1-B0 95% CI
+      entirely < 0, and no confirmatory FNR point increase (M1-B0 <= 0) to be
+      supported; otherwise the outcome is mixed/not supported.
+
+ai_actions:
+  - action: >
+      Created the locked protocol commit
+      d8b26d21e9692ace19436d78461460940043f5c7 with subject
+      "research(protocol): lock E001 synthetic invariant calibration". This
+      was an AI-executed local provenance action, not scientific evidence.
+    provenance: ai-executed
+    files_changed:
+      - experiments/E001-synthetic-invariant-calibration/protocol.md
+      - experiments/README.md
+      - findings.md
+      - literature/README.md
+      - literature/survey.md
+      - milestones/M01-protocol-design.md
+      - research-log.md
+      - state/workspace.yaml
+  - action: >
+      Created the post-lock metadata commit
+      9bb9c3e03dd537f8fd04c5e5f59a526baf39d27b with subject
+      "research(reflect): record E001 protocol provenance". This was an
+      AI-executed local provenance action, not scientific evidence.
+    provenance: ai-executed
+    files_changed:
+      - experiments/README.md
+      - findings.md
+      - milestones/M01-protocol-design.md
+      - research-log.md
+      - state/workspace.yaml
+  - action: >
+      Created this bounded post-task ARA epilogue, preserving existing ARA
+      content and recording only the AI-suggested C01/N07 provenance boundary.
+    provenance: ai-executed
+    files_changed:
+      - ara/logic/claims.md
+      - ara/trace/exploration_tree.yaml
+      - ara/trace/sessions/session_index.yaml
+      - ara/trace/sessions/2026-08-20_003.yaml
+
+research_event_counts:
+  decisions: 0
+  experiments: 0
+  dead_ends: 0
+  pivots: 0
+  claims: 1
+  heuristics: 0
+  observations: 0
+  results: 0
+  calibrated_metrics: 0
+  supported_claims: 0
+
+provenance_summary:
+  user_confirmed: 0
+  ai_suggested: 2
+  ai_executed: 3
+  user_revised: 0
+  confirmation_rate: 0.0
+
+claims_touched:
+  - id: C01
+    action: created
+    provenance: ai-suggested
+
+open_threads:
+  - "Public push is not authorized."
+  - "Implementation/run requires a separate bounded authorization."
+  - "Venue remains undecided."
+
+ai_suggestions_pending: []
