@@ -2,115 +2,132 @@
 
 > For agentic workers: REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox syntax (- [ ]) for tracking.
 
-**Goal:** Bootstrap a privacy-checked public invariant-audit repository with an auditable M00 milestone, canonical state, logs, findings, commits, and one end-of-session ARA record.
-**Architecture:** Markdown owns human research narrative; state/workspace.yaml owns machine-readable state; CSV and JSONL will own row data. Main moves through privacy preflight, authorized GitHub publication, namespace scaffold, M00 verification, and one final ARA epilogue.
+**Goal:** Bootstrap a privacy-checked public InvariantAudit repository with a documented research direction, auditable state, safe publication gates, and evidence-driven end-of-session provenance.
+**Architecture:** Markdown is the human research source; YAML is machine-readable state; CSV/JSONL is row data. The workflow is privacy preflight, owner-qualified GitHub publication, documented scaffold, M00 direction, validation, and one final ARA epilogue.
 **Tech Stack:** Git, GitHub CLI gh, GitHub public repository, Markdown, YAML, CSV/JSONL, Ruby YAML parser, ARA manager.
 **Spec:** docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 
 ## Global Constraints
 
-- Work only on main; preserve design commit 71b966c: docs(design): define InvariantAudit research workflow.
-- Markdown is narrative source; YAML is state source; CSV/JSONL is row-data source; generated output never becomes a source of truth.
-- Protocol Markdown must be committed before any result/data commit; a result commit must reference its protocol commit and pass the ancestor check.
-- Meaningful changes require validation, a non-empty commit, and push after origin exists; use only research(init), research(protocol), research(results), research(reflect), or research(paper).
-- Public push rejects secrets, credentials, personal data, model artifacts, raw/bulk data, caches, build output, and any single file at or above 52428800 bytes.
-- ARA runs once, after the final meaningful change is validated, committed, and pushed; no research starts after ARA. This plan is the only artifact created in this turn; tasks 1 through 5 are not executed here.
+- Work only on main; preserve 71b966c docs(design): define InvariantAudit research workflow and the existing plan commit 9b43278.
+- This turn changes only this plan locally; do not execute tasks, authenticate gh, create a repository, push, or cause any other external side effect.
+- README and Markdown records own narrative; state/workspace.yaml owns state; research-state.yaml only points to that canonical state; CSV/JSONL owns row data.
+- Protocol Markdown must be committed before any result/data commit; each result must reference its protocol commit and pass git merge-base --is-ancestor.
+- Every meaningful change needs validation, a non-empty commit, and push after origin exists; use only approved research commit patterns.
+- Public push rejects secrets, credentials, personal data, model artifacts, raw/bulk data, caches, build output, and files at or above 52428800 bytes.
+- ARA runs once after the final meaningful change is validated, committed, and pushed; no research starts after ARA.
 
 ## File Map
 
-- Create .gitignore and Git-tracked markers in milestones, experiments, literature, figures, content, paper, and state.
-- Create milestones/M00-bootstrap.md, state/workspace.yaml, state/log.md, state/findings.md, and the ARA seed files under ara/ specified in Task 5 at the final epilogue.
+- Root: README.md, .gitignore, LICENSE, research-state.yaml, research-log.md, and findings.md.
+- Directories and indexes: milestones/README.md, experiments/README.md, literature/README.md, data/README.md, figures/README.md, content/README.md, content/x/README.md, content/linkedin/README.md, and paper/README.md.
+- M00/state: milestones/M00-research-direction.md and state/workspace.yaml; no marker files replace indexes.
+- ARA: ara/ is created or updated only by the ARA skill at the final epilogue and only for actual session evidence.
 
 ---
 
 ### Task 1: Preflight privacy
 
-**Files:** Read-only entire repository; no file writes. **Authority:** Local inspection is allowed. Do not create, authenticate, or push a public repository until the user has authorized those external actions.
+**Files:** Read-only repository inspection; no file writes. **Authority:** local checks are allowed; public GitHub actions require separate user authorization during plan execution.
 
-- [ ] **Step 1: Confirm branch, cleanliness, history, and remote state.**
+- [ ] **Step 1: Confirm branch, history, cleanliness, and remote.**
     git status --short --branch
     git branch --show-current
-    git log --format=%H%x09%s -n 2
+    git log --format=%H%x09%s -n 3
     git remote -v
-  Expected: branch main, clean worktree, HEAD is the plan commit followed by design commit 71b966c, and no remote output.
-- [ ] **Step 2: Run repository hygiene checks.**
+  Expected: clean main; HEAD is 9b43278 followed by 71b966c; no remote output.
+- [ ] **Step 2: Run privacy and artifact scans.**
     git diff --check
     git ls-files -oi --exclude-standard
     git grep -nEI '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----|xox[baprs]-[0-9A-Za-z-]{10,})' -- .
     find . -type f -not -path './.git/*' -exec stat -f '%z %N' {} + | awk '$1 >= 52428800 {print}'
-  Expected: diff check and large-file scan exit 0 with no output; tracked-file scan has no output; secret scan exits 1 with no matches.
+  Expected: diff, untracked-file, and large-file checks are clean; secret scan exits 1 with no matches.
 
-### Task 2: Install/authenticate gh and create the public repository
+### Task 2: Authenticate gh and publish the owner-qualified public repository
 
-**Files:** GitHub account, GitHub repository invariant-audit, and local origin remote; no research files. **Authority:** Execute only after explicit user authorization for GitHub login, public repository creation, and push.
+**Files:** GitHub account, owner-qualified repository, and origin remote; no research files. **Authority:** run only with explicit user authority for login, public creation, and push.
 
-- [ ] **Step 1: Ensure GitHub CLI authentication.**
+- [ ] **Step 1: Ensure gh authentication without assuming an account.**
     command -v gh || brew install gh
     gh auth status --hostname github.com || gh auth login --hostname github.com --git-protocol ssh --web
-  Expected: gh is available and gh auth status reports a valid github.com login.
-- [ ] **Step 2: Verify the target name is unused, then create and push it.**
-    gh repo view invariant-audit --json nameWithOwner,isPrivate,url
-    gh repo create invariant-audit --public --source=. --remote=origin --push
-  Expected: the first command exits 1 because the target is absent; the second creates a public repository, adds origin, and pushes current main without changing content.
-- [ ] **Step 3: Verify public visibility and remote alignment.**
-    gh repo view invariant-audit --json nameWithOwner,isPrivate,url
-    git remote get-url origin
+  Expected: gh auth status succeeds for github.com.
+- [ ] **Step 2: Resolve the exact owner and reject an ambiguous same-name lookup.**
+    github_owner="$(gh api user --jq .login)"
+    test -n "$github_owner"
+    gh repo view "$github_owner/invariant-audit" --json nameWithOwner,isPrivate,url --jq '.nameWithOwner + " " + (.isPrivate|tostring)'
+  Expected: github_owner equals the authenticated login; the repository view exits 1 when absent. If it exists, stop and obtain an explicit reuse decision before any create or push.
+- [ ] **Step 3: Create and verify only owner/invariant-audit.**
+    gh repo create "$github_owner/invariant-audit" --public --source=. --remote=origin --push
+    gh repo view "$github_owner/invariant-audit" --json nameWithOwner,isPrivate,url
+    test "$(git remote get-url origin | sed -E 's#^(git@github.com:|https://github.com/)##; s#\.git$##')" = "$github_owner/invariant-audit"
     test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
-  Expected: isPrivate is false, origin ends in /invariant-audit.git, and the remote main hash equals local HEAD.
+  Expected: exact owner/name, isPrivate false, origin points to that owner/name, and remote main equals local HEAD.
 
-### Task 3: Scaffold workspace, validate, commit, and push
+### Task 3: Scaffold the documented workspace and commit/push it
 
-**Files:** Create .gitignore; create milestones/.gitkeep, experiments/.gitkeep, literature/.gitkeep, figures/.gitkeep, content/.gitkeep, paper/.gitkeep, and state/.gitkeep. **Interfaces:** Consumes origin/main from Task 2; produces the seven tracked research namespaces. Do not create ara/ before the final session epilogue.
+**Files:** Create exactly README.md, .gitignore, LICENSE, research-state.yaml, research-log.md, findings.md, milestones/README.md, experiments/README.md, literature/README.md, data/README.md, figures/README.md, content/README.md, content/x/README.md, content/linkedin/README.md, and paper/README.md. **Interfaces:** create directories milestones experiments literature data figures content/x content/linkedin paper state; do not use marker files.
 
-- [ ] **Step 1: Create namespaces and the exact ignore rules.**
-    mkdir -p milestones experiments literature figures content paper state
-    touch milestones/.gitkeep experiments/.gitkeep literature/.gitkeep figures/.gitkeep content/.gitkeep paper/.gitkeep state/.gitkeep
-  Put exactly these entries in .gitignore: .DS_Store, .env, .env.*, .venv/, __pycache__/, *.py[cod], .pytest_cache/, .mypy_cache/, build/, dist/, and .coverage.
-- [ ] **Step 2: Validate the scaffold and stage only its files.**
+- [ ] **Step 1: Create directories and root documentation.**
+    mkdir -p milestones experiments literature data figures content/x content/linkedin paper state
+  README.md must state the title InvariantAudit; research question How can semantic and state invariants be validated while calibrating false positives and false negatives?; local-only scope; no paid API; no external GPU; Status: preliminary; links to the spec, this plan, milestones/README.md, and findings.md; and No overclaim: public claims require verified milestone evidence and human review.
+  .gitignore must contain exactly .DS_Store, .env, .env.*, .venv/, __pycache__/, *.py[cod], .pytest_cache/, .mypy_cache/, build/, dist/, coverage/, and .coverage.
+  research-state.yaml must contain schema_version: 1, canonical_state_path: state/workspace.yaml, and pointer_only: true, with no duplicated research state.
+  research-log.md starts with # Research log and records that bootstrap has no experiment or result. findings.md starts with # Findings and records that no public claim is eligible before verification.
+- [ ] **Step 2: Write canonical license and every index role.** Require non-empty git config user.name; LICENSE line 1 is Copyright (c) 2026 followed by that exact value, followed by the canonical MIT text unchanged. Each index contains the stated role and source of truth:
+  milestones/README.md: milestone records and verification evidence; Markdown records are the source of truth and YAML mirrors status.
+  experiments/README.md: protocols, runs, results, and linked data; Markdown is narrative source and CSV/JSONL is row-data source.
+  literature/README.md: literature notes and citations; Markdown notes and cited sources are the source of truth.
+  data/README.md: reviewable row data and metadata; CSV/JSONL is the source of truth and interpretation stays in Markdown.
+  figures/README.md: figure specifications and artifacts; source Markdown and result/data commits are the source of truth.
+  content/README.md: external drafts from verified milestones; Markdown is source and human review is required.
+  content/x/README.md: X drafts tied to a verified milestone and verification commit; no automatic posting.
+  content/linkedin/README.md: LinkedIn drafts tied to a verified milestone and verification commit; no automatic posting.
+  paper/README.md: paper Markdown, outline, appendix, and provenance; Markdown claims require verified milestone or literature evidence.
+- [ ] **Step 3: Validate and stage exactly the scaffold.**
+    test -n "$(git config user.name)"
     git diff --check
-    find milestones experiments literature figures content paper state -name .gitkeep -type f -print | sort
-    git add .gitignore milestones/.gitkeep experiments/.gitkeep literature/.gitkeep figures/.gitkeep content/.gitkeep paper/.gitkeep state/.gitkeep
+    git add README.md .gitignore LICENSE research-state.yaml research-log.md findings.md milestones/README.md experiments/README.md literature/README.md data/README.md figures/README.md content/README.md content/x/README.md content/linkedin/README.md paper/README.md
     test -n "$(git diff --cached --name-only)"
-  Expected: seven marker paths print in sorted order, diff check is clean, and the staged-name test exits 0.
-- [ ] **Step 3: Commit and push the non-empty scaffold.**
-    git commit -m "research(init): scaffold InvariantAudit workspace namespaces"
+  Expected: all required files exist, all requested directories exist, staged names equal the exact list, and no marker file is staged.
+- [ ] **Step 4: Commit and push the non-empty scaffold.**
+    git commit -m "research(init): scaffold InvariantAudit research workspace"
     git push origin main
-  Expected: the commit contains exactly the scaffold files, origin/main advances, and git status --short --branch reports clean main.
+  Expected: origin/main advances with the documented scaffold and clean main follows.
 
-### Task 4: Record M00, canonical state, log, and findings
+### Task 4: Record M00 research direction and canonical state
 
-**Files:** Create milestones/M00-bootstrap.md, state/workspace.yaml, state/log.md, and state/findings.md. **Interfaces:** Consumes the Task 3 scaffold commit; produces an active M00 record and canonical state with design_commit 71b966c and scaffold_commit set to the exact output of git rev-parse HEAD before Task 4 edits.
+**Files:** Create/update milestones/M00-research-direction.md, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md. **Interfaces:** consumes the Task 3 scaffold commit; produces active M00 state with exact paths and provenance.
 
-- [ ] **Step 1: Write the M00 record.** Use the exact headings ID, Status, Goal, Completion criteria, Evidence, Limitations, and Next gate. Set ID to M00, Status to active, state that no experiment has a protocol or result yet, link the design spec, all seven namespace paths, and the Task 3 commit, and require a protocol commit before any result/data commit.
-- [ ] **Step 2: Write canonical state and append-only Markdown records.** state/workspace.yaml must contain schema_version 1, workspace_id invariant-audit, branch main, spec_path docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md, canonical_state_path state/workspace.yaml, source roles narrative markdown/state yaml/row_data csv-or-jsonl, and M00 path/status/evidence. state/log.md records the bootstrap date, exact commit IDs, validation commands, and push result. state/findings.md records that the workspace is initialized, no result exists, the protocol-before-results gate is open, and public content is not yet eligible.
-- [ ] **Step 3: Validate YAML and staged content.**
-    ruby -e 'require "yaml"; YAML.load_file(ARGV.fetch(0)); puts "valid YAML"' state/workspace.yaml
+- [ ] **Step 1: Write M00 with separated provenance.** Use headings ID, Status, User decision, Sourced evidence, Reviewer inference, Goal, Completion criteria, Limitations, and Next gate. Set ID M00 and Status active. Under User decision and Provenance user, record the user-approved pivot from generic metamorphic robustness benchmark to validating semantic/state invariants and false-positive/false-negative calibration. Under Sourced evidence, link only the design spec and real commits/files. Under Reviewer inference, label inference as reviewer inference and not evidence. State explicitly: no experiments yet, no results/data, no calibrated metrics, and no public claim eligibility.
+- [ ] **Step 2: Update all five state/log paths.** Keep research-state.yaml as a machine-readable pointer to state/workspace.yaml and add workspace_id invariant-audit plus milestone_path milestones/M00-research-direction.md. state/workspace.yaml must contain schema_version 1, workspace_id invariant-audit, branch main, spec_path, canonical_state_path, research_state_pointer, design_commit 71b966c, scaffold_commit from git rev-parse HEAD before edits, and M00 path/status/provenance/evidence. Append exact date, commit message, validation commands, and push result to research-log.md; update findings.md with the pivot, evidence boundary, limitations, and protocol-before-results gate.
+- [ ] **Step 3: Validate, commit, and push the direction record.**
+    ruby -e 'require "yaml"; ARGV.each { |p| YAML.load_file(p) }; puts "valid YAML"' research-state.yaml state/workspace.yaml
     git diff --check
-    git add milestones/M00-bootstrap.md state/workspace.yaml state/log.md state/findings.md
+    git add milestones/M00-research-direction.md research-state.yaml state/workspace.yaml research-log.md findings.md
     test -n "$(git diff --cached --name-only)"
-  Expected: Ruby prints valid YAML, diff check is clean, and only the four named files are staged.
-- [ ] **Step 4: Commit and push M00 state.**
-    git commit -m "research(init): record M00 bootstrap state"
+    git commit -m "research(reflect): record M00 research direction"
     git push origin main
-  Expected: a non-empty commit is pushed and state/workspace.yaml still identifies main and M00 as active.
+  Expected: valid YAML, only the five named files staged, non-empty commit, and origin/main contains the M00 direction.
 
-### Task 5: Final validation and ARA epilogue
+### Task 5: Final validation and evidence-driven ARA epilogue
 
-**Files:** Modify milestones/M00-bootstrap.md and state/workspace.yaml; create/update ara/PAPER.md, ara/logic/problem.md, ara/logic/claims.md, ara/logic/concepts.md, ara/logic/experiments.md, ara/logic/solution/architecture.md, ara/logic/solution/algorithm.md, ara/logic/solution/constraints.md, ara/logic/solution/heuristics.md, ara/logic/related_work.md, ara/src/environment.md, ara/trace/exploration_tree.yaml, ara/trace/sessions/session_index.yaml, ara/trace/sessions/2026-08-19_001.yaml, ara/evidence/README.md, and ara/staging/observations.yaml. **Interfaces:** Consumes the pushed active M00; produces verified M00, end-of-session provenance, a clean main worktree, and an origin/main equal to local HEAD.
+**Files:** Update only milestones/M00-research-direction.md, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md for M00; ARA paths are created or updated only when the ARA skill requires them from actual session evidence.
 
-- [ ] **Step 1: Run final pre-ARA gates.**
-    test "$(git branch --show-current)" = main
+- [ ] **Step 1: Run final privacy, path, history, and protocol gates.**
+    for path in README.md .gitignore LICENSE research-state.yaml research-log.md findings.md milestones/README.md experiments/README.md literature/README.md data/README.md figures/README.md content/README.md content/x/README.md content/linkedin/README.md paper/README.md milestones/M00-research-direction.md state/workspace.yaml; do test -f "$path" || exit 1; done
     git diff --check
     git status --porcelain
     git grep -nEI '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----|xox[baprs]-[0-9A-Za-z-]{10,})' -- .
     find . -type f -not -path './.git/*' -exec stat -f '%z %N' {} + | awk '$1 >= 52428800 {print}'
     for commit in $(git rev-list 71b966c..HEAD); do test -n "$(git diff-tree --no-commit-id --name-only -r "$commit")" || exit 1; done
-  Expected: main, clean diff checks, no status/secrets/large-file output, and every post-design commit has at least one changed path. No experiments files exist yet, so no protocol ancestry check is needed.
-- [ ] **Step 2: Verify M00 and push the verification commit.** Set M00 and its state entry to verified, add every validation path as evidence, then run git diff --check, git add milestones/M00-bootstrap.md state/workspace.yaml, test -n "$(git diff --cached --name-only)", git commit -m "research(reflect): verify M00 bootstrap milestone", and git push origin main. Record this commit ID in both M00 and state before the ARA commit.
-- [ ] **Step 3: Run the ARA manager only now.** It must read the full session, preserve user/ai-suggested/ai-executed provenance, append rather than overwrite, create the listed ara paths, and record that no research starts after ARA. Validate every YAML file with Ruby, stage only M00/state ARA changes, require a non-empty staged diff, commit with research(reflect): record end-of-session ARA provenance, and push origin main.
-    git add milestones/M00-bootstrap.md state/workspace.yaml ara/
-- [ ] **Step 4: Verify the closing state.**
-    ruby -e 'require "yaml"; ARGV.each { |p| YAML.load_file(p) }; puts "valid YAML"' state/workspace.yaml ara/trace/exploration_tree.yaml ara/trace/sessions/session_index.yaml ara/trace/sessions/2026-08-19_001.yaml ara/staging/observations.yaml
+  Expected: every new path exists, main is clean before the verification edit, no secret/large-file output, and every post-design commit is non-empty. For any future result, run git merge-base --is-ancestor with its recorded protocol and result commits.
+- [ ] **Step 2: Verify M00 and update every new path.** Change M00 and state status to verified, add validation paths and the verification commit reference to M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md; stage only those paths; commit research(reflect): verify M00 research direction; push origin main; record the exact git rev-parse HEAD before ARA.
+- [ ] **Step 3: Run ARA once, only after the final research push.** Invoke ara-research-manager at session end. Let the skill inspect actual conversation evidence and existing ara/; create or update only files its procedure requires, never fabricate empty research artifacts, and preserve provenance tags. Validate every created YAML, stage only the changed M00/state/log/finding files plus actual ara/ changes, require a non-empty staged diff, commit research(reflect): record end-of-session ARA provenance, and push origin main only when that diff exists.
+    find ara -type f -name '*.yaml' -print0 | xargs -0 ruby -e 'require "yaml"; ARGV.each { |p| YAML.load_file(p) }; puts "valid YAML"'
+    git add milestones/M00-research-direction.md research-state.yaml state/workspace.yaml research-log.md findings.md ara/
+    test -n "$(git diff --cached --name-only)"
+- [ ] **Step 4: Verify the closing state and stop.**
+    test "$(git branch --show-current)" = main
     test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
     git status --short --branch
-  Expected: valid YAML, remote/local hashes match, and output is clean main; no commit or research action follows ARA.
+  Expected: clean main, remote/local hashes match, no empty commit, no public-safety violation, and no research action follows ARA.
