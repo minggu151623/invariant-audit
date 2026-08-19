@@ -70,6 +70,7 @@ ai_actions:
       - ara/logic/solution/heuristics.md
       - ara/evidence/README.md
       - ara/trace/exploration_tree.yaml
+      - ara/staging/observations.yaml
       - ara/trace/sessions/session_index.yaml
       - ara/trace/sessions/2026-08-19_001.yaml
 

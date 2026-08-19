@@ -3,16 +3,3 @@ canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
 milestone_path: milestones/M00-research-direction.md
-milestone_status: verified
-validation_paths:
-  - milestones/M00-research-direction.md
-  - research-state.yaml
-  - state/workspace.yaml
-  - research-log.md
-  - findings.md
-planned_verification_subject: "research(reflect): verify M00 research direction"
-verification_commit: c79f20276657f67bb9840a469b7813473fe0ef60
-# M00 verification scope: documentary direction/provenance only.
-# Explicit boundary: no experiments, no results/data, no calibrated metrics,
-# no public-claim eligibility.
-# The verification hash is intentionally added only after the verification push.

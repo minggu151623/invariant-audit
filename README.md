@@ -13,7 +13,7 @@ Bootstrap has no experiment or result. This repository is the public, internatio
 ## Documentation
 
 - [Design spec](docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md)
-- [Task 3 plan](docs/superpowers/plans/2026-08-19-invariant-audit-bootstrap.md)
+- [Bootstrap plan](docs/superpowers/plans/2026-08-19-invariant-audit-bootstrap.md)
 - [Milestones](milestones/README.md)
 - [Findings](findings.md)
 
