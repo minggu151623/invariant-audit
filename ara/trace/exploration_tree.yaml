@@ -43,3 +43,22 @@ tree:
     choice: "Use a GitHub noreply identity for public commit attribution."
     alternatives: []
     evidence: "User-stated privacy choice; no research result."
+
+  - id: N06
+    type: decision
+    title: "Authorize bounded corrective follow-up after independent final review"
+    provenance: user
+    timestamp: "2026-08-19T22:56:26+0700"
+    choice: >
+      After independent final review exposed the pointer-only contract violation
+      and two minor provenance/label defects, authorize only the bounded
+      three-file correction and its terminal ARA epilogue.
+    alternatives:
+      - "Leave the reviewed defects unresolved or expand the correction scope."
+    evidence: >
+      The independent final review identified duplicated state in the
+      pointer-only research-state.yaml, omission of ara/staging/observations.yaml
+      from the Session 001 ARA initialization action list, and the inaccurate
+      README plan label. This is process-review evidence only, not scientific
+      evidence; no experiment, result, calibrated metric, heuristic, supported
+      claim, or public-claim eligibility was produced.
