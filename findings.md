@@ -42,6 +42,7 @@ consistency. Validation paths are `milestones/M00-research-direction.md`,
 Planned verification commit subject: `research(reflect): verify M00 research direction`.
 The verification hash is intentionally omitted until after the verification
 commit is pushed and is recorded only in the later ARA provenance update.
+Captured verification commit after the successful push: `c79f20276657f67bb9840a469b7813473fe0ef60`.
 
 There are still no experiments, no results/data, no calibrated metrics, and no
 public claim eligibility. No robustness, invariant-validity, or calibration

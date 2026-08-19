@@ -35,6 +35,7 @@ Bootstrap has no experiment or result.
 - Planned commit message: `research(reflect): verify M00 research direction`
 - Verification commit hash: intentionally pending until after the verification
   commit is pushed; it will be recorded in the later ARA provenance update.
+- Captured verification commit after the successful push: `c79f20276657f67bb9840a469b7813473fe0ef60`.
 - Push command: `git push origin main`
 - Push target: `origin/main`
 - Push result: `pending-until-publication`

@@ -55,6 +55,7 @@ are recorded consistently across the following paths:
 Planned verification commit subject: `research(reflect): verify M00 research direction`.
 The verification commit hash is intentionally recorded only after that commit
 is pushed, in the later ARA provenance update.
+Verification commit: `c79f20276657f67bb9840a469b7813473fe0ef60`.
 
 ## Goal
 

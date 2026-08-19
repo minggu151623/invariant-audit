@@ -1,0 +1,45 @@
+tree:
+  - id: N01
+    type: pivot
+    title: "Pivot from generic metamorphic robustness benchmarking to semantic/state invariant validation with false-positive/false-negative calibration"
+    provenance: user
+    timestamp: "2026-08-19T21:49:11+0700"
+    from: "generic metamorphic robustness benchmarking"
+    to: "semantic/state invariant validation with false-positive/false-negative calibration"
+    trigger: "The user approved this research-direction pivot; no experimental result or quantitative evidence motivated it."
+
+  - id: N02
+    type: decision
+    title: "Target accessible AI research for an international X/LinkedIn profile"
+    provenance: user
+    timestamp: "2026-08-19T21:49:11+0700"
+    choice: "Keep the research accessible and suitable for an international X/LinkedIn profile."
+    alternatives: []
+    evidence: "User-stated goal; no experiment or result."
+
+  - id: N03
+    type: decision
+    title: "Constrain the work to modest local resources"
+    provenance: user
+    timestamp: "2026-08-19T21:49:11+0700"
+    choice: "Use a modest local machine with no external GPU and no API, with ChatGPT Plus/Codex available."
+    alternatives: []
+    evidence: "User-stated resource constraints; no experiment or result."
+
+  - id: N04
+    type: decision
+    title: "Maintain milestone records and a public GitHub audit trail"
+    provenance: user
+    timestamp: "2026-08-19T21:49:11+0700"
+    choice: "Maintain milestone/recap records and meaningful public GitHub commits for the audit trail."
+    alternatives: []
+    evidence: "User-stated process requirement; routine Git commands are not research events."
+
+  - id: N05
+    type: decision
+    title: "Use GitHub noreply privacy for public attribution"
+    provenance: user
+    timestamp: "2026-08-19T21:49:11+0700"
+    choice: "Use a GitHub noreply identity for public commit attribution."
+    alternatives: []
+    evidence: "User-stated privacy choice; no research result."

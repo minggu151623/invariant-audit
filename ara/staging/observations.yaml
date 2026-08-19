@@ -1,0 +1,8 @@
+observations:
+  - id: O01
+    timestamp: "2026-08-19T21:49:11+0700"
+    provenance: user
+    content: "The user has basic Python knowledge, is familiar with local models, and is a research newbie."
+    context: "Session setup for an accessible, local-only AI research direction."
+    potential_type: unknown
+    promoted: false
