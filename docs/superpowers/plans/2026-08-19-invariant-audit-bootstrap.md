@@ -9,7 +9,7 @@
 
 ## Global Constraints
 
-- Work only on main; preserve 71b966c docs(design): define InvariantAudit research workflow and the existing plan commits.
+- Work only on main; preserve 995b318 docs(design): define InvariantAudit research workflow and the existing plan commits.
 - This turn changes only this plan locally; do not execute tasks, authenticate gh, create a repository, push, or cause any other external side effect.
 - README and Markdown records own narrative; state/workspace.yaml owns state; research-state.yaml only points to that canonical state; CSV/JSONL owns row data.
 - Protocol Markdown must be committed before any result/data commit; each result must reference its protocol commit and pass git merge-base --is-ancestor.
@@ -35,7 +35,7 @@
     git branch --show-current
     git log --format=%H%x09%s -n 4
     git remote -v
-  Expected: clean main; history contains design commit 71b966c and the current plan commits; no remote output.
+  Expected: clean main; history contains design commit 995b318 and the current plan commits; no remote output.
 - [ ] **Step 2: Run privacy and artifact scans.**
     git diff --check
     git ls-files -oi --exclude-standard
@@ -99,7 +99,7 @@
 **Files:** Create/update milestones/M00-research-direction.md, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md. **Interfaces:** consumes the Task 3 scaffold commit; produces active M00 state with exact paths and provenance.
 
 - [ ] **Step 1: Write M00 with separated provenance.** Use headings ID, Status, User decision, Sourced evidence, Reviewer inference, Goal, Completion criteria, Limitations, and Next gate. Set ID M00 and Status active. Under User decision and Provenance user, record the user-approved pivot from generic metamorphic robustness benchmark to validating semantic/state invariants and false-positive/false-negative calibration. Under Sourced evidence, link only the design spec and real commits/files. Under Reviewer inference, label inference as reviewer inference and not evidence. State explicitly: no experiments yet, no results/data, no calibrated metrics, and no public claim eligibility.
-- [ ] **Step 2: Update all five state/log paths.** Keep research-state.yaml as a machine-readable pointer to state/workspace.yaml and add workspace_id invariant-audit plus milestone_path milestones/M00-research-direction.md. state/workspace.yaml must contain schema_version 1, workspace_id invariant-audit, branch main, spec_path, canonical_state_path, research_state_pointer, design_commit 71b966c, scaffold_commit from git rev-parse HEAD before edits, and M00 path/status/provenance/evidence. Append exact date, commit message, validation commands, and push result to research-log.md; update findings.md with the pivot, evidence boundary, limitations, and protocol-before-results gate.
+- [ ] **Step 2: Update all five state/log paths.** Keep research-state.yaml as a machine-readable pointer to state/workspace.yaml and add workspace_id invariant-audit plus milestone_path milestones/M00-research-direction.md. state/workspace.yaml must contain schema_version 1, workspace_id invariant-audit, branch main, spec_path, canonical_state_path, research_state_pointer, design_commit 995b318, scaffold_commit from git rev-parse HEAD before edits, and M00 path/status/provenance/evidence. Append exact date, commit message, validation commands, and push result to research-log.md; update findings.md with the pivot, evidence boundary, limitations, and protocol-before-results gate.
 - [ ] **Step 3: Validate, commit, and push the direction record.**
     ruby -e 'require "yaml"; ARGV.each { |p| YAML.load_file(p) }; puts "valid YAML"' research-state.yaml state/workspace.yaml
     git diff --check
@@ -119,7 +119,7 @@
     git status --porcelain
     git grep -nEI '(gh[pousr]_[A-Za-z0-9_]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|-----BEGIN (RSA|OPENSSH|EC|DSA) PRIVATE KEY-----|xox[baprs]-[0-9A-Za-z-]{10,})' -- .
     find . -type f -not -path './.git/*' -exec stat -f '%z %N' {} + | awk '$1 >= 52428800 {print}'
-    for commit in $(git rev-list 71b966c..HEAD); do test -n "$(git diff-tree --no-commit-id --name-only -r "$commit")" || exit 1; done
+    for commit in $(git rev-list 995b318..HEAD); do test -n "$(git diff-tree --no-commit-id --name-only -r "$commit")" || exit 1; done
   Expected: every new path exists, main is clean before the verification edit, no secret/large-file output, and every post-design commit is non-empty. For any future result, run git merge-base --is-ancestor with its recorded protocol and result commits.
 - [ ] **Step 2: Verify M00 without a self-referential hash.** Before the verification commit, change M00 and state status to verified, add validation paths, and record only the planned subject research(reflect): verify M00 research direction in M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md. Do not write the verification hash before the commit. Stage only those paths, commit research(reflect): verify M00 research direction, push origin main, then capture verification_commit with git rev-parse HEAD for Step 3.
 - [ ] **Step 3: Run ARA once, only after the final research push.** Append the exact verification_commit captured after Step 2 to M00, research-state.yaml, state/workspace.yaml, research-log.md, and findings.md in this ARA provenance commit; never create a self-referential hash. Invoke ara-research-manager at session end. Let the skill inspect actual conversation evidence and existing ara/; create or update only files its procedure requires, never fabricate empty research artifacts, and preserve provenance tags. Validate every created YAML, stage only the changed M00/state/log/finding files plus actual ara/ changes, require a non-empty staged diff, commit research(reflect): record end-of-session ARA provenance, and push origin main only when that diff exists.
