@@ -1,0 +1,27 @@
+schema_version: 1
+workspace_id: invariant-audit
+branch: main
+spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
+canonical_state_path: state/workspace.yaml
+research_state_pointer: research-state.yaml
+design_commit: 995b318
+scaffold_commit: 5424d4c
+scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
+M00:
+  path: milestones/M00-research-direction.md
+  status: active
+  provenance:
+    source: user
+    date: 2026-08-19
+    decision: "Pivot from generic metamorphic robustness benchmark to validating semantic/state invariants and false-positive/false-negative calibration."
+    reviewer_inference: "Reviewer inference; not evidence."
+  evidence:
+    - type: design_spec
+      path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
+      commit: 995b318
+    - type: scaffold
+      commit: 5424d4c
+      paths:
+        - research-state.yaml
+        - research-log.md
+        - findings.md
