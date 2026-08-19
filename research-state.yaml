@@ -1,0 +1,3 @@
+schema_version: 1
+canonical_state_path: state/workspace.yaml
+pointer_only: true
