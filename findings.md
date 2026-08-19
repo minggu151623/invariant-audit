@@ -47,3 +47,60 @@ Captured verification commit after the successful push: `c79f20276657f67bb9840a4
 There are still no experiments, no results/data, no calibrated metrics, and no
 public claim eligibility. No robustness, invariant-validity, or calibration
 performance claim is supported by this documentary verification.
+
+## M01/E001 protocol design
+
+M01 is active and documentary/protocol-only. It is not verified experimental
+evidence and is not eligible to source public claims. The proposed protocol is
+[E001-v1](experiments/E001-synthetic-invariant-calibration/protocol.md), with
+the documentary milestone at [milestones/M01-protocol-design.md](milestones/M01-protocol-design.md)
+and the source boundary at [literature/survey.md](literature/survey.md).
+
+### Provenance correction
+
+The exact user instruction on 2026-08-19 was `tiếp tục` (“continue”). It
+authorized continuation at a high level, but did not enumerate the E001 design
+or explicitly grant or withhold commit, push, run, or public-action authority.
+The initial eight-path allowlist and withheld commit/push/run/external-action
+authority came from the orchestrator-bounded worker brief. The detailed E001
+recipes, parameterization, metrics, and gates are reviewer/worker design
+choices, not a user-selected design. The local draft was completed on
+2026-08-20; the current remediation is limited to the five paths named in its
+worker brief.
+
+### Current understanding
+
+The current record defines a bounded measurement design rather than a finding:
+an exact synthetic oracle labels valid and single-fault invalid semantic/state
+cases; B0 is a schema-only baseline; M1 checks four invariant families; a
+calibration split is disjoint from a confirmatory split; and the confirmatory
+analysis is pre-specified around FP, FN, balanced accuracy, Brier score, ECE,
+and paired cluster-bootstrap intervals. These are proposed protocol choices,
+not observed performance.
+
+### Evidence boundary
+
+The literature foundation records sourced technical facts and links, while the
+E001 generator, transformations, counts, confidence mapping, metrics, and
+gates are reviewer/design choices. No source or local file presently establishes
+that M1 outperforms B0, that the confidence is calibrated, or that the synthetic
+design generalizes.
+
+### Protocol-before-results gate
+
+The planned protocol subject is
+`research(protocol): lock E001 synthetic invariant calibration`. No protocol
+commit hash is recorded because the orchestrator-bounded worker brief withheld
+commit authority. No run, result, metric, figure, data, or code may be created
+before that dedicated protocol commit; a future result must reference its exact
+hash and pass the ancestor check.
+
+### Open questions and limitations
+
+Future authorized work must verify generator determinism, oracle isolation,
+single-fault construction, output schema, and the declared uncertainty method.
+E001 remains finite, synthetic, ontology-coupled, and conditional on its
+generator; even valid results would not establish production validity,
+generalization, novelty, safety, or public-claim eligibility. Any new seeds,
+faults, metrics, thresholds, or post-hoc analyses must be labeled exploratory
+or placed in a new protocol version.

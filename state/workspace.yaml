@@ -36,3 +36,69 @@ M00:
       - findings.md
     planned_commit_subject: "research(reflect): verify M00 research direction"
     verification_commit: c79f20276657f67bb9840a469b7813473fe0ef60
+M01:
+  path: milestones/M01-protocol-design.md
+  status: active
+  scope: documentary_protocol_only
+  provenance:
+    user_instruction:
+      text: "tiếp tục"
+      date: 2026-08-19
+      interpretation: "High-level continuation instruction; it did not enumerate the E001 design or explicitly grant or withhold commit, push, run, or public-action authority."
+    draft_completed_date: 2026-08-20
+    orchestrator_scope:
+      source: orchestrator_bounded_worker_brief
+      file_allowlist:
+        - literature/survey.md
+        - literature/README.md
+        - experiments/E001-synthetic-invariant-calibration/protocol.md
+        - experiments/README.md
+        - milestones/M01-protocol-design.md
+        - state/workspace.yaml
+        - research-log.md
+        - findings.md
+      current_remediation_file_allowlist:
+        - experiments/E001-synthetic-invariant-calibration/protocol.md
+        - milestones/M01-protocol-design.md
+        - state/workspace.yaml
+        - research-log.md
+        - findings.md
+      withheld_authority:
+        - commit
+        - push
+        - run
+        - external_or_public_action
+      interpretation: "The orchestrator-bounded worker brief, not the user instruction, supplied the file boundary and withheld these actions."
+    reviewer_inference: "The detailed E001 synthetic oracle, recipes, splits, metrics, and gates are reviewer/worker design choices; they are not evidence and were not selected by the user."
+  evidence:
+    - type: M00_direction
+      path: milestones/M00-research-direction.md
+    - type: literature_foundation
+      path: literature/survey.md
+  verification:
+    scope: documentary_protocol_design_only
+    status: not_verified
+    experimental_evidence: false
+    public_claim_eligibility: false
+    validation_paths:
+      - literature/survey.md
+      - literature/README.md
+      - experiments/E001-synthetic-invariant-calibration/protocol.md
+      - experiments/README.md
+      - milestones/M01-protocol-design.md
+      - state/workspace.yaml
+      - research-log.md
+      - findings.md
+    planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
+    protocol_commit: null
+E001:
+  path: experiments/E001-synthetic-invariant-calibration/protocol.md
+  status: protocol_drafted_pending_commit
+  milestone: M01
+  protocol_version: E001-v1
+  literature_path: literature/survey.md
+  results: absent
+  data: absent
+  run_authorized: false
+  planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
+  protocol_commit: null
