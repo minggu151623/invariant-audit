@@ -4,9 +4,19 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
+current_milestone: M02
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
+authority_records:
+  - id: user-2026-08-25-e001
+    source: user
+    date: 2026-08-25
+    exact_text: "cả hai, nghiên cứu lâu đi, bao lâu cũng được"
+    scope:
+      - previously discussed public push
+      - E001 implementation and confirmatory run
+    interpretation: "High-level authority for those actions; not selection of technical design."
 M00:
   path: milestones/M00-research-direction.md
   status: verified
@@ -38,7 +48,8 @@ M00:
     verification_commit: c79f20276657f67bb9840a469b7813473fe0ef60
 M01:
   path: milestones/M01-protocol-design.md
-  status: active
+  status: verified
+  completion: protocol_lock_documentary_step_complete_and_published
   scope: documentary_protocol_only
   provenance:
     user_instruction:
@@ -77,9 +88,10 @@ M01:
       path: literature/survey.md
   verification:
     scope: documentary_protocol_design_only
-    status: protocol_locked_locally
+    status: complete_and_published_as_ancestor
     protocol_commit: d8b26d21e9692ace19436d78461460940043f5c7
-    lock_scope: local_only
+    publication_commit: 31071ddf65ad9a1f0e5b28eb0d501899253cd17b
+    lock_scope: published_as_ancestor
     experimental_evidence: false
     public_claim_eligibility: false
     validation_paths:
@@ -94,13 +106,156 @@ M01:
     planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
 E001:
   path: experiments/E001-synthetic-invariant-calibration/protocol.md
-  status: protocol_locked
-  milestone: M01
+  status: verified_within_finite_synthetic_design
+  milestone: M02
   protocol_version: E001-v1
   literature_path: literature/survey.md
-  results: absent
-  data: absent
-  run_authorized: false
+  results: present_and_published
+  data: present_and_published
+  run_authorized: true
+  authority:
+    source: user
+    date: 2026-08-25
+    exact_text: "cả hai, nghiên cứu lâu đi, bao lâu cũng được"
+    scope:
+      - previously discussed public push
+      - E001 implementation
+      - E001 confirmatory run
+    technical_design_selection: false
   planned_commit_subject: "research(protocol): lock E001 synthetic invariant calibration"
   protocol_commit: d8b26d21e9692ace19436d78461460940043f5c7
-  protocol_lock_scope: local_only
+  protocol_lock_scope: published_as_ancestor
+  implementation_commit: 54f530d375372589e191e0231152a177d29c2a64
+  implementation_subject: "research(init): implement E001 evaluation harness"
+  run:
+    run_id: e001-20260825-001
+    status: valid
+    protocol_commit: d8b26d21e9692ace19436d78461460940043f5c7
+    split_counts:
+      development: 256
+      calibration: 256
+      confirmatory: 512
+    confirmatory_clusters: 64
+    bootstrap_replicates: 10000
+    tests: 21
+    reviewer_approval: true
+    deviations: none
+  result:
+    commit: 31071ddf65ad9a1f0e5b28eb0d501899253cd17b
+    status: published
+    remote: origin/main
+    remote_hash_verified: 31071ddf65ad9a1f0e5b28eb0d501899253cd17b
+    protocol_ancestor_verified: true
+    implementation_parent_verified: true
+  artifacts:
+    - path: data/E001-v1-predictions.jsonl
+      sha256: be5e5e2a6c3f33778a34af69d79ec4f14e3b2c0cba2f371ecc004310b7c9559a
+      size_bytes: 2966528
+      rows: 5120
+    - path: data/E001-v1-metrics.csv
+      sha256: ae7c32be651b5dfe175ca0537aa3cb8283acbd7063b14e15b8ec386f0d6a20cb
+      size_bytes: 162200
+      rows: 75
+    - path: data/E001-v1-bootstrap.csv
+      sha256: 63b86d44f3425f0c2a43c53191d13ce614b0d0726ff1e941da98d11ee545ede5
+      size_bytes: 32920126
+      rows: 450270
+    - path: experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md
+      sha256: cc00b21deabb88fd51c55090fc642a80424f960ad6b51c50f75818e8ffa485d6
+      size_bytes: 2870
+      lines: 60
+  primary_metrics:
+    B0:
+      balanced_accuracy: 0.5
+      fpr: 1.0
+      fnr: 0.0
+      brier: 0.25
+      ece: 0.0
+    M1:
+      balanced_accuracy: 1.0
+      fpr: 0.0
+      fnr: 0.0
+      brier: 0.00005917159763
+      ece: 0.007692307692
+    paired_delta_M1_minus_B0:
+      balanced_accuracy: 0.5
+      fpr: -1.0
+      fnr: 0.0
+      brier: -0.2499408284
+      ece: 0.007692307692
+  h1:
+    status: supported
+    rule: "Paired 95% CI for delta balanced accuracy entirely > 0, paired 95% CI for delta FPR entirely < 0, and point delta FNR <= 0."
+    fnr_guardrail: "satisfied; point delta FNR (M1 minus B0) = 0"
+  ablations:
+    M1-no-semantic:
+      balanced_accuracy: 0.75
+      fpr: 0.5
+      fnr: 0.0
+      brier: 0.166726273
+      ece: 0.005076538582
+    M1-no-state:
+      balanced_accuracy: 0.75
+      fpr: 0.5
+      fnr: 0.0
+      brier: 0.166726273
+      ece: 0.005076538582
+    M1-no-calibration:
+      balanced_accuracy: 1.0
+      fpr: 0.0
+      fnr: 0.0
+      brier: 0.0
+      ece: 0.0
+  uncertainty:
+    method: paired_cluster_bootstrap
+    interval_note: "Intervals are degenerate because the locked 64-cluster signatures were identical across all 10000 replicates."
+  limitations:
+    - oracle_recipe_coupling
+    - finite_balanced_single_fault_synthetic_design
+    - no_production_validity
+    - no_external_validity_or_generalization
+    - no_novelty_claim
+    - no_safety_claim
+  public_claim_eligibility: false
+M02:
+  path: milestones/M02-E001-results.md
+  status: verified
+  scope: finite_synthetic_E001_only
+  provenance:
+    authority:
+      source: user
+      date: 2026-08-25
+      exact_text: "cả hai, nghiên cứu lâu đi, bao lâu cũng được"
+      interpretation: "High-level authority for the previously discussed public push and E001 implementation/run, not selection of technical design."
+    technical_design: "Reviewer/design inference; not user-selected and not result evidence."
+  evidence:
+    - type: protocol
+      path: experiments/E001-synthetic-invariant-calibration/protocol.md
+      commit: d8b26d21e9692ace19436d78461460940043f5c7
+    - type: implementation
+      path: experiments/E001-synthetic-invariant-calibration/code/e001.py
+      commit: 54f530d375372589e191e0231152a177d29c2a64
+    - type: run
+      run_id: e001-20260825-001
+      status: valid
+      tests: 21
+      reviewer_approval: true
+    - type: result
+      path: experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md
+      commit: 31071ddf65ad9a1f0e5b28eb0d501899253cd17b
+      remote: origin/main
+  verification:
+    scope: E001_confirmatory_result_within_finite_synthetic_design
+    status: valid_and_published
+    protocol_ancestor_of_result: true
+    remote_result_hash_verified: true
+    deviations: none
+    public_claim_eligibility: false
+    limitations:
+      - degenerate_intervals_from_identical_64_cluster_signatures
+      - oracle_recipe_coupling
+      - no_production_external_validity_novelty_safety_or_generalization
+  outer_loop_decision:
+    decision: deepen_and_broaden
+    next_step: "Design and separately lock a future E002 protocol for heterogeneous clusters, specification misspecification, multi-faults, and stronger oracle-method separation."
+    provenance: "Reviewer/design inference; no E002 protocol, run, result, or claim exists."

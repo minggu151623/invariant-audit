@@ -1,117 +1,108 @@
 # Findings
 
-No public claim is eligible from M00. Its documentary verification does not
-establish public-claim eligibility.
+This document separates user authority, protocol/design provenance, observed
+E001 results, and reviewer/design inference. M02 is verified only within the
+finite synthetic E001 design; `public_claim_eligibility` is `false`.
 
-## M00 research direction
+## M00 — research direction
 
-The user-approved pivot, with **Provenance: user**, is from a generic
-metamorphic robustness benchmark to validating semantic/state invariants and
-false-positive/false-negative calibration. M00 is verified only as a
-documentary direction/provenance record, not as an experimental result.
+M00 remains a verified documentary record of the user-approved pivot from a
+generic metamorphic robustness benchmark toward semantic/state invariants and
+false-positive/false-negative calibration. It is not experimental evidence and
+does not establish performance, calibration, generalization, novelty, safety,
+or public-claim eligibility.
 
-### Evidence boundary
+The underlying design specification, scaffold commits, literature notes, and
+M00 milestone preserve the original source boundary. Reviewer interpretation
+of that pivot is not a user-selected result.
 
-Sourced evidence is limited to the [design spec](docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md),
-real commits `995b318` and `5424d4c`, and the real repository files linked from
-the M00 record. Reviewer inference is labeled as reviewer inference and is not
-evidence. No user decision or reviewer interpretation is a result.
+## M01 — protocol-lock documentary step
 
-### Limitations
+M01's documentary protocol-locking step is complete and published as an
+ancestor of the E001 result. E001-v1 is the protocol at
+`experiments/E001-synthetic-invariant-calibration/protocol.md`, locked in
+commit `d8b26d21e9692ace19436d78461460940043f5c7`. M01 remains documentary
+protocol evidence, not experimental evidence, and does not grant public-claim
+eligibility.
 
-There are no experiments yet, no results/data, no calibrated metrics, and no
-public claim eligibility. No robustness, invariant-validity, or calibration
-performance claim is supported by this record.
+The exact user authorization on 2026-08-25 was
+`cả hai, nghiên cứu lâu đi, bao lâu cũng được`. It supplied high-level
+authority for both the previously discussed public push and the E001
+implementation/run. It did not select the technical design; the detailed
+recipes, oracle, metrics, gates, and ablations remain reviewer/worker design
+choices.
 
-### Protocol-before-results gate
+## E001 result — finite synthetic confirmatory finding
 
-Before any experiment or result/data record, a protocol Markdown record must be
-created and committed with its question or hypothesis, inputs, method,
-parameters, evaluation metrics, expected outputs, stopping criteria, data
-recording, and limitations. A result must reference that protocol commit, and
-the protocol commit must be an ancestor of the result commit. Public-facing
-content remains gated on a verified milestone and human review.
+### Evidence chain
 
-## M00 documentary verification
+- Protocol: commit `d8b26d21e9692ace19436d78461460940043f5c7`.
+- Implementation: commit `54f530d375372589e191e0231152a177d29c2a64`.
+- Run: `e001-20260825-001`, status `valid`.
+- Result: commit `31071ddf65ad9a1f0e5b28eb0d501899253cd17b`, published on
+  `origin/main`; protocol ancestry and remote result hash were verified
+  read-only.
+- Split counts were development 256, calibration 256, and confirmatory 512;
+  the confirmatory split had 64 clusters and the paired bootstrap used exactly
+  10,000 replicates.
+- The reviewed development suite contained 21 tests, and independent review
+  approved the implementation. Deviations: none.
 
-The verification scope is limited to documentary direction and provenance
-consistency. Validation paths are `milestones/M00-research-direction.md`,
-`research-state.yaml`, `state/workspace.yaml`, `research-log.md`, and
-`findings.md`.
+| Artifact | SHA-256 | Size | Count |
+| --- | --- | ---: | ---: |
+| `data/E001-v1-predictions.jsonl` | `be5e5e2a6c3f33778a34af69d79ec4f14e3b2c0cba2f371ecc004310b7c9559a` | 2,966,528 B | 5,120 rows |
+| `data/E001-v1-metrics.csv` | `ae7c32be651b5dfe175ca0537aa3cb8283acbd7063b14e15b8ec386f0d6a20cb` | 162,200 B | 75 rows + header |
+| `data/E001-v1-bootstrap.csv` | `63b86d44f3425f0c2a43c53191d13ce614b0d0726ff1e941da98d11ee545ede5` | 32,920,126 B | 450,270 rows + header |
+| `experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md` | `cc00b21deabb88fd51c55090fc642a80424f960ad6b51c50f75818e8ffa485d6` | 2,870 B | 60 lines |
 
-Planned verification commit subject: `research(reflect): verify M00 research direction`.
-The verification hash is intentionally omitted until after the verification
-commit is pushed and is recorded only in the later ARA provenance update.
-Captured verification commit after the successful push: `c79f20276657f67bb9840a469b7813473fe0ef60`.
+### Primary result: M1 minus B0
 
-There are still no experiments, no results/data, no calibrated metrics, and no
-public claim eligibility. No robustness, invariant-validity, or calibration
-performance claim is supported by this documentary verification.
+The primary comparison is strictly M1 minus B0. On the confirmatory split:
 
-## M01/E001 protocol design
+| Method | BA | FPR | FNR | Brier | ECE |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| B0 | 0.5 | 1 | 0 | 0.25 | 0 |
+| M1 | 1 | 0 | 0 | 0.00005917159763 | 0.007692307692 |
+| Delta M1 − B0 | +0.5 | −1 | 0 | −0.2499408284 | +0.007692307692 |
 
-M01 is active and documentary/protocol-only. It is not verified experimental
-evidence and is not eligible to source public claims. The proposed protocol is
-[E001-v1](experiments/E001-synthetic-invariant-calibration/protocol.md), with
-the documentary milestone at [milestones/M01-protocol-design.md](milestones/M01-protocol-design.md)
-and the source boundary at [literature/survey.md](literature/survey.md).
+H1 was **supported within this synthetic design**: the paired 95% interval for
+delta BA was entirely above zero, the paired interval for delta FPR was entirely
+below zero, and the point delta FNR was non-positive. The FNR guardrail was
+satisfied at delta FNR `0`. This is not a production or external-validity
+claim.
 
-### Provenance correction
+### Ablations
 
-The exact user instruction on 2026-08-19 was `tiếp tục` (“continue”). It
-authorized continuation at a high level, but did not enumerate the E001 design
-or explicitly grant or withhold commit, push, run, or public-action authority.
-The initial eight-path allowlist and withheld commit/push/run/external-action
-authority came from the orchestrator-bounded worker brief. The detailed E001
-recipes, parameterization, metrics, and gates are reviewer/worker design
-choices, not a user-selected design. The local draft was completed on
-2026-08-20; the current remediation is limited to the five paths named in its
-worker brief.
+Ablations were reported as secondary analysis and do not change the primary
+paired deltas:
 
-### Current understanding
+- M1-no-semantic: BA `0.75`, FPR `0.5`, FNR `0`, Brier `0.166726273`, ECE
+  `0.005076538582`.
+- M1-no-state: BA `0.75`, FPR `0.5`, FNR `0`, Brier `0.166726273`, ECE
+  `0.005076538582`.
+- M1-no-calibration: BA `1`, FPR `0`, FNR `0`, Brier `0`, ECE `0`.
 
-The current record defines a bounded measurement design rather than a finding:
-an exact synthetic oracle labels valid and single-fault invalid semantic/state
-cases; B0 is a schema-only baseline; M1 checks four invariant families; a
-calibration split is disjoint from a confirmatory split; and the confirmatory
-analysis is pre-specified around FP, FN, balanced accuracy, Brier score, ECE,
-and paired cluster-bootstrap intervals. These are proposed protocol choices,
-not observed performance.
+### Uncertainty and limitations
 
-### Evidence boundary
+All locked paired bootstrap intervals are degenerate because the 64-cluster
+signatures were identical across all 10,000 replicates. Those point intervals
+are a consequence of this finite construction, not evidence of broad
+uncertainty characterization.
 
-The literature foundation records sourced technical facts and links, while the
-E001 generator, transformations, counts, confidence mapping, metrics, and
-gates are reviewer/design choices. No source or local file presently establishes
-that M1 outperforms B0, that the confidence is calibrated, or that the synthetic
-design generalizes.
+The oracle is coupled to the hand-designed recipes. E001 is finite, balanced,
+synthetic, and single-fault. It establishes no production validity, external
+validity, generalization, novelty, or safety, and it is not evidence that the
+method is calibrated outside this design. Accordingly,
+`public_claim_eligibility` remains `false`.
 
-### Protocol-before-results gate
+## Outer-loop decision
 
-The E001-v1 protocol was locked locally in commit
-`d8b26d21e9692ace19436d78461460940043f5c7` with subject
-`research(protocol): lock E001 synthetic invariant calibration`. This lock is
-temporal protocol evidence, not result evidence: it establishes the
-protocol-before-results boundary but does not establish performance,
-calibration, generalization, novelty, safety, or public-claim eligibility. The
-commit has not been pushed. No run, result, metric, figure, data, or code may
-be created without a separately authorized run, and any future result must
-reference this exact hash and pass the ancestor check.
+**Decision: deepen and broaden.** A future, separately locked E002 protocol
+should test heterogeneous clusters, specification misspecification,
+multi-faults, and stronger separation between oracle and method. This is a
+reviewer/design inference for the next protocol, not an E002 result. No E002
+protocol, implementation, run, result, or claim exists.
 
-## Post-lock protocol evidence
-
-The local protocol lock is the only new evidence recorded here. M01 remains
-active and documentary/protocol-only; it is not verified experimental evidence
-and is not eligible to source public claims. The metadata update records the
-commit identity and validation boundary only, not an observation or measured
-outcome.
-
-### Open questions and limitations
-
-Future authorized work must verify generator determinism, oracle isolation,
-single-fault construction, output schema, and the declared uncertainty method.
-E001 remains finite, synthetic, ontology-coupled, and conditional on its
-generator; even valid results would not establish production validity,
-generalization, novelty, safety, or public-claim eligibility. Any new seeds,
-faults, metrics, thresholds, or post-hoc analyses must be labeled exploratory
-or placed in a new protocol version.
+Future E002 work must preserve the protocol-before-results gate and repeat the
+provenance separation between user authority, technical design, observed
+results, and reviewer inference.

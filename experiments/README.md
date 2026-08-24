@@ -6,12 +6,17 @@ CSV/JSONL is row-data source.
 ## Current boundary
 
 - [E001 synthetic invariant calibration protocol](E001-synthetic-invariant-calibration/protocol.md)
-  is the M01 documentary protocol, locked locally by commit
+  is the M01 documentary protocol, locked by commit
   `d8b26d21e9692ace19436d78461460940043f5c7` with subject
-  `research(protocol): lock E001 synthetic invariant calibration`; it is not
-  pending.
-- No run, result, metric, figure, or data file exists. A future result must
-  record that exact protocol commit and pass the protocol-before-results gate.
-  The lock is local-only; no push or publication occurred.
+  `research(protocol): lock E001 synthetic invariant calibration`. The protocol
+  commit is published as an ancestor of result commit
+  `31071ddf65ad9a1f0e5b28eb0d501899253cd17b`.
+- The authorized run `e001-20260825-001` is valid. Its published result is
+  [run Markdown](E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md)
+  in result commit `31071ddf65ad9a1f0e5b28eb0d501899253cd17b`; linked row data
+  is indexed in [data/README.md](../data/README.md).
+- M02 verifies this result only within the finite synthetic E001 design. It is
+  not production, external-validity, novelty, safety, or generalization
+  evidence, and it does not authorize a future E002 run.
 - This index is not experimental evidence and does not authorize a run or
   public claim.

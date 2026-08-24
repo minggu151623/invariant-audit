@@ -2,4 +2,4 @@ schema_version: 1
 canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
-milestone_path: milestones/M00-research-direction.md
+milestone_path: milestones/M02-E001-results.md
