@@ -11,3 +11,8 @@ Milestone records and verification evidence; Markdown records are the source of 
   experimental evidence.
 - [M02 — E001 results](M02-E001-results.md): verified only within the finite
   synthetic E001 design; `public_claim_eligibility` is `false`.
+- [M03 — E002 protocol design](M03-E002-protocol-design.md): protocol-only
+  design for heterogeneous specification stress; no executable implementation,
+  run, experimental data/result/output, figure, or ARA artifact exists. The
+  protocol is locally locked in its dedicated descendant commit; it does not
+  authorize implementation or execution.

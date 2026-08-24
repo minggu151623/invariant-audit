@@ -101,8 +101,118 @@ method is calibrated outside this design. Accordingly,
 should test heterogeneous clusters, specification misspecification,
 multi-faults, and stronger separation between oracle and method. This is a
 reviewer/design inference for the next protocol, not an E002 result. No E002
-protocol, implementation, run, result, or claim exists.
+protocol, implementation, run, result, or claim existed at that pre-M03 point;
+the later protocol lock is recorded below.
 
 Future E002 work must preserve the protocol-before-results gate and repeat the
 provenance separation between user authority, technical design, observed
 results, and reviewer inference.
+
+## M03 — E002 protocol-only design
+
+The outer-loop decision has now been converted into a locally locked,
+protocol-only E002 design:
+[E002-v1 heterogeneous specification stress](experiments/E002-heterogeneous-specification-stress/protocol.md).
+This is not an E002 result. No executable E002 implementation or run, or
+experimental data/results/output, figure, or ARA artifact exists, and
+public_claim_eligibility remains false.
+
+### Technical source boundary
+
+The new literature section uses only direct primary papers or official
+technical documentation for its new technical concepts. Stocks and Carrington
+and Hierons and Merayo ground specification-based testing and specification
+mutation; McKeeman grounds independent differential comparison; Cameron et al.
+and Hagemann ground the motivation for cluster-aware treatment under
+heterogeneity; Kuhn et al., Yan et al., and the official NIST record ground
+bounded interaction and multi-fault motivation. The direct URLs and the
+supported-claim limits are recorded in [literature/survey.md](literature/survey.md).
+No source establishes an E002 result or validates the protocol's choices.
+
+### Locked design boundary
+
+Every detailed E002 choice is reviewer/design inference, not user selection or
+sourced fact. The protocol predeclares non-identical H0-H5 signatures and 96
+clusters; valid, four single-fault, and bounded multi-fault/schema-visible
+recipes; an independently maintained replay/conservation reference oracle
+with no shared checker predicates or tables; schema-only B0; exact-spec M1;
+omission, overconstraint, and stale-transition checker regimes; semantic/state
+and no-calibration ablations; disjoint development/calibration/confirmatory
+splits; calibration isolation; the exact H2 supported versus mixed/not
+supported rule; subgroup metrics; paired cluster bootstrap with 10,000
+replicates; determinism, leakage, schema, footprint, size, and overwrite
+gates; and invalid-run staging.
+
+The heterogeneous signatures and cluster resampling are intended to make
+nondegenerate cluster uncertainty possible, but an eventual degenerate
+interval would be reported as a property of the finite construction, not
+silently treated as broader uncertainty. The oracle is independent in code
+structure but remains a hand-specified synthetic reference. The protocol
+therefore makes no production, external-validity, novelty, safety, or
+generalization claim.
+
+### Status and next gate
+
+M03 is protocol_locked_local. The required lock parent is the published
+reflection commit 4494ed80af0dec9b57b183877cb5ed3a8270c3db, and the dedicated
+lock subject is research(protocol): lock E002 heterogeneous specification
+stress. The user supplied only high-level continuation authority. There is no
+E002 run authorization in this record. Implementation, execution, results,
+data, and publication require later bounded authority and independent review.
+
+## M03 remediation — co-primary stress and deterministic handoff
+
+The amended protocol makes specification stress co-primary with the
+heterogeneous M1-minus-B0 anchor. It locks three denominator-valid diagnostics:
+d1 omit-M1 FPR on schema-valid truth-negative conservation-failure cases, d2
+over-M1 FNR on valid active-active cases, and d3 stale-M1 FNR on valid
+pending-closed cases. d1 uses all 48 confirmatory clusters; d2 uses the 40
+H0-H4 clusters; d3 uses the 40 H1-H5 clusters. Each diagnostic requires a
+strictly positive lower paired
+cluster-bootstrap interval. The suggested FNR-on-negative and FPR-on-positive
+forms were explicitly rejected as zero-denominator alternatives under the
+truth=1 convention.
+
+H2 now gates only its required overall anchor BA/FPR intervals and the three
+stress intervals, together with defined anchor points. Single-class
+case-kind BA/FPR/FNR intervals are descriptive and may be partial or
+undefined; they do not make H2 unreachable. Partial required intervals cannot
+support H2.
+
+The amended arithmetic is 912 cases and 7,296 prediction rows; 240 standard
+metric rows plus 3 diagnostic rows; and 530,000 bootstrap replicates plus 53
+interval summaries plus one header, or 530,054 lines. The compact deterministic
+bootstrap upper estimate is 47,710,564 bytes, below the 50,000,000-byte
+pre-write gate and 52,428,800-byte public limit.
+
+The handoff now fixes exact UTF-8/LF, canonical JSON, CSV, Markdown, decimal,
+NA, boolean, list, fault-set, case-ID, hash-input, manifest, and row-order
+encodings; two-build byte comparison; external post-finalization result
+hashing; and all six known-answer signature SHA-256 vectors. Overconstraint
+rejects active-active while stale-transition accepts active-active and omits
+pending-closed. The generated H0-C00 valid-base payload hash is
+`8ddb5fbd84a64ef811a261ad72359f647d0757e8c83c864bd206bbb03b8dd07b` with
+decisions M1=true, over=false, stale=true; H5-C00 is
+`97935beb48f281d1d1fe8317d8ee7f300089bd2e6ad523fc06aaaaf47d4c6db3` with
+M1=true, over=true, stale=false. The mandatory H0-H5 manifest rejects type
+label, recipe, count, or signature drift, while distinctness still excludes
+type from the structural hash proof.
+Signature distinctness excludes type, and split gates enforce pairwise
+disjoint base-hash, cluster-ID, and case-ID sets with within-split uniqueness.
+
+The mutation paper attribution is corrected to Robert M. Hierons and Mercedes
+G. Merayo, with its direct DOI and ScienceDirect record in the survey. This
+lock creates documentary protocol/milestone/state/log/findings/literature/
+README updates. It creates no executable E002 code or implementation, run,
+experimental data/results/output, figure, or ARA artifact; no E002 metric or
+H2 outcome exists.
+
+The third review closes the result-template boundary: `result_draft_bytes` and
+all report draft/final self-hash fields are removed. Two complete rendered
+result drafts are compared directly, while the finalized report SHA-256 is
+computed only externally after finalization; no redacted or preimage form is
+serialized. Both templates now use a closed placeholder vocabulary with
+strict ASCII grammars, fixed semantic sources, exact interval-key membership,
+list/empty-list rules, Markdown cell-safety, and static/render gates. Valid
+deviations are literal `none`, and invalid records use literal
+`failure_class: invalid-run`.

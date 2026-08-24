@@ -111,3 +111,124 @@ real system.
 The cited sources ground terminology and measurement choices only. They do not
 verify M01, E001, or any future method. No source here supplies observed E001
 results, and no content or public claim may be derived from this survey alone.
+
+## E002 source foundation — primary and official sources
+
+This section was added for the E002 outer-loop protocol on 2026-08-25. New
+technical claims below are restricted to direct primary research papers or
+official technical documentation. The E002 parameters, regimes, recipes,
+subgroups, co-primary diagnostics, thresholds, serialization, and gates in the
+following sections are reviewer/design inference, not sourced facts and not
+user-selected technical design.
+
+### Specification-based testing and specification mutation
+
+**Sourced fact.** Stocks and Carrington present a specification-based testing
+framework in which model-based specifications structure test data, test
+purposes, and test oracles. Their framework is a research method, not evidence
+that any particular specification is correct for E002.
+
+**Sourced fact.** Robert M. Hierons and Mercedes G. Merayo present a primary
+study of mutation testing for probabilistic and stochastic finite-state-machine
+specifications. It describes mutating the specification and deriving tests
+that distinguish the mutated specification from the original, and treats
+mutation operators as models of incorrect specifications. This motivates
+testing bounded omission, overconstraint, and stale-transition regimes as
+deliberate misspecifications, not as accidental post-hoc changes.
+
+- Stocks, P. and Carrington, D. (1996), *A Framework for Specification-Based
+  Testing*, IEEE Transactions on Software Engineering 22(11):777–793,
+  [IEEE DOI](https://doi.org/10.1109/32.553698).
+- Hierons, R. M. and Merayo, M. G. (2009), *Mutation testing from
+  probabilistic and stochastic finite state machines*, Journal of Systems and
+  Software 82(11):1804–1818,
+  [publisher DOI](https://doi.org/10.1016/j.jss.2009.06.030) and
+  [ScienceDirect article](https://www.sciencedirect.com/science/article/pii/S0164121209001356).
+
+### Independent and differential oracle mechanisms
+
+**Sourced fact.** McKeeman’s original differential-testing paper frames
+differential testing as comparing independently produced program results to
+reduce the cost of deciding whether generated tests expose a behavioral
+difference. This supports treating an independent reference implementation as
+a separate oracle mechanism; it does not prove that two implementations agree
+with an external specification.
+
+- McKeeman, W. M. (1998), *Differential Testing for Software*, Digital
+  Technical Journal 10(1),
+  [official Hewlett-Packard Journal paper](https://www.hpl.hp.com/hpjournal/dtj/vol10num1/vol10num1art9.pdf).
+
+### Heterogeneous clustered evaluation and bootstrap inference
+
+**Sourced fact.** Cameron, Gelbach, and Miller study inference with clustered
+errors, including within-cluster dependence and the limitations of ordinary
+asymptotics when the number of clusters is small. They evaluate cluster
+bootstrap-t procedures in simulations; this is evidence about that statistical
+setting, not a guarantee for E002.
+
+**Sourced fact.** Hagemann develops a cluster-robust bootstrap for a setting
+with small, heterogeneous clusters and studies its behavior relative to the
+number and size of clusters. E002 therefore treats the cluster as the
+resampling unit and makes cluster heterogeneity an explicit design dimension;
+the exact pairs-bootstrap implementation below remains a repository choice.
+
+- Cameron, A. C., Gelbach, J. B., and Miller, D. L. (2008), *Bootstrap-Based
+  Improvements for Inference with Clustered Errors*, Review of Economics and
+  Statistics 90(3):414–427,
+  [MIT Press record and DOI](https://doi.org/10.1162/REST.90.3.414).
+- Hagemann, A. (2017), *Cluster-Robust Bootstrap Inference in Quantile
+  Regression Models*, Journal of the American Statistical Association
+  112(517):446–456,
+  [publisher DOI](https://doi.org/10.1080/01621459.2016.1148610).
+
+### Interaction-triggered and multi-fault behavior
+
+**Sourced fact.** Kuhn, Wallace, and Gallo report an empirical study of
+software failures caused by combinations of conditions and discuss the
+relationship between bounded interaction strength and combinatorial testing.
+The conditional assumptions in their result are not assumed for E002.
+
+**Sourced fact.** Yan, Liu, and Li report an empirical study of multi-fault
+programs in which dominant/recessive fault interactions can produce unexpected
+failure behavior. This motivates recording intended fault sets separately from
+the independently recomputed failure set instead of treating multi-faults as
+the sum of isolated single-fault outcomes.
+
+**Sourced fact.** NIST’s official combinatorial-testing record describes
+exercising all combinations up to a pre-specified interaction strength as a
+way to expose faults triggered by unusual combinations. E002 uses a small,
+explicitly bounded interaction recipe set rather than claiming exhaustive
+coverage.
+
+- Kuhn, D. R., Wallace, D. R., and Gallo, A. M. (2004), *Software Fault
+  Interactions and Implications for Software Testing*, IEEE Transactions on
+  Software Engineering 30:418–421,
+  [IEEE DOI](https://doi.org/10.1109/TSE.2004.24).
+- Yan, X., Liu, B., and Li, J. (2017), *The Failure Behaviors of Multi-Faults
+  Programs: An Empirical Study*, 2017 IEEE International Conference on
+  Software Quality, Reliability and Security Companion,
+  [IEEE DOI](https://doi.org/10.1109/QRS-C.2017.11).
+- Kuhn, D. R., Kacker, R. N., Lei, Y., and Hunter, J. (2009), *Combinatorial
+  Software Testing*, Computer 42(8),
+  [official NIST publication](https://www.nist.gov/publications/combinatorial-software-testing).
+
+## E002 source-to-choice boundary
+
+The sources above support only the bounded concepts named in their respective
+source-fact paragraphs: specification-based testing/mutation, differential
+comparison, cluster-aware inference under heterogeneity, and interaction-aware
+fault testing. The following E002 choices are not sourced conclusions:
+
+- six deterministic heterogeneous cluster templates and 96 total clusters;
+- the valid, single-fault, multi-fault, and schema-visible recipe inventory;
+- the independent replay/conservation oracle implementation boundary;
+- B0, exact-spec M1, three misspecified checker regimes, three ablations, and
+  three co-primary specification-stress diagnostics;
+- split allocation, metrics, H2 rule, 10,000-replicate pairs cluster bootstrap
+  with 530,000 replicate rows and 53 interval rows, schemas, size budget, and
+  invalid-run behavior.
+
+No E002 executable implementation, run, experimental result, or experimental
+data exists in this documentary protocol update. The protocol and its linked
+documentary state, log, findings, literature, and README index updates do
+exist.

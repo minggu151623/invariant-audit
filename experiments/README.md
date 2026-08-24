@@ -18,5 +18,10 @@ CSV/JSONL is row-data source.
 - M02 verifies this result only within the finite synthetic E001 design. It is
   not production, external-validity, novelty, safety, or generalization
   evidence, and it does not authorize a future E002 run.
+- [E002 heterogeneous specification stress protocol](E002-heterogeneous-specification-stress/protocol.md)
+  is the M03 protocol-only design. It is locally locked separately from any
+  executable implementation or run; no E002 experimental data, result/output,
+  figure, or ARA artifact exists. This documentary index and the protocol
+  lock are present, and the protocol does not authorize execution.
 - This index is not experimental evidence and does not authorize a run or
   public claim.
