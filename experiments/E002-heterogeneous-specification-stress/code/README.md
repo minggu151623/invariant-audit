@@ -24,7 +24,7 @@ PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-st
 The confirmatory run was not executed in this implementation commit.  The
 tests use in-memory generated cases and temporary directories only; they do
 not create E002 repository data, metrics, bootstrap, or result outputs.  The
-48-test development suite deliberately scores and bootstraps only development
+53-test development suite deliberately scores and bootstraps only development
 and calibration cases; confirmatory counts are checked as locked arithmetic.
 The runner validates every staged byte before publication, reports the
 finalized result SHA-256 externally, and emits multi-fault relation evidence

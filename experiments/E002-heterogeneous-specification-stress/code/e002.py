@@ -550,6 +550,12 @@ INDEPENDENT_DIAGNOSTIC_CLUSTER_IDS = MappingProxyType(
         ),
     }
 )
+INDEPENDENT_SPLIT_ALLOCATION = (
+    "development", "development", "development", "development",
+    "calibration", "calibration", "calibration", "calibration",
+    "confirmatory", "confirmatory", "confirmatory", "confirmatory",
+    "confirmatory", "confirmatory", "confirmatory", "confirmatory",
+)
 
 # The following fixtures are a second transcription of the *construction*
 # contract.  They are deliberately literal rather than projections of the
@@ -1911,6 +1917,14 @@ def _runtime_sanity_check_impl(
     for cluster in clusters:
         if cluster.cluster_type not in expected_types:
             raise ProtocolError("unknown type label")
+        if (
+            type(cluster.local_index) is not int
+            or not 0 <= cluster.local_index < len(INDEPENDENT_SPLIT_ALLOCATION)
+        ):
+            raise ProtocolError("local-index allocation drift")
+        expected_split = INDEPENDENT_SPLIT_ALLOCATION[cluster.local_index]
+        if cluster.split != expected_split:
+            raise ProtocolError("split allocation drift")
         expected_tuple, expected_signature = INDEPENDENT_SIGNATURE_MANIFEST[cluster.cluster_type]
         expected_recipes = INDEPENDENT_RECIPE_MANIFEST[cluster.cluster_type]
         if (
@@ -2391,6 +2405,27 @@ def oracle_manifest(population: Population) -> dict[str, Any]:
             for case in ordered_cases
         ],
     }
+
+
+def _population_oracle_canonical_bytes(
+    population: Population,
+) -> tuple[bytes, bytes]:
+    """Return the locked population and oracle payload bytes for comparison."""
+
+    return (
+        canonical_json_bytes(population_manifest(population)),
+        canonical_json_bytes(oracle_manifest(population)),
+    )
+
+
+def _assert_population_build_determinism(
+    population: Population,
+    independent_population: Population,
+) -> None:
+    if _population_oracle_canonical_bytes(population) != _population_oracle_canonical_bytes(
+        independent_population
+    ):
+        raise ProtocolError("double population canonical payload determinism failed")
 
 
 def multi_fault_relation_evidence(
@@ -3633,13 +3668,7 @@ def _build_pipeline_once(run_id: str, repo_root: Path | None = None) -> Pipeline
         raise ProtocolError("invalid run ID")
     population = generate_population()
     independent_population = generate_population()
-    if (
-        canonical_sha256(population_manifest(population))
-        != canonical_sha256(population_manifest(independent_population))
-        or canonical_sha256(oracle_manifest(population))
-        != canonical_sha256(oracle_manifest(independent_population))
-    ):
-        raise ProtocolError("double population generation determinism failed")
+    _assert_population_build_determinism(population, independent_population)
     runtime_sanity_check(population)
     calibration_cases = tuple(
         case for case in population.cases if case.split == "calibration"

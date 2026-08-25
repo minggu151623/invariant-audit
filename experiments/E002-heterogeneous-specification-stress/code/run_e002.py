@@ -2554,7 +2554,7 @@ def execute_run(
                 raise InvalidRunError(f"output appeared during run: {destination}")
             try:
                 receipt = publisher(stage_paths[label], destination)
-            except Exception:
+            except BaseException:
                 # No receipt means no ownership.  In particular, byte
                 # equality is deliberately not considered evidence because a
                 # race-created external file may be identical.
@@ -2578,27 +2578,29 @@ def execute_run(
                 raise InvalidRunError(f"final ownership identity changed: {label}")
         _remove_tree_verified(stage_root)
         stage_root = None
-    except Exception as error:
+    except BaseException as error:
         cleanup_errors: list[BaseException] = []
         if stage_root is not None:
             try:
                 _remove_tree_verified(stage_root)
-            except Exception as cleanup_error:
+            except BaseException as cleanup_error:
                 cleanup_errors.append(cleanup_error)
         if owned_destinations:
             try:
                 _remove_owned_files_verified(owned_destinations)
-            except Exception as cleanup_error:
+            except BaseException as cleanup_error:
                 cleanup_errors.append(cleanup_error)
         if created_directories:
             try:
                 _remove_directories_verified(created_directories)
-            except Exception as cleanup_error:
+            except BaseException as cleanup_error:
                 cleanup_errors.append(cleanup_error)
         if not staging_started:
             if cleanup_errors:
                 raise InvalidRunError("persistent pre-staging cleanup failure") from cleanup_errors[0]
             if isinstance(error, InvalidRunError):
+                raise
+            if not isinstance(error, Exception):
                 raise
             raise InvalidRunError(f"pre-staging failure: {error}") from error
         if cleanup_errors:
@@ -2614,9 +2616,13 @@ def execute_run(
             _write_exclusive(invalid_target, e002.render_invalid_result(run_id))
             if invalid_target.read_bytes() != e002.render_invalid_result(run_id):
                 raise InvalidRunError("invalid-run record verification failed")
-        except Exception as invalid_error:
+        except BaseException as invalid_error:
+            if not isinstance(invalid_error, Exception):
+                raise
             raise InvalidRunError("could not write invalid-run record") from invalid_error
         if isinstance(error, InvalidRunError):
+            raise
+        if not isinstance(error, Exception):
             raise
         raise InvalidRunError(str(error)) from error
     result_sha256 = e002.sha256_hex(final_paths["result"].read_bytes())

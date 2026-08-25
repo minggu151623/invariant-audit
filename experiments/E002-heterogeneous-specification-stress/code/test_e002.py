@@ -285,6 +285,41 @@ class E002HarnessTests(unittest.TestCase):
             with self.assertRaises(e002.ProtocolError):
                 e002.runtime_sanity_check(self.population)
 
+    def test_runtime_sanity_rejects_local_index_split_allocation_swap(self) -> None:
+        swapped_splits = {"H0-C00": "calibration", "H0-C04": "development"}
+        mutated_clusters = []
+        for cluster in self.population.clusters:
+            split = swapped_splits.get(cluster.cluster_id, cluster.split)
+            cases = tuple(replace(case, split=split) for case in cluster.cases)
+            mutated_clusters.append(replace(cluster, split=split, cases=cases))
+        mutated_population = e002.Population(tuple(mutated_clusters))
+
+        with self.assertRaisesRegex(e002.ProtocolError, "allocation"):
+            e002.runtime_sanity_check(mutated_population)
+
+    def test_double_population_gate_compares_canonical_bytes_not_hashes(self) -> None:
+        swapped_splits = {"H0-C00": "calibration", "H0-C04": "development"}
+        mutated_clusters = []
+        for cluster in self.population.clusters:
+            split = swapped_splits.get(cluster.cluster_id, cluster.split)
+            cases = tuple(replace(case, split=split) for case in cluster.cases)
+            mutated_clusters.append(replace(cluster, split=split, cases=cases))
+        mutated_population = e002.Population(tuple(mutated_clusters))
+
+        self.assertNotEqual(
+            e002._population_oracle_canonical_bytes(self.population),
+            e002._population_oracle_canonical_bytes(mutated_population),
+        )
+        with mock.patch.object(e002, "canonical_sha256", return_value="0" * 64):
+            self.assertEqual(
+                e002.canonical_sha256(e002.population_manifest(self.population)),
+                e002.canonical_sha256(e002.population_manifest(mutated_population)),
+            )
+            with self.assertRaisesRegex(e002.ProtocolError, "canonical payload"):
+                e002._assert_population_build_determinism(
+                    self.population, mutated_population
+                )
+
     def test_independent_recipe_constructor_is_not_a_projection(self) -> None:
         for cluster in self.population.clusters:
             independent_base = e002.independently_rebuild_base_payload(
@@ -1409,6 +1444,74 @@ class E002HarnessTests(unittest.TestCase):
             self.assertFalse(finals["bootstrap"].exists())
             self.assertFalse(finals["result"].exists())
             self.assertFalse(any(".e002-stage-" in str(item) for item in output_root.rglob("*")))
+
+    def test_runner_staging_interrupt_cleans_and_propagates_invalid_run(self) -> None:
+        fake = self._fake_artifacts()
+        for interruption in (KeyboardInterrupt(), SystemExit(23)):
+            with self.subTest(interruption=type(interruption).__name__):
+                with tempfile.TemporaryDirectory() as temporary:
+                    output_root = Path(temporary) / "staging-interrupt"
+
+                    def interrupt(_paths: object, _artifacts: object) -> None:
+                        raise interruption
+
+                    with self.assertRaises(type(interruption)) as raised:
+                        run_e002.execute_run(
+                            RUN_ID,
+                            output_root,
+                            protocol_guard_fn=lambda *_args: None,
+                            pipeline_factory=lambda _run_id, _repository: fake,
+                            artifact_validator_fn=self._no_validation,
+                            staged_validator_fn=interrupt,
+                        )
+                    if isinstance(interruption, SystemExit):
+                        self.assertEqual(raised.exception.code, 23)
+                    finals = run_e002._final_paths(output_root, RUN_ID)
+                    self.assertFalse(finals["predictions"].exists())
+                    self.assertFalse(finals["metrics"].exists())
+                    self.assertFalse(finals["bootstrap"].exists())
+                    self.assertTrue(finals["result"].is_file())
+                    self.assertIn(b"status: invalid", finals["result"].read_bytes())
+                    self.assertFalse(
+                        any(".e002-stage-" in str(item) for item in output_root.rglob("*"))
+                    )
+
+    def test_runner_partial_publication_interrupt_cleans_and_propagates_invalid_run(self) -> None:
+        fake = self._fake_artifacts()
+        for interruption in (KeyboardInterrupt(), SystemExit(29)):
+            with self.subTest(interruption=type(interruption).__name__):
+                with tempfile.TemporaryDirectory() as temporary:
+                    output_root = Path(temporary) / "partial-publication-interrupt"
+
+                    def interrupt(
+                        _source: Path,
+                        _destination: Path,
+                        _receipt: run_e002._PublicationReceipt,
+                    ) -> None:
+                        raise interruption
+
+                    with self.assertRaises(type(interruption)) as raised:
+                        run_e002.execute_run(
+                            RUN_ID,
+                            output_root,
+                            protocol_guard_fn=lambda *_args: None,
+                            pipeline_factory=lambda _run_id, _repository: fake,
+                            publish_fn=run_e002._publish_exclusive,
+                            post_publish_fn=interrupt,
+                            artifact_validator_fn=self._no_validation,
+                            staged_validator_fn=lambda _paths, _artifacts: None,
+                        )
+                    if isinstance(interruption, SystemExit):
+                        self.assertEqual(raised.exception.code, 29)
+                    finals = run_e002._final_paths(output_root, RUN_ID)
+                    self.assertFalse(finals["predictions"].exists())
+                    self.assertFalse(finals["metrics"].exists())
+                    self.assertFalse(finals["bootstrap"].exists())
+                    self.assertTrue(finals["result"].is_file())
+                    self.assertIn(b"status: invalid", finals["result"].read_bytes())
+                    self.assertFalse(
+                        any(".e002-stage-" in str(item) for item in output_root.rglob("*"))
+                    )
 
     def test_runner_owned_receipt_allows_post_publish_cleanup(self) -> None:
         fake = self._fake_artifacts()
