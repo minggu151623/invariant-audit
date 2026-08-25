@@ -32,3 +32,10 @@ sessions:
     events_count: 4
     claims_touched: []
     open_threads: 3
+  - id: "2026-08-25_006"
+    date: "2026-08-25"
+    summary: "Recorded explicit authorization, the single valid E002 corrected run, M08/result provenance, and an independent snapshot audit; C02 is finite-synthetic supported and no public action is authorized."
+    events_count: 3
+    claims_touched:
+      - C02
+    open_threads: 3

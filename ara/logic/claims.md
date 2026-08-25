@@ -3,8 +3,9 @@
 Supported claims: C01, strictly within the locked finite synthetic E001-v1
 design.
 
-Untested claims: C02, the AI-suggested E002 H2 question; no E002 scientific
-evidence exists.
+The E002 H2 claim C02 is supported only within the locked finite synthetic
+E002-v1 design; neither claim establishes production, external-validity,
+generalization, novelty, safety, or public evidence.
 
 ## C01: H1 — invariant-aware validation improves synthetic calibration
 
@@ -43,15 +44,30 @@ evidence exists.
   balanced accuracy and reduce false-positive rate relative to B0 without
   worsening the false-negative rate, while the predeclared specification
   stress diagnostics pass the locked H2 rule.
-- **Status**: untested
+- **Status**: supported, strictly within the finite synthetic E002-v1 design
+- **Observed result boundary**: One valid locked local confirmatory run,
+  `e002-20260825-002`, returned H2 `supported` with the FNR guardrail passing.
+  The primary M1-minus-B0 deltas were BA `0.401960784`, FPR `-0.803921569`,
+  FNR `0.000000000`, Brier `-0.091689527`, and ECE `0.005222762`; the
+  co-primary stress diagnostics passed. This is an AI-executed observation
+  under the finite synthetic protocol, not a user-selected technical result.
 - **Provenance**: ai-suggested
 - **Falsification criteria**: Any failed required anchor interval/point,
   undefined required denominator, failed stress diagnostic, or mixed/not
   supported result under the locked E002 protocol falsifies H2 for this finite
   design.
-- **Proof**: pending; [locked E002-v1 protocol](../../experiments/E002-heterogeneous-specification-stress/protocol.md)
-  is design evidence only. The sole E002 attempt is an invalid diagnostic
-  record and supplies no scientific proof.
+- **Proof**: [M08 corrected-run record](../../milestones/M08-E002-run-002-valid.md),
+  [committed result](../../experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md),
+  and the committed predictions, metrics, and bootstrap hashes in the
+  [evidence index](../evidence/README.md), all under the locked
+  [E002-v1 protocol](../../experiments/E002-heterogeneous-specification-stress/protocol.md)
+  (commit `9e39c5defc89f2c2a896b53dda529f326e9dfcf8`, blob
+  `f7d27a069ee3fd1600f89d9271e107c197033238`). Run 001 remains an invalid
+  diagnostic-only record and is not part of this proof.
 - **Dependencies**: [C01]
+- **Limitations**: finite, synthetic, hand-specified oracle, bounded recipe
+  inventory and cluster bootstrap; no production validity, external validity,
+  generalization, novelty, safety, or public claim. `public_claim_eligibility`
+  is `false`.
 - **Tags**: E002-v1, H2, heterogeneous-clusters, specification-stress,
-  untested
+  finite-synthetic-only, supported

@@ -1,0 +1,105 @@
+session:
+  id: "2026-08-25_006"
+  timestamp: "2026-08-25T22:40:19+0700"
+  summary: "Recorded explicit user authorization, the single valid E002 corrected run, M08/result provenance, and an independent snapshot audit; C02 is supported only within finite synthetic E002-v1 and no public action is authorized."
+
+events_logged:
+  - type: decision
+    id: "N17"
+    provenance: user
+    summary: "User explicitly authorized exactly one locked local E002 corrected run with run ID e002-20260825-002: \"Cho phép chạy E002 corrected với run ID e002-20260825-002.\""
+  - type: experiment
+    id: "N18"
+    provenance: ai-executed
+    summary: "Clean-tree preflight passed and the exact corrected command ran once; exit 0/status valid, H2 supported, FNR guardrail passed, and the finite-synthetic artifact/result evidence was committed in M08."
+  - type: observation
+    id: "N19"
+    provenance: ai-executed
+    summary: "Independent read-only snapshot audit returned ACCEPT with no P0-P3 findings and runner invocations 0; artifact hashes/counts and result gates parsed consistently, with timestamp/runtime/exactly-once/two-build limits retained as documentary provenance."
+
+user_decisions:
+  - id: "N17"
+    exact_text: "Cho phép chạy E002 corrected với run ID e002-20260825-002."
+    scope: "Exactly one locked local corrected run and result recording; no retry, push, publication, or public claim."
+    technical_design_selection: false
+
+ai_actions:
+  - action: "Ran the locked runtime preflight and executed the exact E002 corrected command once for e002-20260825-002; captured exit 0/status valid, result SHA-256 d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa, multi-fault relation counts equals=272/contains=160/differs=0, primary deltas, H2, guardrail, and artifact hashes/counts."
+    provenance: ai-executed
+    files_changed:
+      - data/E002-v1-predictions.jsonl
+      - data/E002-v1-metrics.csv
+      - data/E002-v1-bootstrap.csv
+      - experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md
+    run_count: 1
+    confirmatory_run_invocations: 1
+  - action: "Recorded M08 and the corrected-run result/provenance in local commit a60550753a1ea876a47514e67f866ae1332fd5a0, parent 86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0, subject research(results): record E002 corrected run 002."
+    provenance: ai-executed
+    files_changed:
+      - experiments/E002-heterogeneous-specification-stress/code/README.md
+      - experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md
+      - experiments/README.md
+      - findings.md
+      - milestones/M08-E002-run-002-valid.md
+      - milestones/README.md
+      - research-log.md
+      - research-state.yaml
+      - state/workspace.yaml
+      - data/E002-v1-predictions.jsonl
+      - data/E002-v1-metrics.csv
+      - data/E002-v1-bootstrap.csv
+  - action: "Performed an independent read-only artifact/result snapshot audit without importing the runner or invoking tests: hashes, byte sizes, row/line counts, result validity, substantive gate fields, H2, and guardrail were consistent; reviewer runner invocations were 0."
+    provenance: ai-executed
+    files_changed: []
+    audit_status: ACCEPT
+    findings: none_P0_P1_P2_P3
+    documentary_limitations:
+      - timestamp
+      - runtime_identity
+      - exactly_once_execution
+      - two_build_byte_equivalence
+  - action: "Recorded this ARA terminal epilogue, preserving existing IDs and nested history while updating C02, O02, the evidence index, PAPER/problem boundaries, and the next session/tree nodes."
+    provenance: ai-executed
+    files_changed:
+      - ara/PAPER.md
+      - ara/evidence/README.md
+      - ara/logic/problem.md
+      - ara/logic/claims.md
+      - ara/logic/solution/heuristics.md
+      - ara/staging/observations.yaml
+      - ara/trace/exploration_tree.yaml
+      - ara/trace/sessions/session_index.yaml
+      - ara/trace/sessions/2026-08-25_006.yaml
+
+research_event_counts:
+  decisions: 1
+  experiments: 1
+  dead_ends: 0
+  pivots: 0
+  claims: 0
+  heuristics: 0
+  observations: 1
+  results: 1
+  calibrated_metrics: 0
+  supported_claims: 1
+
+provenance_summary:
+  user_confirmed: 1
+  ai_suggested: 1
+  ai_executed: 4
+  user_revised: 0
+  confirmation_rate: 0.5
+
+claims_touched:
+  - id: C02
+    action: advanced
+    provenance: ai-suggested
+
+open_threads:
+  - "No additional E002 run or public action is authorized; any future action requires separate explicit authority and a new bounded gate."
+  - "C01 and C02 remain strictly finite-synthetic claims; production, external-validity, generalization, novelty, safety, and public claims remain unsupported."
+  - "Venue remains undecided."
+
+ai_suggestions_pending:
+  - "Keep C01 and C02 scoped to their finite synthetic protocols and do not generalize the observed H1/H2 outcomes."
+  - "Treat any future run, push, publication, or public claim as a separate explicit-authority gate; none is currently authorized."

@@ -160,6 +160,60 @@ tree:
                                           ACCEPT with no findings. This is process/test
                                           evidence only, not E002 scientific evidence.
                                         evidence: [M07, "1fe42a7", "cf410dc"]
+                                        children:
+                                          - id: N17
+                                            type: decision
+                                            title: "User authorization for exactly one E002 corrected run"
+                                            provenance: user
+                                            timestamp: "2026-08-25T22:40:19+0700"
+                                            choice: >
+                                              Authorize exactly one locked local corrected
+                                              E002 run with run ID e002-20260825-002 and
+                                              record its result; no retry or external action.
+                                            alternatives:
+                                              - "Do not authorize the corrected run or authorize a different run ID."
+                                            evidence: >
+                                              Exact user authority: "Cho phép chạy E002
+                                              corrected với run ID e002-20260825-002." The
+                                              authority selected the bounded action only;
+                                              it did not select technical design or authorize
+                                              push/publication/public claim.
+                                            children:
+                                              - id: N18
+                                                type: experiment
+                                                title: "Valid E002-v1 corrected local run e002-20260825-002"
+                                                provenance: ai-executed
+                                                timestamp: "2026-08-25T22:40:19+0700"
+                                                result: >
+                                                  Clean-tree preflight passed and the exact
+                                                  locked command was started once. It exited
+                                                  0 with status valid. The primary M1-B0
+                                                  deltas were BA 0.401960784, FPR -0.803921569,
+                                                  FNR 0, Brier -0.091689527, and ECE 0.005222762;
+                                                  H2 was supported, the FNR guardrail passed,
+                                                  and multi-fault relations were equals=272,
+                                                  contains=160, differs=0. This is evidence
+                                                  only for finite synthetic E002-v1.
+                                                evidence: [C02, M08, "E002-v1-artifacts"]
+                                                children:
+                                                  - id: N19
+                                                    type: experiment
+                                                    title: "Independent forensic audit of the M08 corrected-run snapshot"
+                                                    provenance: ai-executed
+                                                    timestamp: "2026-08-25T22:40:19+0700"
+                                                    result: >
+                                                      Independent read-only parsing confirmed
+                                                      the four committed artifact hashes and
+                                                      counts, valid result status, all substantive
+                                                      gates passing, H2 supported, and the FNR
+                                                      guardrail pass. The audit recorded ACCEPT,
+                                                      no P0-P3 findings, and reviewer runner
+                                                      invocations 0. Timestamp, runtime,
+                                                      exactly-once execution, and two-build
+                                                      equivalence remain documentary provenance
+                                                      in the repository snapshot rather than
+                                                      independently reconstructible facts.
+                                                    evidence: [M08, "a605507", "independent-audit-snapshot"]
 
   - id: N02
     type: decision
