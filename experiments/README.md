@@ -25,7 +25,8 @@ CSV/JSONL is row-data source.
   and is recorded by the implementation chain
   `42cb62374c2b94ad6c567232acdac6d7365a9d8f` ->
   `6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc` ->
-  `0977641f129d172dd4d11136197a82cb17654aeb`.
+  `0977641f129d172dd4d11136197a82cb17654aeb` ->
+  `1fe42a7ebc6a9ce69d8a16654e068c0a9a891d08`.
 - [M04 implementation review and authorization gate](../milestones/M04-E002-implementation-review.md)
   records the independent-review approval and bounded authorization for one
   locked local run. The 54-test development suite is `OK`; the subsequent run
@@ -41,6 +42,11 @@ CSV/JSONL is row-data source.
   records the exact-delta fix and independent acceptance. The invalid run
   remains the only E002 execution; a corrected run requires a new run ID and
   separate explicit authorization.
+- [M07 E002 corrected-run technical-readiness gate](../milestones/M07-E002-corrected-run-readiness.md)
+  records the final development-test-boundary remediation and technical
+  readiness for candidate `e002-20260825-002`, subject to runtime preflight.
+  The candidate was not executed or reserved, and no corrected run is
+  authorized; no metrics, data, evidence, H2 outcome, or public claim exists.
 - This index is not experimental evidence and establishes no E002 metric,
   H2 outcome, external validity, novelty, safety, generalization, or public
   claim.

@@ -4,9 +4,13 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M07 — E002 corrected-run technical-readiness gate](M07-E002-corrected-run-readiness.md): records technical readiness for candidate
+  `e002-20260825-002` subject to the locked runtime preflight; the corrected
+  run remains unauthorized, unexecuted, and without reserved outputs.
 - [M06 — E002 validator remediation and independent-review gate](M06-E002-validator-remediation.md): records complete validator remediation and
-  independent acceptance; the M05 execution remains invalid, no corrected run
-  is authorized, and `public_claim_eligibility` remains `false`.
+  independent acceptance; M07 records the subsequent technical-readiness
+  audit, while the M05 execution remains invalid and
+  `public_claim_eligibility` remains `false`.
 - [M05 — E002 run 001 invalid evidence](M05-E002-run-001-invalid.md): records
   the authorized local run `e002-20260825-001` as invalid with exit code 2 and
   failure `result semantic field drift: D9_OR_NA`; no metrics, evidence, or

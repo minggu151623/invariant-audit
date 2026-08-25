@@ -368,3 +368,59 @@ Implementation remediation is complete and implementation review is true, but
 invalid and the result record remains invalid-report-only. Any corrected run
 requires a new run ID and separate explicit authorization. M06 does not
 authorize or execute one.
+
+## M07 — E002 corrected-run technical readiness
+
+M07 is a documentary technical-readiness gate, not an E002 result. The
+read-only readiness audit began at ARA epilogue HEAD
+`70d47de1af70d380437876effe082adcfb1a70a3`; its worker conclusion was
+technical **PASS**. No new user authority for a corrected run is inferred, and
+all technical choices remain worker/reviewer design and verification.
+
+### Review correction and final remediation
+
+The independent reviewer initially returned **HOLD** for P1: the new
+development regression and canonical structural-report call paths computed
+confirmatory statistics despite `protocol.md:1164`, plus P3 stale docs. The
+first refactor correctly moved the exact-versus-rounded counterexample to
+development/calibration data, but re-review correctly held because the
+canonical report still executed the real confirmatory
+`_validator_primary_deltas` before and under a wraps spy.
+
+The final remediation is commit
+`1fe42a7ebc6a9ce69d8a16654e068c0a9a891d08`, parent
+`70d47de1af70d380437876effe082adcfb1a70a3`, subject
+`research(impl): enforce E002 development test boundary`, containing exactly
+the code README, runner, and development-test paths. The final design makes
+the delta helper’s `split` keyword required; production report/H2 calls pass
+`confirmatory` explicitly; the structural report test installs an exact-delta
+stub before generation through all validation/mutation calls and blocks
+`_validator_stats`; and the dev/cal regression alone dynamically computes
+exact statistics and metric/bootstrap evidence. Its rounding counterexample
+remains exact token `-0.091689527` versus rounded-cell token `-0.091689526`.
+The README and module docstring now state this boundary accurately.
+
+Worker verification passed targeted `2/2` and the full standard-library-only
+development suite `54/54 OK`. Independent review statically traced the calls
+and passed targeted `2/2`, returning **TECHNICAL READINESS ACCEPT** with no
+findings. It did not run the full suite because runner tests were outside its
+read-only scope. These are implementation/reviewer checks, not experimental
+evidence.
+
+### Readiness-only evidence and state
+
+The candidate `e002-20260825-002` has valid run-ID grammar. The three shared
+E002 data paths and candidate result path were absent; staging/temp/lock paths
+were absent; repository cwd/output-root assumptions were correct; Python
+`3.14.5` and approximately `18 GiB` free space were nonblocking; protocol
+commit/blob identity was valid; and the preserved invalid report for run 001
+remains unchanged. Run 001 is still invalid only: exit code `2`,
+`D9_OR_NA`, no metrics/data/evidence, and no H2 or scientific outcome.
+
+M07 sets `technical_ready: true` subject to runtime preflight,
+`implementation_reviewed: true`, and `corrected_run_authorized: false`. The
+M04 authorization is consumed. Candidate 002 was not executed or reserved;
+its output is absent. Metrics, data, evidence, H2 outcome, and public-claim
+eligibility remain absent/false. The exact intended CLI is recorded as not
+authorized and not executed. M07 therefore authorizes no run, publication,
+push, or public claim.

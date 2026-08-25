@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M06
+current_milestone: M07
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -470,6 +470,7 @@ M06:
   path: milestones/M06-E002-validator-remediation.md
   status: implementation_remediation_complete_independently_reviewed
   supersedes: M05
+  superseded_by: M07
   scope: documentary_validator_remediation_and_independent_review_gate
   provenance:
     prior_invalid_run_commit: 9d8019023082e8125ecb88808408ebb3d40d41d7
@@ -540,3 +541,85 @@ M06:
     corrected_run_requires_separate_explicit_authorization: true
     no_corrected_run: true
   next_gate: "A corrected local run requires a new run ID and separate explicit authorization; no corrected run is authorized or executed by M06."
+M07:
+  path: milestones/M07-E002-corrected-run-readiness.md
+  status: technical_readiness_accepted_subject_to_runtime_preflight
+  supersedes: M06
+  scope: documentary_corrected_run_technical_readiness_gate
+  provenance:
+    audit_start_head: 70d47de1af70d380437876effe082adcfb1a70a3
+    worker_readiness_audit: technical_pass_read_only
+    independent_review_initial_status: HOLD
+    independent_review_findings:
+      - id: P1
+        finding: locked_development_test_boundary_violation
+        protocol_reference: protocol.md:1164
+      - id: P3
+        finding: stale_documentation
+    first_refactor_status: HOLD
+    final_boundary_remediation_commit: 1fe42a7ebc6a9ce69d8a16654e068c0a9a891d08
+    final_boundary_remediation_parent: 70d47de1af70d380437876effe082adcfb1a70a3
+    final_boundary_remediation_subject: "research(impl): enforce E002 development test boundary"
+    final_boundary_remediation_paths:
+      - experiments/E002-heterogeneous-specification-stress/code/README.md
+      - experiments/E002-heterogeneous-specification-stress/code/run_e002.py
+      - experiments/E002-heterogeneous-specification-stress/code/test_e002.py
+    user_authority_for_corrected_run: absent
+    technical_design_provenance: worker_reviewer_design_and_verification_not_user_selected
+  evidence:
+    - type: protocol_lock
+      path: experiments/E002-heterogeneous-specification-stress/protocol.md
+      protocol_id: E002-v1
+      protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8
+      protocol_blob: f7d27a069ee3fd1600f89d9271e107c197033238
+      unchanged: true
+    - type: invalid_result_report
+      path: experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md
+      sha256: f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34
+      status: invalid
+      metrics: absent
+      evidence: absent
+      data_outputs: absent
+    - type: worker_verification
+      targeted_checks: "2/2 passed"
+      full_development_suite: "54/54 OK"
+      standard_library_only: true
+    - type: independent_review
+      static_call_path_trace: passed
+      targeted_checks: "2/2 passed"
+      status: TECHNICAL_READINESS_ACCEPT
+      findings: none
+      full_suite: not_run_runner_tests_outside_read_only_scope
+    - type: readiness_audit
+      candidate_run_id: e002-20260825-002
+      run_id_grammar: valid
+      candidate_output_paths_absent: true
+      staging_temp_lock_paths_absent: true
+      repository_root_assumptions: valid
+      python_version: "3.14.5"
+      free_space: approximately_18_GiB_nonblocking
+      protocol_ancestor_and_blob: valid
+      invalid_run_001_preserved: true
+  verification:
+    scope: technical_readiness_without_run_authorization_or_experimental_evidence
+    technical_ready: true
+    subject_to_runtime_preflight: true
+    implementation_reviewed: true
+    corrected_run_authorized: false
+    prior_m04_authorization: consumed
+    run: invalid_only_e002_20260825_001
+    results: invalid_report_only
+    candidate_run_id: e002-20260825-002
+    candidate_executed: false
+    candidate_reserved: false
+    candidate_output_absent: true
+    data: absent
+    metrics: absent
+    evidence: absent
+    h2_outcome: absent
+    public_claim_eligibility: false
+    protocol_unchanged: true
+    corrected_run_requires_separate_explicit_authorization: true
+    intended_command_authorized: false
+    intended_command_executed: false
+  next_gate: "A separately authorized clean-tree runtime preflight and one corrected local run using e002-20260825-002; M07 does not authorize or execute it."
