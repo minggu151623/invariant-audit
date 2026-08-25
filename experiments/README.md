@@ -28,13 +28,19 @@ CSV/JSONL is row-data source.
   `0977641f129d172dd4d11136197a82cb17654aeb`.
 - [M04 implementation review and authorization gate](../milestones/M04-E002-implementation-review.md)
   records the independent-review approval and bounded authorization for one
-  locked local run. The 53-test development suite is `OK`; the subsequent run
-  is recorded as invalid in [M05](../milestones/M05-E002-run-001-invalid.md).
+  locked local run. The 54-test development suite is `OK`; the subsequent run
+  is recorded as invalid in [M05](../milestones/M05-E002-run-001-invalid.md),
+  and validator remediation is recorded in
+  [M06](../milestones/M06-E002-validator-remediation.md).
 - [M05 E002 run 001 invalid evidence](../milestones/M05-E002-run-001-invalid.md)
   records run `e002-20260825-001`, exit code 2, and the
   `D9_OR_NA` semantic-field drift. No metrics, evidence, or data outputs
-  exist; implementation remediation is pending and
+  exist; implementation remediation is complete in M06 and
   `public_claim_eligibility` is `false`.
+- [M06 E002 validator-remediation gate](../milestones/M06-E002-validator-remediation.md)
+  records the exact-delta fix and independent acceptance. The invalid run
+  remains the only E002 execution; a corrected run requires a new run ID and
+  separate explicit authorization.
 - This index is not experimental evidence and establishes no E002 metric,
   H2 outcome, external validity, novelty, safety, generalization, or public
   claim.

@@ -351,3 +351,45 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
 - **Next gate:** Remediate the implementation and obtain independent review
   before any separately authorized corrected local run. A corrected run must
   use a new run ID. No corrected run or publication is authorized here.
+
+## 2026-08-25 — M06/E002 validator remediation and independent-review gate
+
+- **Provenance (repository artifacts):** M05's invalid-run record is in commit
+  `9d8019023082e8125ecb88808408ebb3d40d41d7`. The validator remediation is in
+  commit `e090fa76be67a3cb1d52517bd93327ef821b8e75`, whose parent is the M05
+  commit and whose subject is `research(impl): fix E002 exact delta validation`.
+  The locked protocol remains commit
+  `9e39c5defc89f2c2a896b53dda529f326e9dfcf8`, blob
+  `f7d27a069ee3fd1600f89d9271e107c197033238`; its bytes are unchanged. The
+  preserved invalid report remains SHA-256
+  `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`.
+- **Independent diagnosis (Provenance: worker/reviewer verification):** The
+  first mismatch in run `e002-20260825-001` was `D9_OR_NA` at zero-based index
+  `13`, result line `38`, `Delta M1-B0 Brier`. The producer value was
+  `-0.091689527` from exact fractions; the validator value was
+  `-0.091689526` from subtracting rounded metric cells. The protocol requires
+  exact arithmetic until serialization. This was an implementation defect,
+  not a scientific outcome.
+- **Remediation (Provenance: worker implementation):** The validator now
+  recomputes overall and cluster deltas from independently reconstructed exact
+  `Fraction` statistics, rather than rounded D9 metric-row strings, and
+  propagates those exact values through D9, H2, and the guardrail. The
+  deterministic regression renders through the producer and then validates
+  through the independent validator. The implementer’s targeted regression
+  failed before the patch with `result semantic field drift: D9_OR_NA` and
+  passed after it. The full standard-library-only development suite passed
+  with 54 tests and `OK`.
+- **Independent review (Provenance: reviewer check):** Targeted checks passed
+  `3/3`; static, diff, and hash review passed. The review initially returned
+  **HOLD** solely for stale README test-count text, then returned **ACCEPT**
+  after the count was corrected to 54.
+- **Current state:** M06 is current. The M04 one-run authorization was
+  consumed by M05: `implementation_remediation: complete`,
+  `implementation_reviewed: true`, `run_authorized: false`,
+  `corrected_run_authorized: false`, `authorization_consumed: true`,
+  `run: invalid`, `results: invalid_report_only`, and data, metrics, and
+  evidence are absent. `public_claim_eligibility` remains `false`.
+- **Next gate:** Any corrected run requires a new run ID and separate explicit
+  authorization. M06 neither authorizes nor executes a corrected run. No E002
+  metric, H2 outcome, external-validity, novelty, safety, generalization, or
+  public claim is established by this remediation record.

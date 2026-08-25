@@ -317,3 +317,54 @@ is the only result record; metrics, evidence, and data remain absent.
 The next gate is implementation remediation followed by independent review.
 Any corrected local run requires a new run ID and separate authorization. No
 corrected run, publication, or public claim is authorized by this record.
+
+## M06 — E002 validator remediation and independent review
+
+M06 closes the validator-remediation gate while preserving M04 and M05 as
+historical records. M05's invalid-run record is in commit
+`9d8019023082e8125ecb88808408ebb3d40d41d7`. The remediation commit is
+`e090fa76be67a3cb1d52517bd93327ef821b8e75`, with parent `9d801902` and subject
+`research(impl): fix E002 exact delta validation`. These are repository
+artifacts, not user-selected technical design.
+
+### Root cause and fix
+
+The first invalid-run mismatch was `D9_OR_NA` at zero-based index `13`, result
+line `38`, `Delta M1-B0 Brier`: producer `-0.091689527` from exact fractions
+versus validator `-0.091689526` from subtraction of rounded metric cells.
+The locked protocol requires exact arithmetic until serialization. This was an
+implementation defect, not a scientific outcome.
+
+The remediation recomputes validator overall and cluster deltas from
+independently reconstructed exact `Fraction` statistics and propagates those
+values through D9, H2, and the guardrail checks. A deterministic regression
+renders a producer-style report and then independently validates it. The
+implementer’s targeted regression failed prepatch with
+`result semantic field drift: D9_OR_NA` and passed postpatch. The worker’s
+full standard-library-only development suite passed with 54 tests and `OK`.
+
+### Review and evidence boundary
+
+The independent reviewer’s targeted checks passed 3/3, with static, diff, and
+hash review also passing. The review initially returned **HOLD** only for the
+stale README test count; after correction to 54 tests, it returned **ACCEPT**.
+Worker test results, reviewer checks, and repository hashes are kept as
+distinct evidence classes. None is confirmatory experimental evidence.
+
+The locked protocol remains commit
+`9e39c5defc89f2c2a896b53dda529f326e9dfcf8`, blob
+`f7d27a069ee3fd1600f89d9271e107c197033238`, unchanged. The preserved invalid
+report remains SHA-256
+`f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`. No data,
+metrics, or evidence outputs exist, and the invalid run establishes no metric,
+H2 outcome, external validity, novelty, safety, generalization, or public
+claim.
+
+### Current state and next gate
+
+M06 is current. The M04 authorization was consumed by the M05 invalid run.
+Implementation remediation is complete and implementation review is true, but
+`run_authorized` and `corrected_run_authorized` are false; the run remains
+invalid and the result record remains invalid-report-only. Any corrected run
+requires a new run ID and separate explicit authorization. M06 does not
+authorize or execute one.

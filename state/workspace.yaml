@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M05
+current_milestone: M06
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -411,6 +411,8 @@ M04:
 M05:
   path: milestones/M05-E002-run-001-invalid.md
   status: invalid_run_recorded
+  historical: true
+  superseded_by: M06
   scope: documentary_invalid_run_evidence_record
   provenance:
     authorization_record: M04
@@ -464,3 +466,77 @@ M05:
     protocol_unchanged: true
     corrected_run: not_authorized
   next_gate: "Remediate the implementation, obtain independent review, and separately authorize any corrected local run with a new run ID; no corrected run is authorized by M05."
+M06:
+  path: milestones/M06-E002-validator-remediation.md
+  status: implementation_remediation_complete_independently_reviewed
+  supersedes: M05
+  scope: documentary_validator_remediation_and_independent_review_gate
+  provenance:
+    prior_invalid_run_commit: 9d8019023082e8125ecb88808408ebb3d40d41d7
+    remediation_worker_commit: e090fa76be67a3cb1d52517bd93327ef821b8e75
+    remediation_worker_parent: 9d8019023082e8125ecb88808408ebb3d40d41d7
+    remediation_worker_subject: "research(impl): fix E002 exact delta validation"
+    technical_diagnosis: independent_worker_reviewer_verification
+    user_authority_for_corrected_run: absent
+  evidence:
+    - type: protocol_lock
+      path: experiments/E002-heterogeneous-specification-stress/protocol.md
+      protocol_id: E002-v1
+      protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8
+      protocol_blob: f7d27a069ee3fd1600f89d9271e107c197033238
+      unchanged: true
+    - type: invalid_result_report
+      path: experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md
+      sha256: f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34
+      status: invalid
+      metrics: absent
+      evidence: absent
+      data_outputs: absent
+    - type: independent_diagnosis
+      first_mismatch: D9_OR_NA
+      zero_based_index: 13
+      result_line: 38
+      result_field: "Delta M1-B0 Brier"
+      producer_value: "-0.091689527"
+      producer_basis: exact_fractions
+      validator_value: "-0.091689526"
+      validator_basis: subtraction_of_rounded_metric_cells
+      protocol_arithmetic: exact_until_serialization
+      classification: implementation_defect_not_scientific_outcome
+    - type: implementation_remediation
+      commit: e090fa76be67a3cb1d52517bd93327ef821b8e75
+      exact_stats: independent_fraction_reconstruction
+      propagation: D9_H2_guardrail
+      producer_style_regression: rendered_then_independently_validated
+      prepatch_targeted_regression: failed_D9_OR_NA
+      postpatch_targeted_regression: passed
+    - type: worker_development_suite
+      command: "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/E002-heterogeneous-specification-stress/code -p 'test_e002.py'"
+      tests: 54
+      result: OK
+      standard_library_only: true
+    - type: independent_review
+      targeted_checks: "3/3 passed"
+      static_diff_hash_review: passed
+      initial_status: HOLD
+      initial_hold_reason: stale_readme_test_count
+      final_status: ACCEPT
+      final_findings: none
+  verification:
+    scope: validator_remediation_and_independent_review_documentary_only
+    implementation_remediation: complete
+    implementation_reviewed: true
+    run_authorized: false
+    corrected_run_authorized: false
+    authorization_consumed: true
+    run: invalid
+    results: invalid_report_only
+    data: absent
+    metrics: absent
+    evidence: absent
+    public_claim_eligibility: false
+    protocol_unchanged: true
+    corrected_run_requires_new_id: true
+    corrected_run_requires_separate_explicit_authorization: true
+    no_corrected_run: true
+  next_gate: "A corrected local run requires a new run ID and separate explicit authorization; no corrected run is authorized or executed by M06."
