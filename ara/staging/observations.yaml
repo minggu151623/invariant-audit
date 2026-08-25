@@ -11,7 +11,8 @@ observations:
   - id: O02
     timestamp: "2026-08-25T19:37:01+0700"
     provenance: ai-suggested
-    content: "A corrected E002 run is a separate open gate: it requires a new run ID and separate explicit authorization after M06; the current invalid attempt cannot be reused as scientific evidence."
-    context: "M06 validator remediation and independent-review epilogue after the consumed M04 one-run authorization."
+    content: "Candidate E002 run e002-20260825-002 is technically ready subject to the locked runtime preflight, but remains a separate open gate requiring a new run ID and separate explicit authorization; M07 is process/readiness evidence, not experimental proof, and the invalid attempt cannot be reused as scientific evidence."
+    context: "M07 corrected-run readiness audit after the final development-test-boundary remediation and independent TECHNICAL READINESS ACCEPT; no confirmatory run occurred."
     potential_type: decision
     promoted: false
+    maturity_note: "Retained as an unpromoted open gate; technical readiness does not promote it to authorization or experimental evidence."

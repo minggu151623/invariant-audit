@@ -26,3 +26,9 @@ sessions:
       - C01
       - C02
     open_threads: 3
+  - id: "2026-08-25_005"
+    date: "2026-08-25"
+    summary: "Recorded the E002 corrected-run readiness audit, P1 boundary remediation and independent technical-readiness acceptance, M07 process gate, and H02; no corrected run or public action is authorized."
+    events_count: 4
+    claims_touched: []
+    open_threads: 3

@@ -1,0 +1,59 @@
+session:
+  id: "2026-08-25_005"
+  timestamp: "2026-08-25"
+  summary: "Recorded the E002 corrected-run readiness audit, P1 boundary remediation and independent technical-readiness acceptance, M07 process gate, and H02; no corrected run or public action is authorized."
+
+events_logged:
+  - type: observation
+    id: "N14"
+    provenance: ai-suggested
+    summary: "Recorded the readiness question for candidate e002-20260825-002: technical gates may pass subject to runtime preflight, but authorization and scientific evidence remain separate."
+  - type: dead_end
+    id: "N15"
+    provenance: ai-executed
+    summary: "Recorded the initial worker technical PASS and the first wraps-spy refactor as a dead end because the canonical path still executed confirmatory statistics under protocol.md:1164; the lesson is independent dynamic call tracing and body blocking."
+  - type: experiment
+    id: "N16"
+    provenance: ai-executed
+    summary: "Recorded final development-test-boundary remediation and verification: worker targeted 2/2 and full 54/54 OK, independent targeted 2/2 and TECHNICAL READINESS ACCEPT; process/test evidence only."
+  - type: heuristic
+    id: "H02"
+    provenance: ai-suggested
+    summary: "Recorded the high-sensitivity heuristic to body-block restricted computations, require explicit split parameters, and keep dynamic exact counterexamples on development/calibration data; wraps spies alone are insufficient."
+
+ai_actions:
+  - action: "Reviewed the read-only corrected-run readiness audit, candidate-path collisions, protocol identity, runtime/disk checks, and preservation of invalid run 001 without running tests or the runner."
+    provenance: ai-executed
+    files_changed: []
+  - action: "Reviewed and recorded the P1/P3 HOLD sequence, the first insufficient wraps-spy refactor, and the final boundary-remediation/independent-review evidence without changing non-ARA files."
+    provenance: ai-executed
+    files_changed:
+      - ara/PAPER.md
+      - ara/evidence/README.md
+      - ara/logic/solution/heuristics.md
+      - ara/staging/observations.yaml
+      - ara/trace/exploration_tree.yaml
+      - ara/trace/sessions/session_index.yaml
+      - ara/trace/sessions/2026-08-25_005.yaml
+  - action: "Recorded the M07 technical-ready/auth-hold state, process-only evidence bindings, H02, and open corrected-run gate in the ARA epilogue."
+    provenance: ai-executed
+    files_changed:
+      - ara/PAPER.md
+      - ara/evidence/README.md
+      - ara/logic/solution/heuristics.md
+      - ara/staging/observations.yaml
+      - ara/trace/exploration_tree.yaml
+      - ara/trace/sessions/session_index.yaml
+      - ara/trace/sessions/2026-08-25_005.yaml
+
+claims_touched: []
+user_decisions: []
+
+open_threads:
+  - "A corrected E002 run requires explicit authorization and a new run ID; candidate e002-20260825-002 is technically ready subject to runtime preflight but remains unauthorized."
+  - "C02 remains untested; no corrected E002 result, metrics, data, evidence, or H2 outcome exists."
+  - "No E002 public claim, push, or publication is authorized; venue remains undecided."
+
+ai_suggestions_pending:
+  - "If separately authorized, perform the locked runtime preflight and one corrected E002 attempt under e002-20260825-002; this remains an AI-suggested open gate, not current authorization."
+  - "Keep H02 as a process heuristic and do not treat M07, code commits, worker tests, or reviewer acceptance as E002 scientific proof."

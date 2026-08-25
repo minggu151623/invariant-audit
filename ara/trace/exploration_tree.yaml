@@ -105,6 +105,61 @@ tree:
                                   only at serialization. The remediation was
                                   independently reviewed in M06.
                                 evidence: [M05, M06, H01]
+                                children:
+                                  - id: N14
+                                    type: question
+                                    title: "Is candidate E002 run e002-20260825-002 technically ready under the locked runtime preflight?"
+                                    provenance: ai-suggested
+                                    timestamp: "2026-08-25"
+                                    description: >
+                                      Audit corrected-run grammar, protocol identity,
+                                      output collisions, repository-root assumptions,
+                                      runtime, disk, and preservation of invalid run
+                                      001 without executing a corrected run. Technical
+                                      readiness must remain separate from explicit
+                                      user authorization and scientific evidence.
+                                    evidence: [M07]
+                                    children:
+                                      - id: N15
+                                        type: dead_end
+                                        title: "Initial technical PASS and wraps-spy refactor dead end"
+                                        provenance: ai-executed
+                                        timestamp: "2026-08-25"
+                                        hypothesis: >
+                                          Moving the exact-versus-rounded counterexample
+                                          to development/calibration data and wrapping
+                                          the canonical validator helper would satisfy
+                                          the locked development-test boundary.
+                                        failure_mode: >
+                                          Independent tracing showed that the canonical
+                                          report path still executed confirmatory
+                                          _validator_primary_deltas before and under
+                                          the wraps spy, violating protocol.md:1164;
+                                          stale documentation also remained.
+                                        lesson: >
+                                          Restricted computations must be body-blocked
+                                          across the entire structural path; observation
+                                          spies are insufficient. Use independent dynamic
+                                          call tracing and explicit split boundaries.
+                                        evidence: [M07, H02]
+                                      - id: N16
+                                        type: experiment
+                                        title: "Final E002 development-test-boundary remediation and technical-readiness verification"
+                                        provenance: ai-executed
+                                        timestamp: "2026-08-25"
+                                        result: >
+                                          The final remediation made split a required
+                                          keyword, kept production confirmatory calls
+                                          explicit, body-blocked the structural test’s
+                                          exact-delta helper and validator statistics,
+                                          and retained dynamic exact-statistics testing
+                                          only on development/calibration data. Worker
+                                          targeted checks were 2/2 and the full suite
+                                          was 54/54 OK; independent targeted checks
+                                          were 2/2 and returned TECHNICAL READINESS
+                                          ACCEPT with no findings. This is process/test
+                                          evidence only, not E002 scientific evidence.
+                                        evidence: [M07, "1fe42a7", "cf410dc"]
 
   - id: N02
     type: decision

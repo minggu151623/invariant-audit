@@ -35,12 +35,20 @@ single-fault design. The oracle is recipe-coupled and
 - [M05 invalid-run record](../../milestones/M05-E002-run-001-invalid.md) and
   [M06 remediation gate](../../milestones/M06-E002-validator-remediation.md)
   are documentary process/review records.
+- [M07 corrected-run technical-readiness gate](../../milestones/M07-E002-corrected-run-readiness.md)
+  records candidate `e002-20260825-002` as technically ready subject to
+  runtime preflight, while corrected-run authorization remains false.
+- The final development-test-boundary remediation commit
+  `1fe42a7ebc6a9ce69d8a16654e068c0a9a891d08` and M07 documentary commit
+  `cf410dc5d36af3bb2c6b2dd5c60ecc44c1361e78` are process/readiness evidence
+  only. Neither commit is proof of E002 H2, metrics, or a scientific result.
 - The only E002 output is the preserved [invalid report](../../experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md),
   SHA-256
   `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`.
   It records exit code `2`, `D9_OR_NA`, and no metrics, data, evidence, or
   H2 outcome.
 
-The E002 report and remediation checks must not be used as scientific proof.
-The corrected run remains unauthorized and would require a new run ID and
-separate explicit authorization.
+The E002 report, remediation checks, and M07 readiness record must not be used
+as scientific proof. The corrected run remains unauthorized and would require
+a new run ID and separate explicit authorization; no confirmatory run occurred
+in this readiness segment.
