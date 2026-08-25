@@ -195,9 +195,10 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
 - **Negative evidence and documentary update:** This lock creates the
   documentary protocol, M03 milestone, state and research-state pointer,
   research-log and findings entries, literature notes, and README index
-  updates. It creates no executable E002 code or implementation, run,
-  experimental data/results/output, figure, or ARA artifact. run_authorized
-  remains false and public_claim_eligibility remains false.
+  updates. At that M03 protocol-only stage, it created no executable E002 code
+  or implementation, run, experimental data/results/output, figure, or ARA
+  artifact. run_authorized remained false and public_claim_eligibility
+  remained false.
 - **Next gate:** A separately authorized and independently reviewed
   implementation may begin only from the protocol lock commit. A future run
   must use the locked preflight, independent oracle, full determinism gate,
@@ -277,3 +278,45 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   signatures, H0/H5 probes, 48/40/40 eligibility, and synthetic-only limits
   are unchanged; no E002 code, run, result, data, output, figure, or ARA
   artifact exists.
+
+## 2026-08-25 — M04/E002 implementation review and authorization gate
+
+- **Authority (Provenance: user):** The current messages were `tiếp tục lúc
+  hết quota đi` and `bạn đọc lại tài liêụ đi là biết mà`. The existing
+  long-running context also records `cả hai, nghiên cứu lâu đi, bao lâu cũng
+  được`. Calibrated interpretation: these current messages explicitly direct
+  resumption from documented state and reaffirm continued local research. They
+  authorize the next locked local E002 confirmatory execution and result
+  recording, but do not select technical design, authorize push/publication or
+  a public claim, or establish any result.
+- **Protocol lock:** E002-v1 remains locked at commit
+  `9e39c5defc89f2c2a896b53dda529f326e9dfcf8`, with protocol blob
+  `f7d27a069ee3fd1600f89d9271e107c197033238`; the protocol is unchanged.
+- **Implementation chain:** The initial implementation is
+  `42cb62374c2b94ad6c567232acdac6d7365a9d8f`; result-validator hardening is
+  `6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc`; independent-review remediation
+  is `0977641f129d172dd4d11136197a82cb17654aeb`.
+- **Independent review:** Initial status was **HOLD** with High interrupt
+  cleanup, Medium local-index split allocation, Medium canonical-byte
+  determinism, and Low stale README test-count findings. All four findings
+  were remediated. Re-review returned **no findings** and fit the
+  independent-review gate.
+- **Observed verification:** The standard-library-only development command
+  `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s
+  experiments/E002-heterogeneous-specification-stress/code -p 'test_e002.py'`
+  ran 53 tests and returned `OK`. This is implementation/test evidence only;
+  no confirmatory run or E002 output has yet occurred.
+- **Current E002 state:** `implementation_reviewed: true`,
+  `run_authorized: true`, `run: absent`, `results: absent`, and
+  `public_claim_eligibility: false`. No E002 metrics, H2 outcome, external
+  validity, novelty, safety, or generalization claim is established.
+- **Next gate:** After the required clean-tree preflight, the authorized local
+  command is:
+
+  ```text
+  PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root .
+  ```
+
+  No run is performed in this documentation task. M03 remains the historical
+  protocol-only record; M04 is the current implementation-review and
+  authorization gate.

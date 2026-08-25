@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M03
+current_milestone: M04
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -25,6 +25,21 @@ authority_records:
       - high-level continuation into the next outer-loop protocol
       - local protocol-lock documentation
     interpretation: "High-level continuation authority only; it did not select any E002 technical design."
+  - id: user-2026-08-25-e002-resumption
+    source: user
+    date: 2026-08-25
+    exact_text: "tiếp tục lúc hết quota đi"
+    scope:
+      - resumption from documented E002 implementation/review state
+      - next locked local E002 confirmatory execution and result recording
+    interpretation: "Calibrated interpretation: this current message explicitly directs resumption from documented state and reaffirms continued local research; it authorizes the next locked local E002 confirmatory execution and result recording, but does not select technical design, authorize push/publication/public claim, or establish any result."
+  - id: user-2026-08-25-e002-documentary-context
+    source: user
+    date: 2026-08-25
+    exact_text: "bạn đọc lại tài liêụ đi là biết mà"
+    scope:
+      - review of documented E002 state and continuation context
+    interpretation: "Calibrated interpretation: this current message reaffirms continued local research from the documented state; together with the resumption message it authorizes the next locked local E002 confirmatory execution and result recording, but does not select technical design, authorize push/publication/public claim, or establish any result."
 M00:
   path: milestones/M00-research-direction.md
   status: verified
@@ -270,6 +285,8 @@ M02:
 M03:
   path: milestones/M03-E002-protocol-design.md
   status: protocol_locked_local
+  historical: true
+  superseded_by: M04
   scope: documentary_protocol_only
   provenance:
     authority:
@@ -323,5 +340,69 @@ M03:
       - research-state.yaml
       - research-log.md
       - findings.md
-    negative_evidence: "No executable E002 code or implementation, run, experimental data/results/output, figure, or ARA artifact exists."
+    negative_evidence: "At the M03 protocol-only stage, no executable E002 code or implementation, run, experimental data/results/output, figure, or ARA artifact existed."
   next_gate: "A separately authorized implementation may begin only from the dedicated protocol lock commit; no E002 execution or publication is authorized by this record."
+M04:
+  path: milestones/M04-E002-implementation-review.md
+  status: implementation_reviewed
+  scope: documentary_implementation_review_and_run_authorization
+  provenance:
+    user_authority:
+      source: user
+      date: 2026-08-25
+      exact_text_1: "tiếp tục lúc hết quota đi"
+      exact_text_2: "bạn đọc lại tài liêụ đi là biết mà"
+      prior_long_running_context: "cả hai, nghiên cứu lâu đi, bao lâu cũng được"
+      calibrated_interpretation: "These current messages explicitly direct resumption from documented state and reaffirm continued local research. They authorize the next locked local E002 confirmatory execution and result recording, but do not select technical design, authorize push/publication/public claim, or establish any result."
+    technical_design: "The protocol, implementation, tests, review criteria, and remediation choices are worker/reviewer design and verification work, not user-selected technical design."
+  evidence:
+    - type: protocol_lock
+      path: experiments/E002-heterogeneous-specification-stress/protocol.md
+      protocol_id: E002-v1
+      protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8
+      protocol_blob: f7d27a069ee3fd1600f89d9271e107c197033238
+      unchanged: true
+    - type: implementation_chain
+      commits:
+        - commit: 42cb62374c2b94ad6c567232acdac6d7365a9d8f
+          role: initial_implementation
+        - commit: 6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc
+          role: result_validator_hardening
+        - commit: 0977641f129d172dd4d11136197a82cb17654aeb
+          role: independent_review_remediation
+    - type: development_suite
+      command: "PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/E002-heterogeneous-specification-stress/code -p 'test_e002.py'"
+      tests: 53
+      result: OK
+      standard_library_only: true
+      confirmatory_run: absent
+      E002_outputs: absent
+    - type: independent_review
+      initial_status: HOLD
+      findings:
+        - severity: High
+          finding: interrupt_cleanup
+        - severity: Medium
+          finding: local_index_split_allocation
+        - severity: Medium
+          finding: canonical_byte_determinism
+        - severity: Low
+          finding: stale_readme_test_count
+      remediation: all_four_findings_remediated
+      re_review: no_findings_fit_for_independent_review_gate
+  verification:
+    scope: implementation_review_and_authorization_documentary_only
+    implementation_reviewed: true
+    run_authorized: true
+    run: absent
+    results: absent
+    data: absent
+    output_paths_absent: true
+    public_claim_eligibility: false
+    protocol_unchanged: true
+    no_run_in_documentation_task: true
+  next_gate:
+    type: clean_tree_local_confirmatory_run
+    run_id: e002-20260825-001
+    command: "PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root ."
+    condition: locked protocol preflight, independent gates, safe staging, and result verification must pass

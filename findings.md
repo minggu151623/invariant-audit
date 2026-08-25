@@ -203,9 +203,9 @@ disjoint base-hash, cluster-ID, and case-ID sets with within-split uniqueness.
 The mutation paper attribution is corrected to Robert M. Hierons and Mercedes
 G. Merayo, with its direct DOI and ScienceDirect record in the survey. This
 lock creates documentary protocol/milestone/state/log/findings/literature/
-README updates. It creates no executable E002 code or implementation, run,
-experimental data/results/output, figure, or ARA artifact; no E002 metric or
-H2 outcome exists.
+README updates. At that M03 protocol-only stage, it created no executable E002
+code or implementation, run, experimental data/results/output, figure, or ARA
+artifact; no E002 metric or H2 outcome existed.
 
 The third review closes the result-template boundary: `result_draft_bytes` and
 all report draft/final self-hash fields are removed. Two complete rendered
@@ -216,3 +216,61 @@ strict ASCII grammars, fixed semantic sources, exact interval-key membership,
 list/empty-list rules, Markdown cell-safety, and static/render gates. Valid
 deviations are literal `none`, and invalid records use literal
 `failure_class: invalid-run`.
+
+## M04 — E002 implementation review and authorization gate
+
+M03 remains the historical protocol-only stage. M04 records the executable
+implementation review and the current bounded authorization state; it is not
+an E002 result.
+
+### Authority and provenance
+
+On 2026-08-25, the current user messages were exactly:
+
+- `tiếp tục lúc hết quota đi`
+- `bạn đọc lại tài liêụ đi là biết mà`
+
+The existing recorded long-running context is
+`cả hai, nghiên cứu lâu đi, bao lâu cũng được`. Calibrated interpretation:
+these current messages explicitly direct resumption from documented state and
+reaffirm continued local research. They authorize the next locked local E002
+confirmatory execution and result recording, but do not select technical
+design, authorize push/publication or a public claim, or establish any result.
+The implementation and review choices remain worker/reviewer design and
+verification work.
+
+### Protocol, implementation, and review evidence
+
+The locked E002-v1 protocol is commit
+`9e39c5defc89f2c2a896b53dda529f326e9dfcf8`, blob
+`f7d27a069ee3fd1600f89d9271e107c197033238`, unchanged. The implementation
+chain is:
+
+1. `42cb62374c2b94ad6c567232acdac6d7365a9d8f` — initial implementation;
+2. `6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc` — result-validator hardening;
+3. `0977641f129d172dd4d11136197a82cb17654aeb` — independent-review
+   remediation.
+
+The initial independent review was **HOLD** for four findings: High interrupt
+cleanup, Medium local-index split allocation, Medium canonical-byte
+determinism, and Low stale README test count. All four were remediated, and
+re-review returned **no findings** / fit for the independent-review gate.
+The standard-library-only development suite ran 53 tests and returned `OK`.
+No confirmatory run or E002 output has occurred.
+
+### Current state and next gate
+
+The documentary state is `implementation_reviewed: true`,
+`run_authorized: true`, `run: absent`, `results: absent`, and
+`public_claim_eligibility: false`. The next gate is a clean-tree local run
+with run ID `e002-20260825-001` using:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root .
+```
+
+This documentation task does not run the command or create data, metrics,
+bootstrap, results, figures, ARA artifacts, or any H2, external-validity,
+novelty, safety, or generalization evidence. The authorization is bounded to
+the next locked local execution and result recording; it does not authorize
+push, publication, or a public claim.
