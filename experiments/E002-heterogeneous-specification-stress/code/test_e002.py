@@ -831,6 +831,258 @@ class E002HarnessTests(unittest.TestCase):
                 swapped_manifest, artifact_hashes, manifest_hashes, calibration_hash
             )
 
+    def test_full_canonical_valid_report_validation_and_marker_digest_mutations(self) -> None:
+        """Validate a complete canonical report without running confirmatory scoring."""
+
+        lookup_hashes = {
+            method: f"{index + 1:x}" * 64
+            for index, method in enumerate(e002.METHODS)
+        }
+        lookup_entries = [(0, 1, 2, e002.Fraction(1, 2))]
+        lookups = {
+            method: {
+                "entries": () if method == "M1-no-calibration" else lookup_entries,
+                "fallback": None if method == "M1-no-calibration" else e002.Fraction(1, 2),
+            }
+            for method in e002.METHODS
+        }
+        signature_by_cluster = {
+            cluster.cluster_id: cluster.signature_sha256
+            for cluster in self.population.clusters
+        }
+        prediction_rows = []
+        for case in self.cases:
+            for method in e002.METHODS:
+                prediction_rows.append(
+                    {
+                        "run_id": RUN_ID,
+                        "protocol_path": e002.PROTOCOL_PATH,
+                        "protocol_commit": e002.PROTOCOL_COMMIT,
+                        "method": method,
+                        "split": case.split,
+                        "cluster_id": case.cluster_id,
+                        "cluster_type": case.cluster_type,
+                        "cluster_signature_sha256": signature_by_cluster[case.cluster_id],
+                        "case_id": case.case_id,
+                        "case_kind": case.case_kind,
+                        "recipe_id": case.recipe_id,
+                        "fault_set": list(case.fault_set),
+                        "oracle_failure_set": list(case.oracle_failure_set),
+                        "base_structure_flags": list(case.base_structure_flags),
+                        "truth": 0,
+                        "decision": False,
+                        "raw_score": 0,
+                        "p_valid": e002.JsonNumber("0.500000000"),
+                        "input_sha256": case.input_sha256,
+                        "oracle_manifest_sha256": "e" * 64,
+                        "calibration_lookup_sha256": lookup_hashes[method],
+                        "status": "valid",
+                    }
+                )
+        self.assertEqual(len(prediction_rows), 7296)
+
+        metric_rows = []
+        d9_defaults = {
+            "balanced_accuracy": "0.500000000",
+            "fpr": "0.500000000",
+            "fnr": "0.500000000",
+            "precision": "0.500000000",
+            "recall": "0.500000000",
+            "specificity": "0.500000000",
+            "f1": "0.500000000",
+            "brier": "0.500000000",
+            "ece": "0.500000000",
+        }
+        count_defaults = {
+            field: "0"
+            for field in (
+                "support", "positive_count", "negative_count", "tp", "tn", "fp", "fn",
+                "fpr_denominator", "fnr_denominator", "precision_denominator",
+                "recall_denominator", "specificity_denominator", "f1_denominator",
+                "ece_denominator",
+            )
+        }
+        for split in e002.SPLITS:
+            for subgroup in e002.SUBGROUPS:
+                for method in e002.METHODS:
+                    row = {field: "NA" for field in e002.METRIC_FIELDS}
+                    row.update(
+                        {
+                            "row_kind": "method",
+                            "run_id": RUN_ID,
+                            "protocol_path": e002.PROTOCOL_PATH,
+                            "protocol_commit": e002.PROTOCOL_COMMIT,
+                            "split": split,
+                            "subgroup": subgroup,
+                            "method": method,
+                            "method_pair": "NA",
+                            "diagnostic_id": "NA",
+                            "calibration_lookup_sha256": lookup_hashes[method],
+                            "interval_status": (
+                                "valid" if split == "confirmatory" else "descriptive-only"
+                            ),
+                            **count_defaults,
+                            **d9_defaults,
+                        }
+                    )
+                    if split == "confirmatory" and subgroup == "overall":
+                        if method == "M1":
+                            row.update(
+                                balanced_accuracy="0.700000000",
+                                fpr="0.200000000",
+                                fnr="0.400000000",
+                            )
+                        elif method == "B0":
+                            row.update(
+                                balanced_accuracy="0.500000000",
+                                fpr="0.500000000",
+                                fnr="0.500000000",
+                            )
+                    if split == "confirmatory" and subgroup.startswith("cluster:"):
+                        if method == "M1":
+                            row["balanced_accuracy"] = "0.600000000"
+                        elif method == "B0":
+                            row["balanced_accuracy"] = "0.500000000"
+                    metric_rows.append(row)
+        for diagnostic, metric, pair, support in (
+            ("d1", "fpr", "omit-M1", "48"),
+            ("d2", "fnr", "over-M1", "40"),
+            ("d3", "fnr", "stale-M1", "40"),
+        ):
+            row = {field: "NA" for field in e002.METRIC_FIELDS}
+            row.update(
+                {
+                    "row_kind": "diagnostic",
+                    "run_id": RUN_ID,
+                    "protocol_path": e002.PROTOCOL_PATH,
+                    "protocol_commit": e002.PROTOCOL_COMMIT,
+                    "split": "confirmatory",
+                    "subgroup": f"diagnostic:{diagnostic}",
+                    "method": "NA",
+                    "method_pair": pair,
+                    "diagnostic_id": diagnostic,
+                    "calibration_lookup_sha256": "NA",
+                    "interval_status": "valid",
+                    "diagnostic_metric": metric,
+                    "diagnostic_support": support,
+                    "diagnostic_delta": "0.100000000",
+                    "diagnostic_interval_ref": f"stress|{diagnostic}|{metric}|{pair}",
+                    "diagnostic_ci_lower": "0.100000000",
+                    "diagnostic_ci_upper": "0.200000000",
+                }
+            )
+            metric_rows.append(row)
+        self.assertEqual(len(metric_rows), 243)
+
+        intervals = {}
+        for subgroup in e002.SUBGROUPS:
+            for metric in e002.METRICS:
+                intervals[(subgroup, metric, "M1-B0")] = {
+                    "status": "valid",
+                    "ci_lower": "-0.200000000" if metric == "fpr" else "0.100000000",
+                    "ci_upper": "-0.100000000" if metric == "fpr" else "0.200000000",
+                }
+        for diagnostic, metric, pair in (
+            ("d1", "fpr", "omit-M1"),
+            ("d2", "fnr", "over-M1"),
+            ("d3", "fnr", "stale-M1"),
+        ):
+            intervals[(f"diagnostic:{diagnostic}", metric, pair)] = {
+                "status": "valid",
+                "ci_lower": "0.100000000",
+                "ci_upper": "0.200000000",
+            }
+        calibration_hash = "9" * 64
+        bootstrap_manifest_hash = "f" * 64
+        artifact_hashes = {
+            "predictions": "a" * 64,
+            "metrics": "b" * 64,
+            "bootstrap": "c" * 64,
+        }
+        raw_hash = run_e002._validator_raw_prediction_hash(prediction_rows)
+        metric_hash = e002.canonical_sha256(
+            {"protocol_id": "E002-v1", "rows": [dict(row) for row in metric_rows]}
+        )
+        manifest_hashes = {
+            "raw_prediction": raw_hash,
+            "calibration": calibration_hash,
+            "metric": metric_hash,
+            "bootstrap": bootstrap_manifest_hash,
+        }
+        context = {
+            "prediction_rows": tuple(prediction_rows),
+            "lookups": lookups,
+            "lookup_hashes": lookup_hashes,
+            "calibration_hash": calibration_hash,
+            "bootstrap_manifest_hash": bootstrap_manifest_hash,
+        }
+        replacements = run_e002._validator_report_replacements(
+            RUN_ID, context, metric_rows, intervals, manifest_hashes, artifact_hashes
+        )
+        valid_template, _invalid_template = e002._template_blocks(e002._protocol_text())
+        result_bytes = e002._substitute_template(valid_template, replacements).encode("utf-8")
+        self.assertIn(b"# E002-v1 result \xe2\x80\x94 e002-20260825-001\n", result_bytes)
+        self.assertIn(b"## Deviations\nnone\n", result_bytes)
+
+        with tempfile.TemporaryDirectory() as temporary:
+            result_file = Path(temporary) / "run-e002-20260825-001.md"
+            result_file.write_bytes(result_bytes)
+            run_e002._validate_result_bytes(
+                result_file,
+                RUN_ID,
+                context,
+                metric_rows,
+                intervals,
+                manifest_hashes,
+                artifact_hashes,
+            )
+            lowered = result_bytes.replace(
+                b"## Deviations\nnone\n", b"## deviations\nnone\n", 1
+            )
+            result_file.write_bytes(lowered)
+            with self.assertRaises(run_e002.InvalidRunError):
+                run_e002._validate_result_bytes(
+                    result_file,
+                    RUN_ID,
+                    context,
+                    metric_rows,
+                    intervals,
+                    manifest_hashes,
+                    artifact_hashes,
+                )
+            swapped_artifact = result_bytes.replace(
+                f"sha256={'c' * 64}".encode("ascii"),
+                f"sha256={bootstrap_manifest_hash}".encode("ascii"),
+                1,
+            )
+            result_file.write_bytes(swapped_artifact)
+            with self.assertRaises(run_e002.InvalidRunError):
+                run_e002._validate_result_bytes(
+                    result_file,
+                    RUN_ID,
+                    context,
+                    metric_rows,
+                    intervals,
+                    manifest_hashes,
+                    artifact_hashes,
+                )
+            swapped_manifest = result_bytes.replace(
+                f"bootstrap_manifest: {bootstrap_manifest_hash}".encode("ascii"),
+                f"bootstrap_manifest: {'c' * 64}".encode("ascii"),
+                1,
+            )
+            result_file.write_bytes(swapped_manifest)
+            with self.assertRaises(run_e002.InvalidRunError):
+                run_e002._validate_result_bytes(
+                    result_file,
+                    RUN_ID,
+                    context,
+                    metric_rows,
+                    intervals,
+                    manifest_hashes,
+                    artifact_hashes,
+                )
+
     def test_report_placeholder_values_are_checked_against_independent_expectations(self) -> None:
         template = "value=<INT>;state=<STATUS>"
         expected = {"INT": ["7"], "STATUS": ["valid"]}

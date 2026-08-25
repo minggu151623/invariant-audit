@@ -366,6 +366,7 @@ _LOCKED_DIAGNOSTIC_METRIC_FIELDS = (
     "diagnostic_delta", "diagnostic_interval_ref", "diagnostic_ci_lower",
     "diagnostic_ci_upper",
 )
+_VALID_RESULT_DEVIATIONS_MARKER = b"## Deviations\nnone\n"
 
 # Staged validation has its own immutable protocol transcription.  These
 # values intentionally do not reference producer tables in e002.py.  The
@@ -2358,8 +2359,8 @@ def _validate_result_bytes(
     for method in _LOCKED_METHODS:
         if method.encode("ascii") not in result_bytes:
             raise InvalidRunError(f"result method missing: {method}")
-    if b"deviations\nnone\n" not in result_bytes:
-        raise InvalidRunError("result deviation contract drift")
+    if result_bytes.count(_VALID_RESULT_DEVIATIONS_MARKER) != 1:
+        raise InvalidRunError("result deviation marker drift")
 
 
 def _validate_staged_artifacts(
