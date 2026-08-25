@@ -1,8 +1,10 @@
 """Development-only tests for the locked E002-v1 implementation.
 
-Scoring, calibration, metric, and reduced-bootstrap fixtures use only the
-development and calibration splits. Confirmatory arithmetic is checked
-structurally; no confirmatory score or metric is computed here.
+Scoring, calibration, metric-row, and reduced-bootstrap fixtures use only the
+development and calibration splits. Confirmatory report/H2 coverage is
+structural arithmetic only, with exact-delta calls stubbed to the fabricated
+locked rows; no confirmatory scores are evaluated, confirmatory metric rows are
+computed from cases, or bootstrap cases are computed here.
 """
 
 from __future__ import annotations
@@ -1052,6 +1054,52 @@ class E002HarnessTests(unittest.TestCase):
             "calibration_hash": calibration_hash,
             "bootstrap_manifest_hash": bootstrap_manifest_hash,
         }
+        structural_deltas = {
+            None: {
+                "balanced_accuracy": run_e002.Fraction("0.200000000"),
+                "fpr": run_e002.Fraction("-0.300000000"),
+                "fnr": run_e002.Fraction("-0.100000000"),
+                "brier": run_e002.Fraction(0),
+                "ece": run_e002.Fraction(0),
+            },
+            **{
+                cluster_type: {
+                    "balanced_accuracy": run_e002.Fraction("0.100000000"),
+                    "fpr": run_e002.Fraction(0),
+                    "fnr": run_e002.Fraction(0),
+                    "brier": run_e002.Fraction(0),
+                    "ece": run_e002.Fraction(0),
+                }
+                for cluster_type in run_e002._VALIDATOR_TYPE_ORDER
+            },
+        }
+
+        def structural_primary_delta_stub(
+            _context: object,
+            cluster_type: str | None = None,
+            *,
+            split: str,
+        ) -> dict[str, run_e002.Fraction]:
+            self.assertEqual(split, "confirmatory")
+            self.assertIn(cluster_type, structural_deltas)
+            return dict(structural_deltas[cluster_type])
+
+        delta_patcher = mock.patch.object(
+            run_e002,
+            "_validator_primary_deltas",
+            side_effect=structural_primary_delta_stub,
+        )
+        exact_delta_helper = delta_patcher.start()
+        stats_patcher = mock.patch.object(
+            run_e002,
+            "_validator_stats",
+            side_effect=AssertionError(
+                "structural report path must not execute validator statistics"
+            ),
+        )
+        stats_patcher.start()
+        self.addCleanup(delta_patcher.stop)
+        self.addCleanup(stats_patcher.stop)
         replacements = run_e002._validator_report_replacements(
             RUN_ID, context, metric_rows, intervals, manifest_hashes, artifact_hashes
         )
@@ -1118,6 +1166,14 @@ class E002HarnessTests(unittest.TestCase):
                     manifest_hashes,
                     artifact_hashes,
                 )
+            self.assertGreaterEqual(exact_delta_helper.call_count, 8)
+            self.assertTrue(exact_delta_helper.call_args_list)
+            self.assertTrue(
+                all(
+                    call.kwargs.get("split") == "confirmatory"
+                    for call in exact_delta_helper.call_args_list
+                )
+            )
 
     def test_report_placeholder_values_are_checked_against_independent_expectations(self) -> None:
         template = "value=<INT>;state=<STATUS>"
@@ -1126,147 +1182,76 @@ class E002HarnessTests(unittest.TestCase):
         with self.assertRaises(run_e002.InvalidRunError):
             run_e002._validate_report_template_shape("value=8;state=valid\n", template, expected)
 
-    def test_exact_primary_delta_accepts_producer_rendered_result(self) -> None:
-        calibration_cases = tuple(
-            case for case in self.population.cases if case.split == "calibration"
-        )
-        (
-            lookups,
-            _calibration_manifest,
-            calibration_hash,
-            prediction_rows,
-            prediction_map,
-        ) = e002.build_predictions(RUN_ID, self.population, calibration_cases)
-        producer_bootstrap = e002.run_bootstrap(
-            self.population,
-            prediction_map,
-            replicate_count=1,
-            bootstrap_splits=("confirmatory",),
-            include_diagnostics=True,
-        )
-        lookup_hashes = {
-            lookup.method: e002._lookup_hash(lookup) for lookup in lookups
-        }
-        producer_metric_rows = e002.build_metric_rows(
-            RUN_ID,
-            self.population,
-            prediction_map,
-            lookup_hashes,
-            producer_bootstrap,
-        )
-        prediction_bytes = e002.serialize_predictions(prediction_rows)
-        bootstrap_bytes = e002.serialize_bootstrap(producer_bootstrap.rows)
+    def test_exact_primary_delta_rejects_rounded_cells_on_development_or_calibration_data(
+        self,
+    ) -> None:
+        selected_splits = ("development", "calibration")
+        prediction_bytes = e002.serialize_predictions(self.prediction_rows)
+        metric_bytes = e002.serialize_metrics(self.metric_rows)
+        bootstrap_bytes = e002.serialize_bootstrap(self.bootstrap.rows)
 
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             prediction_file = root / "predictions.jsonl"
+            metric_file = root / "metrics.csv"
             bootstrap_file = root / "bootstrap.csv"
             prediction_file.write_bytes(prediction_bytes)
+            metric_file.write_bytes(metric_bytes)
             bootstrap_file.write_bytes(bootstrap_bytes)
 
             parsed, context = run_e002._validate_jsonl_predictions_independent(
-                prediction_file, RUN_ID
+                prediction_file, RUN_ID, required_splits=selected_splits
             )
             context = dict(context)
             context["prediction_rows"] = parsed
             intervals, bootstrap_manifest_hash = run_e002._validate_bootstrap_independent(
                 bootstrap_file,
                 context,
-                replicate_count=1,
+                selected_splits=selected_splits,
+                replicate_count=16,
+                include_diagnostics=False,
             )
             context["bootstrap_manifest_hash"] = bootstrap_manifest_hash
-            validator_metric_rows = run_e002._validator_metric_rows(
-                RUN_ID, context, intervals
+            validator_metric_rows = run_e002._validate_metrics_independent(
+                metric_file,
+                RUN_ID,
+                context,
+                intervals,
+                selected_splits=selected_splits,
             )
-            self.assertEqual(tuple(producer_metric_rows), validator_metric_rows)
-            validator_metric_lookup = {
+            self.assertEqual(tuple(self.metric_rows), validator_metric_rows)
+            metric_lookup = {
                 (row["split"], row["subgroup"], row["method"]): row
                 for row in validator_metric_rows
                 if row["row_kind"] == "method"
             }
 
-            confirmatory = tuple(
-                case for case in context["facts"] if case["split"] == "confirmatory"
-            )
-            validator_predictions = {
-                (row["method"], row["case_id"]): row for row in parsed
-            }
-            exact_stats = {
-                method: run_e002._validator_stats(
-                    confirmatory,
-                    validator_predictions,
-                    method,
-                    lambda _case: True,
-                    context["lookups"],
+            counterexample = None
+            for split in selected_splits:
+                exact_brier = run_e002._validator_primary_deltas(
+                    context, split=split
+                )["brier"]
+                rounded_brier = run_e002.Fraction(
+                    metric_lookup[(split, "overall", "M1")]["brier"]
+                ) - run_e002.Fraction(
+                    metric_lookup[(split, "overall", "B0")]["brier"]
                 )
-                for method in ("B0", "M1")
-            }
-            exact_brier = (
-                run_e002._validator_metric_value(exact_stats["M1"], "brier")
-                - run_e002._validator_metric_value(exact_stats["B0"], "brier")
-            )
-            rounded_brier = run_e002.Fraction(
-                validator_metric_lookup[("confirmatory", "overall", "M1")]["brier"]
-            ) - run_e002.Fraction(
-                validator_metric_lookup[("confirmatory", "overall", "B0")]["brier"]
-            )
-            self.assertEqual(run_e002._validator_d9(exact_brier), "-0.091689527")
-            self.assertEqual(run_e002._validator_d9(rounded_brier), "-0.091689526")
-            self.assertNotEqual(exact_brier, rounded_brier)
+                if exact_brier != rounded_brier:
+                    counterexample = (split, exact_brier, rounded_brier)
+                    break
 
-            render_bootstrap = e002.BootstrapResult(
-                rows=({},) * 530053,
-                intervals=producer_bootstrap.intervals,
-                block_count=producer_bootstrap.block_count,
-                replicate_count=producer_bootstrap.replicate_count,
+            self.assertIsNotNone(counterexample)
+            split, exact_brier, rounded_brier = counterexample
+            self.assertIn(split, selected_splits)
+            exact_token = run_e002._validator_d9(exact_brier)
+            rounded_token = run_e002._validator_d9(rounded_brier)
+            self.assertEqual(exact_token, "-0.091689527")
+            self.assertEqual(rounded_token, "-0.091689526")
+            self.assertEqual(
+                abs(run_e002.Fraction(exact_token) - run_e002.Fraction(rounded_token)),
+                run_e002.Fraction(1, 10**9),
             )
-            metric_bytes = e002.serialize_metrics(producer_metric_rows)
-            artifact_hashes = {
-                "predictions": e002.sha256_hex(prediction_bytes),
-                "metrics": e002.sha256_hex(metric_bytes),
-                "bootstrap": e002.sha256_hex(bootstrap_bytes),
-            }
-            manifest_hashes = {
-                "raw_prediction": run_e002._validator_raw_prediction_hash(parsed),
-                "calibration": context["calibration_hash"],
-                "metric": e002.canonical_sha256(
-                    {"protocol_id": "E002-v1", "rows": [dict(row) for row in producer_metric_rows]}
-                ),
-                "bootstrap": bootstrap_manifest_hash,
-            }
-            diagnostic_rows = [
-                row for row in producer_metric_rows if row["row_kind"] == "diagnostic"
-            ]
-            h2 = e002._h2_summary(
-                self.population, prediction_map, render_bootstrap, diagnostic_rows
-            )
-            with mock.patch.object(
-                e002, "serialize_bootstrap", return_value=bootstrap_bytes
-            ):
-                result_bytes = e002._render_result(
-                    RUN_ID,
-                    self.population,
-                    lookups,
-                    calibration_hash,
-                    manifest_hashes,
-                    artifact_hashes,
-                    prediction_rows,
-                    producer_metric_rows,
-                    render_bootstrap,
-                    h2,
-                )
-            self.assertIn(b"-0.091689527", result_bytes)
-            result_file = root / "run-e002-20260825-001.md"
-            result_file.write_bytes(result_bytes)
-            run_e002._validate_result_bytes(
-                result_file,
-                RUN_ID,
-                context,
-                validator_metric_rows,
-                intervals,
-                manifest_hashes,
-                artifact_hashes,
-            )
+            self.assertNotEqual(exact_brier, rounded_brier)
 
     def test_multi_fault_external_relation_evidence_is_complete_and_deterministic(self) -> None:
         rows, counts, evidence_bytes, evidence_hash = e002.multi_fault_relation_evidence(

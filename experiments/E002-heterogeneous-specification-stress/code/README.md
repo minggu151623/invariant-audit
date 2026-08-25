@@ -30,12 +30,15 @@ PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-st
 The development suite currently contains 54 tests. Its ordinary fixtures
 score, calibrate, and reduced-bootstrap only development and calibration
 cases; confirmatory counts are checked as locked arithmetic. The added
-deterministic in-memory validator regression also reconstructs the
-confirmatory population and performs a one-replicate confirmatory
-calculation/bootstrap to compare exact producer and validator values. It
-renders a producer-style report in memory and validates it independently; it
-does not invoke `execute_run` or the CLI and produces no confirmatory
-repository artifacts.
+deterministic in-memory validator regression reconstructs only the development
+and calibration population/prediction evidence and performs a reduced
+bootstrap on those splits to compare exact producer and validator values.
+Confirmatory report/H2 coverage is structural arithmetic only, with exact-delta
+calls stubbed to the fabricated locked rows; it does not evaluate confirmatory
+scores, compute confirmatory metric rows from cases, or bootstrap confirmatory
+cases. The regression does not invoke `execute_run` or the CLI and produces no
+confirmatory repository artifacts; separate runner tests use fake artifacts in
+temporary directories for staging and fail-closed behavior.
 
 One authorized locked attempt, `e002-20260825-001`, was executed after the
 M04 gate. It failed closed with exit code 2 because of

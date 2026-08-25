@@ -2008,7 +2008,7 @@ def _validator_h2_outcome(
         (row["split"], row["subgroup"], row["method"]): row
         for row in metric_rows if row["row_kind"] == "method"
     }
-    deltas = _validator_primary_deltas(context)
+    deltas = _validator_primary_deltas(context, split="confirmatory")
     ba_interval = intervals[("overall", "balanced_accuracy", "M1-B0")]
     fpr_interval = intervals[("overall", "fpr", "M1-B0")]
     anchor_ok = (
@@ -2021,7 +2021,9 @@ def _validator_h2_outcome(
     cluster_deltas: list[Fraction | None] = []
     for cluster_type in _VALIDATOR_TYPE_ORDER:
         cluster_deltas.append(
-            _validator_primary_deltas(context, cluster_type)["balanced_accuracy"]
+            _validator_primary_deltas(
+                context, cluster_type, split="confirmatory"
+            )["balanced_accuracy"]
         )
     anchor_ok = anchor_ok and all(
         delta is not None and delta >= 0 for delta in cluster_deltas
@@ -2071,12 +2073,17 @@ def _validator_fraction(token: str) -> Fraction | None:
 
 
 def _validator_primary_deltas(
-    context: Mapping[str, Any], cluster_type: str | None = None
+    context: Mapping[str, Any],
+    cluster_type: str | None = None,
+    *,
+    split: str,
 ) -> dict[str, Fraction | None]:
+    if split not in _LOCKED_SPLITS:
+        raise InvalidRunError(f"validator delta split drift: {split}")
     facts = tuple(
         case
         for case in context["facts"]
-        if case["split"] == "confirmatory"
+        if case["split"] == split
         and (cluster_type is None or case["cluster_type"] == cluster_type)
     )
     predictions = {
@@ -2129,7 +2136,7 @@ def _validator_report_replacements(
     d9_values: list[str] = []
     for method in ("B0", "M1"):
         d9_values.extend(primary_rows[method][metric] for metric in primary_metrics)
-    primary_deltas = _validator_primary_deltas(context)
+    primary_deltas = _validator_primary_deltas(context, split="confirmatory")
     d9_values.extend(_validator_d9(primary_deltas[metric]) for metric in primary_metrics)
     for metric in primary_metrics:
         interval = intervals[("overall", metric, "M1-B0")]
