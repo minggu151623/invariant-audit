@@ -21,19 +21,32 @@ Run the development suite from the repository root:
 PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/E002-heterogeneous-specification-stress/code -p 'test_e002.py'
 ```
 
-The next locked local confirmatory command, invoked only under the M04
-authorization and a clean-tree preflight, is:
+The M04-authorized locked local confirmatory command was:
 
 ```text
 PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root .
 ```
 
-No confirmatory run has been executed. The tests use in-memory generated
-cases and temporary directories only; they do not create E002 repository data,
-metrics, bootstrap, or result outputs. The 53-test development suite
-deliberately scores and bootstraps only development and calibration cases;
-confirmatory counts are checked as locked arithmetic. The M04 gate authorizes
-the next run but establishes no result, metric, H2 outcome, or public claim.
+The development suite currently contains 54 tests. Its ordinary fixtures
+score, calibrate, and reduced-bootstrap only development and calibration
+cases; confirmatory counts are checked as locked arithmetic. The added
+deterministic in-memory validator regression also reconstructs the
+confirmatory population and performs a one-replicate confirmatory
+calculation/bootstrap to compare exact producer and validator values. It
+renders a producer-style report in memory and validates it independently; it
+does not invoke `execute_run` or the CLI and produces no confirmatory
+repository artifacts.
+
+One authorized locked attempt, `e002-20260825-001`, was executed after the
+M04 gate. It failed closed with exit code 2 because of
+`result semantic field drift: D9_OR_NA`. The only preserved output is the
+[invalid run report](../results/run-e002-20260825-001.md), with SHA-256
+`f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`; no
+data, metrics, or evidence outputs were produced. See the [M05 invalid-run
+record](../../../milestones/M05-E002-run-001-invalid.md). No corrected run
+has been executed or authorized, and this invalid attempt establishes no
+scientific result, metric, H2 outcome, or public claim.
+
 The runner validates every staged byte before publication, reports the
 finalized result SHA-256 externally, and emits multi-fault relation evidence
 only after a valid run.

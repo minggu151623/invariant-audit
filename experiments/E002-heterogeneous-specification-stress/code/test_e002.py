@@ -1045,6 +1045,7 @@ class E002HarnessTests(unittest.TestCase):
             "bootstrap": bootstrap_manifest_hash,
         }
         context = {
+            "facts": run_e002._validator_case_facts(),
             "prediction_rows": tuple(prediction_rows),
             "lookups": lookups,
             "lookup_hashes": lookup_hashes,
@@ -1124,6 +1125,148 @@ class E002HarnessTests(unittest.TestCase):
         run_e002._validate_report_template_shape("value=7;state=valid\n", template, expected)
         with self.assertRaises(run_e002.InvalidRunError):
             run_e002._validate_report_template_shape("value=8;state=valid\n", template, expected)
+
+    def test_exact_primary_delta_accepts_producer_rendered_result(self) -> None:
+        calibration_cases = tuple(
+            case for case in self.population.cases if case.split == "calibration"
+        )
+        (
+            lookups,
+            _calibration_manifest,
+            calibration_hash,
+            prediction_rows,
+            prediction_map,
+        ) = e002.build_predictions(RUN_ID, self.population, calibration_cases)
+        producer_bootstrap = e002.run_bootstrap(
+            self.population,
+            prediction_map,
+            replicate_count=1,
+            bootstrap_splits=("confirmatory",),
+            include_diagnostics=True,
+        )
+        lookup_hashes = {
+            lookup.method: e002._lookup_hash(lookup) for lookup in lookups
+        }
+        producer_metric_rows = e002.build_metric_rows(
+            RUN_ID,
+            self.population,
+            prediction_map,
+            lookup_hashes,
+            producer_bootstrap,
+        )
+        prediction_bytes = e002.serialize_predictions(prediction_rows)
+        bootstrap_bytes = e002.serialize_bootstrap(producer_bootstrap.rows)
+
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            prediction_file = root / "predictions.jsonl"
+            bootstrap_file = root / "bootstrap.csv"
+            prediction_file.write_bytes(prediction_bytes)
+            bootstrap_file.write_bytes(bootstrap_bytes)
+
+            parsed, context = run_e002._validate_jsonl_predictions_independent(
+                prediction_file, RUN_ID
+            )
+            context = dict(context)
+            context["prediction_rows"] = parsed
+            intervals, bootstrap_manifest_hash = run_e002._validate_bootstrap_independent(
+                bootstrap_file,
+                context,
+                replicate_count=1,
+            )
+            context["bootstrap_manifest_hash"] = bootstrap_manifest_hash
+            validator_metric_rows = run_e002._validator_metric_rows(
+                RUN_ID, context, intervals
+            )
+            self.assertEqual(tuple(producer_metric_rows), validator_metric_rows)
+            validator_metric_lookup = {
+                (row["split"], row["subgroup"], row["method"]): row
+                for row in validator_metric_rows
+                if row["row_kind"] == "method"
+            }
+
+            confirmatory = tuple(
+                case for case in context["facts"] if case["split"] == "confirmatory"
+            )
+            validator_predictions = {
+                (row["method"], row["case_id"]): row for row in parsed
+            }
+            exact_stats = {
+                method: run_e002._validator_stats(
+                    confirmatory,
+                    validator_predictions,
+                    method,
+                    lambda _case: True,
+                    context["lookups"],
+                )
+                for method in ("B0", "M1")
+            }
+            exact_brier = (
+                run_e002._validator_metric_value(exact_stats["M1"], "brier")
+                - run_e002._validator_metric_value(exact_stats["B0"], "brier")
+            )
+            rounded_brier = run_e002.Fraction(
+                validator_metric_lookup[("confirmatory", "overall", "M1")]["brier"]
+            ) - run_e002.Fraction(
+                validator_metric_lookup[("confirmatory", "overall", "B0")]["brier"]
+            )
+            self.assertEqual(run_e002._validator_d9(exact_brier), "-0.091689527")
+            self.assertEqual(run_e002._validator_d9(rounded_brier), "-0.091689526")
+            self.assertNotEqual(exact_brier, rounded_brier)
+
+            render_bootstrap = e002.BootstrapResult(
+                rows=({},) * 530053,
+                intervals=producer_bootstrap.intervals,
+                block_count=producer_bootstrap.block_count,
+                replicate_count=producer_bootstrap.replicate_count,
+            )
+            metric_bytes = e002.serialize_metrics(producer_metric_rows)
+            artifact_hashes = {
+                "predictions": e002.sha256_hex(prediction_bytes),
+                "metrics": e002.sha256_hex(metric_bytes),
+                "bootstrap": e002.sha256_hex(bootstrap_bytes),
+            }
+            manifest_hashes = {
+                "raw_prediction": run_e002._validator_raw_prediction_hash(parsed),
+                "calibration": context["calibration_hash"],
+                "metric": e002.canonical_sha256(
+                    {"protocol_id": "E002-v1", "rows": [dict(row) for row in producer_metric_rows]}
+                ),
+                "bootstrap": bootstrap_manifest_hash,
+            }
+            diagnostic_rows = [
+                row for row in producer_metric_rows if row["row_kind"] == "diagnostic"
+            ]
+            h2 = e002._h2_summary(
+                self.population, prediction_map, render_bootstrap, diagnostic_rows
+            )
+            with mock.patch.object(
+                e002, "serialize_bootstrap", return_value=bootstrap_bytes
+            ):
+                result_bytes = e002._render_result(
+                    RUN_ID,
+                    self.population,
+                    lookups,
+                    calibration_hash,
+                    manifest_hashes,
+                    artifact_hashes,
+                    prediction_rows,
+                    producer_metric_rows,
+                    render_bootstrap,
+                    h2,
+                )
+            self.assertIn(b"-0.091689527", result_bytes)
+            result_file = root / "run-e002-20260825-001.md"
+            result_file.write_bytes(result_bytes)
+            run_e002._validate_result_bytes(
+                result_file,
+                RUN_ID,
+                context,
+                validator_metric_rows,
+                intervals,
+                manifest_hashes,
+                artifact_hashes,
+            )
 
     def test_multi_fault_external_relation_evidence_is_complete_and_deterministic(self) -> None:
         rows, counts, evidence_bytes, evidence_hash = e002.multi_fault_relation_evidence(
@@ -1664,7 +1807,7 @@ class E002HarnessTests(unittest.TestCase):
             run_e002._protocol_guard(
                 repository,
                 output_root,
-                run_e002._final_paths(output_root, RUN_ID),
+                run_e002._final_paths(output_root, "e002-20260825-002"),
             )
         self.assertTrue(output_root.exists())
 
@@ -1695,7 +1838,7 @@ class E002HarnessTests(unittest.TestCase):
                     )
             self.assertFalse(output_root.exists())
 
-    def test_output_paths_and_repository_outputs_remain_absent(self) -> None:
+    def test_data_and_bytecode_outputs_remain_absent_invalid_report_is_preserved(self) -> None:
         repository = Path(__file__).resolve().parents[3]
         reserved = (
             repository / "data" / "E002-v1-predictions.jsonl",
@@ -1704,15 +1847,22 @@ class E002HarnessTests(unittest.TestCase):
             repository
             / "experiments"
             / "E002-heterogeneous-specification-stress"
-            / "results"
-            / f"run-{RUN_ID}.md",
-            repository
-            / "experiments"
-            / "E002-heterogeneous-specification-stress"
             / "code"
             / "__pycache__",
         )
         self.assertTrue(all(not target.exists() for target in reserved))
+        invalid_report = (
+            repository
+            / "experiments"
+            / "E002-heterogeneous-specification-stress"
+            / "results"
+            / f"run-{RUN_ID}.md"
+        )
+        self.assertTrue(invalid_report.is_file())
+        self.assertEqual(
+            e002.sha256_hex(invalid_report.read_bytes()),
+            "f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34",
+        )
 
 
 if __name__ == "__main__":

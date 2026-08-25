@@ -2000,6 +2000,7 @@ def _validator_raw_prediction_hash(rows: Sequence[Mapping[str, Any]]) -> str:
 
 
 def _validator_h2_outcome(
+    context: Mapping[str, Any],
     metric_rows: Sequence[Mapping[str, str]],
     intervals: Mapping[tuple[str, str, str], Mapping[str, str]],
 ) -> tuple[str, str]:
@@ -2007,21 +2008,7 @@ def _validator_h2_outcome(
         (row["split"], row["subgroup"], row["method"]): row
         for row in metric_rows if row["row_kind"] == "method"
     }
-    primary = {
-        method: by_key[("confirmatory", "overall", method)]
-        for method in ("B0", "M1")
-    }
-    def value(row: Mapping[str, str], metric: str) -> Fraction | None:
-        token = row[metric]
-        return None if token == "NA" else Fraction(token)
-    deltas = {
-        metric: (
-            value(primary["M1"], metric) - value(primary["B0"], metric)
-            if value(primary["M1"], metric) is not None and value(primary["B0"], metric) is not None
-            else None
-        )
-        for metric in _LOCKED_METRICS
-    }
+    deltas = _validator_primary_deltas(context)
     ba_interval = intervals[("overall", "balanced_accuracy", "M1-B0")]
     fpr_interval = intervals[("overall", "fpr", "M1-B0")]
     anchor_ok = (
@@ -2033,13 +2020,8 @@ def _validator_h2_outcome(
     )
     cluster_deltas: list[Fraction | None] = []
     for cluster_type in _VALIDATOR_TYPE_ORDER:
-        left = by_key[("confirmatory", f"cluster:{cluster_type}", "M1")]
-        right = by_key[("confirmatory", f"cluster:{cluster_type}", "B0")]
-        left_value = value(left, "balanced_accuracy")
-        right_value = value(right, "balanced_accuracy")
         cluster_deltas.append(
-            left_value - right_value
-            if left_value is not None and right_value is not None else None
+            _validator_primary_deltas(context, cluster_type)["balanced_accuracy"]
         )
     anchor_ok = anchor_ok and all(
         delta is not None and delta >= 0 for delta in cluster_deltas
@@ -2088,6 +2070,37 @@ def _validator_fraction(token: str) -> Fraction | None:
     return None if token == _VALIDATOR_NA else Fraction(token)
 
 
+def _validator_primary_deltas(
+    context: Mapping[str, Any], cluster_type: str | None = None
+) -> dict[str, Fraction | None]:
+    facts = tuple(
+        case
+        for case in context["facts"]
+        if case["split"] == "confirmatory"
+        and (cluster_type is None or case["cluster_type"] == cluster_type)
+    )
+    predictions = {
+        (row["method"], row["case_id"]): row
+        for row in context["prediction_rows"]
+    }
+    stats = {
+        method: _validator_stats(
+            facts,
+            predictions,
+            method,
+            lambda _case: True,
+            context["lookups"],
+        )
+        for method in ("B0", "M1")
+    }
+    deltas: dict[str, Fraction | None] = {}
+    for metric in _LOCKED_METRICS:
+        left = _validator_metric_value(stats["M1"], metric)
+        right = _validator_metric_value(stats["B0"], metric)
+        deltas[metric] = left - right if left is not None and right is not None else None
+    return deltas
+
+
 def _validator_report_replacements(
     run_id: str,
     context: Mapping[str, Any],
@@ -2116,12 +2129,8 @@ def _validator_report_replacements(
     d9_values: list[str] = []
     for method in ("B0", "M1"):
         d9_values.extend(primary_rows[method][metric] for metric in primary_metrics)
-    for metric in primary_metrics:
-        left = _validator_fraction(primary_rows["M1"][metric])
-        right = _validator_fraction(primary_rows["B0"][metric])
-        d9_values.append(
-            _validator_d9(left - right if left is not None and right is not None else None)
-        )
+    primary_deltas = _validator_primary_deltas(context)
+    d9_values.extend(_validator_d9(primary_deltas[metric]) for metric in primary_metrics)
     for metric in primary_metrics:
         interval = intervals[("overall", metric, "M1-B0")]
         d9_values.extend((interval["ci_lower"], interval["ci_upper"]))
@@ -2184,7 +2193,7 @@ def _validator_report_replacements(
             f"p_valid={probabilities}"
         )
 
-    h2_outcome, guardrail = _validator_h2_outcome(metric_rows, intervals)
+    h2_outcome, guardrail = _validator_h2_outcome(context, metric_rows, intervals)
     return {
         "RUN_ID": [run_id, run_id, run_id],
         "PROTOCOL_COMMIT": [_VALIDATOR_PROTOCOL_COMMIT],
@@ -2334,7 +2343,7 @@ def _validate_result_bytes(
         raise InvalidRunError("result run identity drift")
     if "protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8\n" not in result_text:
         raise InvalidRunError("result protocol identity drift")
-    outcome, guardrail = _validator_h2_outcome(metric_rows, intervals)
+    outcome, guardrail = _validator_h2_outcome(context, metric_rows, intervals)
     if f"outcome: {outcome}\n" not in result_text or f"fnr_guardrail: {guardrail}\n" not in result_text:
         raise InvalidRunError("result H2 field mismatch")
     actual_prediction_rows = context["prediction_rows"]
