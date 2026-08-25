@@ -258,9 +258,9 @@ re-review returned **no findings** / fit for the independent-review gate.
 The standard-library-only development suite ran 53 tests and returned `OK`.
 No confirmatory run or E002 output has occurred.
 
-### Current state and next gate
+### M04-stage state and next gate
 
-The documentary state is `implementation_reviewed: true`,
+At the M04 gate, the documentary state was `implementation_reviewed: true`,
 `run_authorized: true`, `run: absent`, `results: absent`, and
 `public_claim_eligibility: false`. The next gate is a clean-tree local run
 with run ID `e002-20260825-001` using:
@@ -269,8 +269,51 @@ with run ID `e002-20260825-001` using:
 PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root .
 ```
 
-This documentation task does not run the command or create data, metrics,
+That M04 documentation task did not run the command or create data, metrics,
 bootstrap, results, figures, ARA artifacts, or any H2, external-validity,
-novelty, safety, or generalization evidence. The authorization is bounded to
-the next locked local execution and result recording; it does not authorize
-push, publication, or a public claim.
+novelty, safety, or generalization evidence. The authorization was bounded to
+the next locked local execution and result recording; it did not authorize
+push, publication, or a public claim. M05 records the later execution as
+invalid.
+
+## M05 — E002 run 001 invalid execution
+
+M05 records the already-existing local execution authorized by M04. It is an
+invalid-run evidence record, not an E002 scientific result.
+
+### Observed invalid run
+
+- Run ID: `e002-20260825-001`.
+- Exit code: `2`.
+- Runner failure: `result semantic field drift: D9_OR_NA`.
+- Invalid report:
+  [run-e002-20260825-001.md](experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md)
+  with SHA-256
+  `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`.
+- The report is 258 bytes and 8 lines, has status `invalid` and failure class
+  `invalid-run`, and requires a new ID for a corrected run.
+- No metrics, evidence, or data outputs exist. No H2 outcome is established.
+
+### Independent implementation diagnosis
+
+The first mismatch was `D9_OR_NA` at zero-based index `13`, on result line
+`38`, `Delta M1-B0 Brier`. The producer value was `-0.091689527` from exact
+fractions. The validator value was `-0.091689526`, produced by subtracting
+rounded metric cells. The locked protocol requires exact arithmetic until
+serialization. This is an implementation defect, not a scientific outcome.
+
+This diagnosis is independent worker/reviewer verification, not a user-
+selected technical design or experimental conclusion. The invalid execution
+does not establish an E002 metric, H2 outcome, external validity, novelty,
+safety, generalization, or public claim.
+
+### State and next gate
+
+The M04 one-run authorization is consumed. M05 is current with
+`run_authorized: false`, `authorization_consumed: true`, implementation
+remediation pending, and `public_claim_eligibility: false`. The invalid report
+is the only result record; metrics, evidence, and data remain absent.
+
+The next gate is implementation remediation followed by independent review.
+Any corrected local run requires a new run ID and separate authorization. No
+corrected run, publication, or public claim is authorized by this record.

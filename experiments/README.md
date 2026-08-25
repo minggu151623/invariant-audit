@@ -27,9 +27,14 @@ CSV/JSONL is row-data source.
   `6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc` ->
   `0977641f129d172dd4d11136197a82cb17654aeb`.
 - [M04 implementation review and authorization gate](../milestones/M04-E002-implementation-review.md)
-  records the independent-review approval and authorization for the next
-  locked local run. The 53-test development suite is `OK`; no E002 run,
-  experimental data, result/output, figure, or ARA artifact exists.
+  records the independent-review approval and bounded authorization for one
+  locked local run. The 53-test development suite is `OK`; the subsequent run
+  is recorded as invalid in [M05](../milestones/M05-E002-run-001-invalid.md).
+- [M05 E002 run 001 invalid evidence](../milestones/M05-E002-run-001-invalid.md)
+  records run `e002-20260825-001`, exit code 2, and the
+  `D9_OR_NA` semantic-field drift. No metrics, evidence, or data outputs
+  exist; implementation remediation is pending and
+  `public_claim_eligibility` is `false`.
 - This index is not experimental evidence and establishes no E002 metric,
   H2 outcome, external validity, novelty, safety, generalization, or public
   claim.

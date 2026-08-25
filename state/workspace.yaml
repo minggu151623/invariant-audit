@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M04
+current_milestone: M05
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -345,6 +345,8 @@ M03:
 M04:
   path: milestones/M04-E002-implementation-review.md
   status: implementation_reviewed
+  historical: true
+  superseded_by: M05
   scope: documentary_implementation_review_and_run_authorization
   provenance:
     user_authority:
@@ -406,3 +408,59 @@ M04:
     run_id: e002-20260825-001
     command: "PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root ."
     condition: locked protocol preflight, independent gates, safe staging, and result verification must pass
+M05:
+  path: milestones/M05-E002-run-001-invalid.md
+  status: invalid_run_recorded
+  scope: documentary_invalid_run_evidence_record
+  provenance:
+    authorization_record: M04
+    observed_run: runner_output_and_existing_invalid_report
+    technical_diagnosis: independent_worker_reviewer_diagnosis
+  evidence:
+    - type: protocol_lock
+      path: experiments/E002-heterogeneous-specification-stress/protocol.md
+      protocol_id: E002-v1
+      protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8
+      protocol_blob: f7d27a069ee3fd1600f89d9271e107c197033238
+      unchanged: true
+    - type: invalid_run
+      run_id: e002-20260825-001
+      exit_code: 2
+      failure: "result semantic field drift: D9_OR_NA"
+      status: invalid
+      failure_class: invalid-run
+      corrected_run_requires_new_id: true
+    - type: invalid_result_report
+      path: experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md
+      sha256: f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34
+      size_bytes: 258
+      lines: 8
+      metrics: absent
+      evidence: absent
+      data_outputs: absent
+    - type: independent_diagnosis
+      first_mismatch: D9_OR_NA
+      zero_based_index: 13
+      result_line: 38
+      result_field: "Delta M1-B0 Brier"
+      producer_value: "-0.091689527"
+      producer_basis: exact_fractions
+      validator_value: "-0.091689526"
+      validator_basis: subtraction_of_rounded_metric_cells
+      protocol_arithmetic: exact_until_serialization
+      classification: implementation_defect_not_scientific_outcome
+  verification:
+    scope: invalid_run_recorded_without_valid_result_or_scientific_outcome
+    implementation_reviewed: true
+    implementation_remediation_pending: true
+    run_authorized: false
+    authorization_consumed: true
+    run: invalid
+    results: invalid_report_only
+    metrics: absent
+    evidence: absent
+    data: absent
+    public_claim_eligibility: false
+    protocol_unchanged: true
+    corrected_run: not_authorized
+  next_gate: "Remediate the implementation, obtain independent review, and separately authorize any corrected local run with a new run ID; no corrected run is authorized by M05."

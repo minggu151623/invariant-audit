@@ -317,6 +317,37 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-001 --output-root .
   ```
 
-  No run is performed in this documentation task. M03 remains the historical
-  protocol-only record; M04 is the current implementation-review and
-  authorization gate.
+  No run was performed in that M04 documentation task. M03 remains the
+  historical protocol-only record; M04 was the current implementation-review
+  and authorization gate at that stage. M05 now records the subsequent
+  invalid execution.
+
+## 2026-08-25 — M05/E002 run 001 invalid evidence record
+
+- **Observed run (runner evidence):** The M04-authorized local command was run
+  once with run ID `e002-20260825-001`. It exited with code `2` and emitted
+  `status: invalid`, the run ID, and
+  `error: result semantic field drift: D9_OR_NA`.
+- **Invalid report:** The existing report is
+  [run-e002-20260825-001.md](experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md),
+  SHA-256
+  `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`, 258
+  bytes and 8 lines. It records `failure_class: invalid-run`, states that no
+  metrics or evidence exist, and sets `corrected_run_requires_new_id: true`.
+  The three E002 data outputs were absent.
+- **Independent diagnosis (worker/reviewer verification, not user-selected
+  design):** The first mismatch was `D9_OR_NA` at zero-based index `13`, on
+  result line `38`, `Delta M1-B0 Brier`. The producer value was
+  `-0.091689527` from exact fractions, while the validator produced
+  `-0.091689526` by subtracting rounded metric cells. The locked protocol
+  requires exact arithmetic until serialization. This is an implementation
+  defect, not a scientific outcome.
+- **State transition:** M05 records the invalid run. The one-run M04
+  authorization is consumed: `run_authorized: false`,
+  `authorization_consumed: true`, implementation remediation is pending, and
+  `public_claim_eligibility: false`. No metrics, evidence, data, H2 outcome,
+  external-validity, novelty, safety, generalization, or public claim is
+  established.
+- **Next gate:** Remediate the implementation and obtain independent review
+  before any separately authorized corrected local run. A corrected run must
+  use a new run ID. No corrected run or publication is authorized here.
