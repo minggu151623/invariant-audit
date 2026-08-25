@@ -20,6 +20,91 @@ tree:
           entirely < 0, and the confirmatory FNR point difference M1-B0 is <=
           0. No run or result has occurred, and the user did not confirm this
           E001 design or hypothesis.
+        children:
+          - id: N08
+            type: experiment
+            title: "Valid E001-v1 confirmatory experiment"
+            provenance: ai-executed
+            timestamp: "2026-08-25T19:37:01+0700"
+            result: >
+              The published E001-v1 run e001-20260825-001 was valid within the
+              finite synthetic design. Primary M1-minus-B0 deltas were BA
+              +0.5, FPR -1, and FNR 0; H1 was supported under the locked rule.
+              This does not establish production or public validity.
+            evidence: [C01, M02, "E001-published-artifacts"]
+            children:
+              - id: N09
+                type: pivot
+                title: "AI-suggested deepen-and-broaden pivot from E001 to E002"
+                provenance: ai-suggested
+                timestamp: "2026-08-25T19:37:01+0700"
+                from: "finite synthetic E001 invariant-aware validation"
+                to: "a separately locked E002 heterogeneous specification-stress protocol"
+                trigger: "The M02 result and reviewer/design inference suggested testing heterogeneity, misspecification, multi-faults, and stronger oracle-method separation; the user did not select the technical design."
+                children:
+                  - id: N10
+                    type: question
+                    title: "Will locked E002-v1 support H2?"
+                    provenance: ai-suggested
+                    timestamp: "2026-08-25T19:37:01+0700"
+                    description: >
+                      Test the predeclared E002 H2 anchor and specification-stress
+                      diagnostics on the confirmatory split. This remains an
+                      untested AI-suggested question; the protocol is design
+                      evidence, not a result.
+                    evidence: [C02, M03]
+                    children:
+                      - id: N11
+                        type: decision
+                        title: "User resume and one-run E002 authorization decision"
+                        provenance: user
+                        timestamp: "2026-08-25T19:37:01+0700"
+                        choice: >
+                          Resume from the documented state and authorize one
+                          locked local E002 confirmatory attempt under the
+                          existing protocol and clean-tree gate.
+                        alternatives:
+                          - "Do not resume or do not authorize the bounded local attempt."
+                        evidence: >
+                          User process authority is recorded in the exact texts
+                          "cả hai, nghiên cứu lâu đi, bao lâu cũng được",
+                          "tiếp tục lúc hết quota đi", and "bạn đọc lại tài liêụ đi
+                          là biết mà". These texts did not select E002 technical
+                          design, authorize push/publication, or establish a
+                          result.
+                        children:
+                          - id: N12
+                            type: experiment
+                            title: "Invalid E002 run e002-20260825-001"
+                            provenance: ai-executed
+                            timestamp: "2026-08-25T19:37:01+0700"
+                            result: >
+                              The one authorized locked attempt exited 2 and
+                              failed closed with D9_OR_NA. Only the preserved
+                              invalid report exists; no metrics, data, evidence,
+                              or H2 outcome was produced.
+                            evidence: [M05, "E002-invalid-report"]
+                            children:
+                              - id: N13
+                                type: dead_end
+                                title: "Rounded-cell validator delta dead end and lesson"
+                                provenance: ai-executed
+                                timestamp: "2026-08-25T19:37:01+0700"
+                                hypothesis: >
+                                  Validator primary deltas could be reconstructed
+                                  by subtracting serialized rounded metric cells.
+                                failure_mode: >
+                                  At zero-based mismatch index 13, result line 38
+                                  Delta M1-B0 Brier was -0.091689527 from exact
+                                  fractions but -0.091689526 after rounded-cell
+                                  subtraction, triggering D9_OR_NA.
+                                lesson: >
+                                  Reconstruct exact Fraction statistics from
+                                  independent raw facts and predictions, propagate
+                                  exact deltas through D9/H2/guardrails, and round
+                                  only at serialization. The remediation was
+                                  independently reviewed in M06.
+                                evidence: [M05, M06, H01]
 
   - id: N02
     type: decision

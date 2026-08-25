@@ -1,0 +1,112 @@
+session:
+  id: "2026-08-25_004"
+  timestamp: "2026-08-25T19:37:01+0700"
+  summary: "Recorded one valid finite E001 result and its C01 proof, then the AI-suggested E002 question, user-authorized invalid attempt, validator dead end/remediation, and M06 acceptance; no corrected E002 run or public claim is authorized."
+
+events_logged:
+  - type: experiment
+    id: "N08"
+    provenance: ai-executed
+    summary: "Verified and recorded the valid published E001-v1 confirmatory run with primary deltas BA +0.5, FPR -1, and FNR 0, strictly within the finite synthetic design."
+  - type: pivot
+    id: "N09"
+    provenance: ai-suggested
+    summary: "Recorded the AI-suggested deepen-and-broaden pivot from E001 to a separately locked E002 protocol; no user technical design selection is inferred."
+  - type: observation
+    id: "N10"
+    provenance: ai-suggested
+    summary: "Recorded the untested E002 H2 question from the locked protocol; proof remains pending and no E002 evidence exists."
+  - type: decision
+    id: "N11"
+    provenance: user
+    summary: "Recorded user process authority to resume documented research and authorize one locked local E002 attempt, without selecting technical design or authorizing public action."
+  - type: experiment
+    id: "N12"
+    provenance: ai-executed
+    summary: "Recorded the authorized E002 run e002-20260825-001 as invalid: exit 2, D9_OR_NA, invalid report only, no metrics/data/evidence/H2."
+  - type: dead_end
+    id: "N13"
+    provenance: ai-executed
+    summary: "Recorded the rounded-cell delta validator dead end and exact-Fraction-until-serialization lesson."
+  - type: claim
+    id: "C01"
+    provenance: ai-suggested
+    summary: "Advanced C01 from untested to supported strictly within locked finite synthetic E001-v1, with M02 and published artifact proof."
+  - type: claim
+    id: "C02"
+    provenance: ai-suggested
+    summary: "Created C02 as the untested AI-suggested E002 H2 claim; proof is pending and the invalid attempt is not scientific evidence."
+  - type: heuristic
+    id: "H01"
+    provenance: ai-suggested
+    summary: "Recorded the exact-delta validator reconstruction heuristic and its run_e002.py/test_e002.py bindings."
+  - type: observation
+    id: "O02"
+    provenance: ai-suggested
+    summary: "Recorded the open corrected-run gate: a new E002 run ID and separate explicit authorization are required."
+
+ai_actions:
+  - action: "Verified and recorded the published E001 result, artifact hashes, primary deltas, finite-design limitations, and C01 proof binding."
+    provenance: ai-executed
+    files_changed:
+      - milestones/M02-E001-results.md
+      - experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md
+      - data/E001-v1-predictions.jsonl
+      - data/E001-v1-metrics.csv
+      - data/E001-v1-bootstrap.csv
+      - ara/evidence/README.md
+      - ara/logic/claims.md
+  - action: "Recorded the E002 protocol lock and AI-suggested protocol/design boundary."
+    provenance: ai-executed
+    files_changed:
+      - experiments/E002-heterogeneous-specification-stress/protocol.md
+      - milestones/M03-E002-protocol-design.md
+      - ara/trace/exploration_tree.yaml
+      - ara/logic/claims.md
+  - action: "Implemented and reviewed the E002 executable harness and initial independent-review remediations."
+    provenance: ai-executed
+    files_changed:
+      - experiments/E002-heterogeneous-specification-stress/code/e002.py
+      - experiments/E002-heterogeneous-specification-stress/code/run_e002.py
+      - experiments/E002-heterogeneous-specification-stress/code/test_e002.py
+      - milestones/M04-E002-implementation-review.md
+  - action: "Executed the one authorized locked E002 attempt and recorded its invalid report and diagnostic boundary."
+    provenance: ai-executed
+    files_changed:
+      - experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md
+      - milestones/M05-E002-run-001-invalid.md
+  - action: "Remediated the exact-delta validator defect, passed the documented worker/reviewer checks, and recorded M06 acceptance."
+    provenance: ai-executed
+    files_changed:
+      - experiments/E002-heterogeneous-specification-stress/code/run_e002.py
+      - experiments/E002-heterogeneous-specification-stress/code/test_e002.py
+      - milestones/M06-E002-validator-remediation.md
+  - action: "Wrote this terminal ARA provenance epilogue and bound repository facts, worker claims, and reviewer checks."
+    provenance: ai-executed
+    files_changed:
+      - ara/PAPER.md
+      - ara/evidence/README.md
+      - ara/logic/problem.md
+      - ara/logic/claims.md
+      - ara/logic/solution/heuristics.md
+      - ara/staging/observations.yaml
+      - ara/trace/exploration_tree.yaml
+      - ara/trace/sessions/session_index.yaml
+      - ara/trace/sessions/2026-08-25_004.yaml
+
+claims_touched:
+  - id: C01
+    action: advanced
+    provenance: ai-suggested
+  - id: C02
+    action: created
+    provenance: ai-suggested
+
+open_threads:
+  - "A corrected E002 run requires a new run ID and separate explicit authorization; it is not currently authorized."
+  - "C02 remains untested; the invalid E002 attempt supplies no scientific evidence, H2 outcome, or public claim."
+  - "No E002 public claim or push/publication is authorized; venue remains undecided."
+
+ai_suggestions_pending:
+  - "If separately authorized, run a corrected E002 attempt under the locked protocol with a new run ID; this is an AI-suggested open gate, not current authorization."
+  - "Keep C01 scoped to finite synthetic E001-v1 and do not promote C02 without valid E002 evidence and review."

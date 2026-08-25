@@ -18,3 +18,11 @@ sessions:
     claims_touched:
       - C01
     open_threads: 3
+  - id: "2026-08-25_004"
+    date: "2026-08-25"
+    summary: "Recorded the valid finite E001 result and C01 support, the AI-suggested E002 pivot/H2 question, the user-authorized invalid E002 attempt, exact-delta remediation, and M06 review; no corrected E002 run is authorized."
+    events_count: 10
+    claims_touched:
+      - C01
+      - C02
+    open_threads: 3

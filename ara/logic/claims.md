@@ -1,17 +1,18 @@
 # Claims
 
-Supported claims: none.
+Supported claims: C01, strictly within the locked finite synthetic E001-v1
+design.
 
-Proof references: pending. C01 was created as an untested AI-suggested
-hypothesis; no claim was advanced, weakened, or confirmed in this session.
+Untested claims: C02, the AI-suggested E002 H2 question; no E002 scientific
+evidence exists.
 
 ## C01: H1 — invariant-aware validation improves synthetic calibration
 
 - **Statement**: On the locked E001-v1 confirmatory split, the invariant-aware
-  method M1 will outperform the schema-only baseline B0 under the protocol's
+  method M1 outperforms the schema-only baseline B0 under the protocol's
   pre-specified balanced-accuracy, false-positive-rate, and false-negative-rate
   rule.
-- **Status**: untested
+- **Status**: supported, strictly within the finite synthetic E001-v1 design
 - **Provenance**: ai-suggested
 - **Falsification criteria**: H1 is not supported, and the outcome is labeled
   mixed/not supported, if the confirmatory M1-B0 balanced-accuracy 95% CI is
@@ -22,6 +23,35 @@ hypothesis; no claim was advanced, weakened, or confirmed in this session.
   FNR point difference M1-B0 is <= 0; otherwise label the outcome
   mixed/not supported. Secondary metrics remain reportable but do not change
   this support rule.
-- **Proof**: [pending experimental evidence; `experiments/E001-synthetic-invariant-calibration/protocol.md` @ `d8b26d21e9692ace19436d78461460940043f5c7`]
+- **Observed primary deltas (M1 minus B0)**: balanced accuracy `+0.5`, FPR
+  `-1`, FNR `0`; Brier `-0.2499408284`; ECE `+0.007692307692`.
+- **Proof**: [M02 result record](../../milestones/M02-E001-results.md) and the
+  [published E001 result](../../experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md)
+  with the published predictions, metrics, and bootstrap artifacts bound in
+  the [evidence index](../evidence/README.md).
 - **Dependencies**: []
-- **Tags**: E001-v1, H1, semantic/state-invariant-validation, FP/FN-calibration
+- **Limitations**: finite, hand-designed, balanced, synthetic, single-fault,
+  recipe-coupled oracle; no production validity, external validity,
+  generalization, novelty, safety, or public claim. `public_claim_eligibility`
+  is `false`.
+- **Tags**: E001-v1, H1, semantic/state-invariant-validation, FP/FN-calibration,
+  finite-synthetic-only
+
+## C02: H2 — heterogeneous specification stress improves without guardrail failure
+
+- **Statement**: On the locked E002-v1 confirmatory split, M1 will improve
+  balanced accuracy and reduce false-positive rate relative to B0 without
+  worsening the false-negative rate, while the predeclared specification
+  stress diagnostics pass the locked H2 rule.
+- **Status**: untested
+- **Provenance**: ai-suggested
+- **Falsification criteria**: Any failed required anchor interval/point,
+  undefined required denominator, failed stress diagnostic, or mixed/not
+  supported result under the locked E002 protocol falsifies H2 for this finite
+  design.
+- **Proof**: pending; [locked E002-v1 protocol](../../experiments/E002-heterogeneous-specification-stress/protocol.md)
+  is design evidence only. The sole E002 attempt is an invalid diagnostic
+  record and supplies no scientific proof.
+- **Dependencies**: [C01]
+- **Tags**: E002-v1, H2, heterogeneous-clusters, specification-stress,
+  untested

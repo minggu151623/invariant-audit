@@ -6,3 +6,12 @@ observations:
     context: "Session setup for an accessible, local-only AI research direction."
     potential_type: unknown
     promoted: false
+    stale: true
+    maturity_note: "Three subsequent recorded sessions have elapsed; retained for provenance and not promoted."
+  - id: O02
+    timestamp: "2026-08-25T19:37:01+0700"
+    provenance: ai-suggested
+    content: "A corrected E002 run is a separate open gate: it requires a new run ID and separate explicit authorization after M06; the current invalid attempt cannot be reused as scientific evidence."
+    context: "M06 validator remediation and independent-review epilogue after the consumed M04 one-run authorization."
+    potential_type: decision
+    promoted: false
