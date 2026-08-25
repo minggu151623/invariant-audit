@@ -424,3 +424,75 @@ its output is absent. Metrics, data, evidence, H2 outcome, and public-claim
 eligibility remain absent/false. The exact intended CLI is recorded as not
 authorized and not executed. M07 therefore authorizes no run, publication,
 push, or public claim.
+
+## M08 — E002 corrected run 002 valid result
+
+M08 records one separately authorized, locked local E002-v1 confirmatory run.
+It is an observed finite synthetic result, not a claim about production data,
+external validity, novelty, safety, generalization, or public eligibility.
+
+### Authority and execution boundary
+
+The current bounded user brief authorized exactly one local corrected run with
+ID `e002-20260825-002`, result recording, and no retry, push, publication, or
+other external action. The user did not select the technical design. The
+protocol, implementation, validator, gates, and artifact encodings remain
+worker/reviewer design and verification work under the locked E002 protocol.
+
+The run began at HEAD
+`86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0` with a clean worktree. The locked
+protocol commit `9e39c5defc89f2c2a896b53dda529f326e9dfcf8` was an ancestor and
+the E002 protocol blob was
+`f7d27a069ee3fd1600f89d9271e107c197033238`. Candidate final, staging,
+temporary, and lock paths were absent. The cwd and output-root were the repo
+root, Python was `3.13.5`, and approximately `18.8 GiB` was free. These
+runtime facts satisfy the protocol's standard-library-only local CPU/no
+network/API/GPU constraint; the protocol does not pin a Python minor version.
+
+The exact command was executed exactly once, at
+`2026-08-25T22:40:19+07:00`, with exit code `0`:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-002 --output-root .
+```
+
+Runner stdout reported `status: valid`, result SHA-256
+`d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa`, and
+multi-fault relation SHA-256
+`a02432ead45db3633e7cbe2f07e5314fa19dd800d9c2441da34bbfbe08510dd5` with
+`equals=272`, `contains=160`, and `differs=0`. The report's gates all pass,
+the two-build byte comparison passes, and deviations are literal `none`.
+
+### Artifact and result evidence
+
+| Artifact | SHA-256 | Size | Count |
+| --- | --- | ---: | ---: |
+| `data/E002-v1-predictions.jsonl` | `bcb34aad4338fdfbffe07be1843769b360bf4e8c422d855a9ce605350fad13b7` | 6,556,304 B | 7,296 rows |
+| `data/E002-v1-metrics.csv` | `f000348d385550745480066fce2d691686728ebe2bfcf7bd96e7231e4b1e5ca3` | 116,260 B | 243 rows + header |
+| `data/E002-v1-bootstrap.csv` | `8c5919f709c9ad8ca673308053ecefbe94ca23b0c190b923f14957cbfeac7d5d` | 30,814,607 B | 530,053 rows + header |
+| `experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md` | `d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa` | 6,486 B | 100 lines |
+
+On the primary confirmatory anchor M1 minus B0, the observed serialized
+deltas are:
+
+| Delta BA | Delta FPR | Delta FNR | Delta Brier | Delta ECE |
+| ---: | ---: | ---: | ---: | ---: |
+| `0.401960784` | `-0.803921569` | `0.000000000` | `-0.091689527` | `0.005222762` |
+
+The co-primary stress intervals passed, H2 was `supported`, and the FNR
+guardrail passed at delta `0.000000000`. The run is confirmatory under the
+locked finite synthetic design; no exploratory run was performed and no
+additional analysis or retry occurred.
+
+### Interpretation and limits
+
+This result supports the locked E002 H2 rule only for its finite synthetic
+population, hand-specified oracle, bounded mutation inventory, and defined
+cluster bootstrap. It does not establish production performance, external
+validity, novelty, safety, generalization, or a public claim. The prior M05
+run `e002-20260825-001` remains an invalid diagnostic-only execution with its
+preserved report SHA-256
+`f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`; it was
+not overwritten or converted into evidence by M08. The one-run authorization
+is consumed, and any future action requires separate explicit authority and a
+new bounded gate. `public_claim_eligibility` remains `false`.

@@ -11,7 +11,9 @@ Markdown finalized last.
 The implementation chain is `42cb62374c2b94ad6c567232acdac6d7365a9d8f`
 (initial implementation), `6df4f3bc02f5f12feb243df21ec9eeaafd53d8fc`
 (result-validator hardening), and
-`0977641f129d172dd4d11136197a82cb17654aeb` (independent-review remediation).
+`0977641f129d172dd4d11136197a82cb17654aeb` (independent-review remediation),
+followed by `1fe42a7ebc6a9ce69d8a16654e068c0a9a891d08` (development-test
+boundary remediation).
 The implementation review is recorded in
 `milestones/M04-E002-implementation-review.md`.
 
@@ -47,8 +49,24 @@ M04 gate. It failed closed with exit code 2 because of
 `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`; no
 data, metrics, or evidence outputs were produced. See the [M05 invalid-run
 record](../../../milestones/M05-E002-run-001-invalid.md). No corrected run
-has been executed or authorized, and this invalid attempt establishes no
-scientific result, metric, H2 outcome, or public claim.
+was authorized by M05/M06; this invalid attempt establishes no scientific
+result, metric, H2 outcome, or public claim.
+
+The M07 technical-readiness gate then recorded the non-authorizing runtime
+preflight for candidate `e002-20260825-002`. Under the current bounded user
+authority, that locked command was executed exactly once and exited `0` with
+`status: valid`:
+
+```text
+PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-002 --output-root .
+```
+
+The valid result is recorded in [M08](../../../milestones/M08-E002-run-002-valid.md)
+and [the result report](../results/run-e002-20260825-002.md). It produced the
+four expected artifacts, reports H2 `supported` within the locked finite
+synthetic E002-v1 design, and preserves `public_claim_eligibility=false`.
+No further corrected run, publication, push, or public claim is authorized by
+this record.
 
 The runner validates every staged byte before publication, reports the
 finalized result SHA-256 externally, and emits multi-fault relation evidence

@@ -4,9 +4,13 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M08 — E002 corrected run 002 valid result](M08-E002-run-002-valid.md): records exactly one valid locked local confirmatory run for
+  `e002-20260825-002`, its four runner-produced artifacts, and H2 `supported`
+  within the finite synthetic protocol. The authorization is consumed and
+  `public_claim_eligibility` remains `false`.
 - [M07 — E002 corrected-run technical-readiness gate](M07-E002-corrected-run-readiness.md): records technical readiness for candidate
-  `e002-20260825-002` subject to the locked runtime preflight; the corrected
-  run remains unauthorized, unexecuted, and without reserved outputs.
+  `e002-20260825-002` subject to the locked runtime preflight. M07 is the
+  historical pre-run gate; M08 records the subsequent valid run.
 - [M06 — E002 validator remediation and independent-review gate](M06-E002-validator-remediation.md): records complete validator remediation and
   independent acceptance; M07 records the subsequent technical-readiness
   audit, while the M05 execution remains invalid and

@@ -44,9 +44,27 @@ CSV/JSONL is row-data source.
   separate explicit authorization.
 - [M07 E002 corrected-run technical-readiness gate](../milestones/M07-E002-corrected-run-readiness.md)
   records the final development-test-boundary remediation and technical
-  readiness for candidate `e002-20260825-002`, subject to runtime preflight.
-  The candidate was not executed or reserved, and no corrected run is
-  authorized; no metrics, data, evidence, H2 outcome, or public claim exists.
+  readiness for candidate `e002-20260825-002`, subject to runtime preflight at
+  that historical gate. M08 records the subsequent separately authorized
+  execution.
+- [M08 E002 corrected run 002 valid result](../milestones/M08-E002-run-002-valid.md)
+  records exactly one valid locked local confirmatory run,
+  `e002-20260825-002`, with the four runner-produced artifacts. The result
+  reports H2 `supported` within the finite synthetic E002-v1 design; its
+  primary anchor is delta M1-B0 BA `0.401960784`, FPR `-0.803921569`, FNR
+  `0.000000000`, Brier `-0.091689527`, and ECE `0.005222762`. The FNR
+  guardrail passed and multi-fault relations had `equals=272`, `contains=160`,
+  and `differs=0`. This is confirmatory evidence for the locked synthetic
+  design only, not production, external-validity, novelty, safety,
+  generalization, or a public claim; `public_claim_eligibility` remains
+  `false`.
+- The M08 result report is
+  [run-e002-20260825-002.md](E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md).
+  Its linked data artifacts are
+  [predictions](../data/E002-v1-predictions.jsonl),
+  [metrics](../data/E002-v1-metrics.csv), and
+  [bootstrap](../data/E002-v1-bootstrap.csv). The prior M05 invalid report
+  remains preserved and is not replaced by this corrected run.
 - This index is not experimental evidence and establishes no E002 metric,
   H2 outcome, external validity, novelty, safety, generalization, or public
-  claim.
+  claim beyond the explicitly bounded M08 result record.

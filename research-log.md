@@ -439,3 +439,62 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   exact intended CLI is recorded in M07 as not authorized and not executed.
   A corrected run requires separate explicit authority; no run or claim is
   established here.
+
+## 2026-08-25 — M08/E002 corrected run 002 valid result
+
+- **Authority and provenance boundary:** The current bounded user brief
+  explicitly authorized exactly one corrected local E002 run with run ID
+  `e002-20260825-002`, its locked result recording, and no retry or external
+  action. It did not select the E002 technical design. The protocol, runner,
+  validator, and test design remain locked worker/reviewer implementation
+  work; this record separates that provenance from the observed run.
+- **Runtime preflight (worker evidence):** The run began from HEAD
+  `86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0` with a clean worktree. The E002
+  protocol commit `9e39c5defc89f2c2a896b53dda529f326e9dfcf8` was an ancestor,
+  and `experiments/E002-heterogeneous-specification-stress/protocol.md` had
+  locked blob `f7d27a069ee3fd1600f89d9271e107c197033238`. The candidate final,
+  staging, temporary, and lock paths were absent; cwd/output-root matched the
+  repository; Python was `3.13.5`; and `19,730,772` 1-KiB blocks were free
+  (approximately `18.8 GiB`). The protocol requires standard-library-only
+  local CPU execution with no network/API/GPU and does not pin a Python minor
+  version.
+- **Execution (runner evidence):** The exact command was run once at
+  `2026-08-25T22:40:19+07:00` and exited `0`:
+
+  ```text
+  PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-002 --output-root .
+  ```
+
+  Runner stdout reported `status: valid`, the expected run ID, result SHA-256
+  `d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa`, and
+  multi-fault relation SHA-256
+  `a02432ead45db3633e7cbe2f07e5314fa19dd800d9c2441da34bbfbe08510dd5` with
+  `equals=272`, `contains=160`, and `differs=0`. The emitted relation JSON
+  contained no `differs` rows.
+- **Artifact evidence:**
+
+  | Artifact | SHA-256 | Size | Count |
+  | --- | --- | ---: | ---: |
+  | `data/E002-v1-predictions.jsonl` | `bcb34aad4338fdfbffe07be1843769b360bf4e8c422d855a9ce605350fad13b7` | 6,556,304 B | 7,296 rows |
+  | `data/E002-v1-metrics.csv` | `f000348d385550745480066fce2d691686728ebe2bfcf7bd96e7231e4b1e5ca3` | 116,260 B | 243 rows + header |
+  | `data/E002-v1-bootstrap.csv` | `8c5919f709c9ad8ca673308053ecefbe94ca23b0c190b923f14957cbfeac7d5d` | 30,814,607 B | 530,053 rows + header |
+  | `experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md` | `d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa` | 6,486 B | 100 lines |
+
+  The result report records all protocol gates as pass, two-build byte
+  comparison as pass, literal `Deviations: none`, and
+  `confirmatory_execution: completed exactly once`.
+- **Observed locked result:** On the primary confirmatory anchor M1 minus B0,
+  the report records delta BA `0.401960784`, FPR `-0.803921569`, FNR
+  `0.000000000`, Brier `-0.091689527`, and ECE `0.005222762`. The co-primary
+  stress intervals passed, H2 is `supported`, and the FNR guardrail passed at
+  delta `0.000000000`. This is a confirmatory result within the finite,
+  synthetic E002-v1 construction only. It is not production, external-
+  validity, novelty, safety, generalization, or public-claim evidence;
+  `public_claim_eligibility` remains `false`.
+- **Preservation and state transition:** The M05 invalid report for
+  `e002-20260825-001` remains unchanged with SHA-256
+  `f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34`.
+  M08 is now current; the one-run corrected authorization is consumed,
+  `run_001` remains invalid only, `run_002` is valid, and data, metrics,
+  evidence, and the bounded H2 outcome are present. No further run, retry,
+  publication, push, or public claim is authorized by this record.

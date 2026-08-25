@@ -2,4 +2,4 @@ schema_version: 1
 canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
-milestone_path: milestones/M07-E002-corrected-run-readiness.md
+milestone_path: milestones/M08-E002-run-002-valid.md

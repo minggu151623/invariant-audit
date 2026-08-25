@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M07
+current_milestone: M08
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -623,3 +623,110 @@ M07:
     intended_command_authorized: false
     intended_command_executed: false
   next_gate: "A separately authorized clean-tree runtime preflight and one corrected local run using e002-20260825-002; M07 does not authorize or execute it."
+M08:
+  path: milestones/M08-E002-run-002-valid.md
+  status: valid_confirmatory_run_recorded
+  supersedes: M07
+  scope: locked_local_confirmatory_run_and_result_record
+  provenance:
+    preflight_start_head: 86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0
+    user_authority: current_bounded_user_brief_for_exactly_one_corrected_run
+    authorized_run_id: e002-20260825-002
+    technical_design_provenance: locked_protocol_and_worker_reviewer_implementation_not_user_selected
+    run_count: 1
+  evidence:
+    - type: protocol_lock
+      path: experiments/E002-heterogeneous-specification-stress/protocol.md
+      protocol_id: E002-v1
+      protocol_commit: 9e39c5defc89f2c2a896b53dda529f326e9dfcf8
+      protocol_blob: f7d27a069ee3fd1600f89d9271e107c197033238
+      ancestor_verified: true
+      working_blob_unchanged: true
+    - type: runtime_preflight
+      head: 86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0
+      clean_tree: true
+      run_id_grammar: valid
+      candidate_paths_absent_before_run: true
+      staging_temp_lock_paths_absent: true
+      repository_root_and_output_root: valid
+      python_version: "3.13.5"
+      protocol_runtime_constraint: standard_library_only_local_cpu_no_network_api_gpu
+      free_space_bytes_1k_blocks: 19730772
+      free_space_approximation: approximately_18_8_GiB
+    - type: runner_execution
+      command: "PYTHONDONTWRITEBYTECODE=1 python experiments/E002-heterogeneous-specification-stress/code/run_e002.py --run-id e002-20260825-002 --output-root ."
+      started_at: "2026-08-25T22:40:19+07:00"
+      exit_code: 0
+      status: valid
+      run_id: e002-20260825-002
+      result_sha256: d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa
+      multi_fault_relation_sha256: a02432ead45db3633e7cbe2f07e5314fa19dd800d9c2441da34bbfbe08510dd5
+      multi_fault_relation_counts:
+        equals: 272
+        contains: 160
+        differs: 0
+    - type: result_report
+      path: experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md
+      sha256: d1f11d17be3b91d246126dc36b88880a76f039f31fa7eeef63d5aff4cfe713fa
+      size_bytes: 6486
+      lines: 100
+      validity: valid
+      gate_status: all_pass
+      deviations: none
+      two_build_byte_comparison: pass
+      h2_outcome: supported
+      fnr_guardrail: pass
+    - type: artifact
+      path: data/E002-v1-predictions.jsonl
+      sha256: bcb34aad4338fdfbffe07be1843769b360bf4e8c422d855a9ce605350fad13b7
+      size_bytes: 6556304
+      rows: 7296
+    - type: artifact
+      path: data/E002-v1-metrics.csv
+      sha256: f000348d385550745480066fce2d691686728ebe2bfcf7bd96e7231e4b1e5ca3
+      size_bytes: 116260
+      rows: 243
+      header_lines: 1
+    - type: artifact
+      path: data/E002-v1-bootstrap.csv
+      sha256: 8c5919f709c9ad8ca673308053ecefbe94ca23b0c190b923f14957cbfeac7d5d
+      size_bytes: 30814607
+      rows: 530053
+      header_lines: 1
+    - type: preserved_invalid_run
+      path: experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-001.md
+      sha256: f441d55795b81d280e35b09980dcb6f79e58e7cfacbe9886ed094a207580aa34
+      status: invalid_only
+      overwritten: false
+  result:
+    primary_anchor: M1_minus_B0
+    delta_balanced_accuracy: "0.401960784"
+    delta_fpr: "-0.803921569"
+    delta_fnr: "0.000000000"
+    delta_brier: "-0.091689527"
+    delta_ece: "0.005222762"
+    h2_outcome: supported
+    fnr_guardrail: pass
+    confirmatory_execution: completed_exactly_once
+    exploratory_execution: none
+    scope: finite_locked_synthetic_E002_v1_only
+  verification:
+    scope: valid_locked_local_confirmatory_result_without_public_claim
+    technical_ready: true
+    implementation_reviewed: true
+    corrected_run_authorized: false
+    authorization_consumed: true
+    prior_m04_authorization: consumed_by_run_001_invalid
+    run_001: invalid_only
+    run_002: valid
+    run: valid
+    results: present
+    data: present
+    metrics: present
+    evidence: present
+    h2_outcome: supported_within_finite_synthetic_protocol
+    public_claim_eligibility: false
+    external_validity: not_established
+    protocol_unchanged: true
+    no_retry: true
+  next_gate: "No additional E002 run, publication, push, or public claim is authorized by M08; any future action requires separate explicit authority and a new bounded gate."
