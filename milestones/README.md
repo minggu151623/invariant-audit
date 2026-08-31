@@ -5,9 +5,12 @@ Milestone records and verification evidence; Markdown records are the source of 
 ## Current milestones
 
 - [M10 — E003 external-transfer protocol design](M10-E003-protocol-design.md):
-  current protocol-only design after the M09 **BROADEN** decision. The source
-  snapshot is staged but unacquired; no E003 implementation, run, result, data,
-  code, or public claim exists.
+  protocol design after the M09 **BROADEN** decision. M11 records the
+  subsequent exact source acquisition; no E003 implementation, run, result,
+  data, code, or public claim exists.
+- [M11 — E003 source acquisition freeze](M11-E003-source-acquisition.md):
+  records the three exact GH Archive fixture hashes, sizes, JSONL line counts,
+  HTTP metadata, external cache, and preserved confirmatory isolation.
 - [M09 — outer-loop reflection after E002](M09-outer-loop-after-E002.md):
   synthesizes the verified finite-synthetic E001/E002 records and identifies
   external transfer as the largest unresolved gap.

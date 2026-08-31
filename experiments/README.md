@@ -69,9 +69,9 @@ CSV/JSONL is row-data source.
   H2 outcome, external validity, novelty, safety, generalization, or public
   claim beyond the explicitly bounded M08 result record.
 - [E003 external-transfer validation protocol](E003-external-transfer-validation/protocol.md)
-  is the M10 protocol-only design following the M09 **BROADEN** decision. It
-  fixes a staged GH Archive fixture plan, external source/hash boundary,
-  repository-isolated cases, B0/M1 methods, an independent oracle, metrics,
-  invalid-run rules, and a one-valid-run stopping gate. The source snapshot is
-  not acquired; E003 has no implementation, run, result, prediction, metric,
-  bootstrap, or code artifact.
+  is the M10 protocol design following the M09 **BROADEN** decision. M11
+  records completion of the exact read-only acquisition: the three raw
+  fixtures and canonical source manifest are frozen outside Git with hashes,
+  byte counts, decompressed JSONL line counts, and HTTP metadata. E003 still
+  has no implementation, run, result, prediction, metric, bootstrap, or code
+  artifact; confirmatory content was not selected or scored.

@@ -583,3 +583,32 @@ while any preflight or integrity failure is invalid with no metrics or
 evidence. The next action requires separate authority for source acquisition,
 implementation/review, and exactly one run; this milestone authorizes none of
 those actions.
+
+## M11 — E003 source acquisition freeze
+
+M11 records a completed, read-only acquisition of the three exact E003-v1 GH
+Archive fixture URLs. This is source provenance and format-validation evidence
+only. It is not an E003 result, implementation, metric, or public claim.
+
+The canonical UTF-8/LF manifest is outside Git at
+`/private/tmp/invariant-audit-e003-v1/source-manifest.json`, with SHA-256
+`683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`. The raw
+gzip files remain outside Git in
+`/private/tmp/invariant-audit-e003-v1/source/`; the external HTTP metadata
+sidecar is `/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json`,
+SHA-256 `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
+
+| Split | SHA-256 | Bytes | JSONL lines | HTTP |
+| --- | --- | ---: | ---: | ---: |
+| development | `ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50` | 29278679 | 67145 | 200 |
+| calibration | `624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd` | 46372480 | 90940 | 200 |
+| confirmatory | `a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788` | 61805367 | 117780 | 200 |
+
+The three streams passed gzip decompression, UTF-8 decoding, and one-JSON-
+object-per-nonempty-line validation. Confirmatory isolation is preserved: the
+confirmatory file was not semantically inspected for selection, was not
+projected into cases, and was not used for calibration, scoring, metrics,
+bootstrap, or result generation. No E003 output path exists. E003 remains
+`implementation: absent`, `run: absent`, `results: absent`, and
+`public_claim_eligibility: false`; the next gate requires separate authority
+and independent review for implementation and exactly one confirmatory run.

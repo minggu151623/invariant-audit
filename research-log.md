@@ -571,3 +571,44 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
 - **Next gate:** Separate authority is required for source acquisition,
   implementation/review, or the single confirmatory run; the protocol-only lock
   authorizes none of those actions.
+
+## 2026-09-01 — M11 E003 source acquisition freeze
+
+- **Authority (Provenance: user):** The bounded follow-up instruction was
+  `Follow-up bounded task: record acquisition only, then stop.` It authorized
+  verification of the already acquired exact fixture set, local acquisition
+  documentation, and one local commit. It did not authorize implementation,
+  event selection, scoring, confirmatory execution, publication, or push.
+- **Exact source boundary:** The three locked GETs are the development
+  `2019-01-15-12.json.gz`, calibration `2020-01-15-12.json.gz`, and
+  confirmatory `2021-01-15-12.json.gz` fixtures at their protocol URLs. The
+  canonical manifest remains outside Git at
+  `/private/tmp/invariant-audit-e003-v1/source-manifest.json` with SHA-256
+  `683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`.
+  HTTP metadata is preserved in
+  `/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json` with
+  SHA-256 `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
+- **Frozen bytes and validation:** Development is SHA-256
+  `ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50`,
+  `29278679` bytes, `67145` JSONL objects, HTTP `200`, ETag
+  `"0af4633b81d16ebcd1e681e34128abf9"`, Last-Modified
+  `Tue, 15 Jan 2019 13:05:10 GMT`. Calibration is SHA-256
+  `624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd`,
+  `46372480` bytes, `90940` JSONL objects, HTTP `200`, ETag
+  `"99bfbdadc0c9fe40e0b56cbbd30580da"`, Last-Modified
+  `Wed, 15 Jan 2020 13:05:14 GMT`. Confirmatory is SHA-256
+  `a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788`,
+  `61805367` bytes, `117780` JSONL objects, HTTP `200`, ETag
+  `"8105aef4fa8d8a4c5cf52480f2e58f35"`, Last-Modified
+  `Fri, 15 Jan 2021 13:05:17 GMT`.
+- **Validation boundary:** All three streams passed standard-library gzip,
+  UTF-8, and one-object-per-nonempty-line checks. The confirmatory shard was
+  touched only for the protocol-required hash, byte, line-count, and format
+  validation; no event selection, projection, calibration, scoring, metric,
+  bootstrap, or result operation was performed. The raw files remain outside
+  Git in `/private/tmp/invariant-audit-e003-v1/source/`.
+- **State transition:** M11 is `acquisition_complete_implementation_absent`.
+  Implementation, run, predictions, metrics, bootstrap, result, and public
+  claim remain absent; `run_authorized: false` and
+  `public_claim_eligibility: false` remain explicit. Separate authority and
+  independent review are required for the next gate.

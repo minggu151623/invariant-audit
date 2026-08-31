@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M10
+current_milestone: M11
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -811,4 +811,89 @@ M10:
     lock_status: current_protocol_only_lock
     protocol_commit: current_lock_recorded_in_git_history
     protocol_ancestry: M09_precedes_current_protocol_lock
-  next_gate: "Separate authority is required for source acquisition, independent implementation review, and exactly one confirmatory run; this M10 lock authorizes none of those actions."
+  next_gate: "M11 records the separately authorized source acquisition; independent implementation review and exactly one confirmatory run still require separate authority."
+M11:
+  path: milestones/M11-E003-source-acquisition.md
+  status: acquisition_complete_implementation_absent
+  supersedes: M10
+  scope: exact_locked_e003_source_acquisition_and_freeze_only
+  provenance:
+    authority:
+      source: user
+      date: 2026-09-01
+      exact_text: "Follow-up bounded task: record acquisition only, then stop."
+      scope:
+        - verify the already acquired exact three public GH Archive fixtures
+        - record external manifest and HTTP metadata
+        - local documentation and one local commit
+      exclusions:
+        - implementation
+        - tests beyond acquisition validation
+        - event selection
+        - scoring
+        - confirmatory execution
+        - publication or push
+    technical_design: "The locked E003-v1 protocol remains unchanged; no technical design was selected by this acquisition record."
+  acquisition:
+    status: frozen
+    protocol_id: E003-v1
+    protocol_commit: 163e44dcabc698f101dee70dd7f3aa1bb7c8d5fb
+    manifest_path: /private/tmp/invariant-audit-e003-v1/source-manifest.json
+    manifest_sha256: 683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633
+    metadata_path: /private/tmp/invariant-audit-e003-v1/acquisition-metadata.json
+    metadata_sha256: 6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f
+    source_cache: /private/tmp/invariant-audit-e003-v1/source
+    raw_sources_in_git: false
+    manifest_in_git: false
+    http_method: GET
+    network_after_manifest_freeze: false
+    source_status_semantics: "frozen external public fixture; no source bytes or manifest copy in Git"
+    jsonl_validation: gzip_decompression_utf8_object_per_nonempty_line_pass
+    confirmatory_content_boundary: "hash, byte, line-count, and format validation only; no selection or scoring"
+    files:
+      - split: development
+        filename: 2019-01-15-12.json.gz
+        url: https://data.gharchive.org/2019-01-15-12.json.gz
+        http_status: 200
+        response_date: "Mon, 31 Aug 2026 19:05:54 GMT"
+        etag: '"0af4633b81d16ebcd1e681e34128abf9"'
+        last_modified: "Tue, 15 Jan 2019 13:05:10 GMT"
+        acquired_at_utc: "2026-08-31T19:05:59Z"
+        sha256: ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50
+        bytes: 29278679
+        jsonl_lines: 67145
+      - split: calibration
+        filename: 2020-01-15-12.json.gz
+        url: https://data.gharchive.org/2020-01-15-12.json.gz
+        http_status: 200
+        response_date: "Mon, 31 Aug 2026 19:05:54 GMT"
+        etag: '"99bfbdadc0c9fe40e0b56cbbd30580da"'
+        last_modified: "Wed, 15 Jan 2020 13:05:14 GMT"
+        acquired_at_utc: "2026-08-31T19:06:09Z"
+        sha256: 624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd
+        bytes: 46372480
+        jsonl_lines: 90940
+      - split: confirmatory
+        filename: 2021-01-15-12.json.gz
+        url: https://data.gharchive.org/2021-01-15-12.json.gz
+        http_status: 200
+        response_date: "Mon, 31 Aug 2026 19:05:54 GMT"
+        etag: '"8105aef4fa8d8a4c5cf52480f2e58f35"'
+        last_modified: "Fri, 15 Jan 2021 13:05:17 GMT"
+        acquired_at_utc: "2026-08-31T19:06:07Z"
+        sha256: a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788
+        bytes: 61805367
+        jsonl_lines: 117780
+  verification:
+    acquisition_validation: pass
+    protocol_unchanged: true
+    implementation: absent
+    run_authorized: false
+    run: absent
+    results: absent
+    data: absent
+    predictions: absent
+    metrics: absent
+    bootstrap: absent
+    public_claim_eligibility: false
+  next_gate: "Separate authority and independent review are required before E003 implementation or exactly one confirmatory run; no run is authorized by M11."
