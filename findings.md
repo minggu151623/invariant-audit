@@ -496,3 +496,61 @@ preserved report SHA-256
 not overwritten or converted into evidence by M08. The one-run authorization
 is consumed, and any future action requires separate explicit authority and a
 new bounded gate. `public_claim_eligibility` remains `false`.
+
+## M09 — outer-loop reflection after E002
+
+M09 is a verified documentary synthesis of the valid E001 and E002 result
+records. It introduces no new run or metric. The observed evidence remains
+bounded to the finite synthetic designs and `public_claim_eligibility` remains
+`false`.
+
+### What is supported
+
+E001's valid confirmatory run supported H1 within its finite synthetic design:
+M1 minus B0 had ΔBA `+0.5`, ΔFPR `-1`, ΔFNR `0`, ΔBrier `-0.2499408284`, and
+ΔECE `+0.007692307692`, on 512 confirmatory cases and 64 clusters. E002's
+corrected valid run supported H2 within its finite heterogeneous synthetic
+design: ΔBA `+0.401960784`, ΔFPR `-0.803921569`, ΔFNR `0.000000000`, ΔBrier
+`-0.091689527`, and ΔECE `+0.005222762`, on 456 confirmatory cases and 48
+confirmatory clusters. E002 also passed the co-primary omit-conservation,
+overconstraint, and stale-transition stress intervals.
+
+### Mechanism/pattern
+
+Across both experiments, B0's schema-only acceptance remained vulnerable to
+schema-valid semantic/state faults, while M1's cross-field semantic/state
+families rejected those faults in the locked synthetic cases. Removing
+semantic or state checks reduced E001 BA to `0.75` and FPR to `0.5`; the E002
+no-semantic and no-state ablations each had BA `0.823529412` and FPR
+`0.352941176`. This is a within-design mechanism inference, not evidence of
+real-world performance.
+
+### Lessons and remaining gaps
+
+E002's heterogeneous clusters and bounded specification/multi-fault stress
+addressed the principal E001 design weaknesses, but the oracle and cases are
+still synthetic and hand-specified. E001's intervals were degenerate; E002's
+nondegenerate intervals still describe its finite designed resampling. The
+first E002 attempt also demonstrated that exact arithmetic and independent
+validation are part of the evidence boundary, not implementation polish.
+
+The largest unresolved gap is external/real-world transfer: externally
+authored structured records, source/schema drift, natural irregularity,
+natural invalid prevalence, sequence-level behavior, and an oracle boundary
+less coupled to generated recipes. More synthetic cases would not directly
+answer that gap.
+
+### Direction decision
+
+**BROADEN.** This is the reviewer/design decision for the next stage. DEEPEN
+would continue synthetic stress without addressing external validity; CONCLUDE
+would be premature because the critical transfer question is open; PIVOT is
+not supported because the two results show a coherent repeated pattern. The
+next bounded action is a protocol-only E003 external-transfer design with a
+frozen public fixture, explicit acquisition hash, split isolation, an
+independent oracle boundary, and no run authorization.
+
+The current stopping gate is therefore: lock E003-v1 protocol only; do not
+acquire the fixture, implement code, run E003, create E003 data/results, or
+make a public claim in this stage. See [M09](milestones/M09-outer-loop-after-E002.md)
+and the [M09 progress presentation](to_human/progress-M09.html).

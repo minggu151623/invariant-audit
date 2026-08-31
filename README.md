@@ -6,9 +6,28 @@ Scope: local-only.
 
 Infrastructure: no paid API; no external GPU.
 
-Status: preliminary.
+Status: M09 outer-loop reflection complete; E001 and E002 have verified
+finite-synthetic results, while external transfer remains untested.
 
-Bootstrap has no experiment or result. This repository is the public, international-facing foundation for evidence-driven research and remains preliminary until verification evidence exists.
+The repository contains verified local evidence for the finite synthetic E001
+and E002 designs. Those results are evidence for their locked constructions
+only; they do not establish production performance, external validity,
+generalization, novelty, safety, or public-claim eligibility.
+
+The current outer-loop decision is **BROADEN**: the largest unresolved gap is
+transfer to externally authored structured records.
+
+## Verified experiments
+
+- [E001 synthetic invariant calibration](experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md): valid
+  confirmatory result within the finite synthetic E001-v1 design.
+- [E002 heterogeneous specification stress](experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md): valid
+  confirmatory result within the finite synthetic E002-v1 design; the earlier
+  invalid run is preserved separately.
+- Row-level artifacts are indexed in [data/README.md](data/README.md).
+
+The latest human-readable synthesis is
+[to_human/progress-M09.html](to_human/progress-M09.html).
 
 ## Documentation
 

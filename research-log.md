@@ -498,3 +498,43 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   `run_001` remains invalid only, `run_002` is valid, and data, metrics,
   evidence, and the bounded H2 outcome are present. No further run, retry,
   publication, push, or public claim is authorized by this record.
+
+## 2026-08-31 — M09 outer-loop reflection after E002
+
+- **Scope/provenance:** This reflection synthesizes only the verified E001
+  record M02 and the verified E002 record M08. The numbers are observed
+  result/artifact evidence; mechanism interpretation, gap analysis, and the
+  direction choice are reviewer/design inference. No new run or data was
+  created.
+- **Quantitative comparison:** E001 used 512 confirmatory cases and 64
+  clusters; M1-B0 deltas were BA `+0.5`, FPR `-1`, FNR `0`, Brier
+  `-0.2499408284`, and ECE `+0.007692307692`, with H1 supported within the
+  finite synthetic design. E002 used 456 confirmatory cases and 48
+  confirmatory clusters; M1-B0 deltas were BA `+0.401960784`, FPR
+  `-0.803921569`, FNR `0.000000000`, Brier `-0.091689527`, and ECE
+  `+0.005222762`, with H2 supported within the finite synthetic design and
+  all three co-primary specification-stress intervals passing.
+- **Pattern/mechanism inference:** In both constructions, schema-only B0
+  accepted schema-valid semantic/state faults that M1's cross-field checks
+  rejected. E001 no-semantic/no-state each had BA `0.75`, FPR `0.5`; E002
+  no-semantic/no-state each had BA `0.823529412`, FPR `0.352941176`.
+- **Lessons:** E002's heterogeneous signatures and stress diagnostics reduced
+  synthetic design weaknesses but did not establish external validity. E001's
+  intervals were degenerate; E002's intervals are still finite-design
+  resampling. The first E002 run's rounded-cell arithmetic defect reinforces
+  exact arithmetic, independent validation, and preserved invalid-run records
+  as mandatory evidence gates.
+- **Remaining gap:** externally authored structured records, source/schema
+  drift, natural invalid prevalence, sequence-level behavior, and a less
+  recipe-coupled oracle boundary remain untested.
+- **Decision:** **BROADEN**, not DEEPEN, PIVOT, or CONCLUDE. The repeated
+  synthetic pattern does not require a question pivot, while further synthetic
+  stress would not directly answer the largest transfer gap and conclusion
+  would overreach.
+- **Next gate:** design and locally lock an E003-v1 protocol only. The next
+  protocol must specify a frozen public fixture, acquisition/hash plan,
+  inclusion/exclusion, source split isolation, independent oracle, metrics,
+  invalid-run rules, and a stopping gate. The fixture is not acquired, E003 is
+  not implemented or run, and no E003 data/result/public claim is authorized.
+- **Artifacts:** [M09 milestone](milestones/M09-outer-loop-after-E002.md) and
+  the self-contained [M09 progress presentation](to_human/progress-M09.html).

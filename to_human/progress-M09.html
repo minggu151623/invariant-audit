@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvariantAudit — M09 Outer-Loop Progress</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #161b22;
+      --line: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --blue: #58a6ff;
+      --teal: #4ecdc4;
+      --green: #3fb950;
+      --red: #f85149;
+      --amber: #d29922;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 28px;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    header {
+      padding: 38px 0 24px;
+      margin-bottom: 30px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; }
+    h2 { margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-size: 1.45rem; }
+    h3 { margin: 0 0 8px; color: var(--blue); font-size: 1.05rem; }
+    p { color: #c9d1d9; }
+    .subtitle { max-width: 760px; margin: 0 auto 16px; color: var(--muted); font-size: 1.12rem; font-style: italic; }
+    .meta { color: var(--muted); font-size: .84rem; }
+    .meta span { display: inline-block; margin: 4px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
+    section { margin-bottom: 34px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+    .card, .stat {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: var(--panel);
+    }
+    .stat { text-align: center; }
+    .stat .value { color: var(--blue); font-size: 2rem; font-weight: 700; line-height: 1.15; }
+    .stat .label { margin-top: 5px; color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+    .positive .value { color: var(--green); }
+    .warning .value { color: var(--amber); }
+    .callout { border-left: 4px solid var(--blue); background: #0c2d6b33; }
+    .decision { border-left-color: var(--green); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); background: var(--panel); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; }
+    td { color: #c9d1d9; font-size: .92rem; }
+    code { padding: 1px 4px; border-radius: 4px; background: #21262d; color: #d2a8ff; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; }
+    .chart { padding: 16px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); overflow-x: auto; }
+    .chart svg { display: block; width: 100%; min-width: 640px; height: auto; }
+    .small { color: var(--muted); font-size: .86rem; }
+    ul { margin-top: 8px; color: #c9d1d9; }
+    li { margin: 5px 0; }
+    footer { padding: 22px 0 8px; border-top: 1px solid var(--line); color: #6e7681; font-size: .8rem; text-align: center; }
+    @media (max-width: 680px) { body { padding: 18px; } th, td { padding: 8px 7px; font-size: .82rem; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>InvariantAudit</h1>
+    <p class="subtitle">Can semantic and state invariants be validated while calibrating false positives and false negatives?</p>
+    <p class="meta"><span>2026-08-31</span><span>2 verified experiments</span><span>Outer loop: BROADEN</span></p>
+  </header>
+
+  <section aria-label="summary">
+    <div class="grid">
+      <div class="stat positive"><div class="value">+0.500</div><div class="label">E001 ΔBA</div></div>
+      <div class="stat positive"><div class="value">+0.402</div><div class="label">E002 ΔBA</div></div>
+      <div class="stat"><div class="value">−1.000</div><div class="label">E001 ΔFPR</div></div>
+      <div class="stat warning"><div class="value">0</div><div class="label">ΔFNR in both</div></div>
+    </div>
+  </section>
+
+  <section id="background">
+    <h2>Why this research</h2>
+    <div class="card">
+      <p>Schema validity is only the surface of a structured record. A record can have the right fields and still violate identity, conservation, transition, or revision relations. InvariantAudit tests whether an invariant-aware validator (M1) improves on a schema-only baseline (B0), while making false-positive, false-negative, and confidence behavior explicit.</p>
+      <p class="small">This presentation reports only verified E001/E002 evidence. It does not claim production performance, external validity, generalization, novelty, safety, or public-claim eligibility.</p>
+    </div>
+  </section>
+
+  <section id="trajectory">
+    <h2>Confirmed synthetic trajectory</h2>
+    <div class="chart">
+      <svg viewBox="0 0 860 360" role="img" aria-labelledby="chart-title chart-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="chart-title">Primary balanced-accuracy delta across the two experiments</title>
+        <desc id="chart-desc">E001 has delta balanced accuracy 0.5 and E002 has 0.401960784. The dashed horizontal line is zero, the schema-only comparison reference.</desc>
+        <rect width="860" height="360" rx="8" fill="#111820"/>
+        <g stroke="#30363d" stroke-dasharray="4 5">
+          <line x1="92" y1="55" x2="790" y2="55"/><line x1="92" y1="111" x2="790" y2="111"/>
+          <line x1="92" y1="167" x2="790" y2="167"/><line x1="92" y1="223" x2="790" y2="223"/>
+          <line x1="92" y1="279" x2="790" y2="279"/>
+        </g>
+        <line x1="92" y1="279" x2="790" y2="279" stroke="#f85149" stroke-width="2" stroke-dasharray="8 6" opacity=".8"/>
+        <g fill="#8b949e" font-size="13" text-anchor="end">
+          <text x="82" y="60">0.50</text><text x="82" y="116">0.40</text><text x="82" y="172">0.30</text>
+          <text x="82" y="228">0.20</text><text x="82" y="284">0.00</text>
+        </g>
+        <line x1="92" y1="55" x2="92" y2="279" stroke="#8b949e"/><line x1="92" y1="279" x2="790" y2="279" stroke="#8b949e"/>
+        <polyline points="270,55 610,101" fill="none" stroke="#4ecdc4" stroke-width="4"/>
+        <circle cx="270" cy="55" r="7" fill="#3fb950"/><circle cx="610" cy="101" r="7" fill="#3fb950"/>
+        <g fill="#e6edf3" font-size="14" text-anchor="middle"><text x="270" y="315">E001 · synthetic</text><text x="610" y="315">E002 · heterogeneous synthetic</text></g>
+        <g fill="#4ecdc4" font-size="14" font-weight="700" text-anchor="middle"><text x="270" y="38">+0.500000</text><text x="610" y="84">+0.401961</text></g>
+        <text x="440" y="342" fill="#8b949e" font-size="12" text-anchor="middle">Experiment (not a claim of monotonic optimization)</text>
+        <text x="18" y="170" fill="#8b949e" font-size="12" text-anchor="middle" transform="rotate(-90 18 170)">Δ balanced accuracy (M1 − B0)</text>
+        <text x="782" y="270" fill="#f85149" font-size="11" text-anchor="end">zero reference</text>
+      </svg>
+    </div>
+    <p class="small">The line is a compact trajectory view of the two locked confirmatory deltas; the points are not pooled and no claim of optimization is made.</p>
+  </section>
+
+  <section id="findings">
+    <h2>What the evidence says</h2>
+    <div class="grid">
+      <div class="card"><h3>1 · The anchor repeated</h3><p>E001 and E002 both supported their predeclared M1-versus-B0 rule within finite synthetic designs. ΔFNR was exactly zero in both; E002's primary intervals were nondegenerate and the three co-primary specification-stress intervals passed.</p></div>
+      <div class="card"><h3>2 · Cross-field checks matter</h3><p>E001 no-semantic/no-state ablations each fell to BA <code>0.75</code> and FPR <code>0.5</code>. E002's corresponding ablations each had BA <code>0.823529412</code> and FPR <code>0.352941176</code>. This is a within-design mechanism inference.</p></div>
+      <div class="card"><h3>3 · The gap is now outside the generator</h3><p>E002 broadened synthetic heterogeneity and specification stress, but both oracles remain hand-specified and their cases are generated. The next important question is transfer to externally authored records.</p></div>
+    </div>
+  </section>
+
+  <section id="comparison">
+    <h2>Quantitative comparison</h2>
+    <table>
+      <thead><tr><th>Run</th><th>Confirmatory design</th><th>ΔBA</th><th>ΔFPR</th><th>ΔFNR</th><th>ΔBrier</th><th>ΔECE</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>E001-v1</td><td>512 cases · 64 clusters</td><td><code>+0.5</code></td><td><code>−1</code></td><td><code>0</code></td><td><code>−0.2499408284</code></td><td><code>+0.007692307692</code></td><td>H1 supported*</td></tr>
+        <tr><td>E002-v1</td><td>456 cases · 48 clusters</td><td><code>+0.401960784</code></td><td><code>−0.803921569</code></td><td><code>0.000000000</code></td><td><code>−0.091689527</code></td><td><code>+0.005222762</code></td><td>H2 supported*</td></tr>
+      </tbody>
+    </table>
+    <p class="small">* “Supported” is always bounded to the corresponding locked synthetic design. E001's bootstrap intervals were degenerate because its 64 cluster signatures were identical; E002's intervals describe its finite designed resampling.</p>
+  </section>
+
+  <section id="lessons">
+    <h2>Lessons and limitations</h2>
+    <div class="card">
+      <ul>
+        <li>E002's first execution was invalid because a validator compared rounded metric cells instead of exact fractions; the corrected run passed after remediation. Exact arithmetic and independent validation are evidence gates.</li>
+        <li>Synthetic heterogeneity, bounded misspecification, and bounded multi-fault stress improved the design, but they do not substitute for externally authored records.</li>
+        <li>Natural invalid prevalence, source/schema drift, sequence-level behavior, and a less recipe-coupled oracle boundary remain open.</li>
+        <li>The public-claim gate remains closed: <code>public_claim_eligibility=false</code>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="next">
+    <h2>Current gate: BROADEN</h2>
+    <div class="card callout decision">
+      <h3>Protocol-only E003 next</h3>
+      <p>Lock a falsifiable external-transfer protocol with a frozen public fixture, a recorded acquisition hash, strict inclusion/exclusion rules, disjoint source and repository splits, a separately maintained oracle, paired uncertainty, and invalid-run behavior. The input snapshot is not acquired; E003 is not implemented or run; no E003 data or result exists.</p>
+      <p>DEEPEN would add more synthetic cases without directly answering the largest gap. PIVOT is not warranted because the repeated pattern is coherent. CONCLUDE would overreach while external transfer remains untested.</p>
+    </div>
+  </section>
+
+  <footer>
+    M09 progress presentation · all observed numbers from verified E001/E002 result records and artifacts · no external dependencies
+  </footer>
+</body>
+</html>
