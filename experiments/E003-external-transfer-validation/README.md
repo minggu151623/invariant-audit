@@ -1,21 +1,39 @@
 # E003 external-transfer validation
 
-This directory contains the locked E003-v1 design and its completed, read-only
-source-acquisition record. The three exact, time-separated GH Archive hourly
-JSON fixtures are frozen outside Git; no raw source is placed in this
+This directory contains the locked E003-v1 design and its completed, audited
+read-only source-acquisition record. The three exact, time-separated GH Archive
+hourly JSON fixtures are frozen outside Git; no raw source is placed in this
 repository.
 
 - [E003-v1 protocol](protocol.md) specifies the source contract, deterministic
   case construction, calibration/confirmatory isolation, B0/M1 methods,
   independent oracle, metrics, bootstrap, artifact schemas, invalid-run
   behavior, and the one-run stopping gate.
-- The canonical acquired-source manifest and HTTP metadata are outside Git at
+- The canonical source manifest and HTTP metadata are outside Git at
   `/private/tmp/invariant-audit-e003-v1/source-manifest.json` and
   `/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json`.
-- E003 implementation, result report, prediction, metric, and bootstrap
+  The manifest SHA-256 is
+  `683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`; the
+  post-remediation metadata SHA-256 is
+  `5937fbf7d8583ed3954b7d107146af331d29f2a14e224d883e892c74ce52388a`; and
+  the canonical local-freeze-event SHA-256 is
+  `17ac5e9eb4386ef2d6f4f34996f240e600b16d7521fdcc6b91dfd10630c27ed7`.
+- The audited source inventory is exactly the three manifest-listed `.json.gz`
+  files under `/private/tmp/invariant-audit-e003-v1/source/`; the three
+  pre-remediation `.headers` sidecars were reversibly moved to
+  `/private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/`.
+- E003 implementation, run, result report, prediction, metric, and bootstrap
   artifacts remain absent. Confirmatory isolation is preserved: acquisition
   validation covered only gzip/UTF-8/JSONL format, byte hashes, byte counts,
   and line counts; no event selection or scoring was performed.
+
+The authoritative local-only freeze event occurred at
+`2026-08-31T19:59:22Z` UTC, after local manifest and payload verification, with
+starting Git HEAD `b68424e756fb86f05c866647b2471d36e24da716`; remediation used
+no network. The prior `network_frozen_at_utc` value
+`2026-08-31T19:06:24Z` predates the observed manifest mtime
+`2026-08-31T19:07:45Z`, so that original chronology is retained only as a
+historical caveat and is not treated as independently supported.
 
 The acquisition gate is complete. The next gate requires separate authority
 for independent implementation/review and one confirmatory execution. A valid

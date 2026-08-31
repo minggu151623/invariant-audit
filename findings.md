@@ -584,19 +584,26 @@ evidence. The next action requires separate authority for source acquisition,
 implementation/review, and exactly one run; this milestone authorizes none of
 those actions.
 
-## M11 — E003 source acquisition freeze
+## M11 — E003 source acquisition freeze and cache remediation
 
-M11 records a completed, read-only acquisition of the three exact E003-v1 GH
-Archive fixture URLs. This is source provenance and format-validation evidence
+M11 records the completed local audit and reversible remediation of the exact
+E003-v1 source cache. This is source provenance and format-validation evidence
 only. It is not an E003 result, implementation, metric, or public claim.
 
-The canonical UTF-8/LF manifest is outside Git at
+The starting Git HEAD was
+`b68424e756fb86f05c866647b2471d36e24da716`. The locked protocol commit
+`163e44dcabc698f101dee70dd7f3aa1bb7c8d5fb` remains an ancestor and its
+protocol blob SHA-256 remains
+`8ec0ebc9b3420a2d71eebfe579ae2d1c87aa74c419dd3f38d1f0dc06c5c1e2a6`.
+
+The canonical UTF-8/LF manifest remains outside Git at
 `/private/tmp/invariant-audit-e003-v1/source-manifest.json`, with SHA-256
-`683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`. The raw
-gzip files remain outside Git in
-`/private/tmp/invariant-audit-e003-v1/source/`; the external HTTP metadata
-sidecar is `/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json`,
-SHA-256 `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
+`683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`. The
+updated metadata sidecar is
+`/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json`, with SHA-256
+`5937fbf7d8583ed3954b7d107146af331d29f2a14e224d883e892c74ce52388a`. Its
+canonical local-only freeze-event object hashes to
+`17ac5e9eb4386ef2d6f4f34996f240e600b16d7521fdcc6b91dfd10630c27ed7`.
 
 | Split | SHA-256 | Bytes | JSONL lines | HTTP |
 | --- | --- | ---: | ---: | ---: |
@@ -604,11 +611,33 @@ SHA-256 `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
 | calibration | `624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd` | 46372480 | 90940 | 200 |
 | confirmatory | `a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788` | 61805367 | 117780 | 200 |
 
-The three streams passed gzip decompression, UTF-8 decoding, and one-JSON-
-object-per-nonempty-line validation. Confirmatory isolation is preserved: the
-confirmatory file was not semantically inspected for selection, was not
-projected into cases, and was not used for calibration, scoring, metrics,
-bootstrap, or result generation. No E003 output path exists. E003 remains
-`implementation: absent`, `run: absent`, `results: absent`, and
-`public_claim_eligibility: false`; the next gate requires separate authority
-and independent review for implementation and exactly one confirmatory run.
+All three payloads and the manifest were re-verified locally. Gzip
+decompression, strict UTF-8 decoding, and one-JSON-object-per-nonempty-line
+validation passed; the manifest and all payload bytes are unchanged. The
+audited cache inventory is exactly the three `.json.gz` files above, with no
+`.headers` sidecars. The former sidecars were moved, not deleted, to
+`/private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/`; their
+SHA-256 values are
+`0e9f751b9c213201b49900c94d58776488ddc6c1b7994b06d7530574b100dfd8`,
+`d33afd6da92f991d7fabef3d27a2e7df05ba21984aa04b27da01764c19636322`, and
+`761ffd6482919336cb57682c9c211843770ad187ed280bec7faf49d59d4d8815`,
+respectively. The pre-remediation metadata copy is also
+preserved there with SHA-256
+`6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
+
+The authoritative local-only freeze event occurred at
+`2026-08-31T19:59:22Z` UTC after manifest/payload verification, records the
+exact three-file inventory and starting HEAD, and states that remediation used
+no network. The prior metadata value `network_frozen_at_utc:
+2026-08-31T19:06:24Z` predates the observed manifest mtime
+`2026-08-31T19:07:45Z`; that original chronology is not independently
+supported, was not rewritten or backdated, and is retained only as historical
+context.
+
+Confirmatory isolation is preserved: the confirmatory file was touched only
+for hash, byte, line-count, and format validation, not for event selection,
+projection, calibration, scoring, metrics, bootstrap, or result generation.
+No E003 output path exists. E003 remains `implementation: absent`,
+`run: absent`, `results: absent`, and `public_claim_eligibility: false`; the
+next gate requires separate authority and independent review for
+implementation and exactly one confirmatory run.

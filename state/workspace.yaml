@@ -814,40 +814,100 @@ M10:
   next_gate: "M11 records the separately authorized source acquisition; independent implementation review and exactly one confirmatory run still require separate authority."
 M11:
   path: milestones/M11-E003-source-acquisition.md
-  status: acquisition_complete_implementation_absent
+  status: acquisition_complete_audited_implementation_absent
   supersedes: M10
-  scope: exact_locked_e003_source_acquisition_and_freeze_only
+  scope: exact_locked_e003_source_acquisition_cache_remediation_and_freeze_only
   provenance:
     authority:
       source: user
       date: 2026-09-01
-      exact_text: "Follow-up bounded task: record acquisition only, then stop."
+      exact_text: "You are the bounded M11 acquisition-remediation worker. Do not delegate."
       scope:
-        - verify the already acquired exact three public GH Archive fixtures
-        - record external manifest and HTTP metadata
-        - local documentation and one local commit
+        - verify the already acquired exact three public GH Archive fixtures locally
+        - move unauthorized sidecars reversibly and preserve their hashes
+        - reconcile chronology without rewriting history or backdating
+        - record the post-verification local-only freeze event
+        - update scoped M11/E003 documentation and state and create one local commit
       exclusions:
-        - implementation
-        - tests beyond acquisition validation
+        - network access
+        - delegation
+        - protocol edits
+        - implementation or tests beyond hash/format/line validation
         - event selection
         - scoring
         - confirmatory execution
         - publication or push
-    technical_design: "The locked E003-v1 protocol remains unchanged; no technical design was selected by this acquisition record."
+    starting_git_head: b68424e756fb86f05c866647b2471d36e24da716
+    technical_design: "The locked E003-v1 protocol remains unchanged; no technical design was selected by this acquisition-remediation record."
   acquisition:
-    status: frozen
+    status: frozen_after_local_remediation
     protocol_id: E003-v1
     protocol_commit: 163e44dcabc698f101dee70dd7f3aa1bb7c8d5fb
+    protocol_blob_sha256: 8ec0ebc9b3420a2d71eebfe579ae2d1c87aa74c419dd3f38d1f0dc06c5c1e2a6
     manifest_path: /private/tmp/invariant-audit-e003-v1/source-manifest.json
     manifest_sha256: 683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633
     metadata_path: /private/tmp/invariant-audit-e003-v1/acquisition-metadata.json
-    metadata_sha256: 6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f
+    metadata_version: 2
+    metadata_sha256: 5937fbf7d8583ed3954b7d107146af331d29f2a14e224d883e892c74ce52388a
+    local_freeze_event_sha256: 17ac5e9eb4386ef2d6f4f34996f240e600b16d7521fdcc6b91dfd10630c27ed7
+    local_freeze_event_at_utc: "2026-08-31T19:59:22Z"
+    manifest_verified_at_utc: "2026-08-31T19:59:22Z"
     source_cache: /private/tmp/invariant-audit-e003-v1/source
     raw_sources_in_git: false
     manifest_in_git: false
     http_method: GET
     network_after_manifest_freeze: false
+    network_used_during_remediation: false
     source_status_semantics: "frozen external public fixture; no source bytes or manifest copy in Git"
+    cache_inventory_exact: true
+    cache_inventory:
+      - filename: 2019-01-15-12.json.gz
+        bytes: 29278679
+        sha256: ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50
+      - filename: 2020-01-15-12.json.gz
+        bytes: 46372480
+        sha256: 624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd
+      - filename: 2021-01-15-12.json.gz
+        bytes: 61805367
+        sha256: a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788
+    pre_remediation:
+      source_inventory:
+        - filename: 2019-01-15-12.headers
+          bytes: 1095
+          sha256: 0e9f751b9c213201b49900c94d58776488ddc6c1b7994b06d7530574b100dfd8
+        - filename: 2019-01-15-12.json.gz
+          bytes: 29278679
+          sha256: ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50
+        - filename: 2020-01-15-12.headers
+          bytes: 1084
+          sha256: d33afd6da92f991d7fabef3d27a2e7df05ba21984aa04b27da01764c19636322
+        - filename: 2020-01-15-12.json.gz
+          bytes: 46372480
+          sha256: 624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd
+        - filename: 2021-01-15-12.headers
+          bytes: 1098
+          sha256: 761ffd6482919336cb57682c9c211843770ad187ed280bec7faf49d59d4d8815
+        - filename: 2021-01-15-12.json.gz
+          bytes: 61805367
+          sha256: a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788
+      original_metadata_sha256: 6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f
+      original_network_frozen_at_utc: "2026-08-31T19:06:24Z"
+      observed_manifest_mtime_utc: "2026-08-31T19:07:45Z"
+      chronology_assessment: "The original network_frozen_at_utc predates the observed manifest mtime; that original ordering is not independently supported."
+    remediation:
+      archive_root: /private/tmp/invariant-audit-e003-v1-remediation-archive-20260901
+      pre_remediation_metadata_archive: /private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/acquisition-metadata.pre-remediation.json
+      pre_remediation_metadata_sha256: 6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f
+      moved_headers:
+        - archive_path: /private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/headers/2019-01-15-12.headers
+          bytes: 1095
+          sha256: 0e9f751b9c213201b49900c94d58776488ddc6c1b7994b06d7530574b100dfd8
+        - archive_path: /private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/headers/2020-01-15-12.headers
+          bytes: 1084
+          sha256: d33afd6da92f991d7fabef3d27a2e7df05ba21984aa04b27da01764c19636322
+        - archive_path: /private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/headers/2021-01-15-12.headers
+          bytes: 1098
+          sha256: 761ffd6482919336cb57682c9c211843770ad187ed280bec7faf49d59d4d8815
     jsonl_validation: gzip_decompression_utf8_object_per_nonempty_line_pass
     confirmatory_content_boundary: "hash, byte, line-count, and format validation only; no selection or scoring"
     files:
@@ -886,6 +946,9 @@ M11:
         jsonl_lines: 117780
   verification:
     acquisition_validation: pass
+    manifest_unchanged: true
+    payload_hashes_bytes_jsonl_unchanged: true
+    audited_cache_allowlist: exact_three_json_gz_files_no_headers
     protocol_unchanged: true
     implementation: absent
     run_authorized: false
@@ -895,5 +958,6 @@ M11:
     predictions: absent
     metrics: absent
     bootstrap: absent
+    code: absent
     public_claim_eligibility: false
   next_gate: "Separate authority and independent review are required before E003 implementation or exactly one confirmatory run; no run is authorized by M11."

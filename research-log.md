@@ -572,43 +572,50 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   implementation/review, or the single confirmatory run; the protocol-only lock
   authorizes none of those actions.
 
-## 2026-09-01 — M11 E003 source acquisition freeze
+## 2026-09-01 — M11 E003 source acquisition freeze and cache remediation
 
-- **Authority (Provenance: user):** The bounded follow-up instruction was
-  `Follow-up bounded task: record acquisition only, then stop.` It authorized
-  verification of the already acquired exact fixture set, local acquisition
-  documentation, and one local commit. It did not authorize implementation,
-  event selection, scoring, confirmatory execution, publication, or push.
-- **Exact source boundary:** The three locked GETs are the development
-  `2019-01-15-12.json.gz`, calibration `2020-01-15-12.json.gz`, and
-  confirmatory `2021-01-15-12.json.gz` fixtures at their protocol URLs. The
-  canonical manifest remains outside Git at
-  `/private/tmp/invariant-audit-e003-v1/source-manifest.json` with SHA-256
+- **Authority (Provenance: user):** The bounded M11 acquisition-remediation
+  brief authorized local verification, reversible cache moves, metadata and
+  scoped documentation/state updates, and one local commit from clean HEAD
+  `b68424e756fb86f05c866647b2471d36e24da716`. It prohibited network access,
+  delegation, protocol edits, E003 implementation/tests, event selection,
+  scoring, confirmatory execution, publication, and push.
+- **Pre-remediation verification:** The canonical manifest
+  `/private/tmp/invariant-audit-e003-v1/source-manifest.json` was verified
+  unchanged at SHA-256
   `683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`.
-  HTTP metadata is preserved in
-  `/private/tmp/invariant-audit-e003-v1/acquisition-metadata.json` with
-  SHA-256 `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
-- **Frozen bytes and validation:** Development is SHA-256
-  `ae451576f78417d75f135b29ee67ea8e666dc5f6cb16e78cef04e20342b42b50`,
-  `29278679` bytes, `67145` JSONL objects, HTTP `200`, ETag
-  `"0af4633b81d16ebcd1e681e34128abf9"`, Last-Modified
-  `Tue, 15 Jan 2019 13:05:10 GMT`. Calibration is SHA-256
-  `624a0d2a2fc575afb1e63bece53521e2b078ddfd1caf60026e313ad36d83cddd`,
-  `46372480` bytes, `90940` JSONL objects, HTTP `200`, ETag
-  `"99bfbdadc0c9fe40e0b56cbbd30580da"`, Last-Modified
-  `Wed, 15 Jan 2020 13:05:14 GMT`. Confirmatory is SHA-256
-  `a4a80c97153c691866d52b7e06ea0051f2449f0c6f8060dad9f441a69cd13788`,
-  `61805367` bytes, `117780` JSONL objects, HTTP `200`, ETag
-  `"8105aef4fa8d8a4c5cf52480f2e58f35"`, Last-Modified
-  `Fri, 15 Jan 2021 13:05:17 GMT`.
-- **Validation boundary:** All three streams passed standard-library gzip,
-  UTF-8, and one-object-per-nonempty-line checks. The confirmatory shard was
-  touched only for the protocol-required hash, byte, line-count, and format
-  validation; no event selection, projection, calibration, scoring, metric,
-  bootstrap, or result operation was performed. The raw files remain outside
-  Git in `/private/tmp/invariant-audit-e003-v1/source/`.
-- **State transition:** M11 is `acquisition_complete_implementation_absent`.
-  Implementation, run, predictions, metrics, bootstrap, result, and public
-  claim remain absent; `run_authorized: false` and
-  `public_claim_eligibility: false` remain explicit. Separate authority and
-  independent review are required for the next gate.
+  Each manifest-listed gzip was locally rehashed and decompressed with the
+  standard library; strict UTF-8 and one-object-per-nonempty-line validation
+  passed with unchanged byte and JSONL counts.
+- **Cache remediation:** The three extra `.headers` files were moved, not
+  deleted, to `/private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/`.
+  Their hashes are
+  `0e9f751b9c213201b49900c94d58776488ddc6c1b7994b06d7530574b100dfd8`,
+  `d33afd6da92f991d7fabef3d27a2e7df05ba21984aa04b27da01764c19636322`, and
+  `761ffd6482919336cb57682c9c211843770ad187ed280bec7faf49d59d4d8815`; the
+  source directory now contains exactly the three manifest-listed `.json.gz`
+  files. A copy of the old metadata is preserved at
+  `.../acquisition-metadata.pre-remediation.json` with SHA-256
+  `6d47ea164f42a02b69fad37c466cd7253bb7f07b3f6a1985534fc2b657b9554f`.
+- **Authoritative freeze:** After the post-move verification, the local-only
+  freeze event was recorded at `2026-08-31T19:59:22Z` UTC with the exact cache
+  inventory, manifest SHA-256, starting HEAD, and explicit
+  `network_used_during_remediation: false`. Its canonical object hash is
+  `17ac5e9eb4386ef2d6f4f34996f240e600b16d7521fdcc6b91dfd10630c27ed7`.
+  The updated metadata v2 hash is
+  `5937fbf7d8583ed3954b7d107146af331d29f2a14e224d883e892c74ce52388a`.
+- **Chronology reconciliation:** The old `network_frozen_at_utc`
+  `2026-08-31T19:06:24Z` predates the observed manifest mtime
+  `2026-08-31T19:07:45Z`. That original ordering is not independently
+  supported and is retained only as historical context; it was not rewritten
+  or backdated. The new post-verification local event is the authoritative
+  audited-freeze boundary.
+- **Isolation and state:** The confirmatory shard was touched only for hash,
+  byte, line-count, and format validation; no event selection, projection,
+  calibration, scoring, metrics, bootstrap, or result generation occurred.
+  M11 is now `acquisition_complete_audited_implementation_absent`;
+  implementation, run, predictions, metrics, bootstrap, result, and code are
+  absent; `run_authorized: false` and `public_claim_eligibility: false` remain
+  explicit. The locked protocol and protected E001/E002/ARA paths remain
+  unchanged. Separate authority and independent review are required for the
+  next gate.
