@@ -6,7 +6,7 @@ Scope: local-only.
 
 Infrastructure: no paid API; no external GPU.
 
-Status: M09 outer-loop reflection complete; E001 and E002 have verified
+Status: M10 protocol-only E003 design complete; E001 and E002 have verified
 finite-synthetic results, while external transfer remains untested.
 
 The repository contains verified local evidence for the finite synthetic E001
@@ -15,7 +15,9 @@ only; they do not establish production performance, external validity,
 generalization, novelty, safety, or public-claim eligibility.
 
 The current outer-loop decision is **BROADEN**: the largest unresolved gap is
-transfer to externally authored structured records.
+transfer to externally authored structured records. The current gate is the
+protocol-only E003 lock recorded in the local Git history. No E003 input
+snapshot has been acquired and no E003 run, result, data, or code exists.
 
 ## Verified experiments
 
@@ -28,6 +30,11 @@ transfer to externally authored structured records.
 
 The latest human-readable synthesis is
 [to_human/progress-M09.html](to_human/progress-M09.html).
+
+The protocol-only E003 design is
+[experiments/E003-external-transfer-validation/protocol.md](experiments/E003-external-transfer-validation/protocol.md),
+with its documentary gate in
+[M10](milestones/M10-E003-protocol-design.md).
 
 ## Documentation
 

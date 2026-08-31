@@ -554,3 +554,32 @@ The current stopping gate is therefore: lock E003-v1 protocol only; do not
 acquire the fixture, implement code, run E003, create E003 data/results, or
 make a public claim in this stage. See [M09](milestones/M09-outer-loop-after-E002.md)
 and the [M09 progress presentation](to_human/progress-M09.html).
+
+## M10 — E003 protocol-only external-transfer design
+
+M10 records the BROADEN decision as a protocol-only design step. It introduces
+no E003 acquisition, implementation, execution, prediction, metric,
+bootstrap, result, or public claim. `public_claim_eligibility` remains
+`false`, and the source snapshot is explicitly `staged_unacquired`.
+
+The capped E003 source set is the GH Archive official site
+(<https://www.gharchive.org/>), GitHub's official event-types documentation
+(<https://docs.github.com/en/rest/using-the-rest-api/github-event-types>), and
+Kalliamvakou et al.'s primary GitHub-mining study
+(<https://doi.org/10.1007/s10664-015-9393-5>). These sources ground only the
+archive/event-contract boundary and a validity caution; they do not establish
+an E003 outcome. The exact fixture URLs, staged acquisition and hash plan, and
+the no-substitution rule are recorded in
+[the E003-v1 protocol](experiments/E003-external-transfer-validation/protocol.md).
+
+The protocol defines H3 on three preselected, time-separated GH Archive hourly
+shard URLs with 64 IssuesEvent and 64 PullRequestEvent bases per split, four
+paired clean or mutated cases per base, B0/M1 plus predeclared ablations,
+calibration-only lookup fitting, an independently maintained oracle,
+repository-cluster bootstrap uncertainty, and explicit
+source/schema/isolation/determinism gates. The sole planned stopping point is
+one valid confirmatory run; a valid `mixed/not supported` outcome is terminal,
+while any preflight or integrity failure is invalid with no metrics or
+evidence. The next action requires separate authority for source acquisition,
+implementation/review, and exactly one run; this milestone authorizes none of
+those actions.

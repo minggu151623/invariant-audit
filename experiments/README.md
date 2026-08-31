@@ -68,3 +68,10 @@ CSV/JSONL is row-data source.
 - This index is not experimental evidence and establishes no E002 metric,
   H2 outcome, external validity, novelty, safety, generalization, or public
   claim beyond the explicitly bounded M08 result record.
+- [E003 external-transfer validation protocol](E003-external-transfer-validation/protocol.md)
+  is the M10 protocol-only design following the M09 **BROADEN** decision. It
+  fixes a staged GH Archive fixture plan, external source/hash boundary,
+  repository-isolated cases, B0/M1 methods, an independent oracle, metrics,
+  invalid-run rules, and a one-valid-run stopping gate. The source snapshot is
+  not acquired; E003 has no implementation, run, result, prediction, metric,
+  bootstrap, or code artifact.

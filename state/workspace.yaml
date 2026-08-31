@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M08
+current_milestone: M10
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -40,6 +40,14 @@ authority_records:
     scope:
       - review of documented E002 state and continuation context
     interpretation: "Calibrated interpretation: this current message reaffirms continued local research from the documented state; together with the resumption message it authorizes the next locked local E002 confirmatory execution and result recording, but does not select technical design, authorize push/publication/public claim, or establish any result."
+  - id: user-2026-08-31-e003-continuation
+    source: user
+    date: 2026-08-31
+    exact_text: "tiếp tục đi"
+    scope:
+      - local M09 outer-loop reflection and E003-v1 protocol-only documentation
+      - intended two-commit handoff from the bounded continuation brief
+    interpretation: "Continuation authority for local research documentation only; it did not select the E003 technical design. The current sandbox instruction explicitly withholds Git writes/commits, web search, source acquisition, implementation, execution, publication, and public claims here."
 M00:
   path: milestones/M00-research-direction.md
   status: verified
@@ -627,6 +635,7 @@ M08:
   path: milestones/M08-E002-run-002-valid.md
   status: valid_confirmatory_run_recorded
   supersedes: M07
+  superseded_by: M09
   scope: locked_local_confirmatory_run_and_result_record
   provenance:
     preflight_start_head: 86ede8ac1fcd674b9cc559ee7ad2c381efa4f3d0
@@ -730,3 +739,76 @@ M08:
     protocol_unchanged: true
     no_retry: true
   next_gate: "No additional E002 run, publication, push, or public claim is authorized by M08; any future action requires separate explicit authority and a new bounded gate."
+M09:
+  path: milestones/M09-outer-loop-after-E002.md
+  status: verified_documentary_outer_loop_reflection
+  supersedes: M08
+  superseded_by: M10
+  scope: documentary_outer_loop_synthesis_only
+  provenance:
+    evidence:
+      - path: milestones/M02-E001-results.md
+        role: verified_E001_result_record
+      - path: milestones/M08-E002-run-002-valid.md
+        role: verified_E002_result_record
+    technical_design: "Mechanism interpretation, gap analysis, and BROADEN decision are worker/reviewer inference, not user-selected design."
+  decision:
+    direction: BROADEN
+    rationale: "Both finite synthetic experiments repeat the cross-field validator pattern, while external transfer, source/schema drift, natural invalidity, sequence behavior, and a less recipe-coupled oracle remain untested."
+    alternatives_rejected:
+      DEEPEN: "More synthetic stress would not directly test external transfer."
+      PIVOT: "The repeated within-design pattern does not require a question change."
+      CONCLUDE: "Conclusion would overreach while the largest transfer gap is open."
+  verification:
+    scope: verified_documentary_synthesis_without_new_run
+    e001_evidence_unchanged: true
+    e002_evidence_unchanged: true
+    acquisition: absent
+    implementation: absent
+    run: absent
+    results: absent
+    data: absent
+    public_claim_eligibility: false
+  next_gate: "Lock E003-v1 protocol only; do not acquire, implement, execute, create E003 outputs, or make a public claim in the M09 stage."
+M10:
+  path: milestones/M10-E003-protocol-design.md
+  status: verified_documentary_protocol_only
+  supersedes: M09
+  scope: documentary_external_transfer_protocol_design
+  provenance:
+    outer_loop_decision: M09_BROADEN
+    technical_design: "Worker/reviewer design and verification; not user-selected technical design."
+    source_cap: 3
+    source_boundary: "GH Archive official documentation, GitHub official event-types documentation, and one primary GitHub-mining study; exact URLs are recorded in literature/survey.md."
+    protocol_stage_authority: "Protocol-only lock is current; source acquisition, implementation, execution, publication, and public claims remain unauthorized."
+  evidence:
+    - type: protocol
+      path: experiments/E003-external-transfer-validation/protocol.md
+      protocol_id: E003-v1
+      source_snapshot_status: staged_unacquired
+      lock_subject: "research(protocol): lock E003 external transfer validation"
+    - type: milestone
+      path: milestones/M09-outer-loop-after-E002.md
+      role: outer_loop_decision_record
+    - type: literature
+      path: literature/survey.md
+      urls:
+        - "https://www.gharchive.org/"
+        - "https://docs.github.com/en/rest/using-the-rest-api/github-event-types"
+        - "https://doi.org/10.1007/s10664-015-9393-5"
+  verification:
+    scope: protocol_completeness_and_provenance_only
+    acquisition_authorized: false
+    acquisition: absent
+    implementation: absent
+    run_authorized: false
+    run: absent
+    results: absent
+    data: absent
+    code: absent
+    h3_outcome: absent
+    public_claim_eligibility: false
+    lock_status: current_protocol_only_lock
+    protocol_commit: current_lock_recorded_in_git_history
+    protocol_ancestry: M09_precedes_current_protocol_lock
+  next_gate: "Separate authority is required for source acquisition, independent implementation review, and exactly one confirmatory run; this M10 lock authorizes none of those actions."

@@ -228,7 +228,68 @@ fault testing. The following E002 choices are not sourced conclusions:
   with 530,000 replicate rows and 53 interval rows, schemas, size budget, and
   invalid-run behavior.
 
-No E002 executable implementation, run, experimental result, or experimental
-data exists in this documentary protocol update. The protocol and its linked
-documentary state, log, findings, literature, and README index updates do
-exist.
+The E002 implementation, run, result, and data are recorded elsewhere in the
+verified repository history. This survey section adds no E002 executable
+implementation or result; it records the source-to-design boundary only.
+
+## E003 source foundation — capped primary and official sources
+
+E003 literature discovery was capped at three directly relevant
+primary/official sources. The following sourced facts are intentionally narrow;
+the fixture dates, filtering, mutations, methods, oracle, metrics, and gates in
+the E003 protocol are worker/reviewer design choices, not conclusions supplied
+by these sources.
+
+### GH Archive fixture boundary
+
+**Sourced fact.** The official GH Archive site describes a public GitHub event
+timeline and provides timestamped hourly archive files containing raw event
+records. It also warns that event payload shape can change. This supports
+freezing exact archive URLs and recording byte hashes before parsing; it does
+not make a selected shard representative or establish E003 truth.
+
+- GH Archive, official project site, <https://www.gharchive.org/>.
+
+### GitHub event contract
+
+**Sourced fact.** GitHub's official event-types documentation describes common
+event fields and per-event-type payloads, including action fields for
+`IssuesEvent` and `PullRequestEvent`. E003 uses only a deliberately narrow
+subset of those documented shapes; the documentation does not validate the
+subset or any future E003 result.
+
+- GitHub, *GitHub event types*, official REST API documentation,
+  <https://docs.github.com/en/rest/using-the-rest-api/github-event-types>.
+
+### GitHub-mining validity caution
+
+**Sourced fact.** Kalliamvakou et al. present an empirical study of the
+promises and perils of mining GitHub. This motivates explicit source alignment,
+selection, and validity checks for an externally sourced fixture; it is not an
+E003 dataset, oracle, or result.
+
+- Kalliamvakou, E., Gousios, G., Spinellis, D., et al. (2015), *An in-depth
+  study of the promises and perils of mining GitHub*, Empirical Software
+  Engineering, DOI <https://doi.org/10.1007/s10664-015-9393-5>.
+
+## E003 source-to-choice boundary
+
+The three sources above ground only the archive/event-contract context and the
+need for explicit GitHub-mining validity checks. E003-v1's exact shards
+(`2019-01-15-12`, `2020-01-15-12`, and `2021-01-15-12`), staged acquisition
+manifest and SHA-256 plan, strict subset contract, repository-isolated
+64+64-base quotas, clean/S1/I1/T1 probes, B0/M1 methods, calibration split,
+independent oracle, repository bootstrap, artifact schemas, invalid-run rules,
+and one-run stopping rule are protocol design choices.
+
+The exact planned fixture URLs are:
+
+- <https://data.gharchive.org/2019-01-15-12.json.gz>
+- <https://data.gharchive.org/2020-01-15-12.json.gz>
+- <https://data.gharchive.org/2021-01-15-12.json.gz>
+
+The three source files are not acquired in this stage. No source hash, byte
+count, line count, HTTP metadata, manifest, E003 implementation, run, result,
+prediction, metric, bootstrap, or public claim is asserted. See [the E003-v1
+protocol](../experiments/E003-external-transfer-validation/protocol.md) and
+[M10](../milestones/M10-E003-protocol-design.md) for the protocol-only gate.

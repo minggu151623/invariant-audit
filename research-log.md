@@ -538,3 +538,36 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   not implemented or run, and no E003 data/result/public claim is authorized.
 - **Artifacts:** [M09 milestone](milestones/M09-outer-loop-after-E002.md) and
   the self-contained [M09 progress presentation](to_human/progress-M09.html).
+
+## 2026-08-31 — M10 E003 protocol-only external-transfer design
+
+- **Provenance and source cap:** M10 follows the M09 **BROADEN** decision. New
+  E003 literature discovery was capped at three directly relevant
+  primary/official sources: [GH Archive](https://www.gharchive.org/),
+  [GitHub event types](https://docs.github.com/en/rest/using-the-rest-api/github-event-types),
+  and [Kalliamvakou et al.](https://doi.org/10.1007/s10664-015-9393-5). Their
+  narrow sourced facts are separated from the worker/reviewer protocol
+  choices; no further search was performed.
+- **Protocol design:** [E003-v1](experiments/E003-external-transfer-validation/protocol.md)
+  fixes three timestamped GH Archive shard URLs, a staged external acquisition
+  and SHA-256 manifest plan, an explicit GitHub event subset, strict exclusion
+  and repository isolation rules, 64+64 bases per split, four paired cases per
+  base, B0/M1 and ablations, calibration/confirmatory isolation, an
+  independently maintained oracle, deterministic repository bootstrap, exact
+  artifact schemas, invalid-run behavior, and one-valid-run stopping.
+- **Acquisition/execution boundary:** The three source files are not acquired;
+  no hash, byte count, line count, HTTP metadata, source manifest, E003 code,
+  run, prediction, metric, bootstrap, result, or public claim exists. No
+  download or experiment was attempted in this stage.
+- **State transition:** M10 is the current documentary milestone and the
+  research pointer/state/index updates identify the E003 stopping gate. The
+  technical design is not user-selected, and `run_authorized: false`,
+  `acquisition_authorized: false`, and `public_claim_eligibility: false` remain
+  explicit.
+- **Git handoff:** The two required local commits are now recorded in order,
+  with the M09/report slice first and the E003 protocol/state/literature/index
+  slice second. The full protocol commit hash is available from Git history and
+  is intentionally not self-embedded in the state record.
+- **Next gate:** Separate authority is required for source acquisition,
+  implementation/review, or the single confirmatory run; the protocol-only lock
+  authorizes none of those actions.

@@ -4,6 +4,13 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M10 — E003 external-transfer protocol design](M10-E003-protocol-design.md):
+  current protocol-only design after the M09 **BROADEN** decision. The source
+  snapshot is staged but unacquired; no E003 implementation, run, result, data,
+  code, or public claim exists.
+- [M09 — outer-loop reflection after E002](M09-outer-loop-after-E002.md):
+  synthesizes the verified finite-synthetic E001/E002 records and identifies
+  external transfer as the largest unresolved gap.
 - [M08 — E002 corrected run 002 valid result](M08-E002-run-002-valid.md): records exactly one valid locked local confirmatory run for
   `e002-20260825-002`, its four runner-produced artifacts, and H2 `supported`
   within the finite synthetic protocol. The authorization is consumed and
