@@ -4,8 +4,14 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M12 — E003 implementation-readiness](M12-E003-implementation-readiness.md):
+  current milestone; records the standard-library implementation, guarded
+  development/calibration-only integration, exact selected/repository counts,
+  calibration lookup hashes, deterministic preflight, and 25-test suite.
+  Independent review is pending; no confirmatory run, result, or production
+  output is authorized or present.
 - [M11 — E003 source acquisition freeze](M11-E003-source-acquisition.md):
-  current milestone; records the audited three-file GH Archive cache, exact
+  preceding milestone; records the audited three-file GH Archive cache, exact
   payload/manifest hashes, local-only freeze event, reversible sidecar archive,
   chronology caveat, and preserved confirmatory isolation. No E003
   implementation, run, result, data, code, or public claim exists.

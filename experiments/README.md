@@ -72,6 +72,8 @@ CSV/JSONL is row-data source.
   is the M10 protocol design following the M09 **BROADEN** decision. M11
   records completion of the exact read-only acquisition: the three raw
   fixtures and canonical source manifest are frozen outside Git with hashes,
-  byte counts, decompressed JSONL line counts, and HTTP metadata. E003 still
-  has no implementation, run, result, prediction, metric, bootstrap, or code
-  artifact; confirmatory content was not selected or scored.
+  byte counts, decompressed JSONL line counts, and HTTP metadata. M12 records
+  the scoped implementation and development/calibration-only preflight; the
+  implementation is pending independent review. E003 still has no run,
+  result, prediction, metric, bootstrap, or production output, and the 2021
+  confirmatory content was not selected or scored.

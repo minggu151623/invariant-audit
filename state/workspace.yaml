@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M11
+current_milestone: M12
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -961,3 +961,112 @@ M11:
     code: absent
     public_claim_eligibility: false
   next_gate: "Separate authority and independent review are required before E003 implementation or exactly one confirmatory run; no run is authorized by M11."
+M12:
+  path: milestones/M12-E003-implementation-readiness.md
+  status: implementation_ready_pending_independent_review
+  supersedes: M11
+  scope: e003_implementation_and_development_calibration_preflight_only
+  provenance:
+    authority:
+      source: user
+      date: 2026-09-01
+      exact_text: "Complete the same bounded implementation task from the green uncommitted code slice."
+      scope:
+        - compute development/calibration-only integration evidence
+        - update M12 and scoped indexes/findings/log/state
+        - rerun py_compile and the 25-test development suite
+        - create exactly one local implementation commit
+      exclusions:
+        - confirmatory gzip read or scoring
+        - run_e003 CLI or confirmatory execution
+        - production E003 outputs or result report
+        - protocol or acquisition-cache edits
+        - E001/E002/ARA edits
+        - push or public claim
+    technical_design: "The locked E003-v1 protocol and scoped worker implementation are not user-selected scientific design."
+  implementation:
+    status: present_pending_independent_review
+    commit: current_m12_commit_full_hash_reported_in_handoff
+    paths:
+      - experiments/E003-external-transfer-validation/code/e003.py
+      - experiments/E003-external-transfer-validation/code/oracle_e003.py
+      - experiments/E003-external-transfer-validation/code/run_e003.py
+      - experiments/E003-external-transfer-validation/code/test_e003.py
+      - experiments/E003-external-transfer-validation/code/README.md
+    imports_side_effect_free: true
+    runner_executed: false
+    run_id_reserved: false
+  integration:
+    scope: development_and_calibration_only
+    manifest_path: /private/tmp/invariant-audit-e003-v1/source-manifest.json
+    manifest_sha256: 683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633
+    opened_source_basenames:
+      - 2019-01-15-12.json.gz
+      - 2020-01-15-12.json.gz
+    confirmatory_opened: false
+    shared_repository_ids_removed: 2178
+    eligible_events_after_isolation:
+      development: 5408
+      calibration: 9435
+    selected_bases:
+      development:
+        IssuesEvent: 64
+        PullRequestEvent: 64
+      calibration:
+        IssuesEvent: 64
+        PullRequestEvent: 64
+    selected_cases:
+      development: 512
+      calibration: 512
+    selected_repositories:
+      development: 103
+      calibration: 92
+    selected_repository_intersection: 0
+    raw_method_rows: 5120
+    calibration_rows_only_for_lookup_fit: true
+    projection_signature_sha256: 8adb4a38cbe92aed57d37c3e8e0812299e6dc57072434061427624ad6fda0f53
+    calibration_lookup_hashes:
+      - method: B0
+        sha256: 2d5d789ed71d73772e62c29eebdce252eee0e6dfe46965ceec676de424463058
+      - method: M1
+        sha256: 02b1d8bddcb941bde65c59499e1799ee559abc9f62ef42755850ab11b5c0c6a2
+      - method: M1-no-identity
+        sha256: 370cd8fa7f24bffe5c72a41e8a1e2f5f93e68f2bba88cb88518a475e89c573d5
+      - method: M1-no-state
+        sha256: 0e786b395a7af8913bdb8fcb2b02957448f94ed9587a471759a73c3f0623e98b
+    two_independent_preflight_builds_equal: true
+    lookup_bytes_equal: true
+    lookup_hashes_equal: true
+  remediation:
+    initial_suite_failures: 6
+    initial_suite_failure_breakdown: "4 failures, 2 errors"
+    real_implementation_defects:
+      - mixed_type_cross_split_exclusion_bookkeeping
+      - calibration_fit_callers_passed_development_rows
+    fixture_or_assertion_mismatches:
+      - ablation_expected_sets
+      - synthetic_bootstrap_missing_pull_request_subgroup
+      - smoothed_calibration_expected_value
+      - temporary_directory_cleanup_assertion
+    evidence_classification: development_remediation_not_experiment_evidence
+  verification:
+    py_compile: pass
+    unittest_tests: 25
+    unittest_status: OK
+    unittest_seconds: 18.574
+    unittest_wall_seconds: 18.72
+    protocol_unchanged: true
+    acquisition_manifest_unchanged: true
+    protected_paths_unchanged: true
+    confirmatory_run_authorized: false
+    confirmatory_run: absent
+    run_authorized: false
+    run_id: absent
+    results: absent
+    production_outputs: absent
+    data: absent
+    predictions: absent
+    metrics: absent
+    bootstrap: absent
+    public_claim_eligibility: false
+  next_gate: "Independent implementation review is required before any separately authorized single confirmatory run; no E003 run or output is authorized by M12."

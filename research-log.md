@@ -619,3 +619,51 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   explicit. The locked protocol and protected E001/E002/ARA paths remain
   unchanged. Separate authority and independent review are required for the
   next gate.
+
+## 2026-09-01 — M12 E003 implementation-readiness
+
+- **Scope and authority:** The bounded continuation from the green uncommitted
+  E003 code slice authorized scoped implementation verification and M12
+  documentation/state updates, followed by exactly one local implementation
+  commit. It did not authorize a confirmatory run, result production, push, or
+  a public claim. The locked protocol and acquisition cache were not edited.
+- **Implementation:** The standard-library/local-CPU implementation is indexed
+  in [the E003 code README](experiments/E003-external-transfer-validation/code/README.md)
+  and consists of the source adapter/methods, separate oracle, future-run
+  runner, and tests. Imports are side-effect free; the runner was not invoked.
+- **Guarded integration:** Two independent development/calibration preflight
+  builds used only `2019-01-15-12.json.gz` and `2020-01-15-12.json.gz`; a
+  byte-read guard rejected any request for `2021-01-15-12.json.gz`. Each split
+  selected 64 IssuesEvent and 64 PullRequestEvent bases, 512 cases, and had
+  selected repository counts 103 (development) and 92 (calibration). There
+  were 2,178 shared repository IDs removed before selection, 5,408/9,435
+  eligible events after isolation, and zero selected-repository overlap.
+- **Calibration and determinism:** The combined raw scoring count was 5,120;
+  only calibration rows fit the four calibrated methods. The manifest hash was
+  `683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`.
+  Lookup hashes were B0
+  `2d5d789ed71d73772e62c29eebdce252eee0e6dfe46965ceec676de424463058`, M1
+  `02b1d8bddcb941bde65c59499e1799ee559abc9f62ef42755850ab11b5c0c6a2`,
+  M1-no-identity
+  `370cd8fa7f24bffe5c72a41e8a1e2f5f93e68f2bba88cb88518a475e89c573d5`, and
+  M1-no-state
+  `0e786b395a7af8913bdb8fcb2b02957448f94ed9587a471759a73c3f0623e98b`.
+  The projection signature was
+  `8adb4a38cbe92aed57d37c3e8e0812299e6dc57072434061427624ad6fda0f53`; two
+  independent preflight builds matched in all recorded fields, lookup bytes,
+  and lookup hashes.
+- **Testing:** `py_compile` passed. The full
+  `PYTHONDONTWRITEBYTECODE=1` unittest discovery passed **25/25** in 18.574
+  seconds (18.72 seconds wall time). The initial diagnostic had six failures
+  (4 failures, 2 errors): two real implementation defects (mixed exclusion
+  key bookkeeping and calibration-row isolation) and four fixture/assertion
+  mismatches (ablation sets, missing bootstrap subgroup, expected smoothed
+  value, and temporary-directory cleanup). All were remediated in scoped
+  code/tests; this is development remediation, not experiment evidence.
+- **Boundary:** M12 state is
+  `implementation_ready_pending_independent_review`. The confirmatory gzip
+  was not opened, selected, scored, or used for metrics/bootstrap. Run,
+  predictions, metrics, bootstrap, result, and production output paths are
+  absent; `run_authorized: false`, `run: absent`, `results: absent`, and
+  `public_claim_eligibility: false` remain explicit. Independent review and
+  separate run authority are required next.

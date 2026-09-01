@@ -641,3 +641,66 @@ No E003 output path exists. E003 remains `implementation: absent`,
 `run: absent`, `results: absent`, and `public_claim_eligibility: false`; the
 next gate requires separate authority and independent review for
 implementation and exactly one confirmatory run.
+
+## M12 — E003 implementation-readiness
+
+M12 records implementation and development/calibration-only verification. It
+is not an E003 result and does not authorize a confirmatory run. The current
+state is `implementation_ready_pending_independent_review`.
+
+### Implementation and integration evidence
+
+The scoped standard-library implementation is in
+[the E003 code directory](experiments/E003-external-transfer-validation/code/),
+with a separate fail-closed oracle, explicit future-run runner, and synthetic
+plus guarded integration tests. Two independent preflight builds opened only
+`2019-01-15-12.json.gz` and `2020-01-15-12.json.gz`; the guard would raise on
+`2021-01-15-12.json.gz`.
+
+| Measure | Development | Calibration |
+| --- | ---: | ---: |
+| selected bases | 64 IssuesEvent + 64 PullRequestEvent | 64 IssuesEvent + 64 PullRequestEvent |
+| cases | 512 | 512 |
+| selected repositories | 103 | 92 |
+| eligible events after isolation | 5,408 | 9,435 |
+
+There were 2,178 shared repository IDs between the two scanned groups; all
+were excluded before selection. Selected repository overlap was zero. The
+combined raw scoring count was 5,120 rows, and calibration fitting used only
+calibration rows. The manifest hash was
+`683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`.
+
+Calibration lookup serialized-byte SHA-256 values were:
+
+- B0: `2d5d789ed71d73772e62c29eebdce252eee0e6dfe46965ceec676de424463058`;
+- M1: `02b1d8bddcb941bde65c59499e1799ee559abc9f62ef42755850ab11b5c0c6a2`;
+- M1-no-identity: `370cd8fa7f24bffe5c72a41e8a1e2f5f93e68f2bba88cb88518a475e89c573d5`;
+- M1-no-state: `0e786b395a7af8913bdb8fcb2b02957448f94ed9587a471759a73c3f0623e98b`.
+
+The deterministic projection signature was
+`8adb4a38cbe92aed57d37c3e8e0812299e6dc57072434061427624ad6fda0f53`.
+The two independent preflight builds were equal, including lookup bytes and
+hashes. No confirmatory metrics, predictions, bootstrap, or result report was
+constructed.
+
+### Development remediation record
+
+The first 25-test diagnostic run had six failures: four failures and two
+errors. Two were real implementation defects: cross-split exclusion counts
+were initialized in a way that mixed tuple and string keys during sorting, and
+the calibration callers passed development rows into the lookup fitter. Four
+were fixture/assertion mismatches: the ablation expected sets, the synthetic
+bootstrap fixture omitted the pull-request subgroup, the smoothed lookup
+expected `1/3` instead of `1/8`, and a temporary-directory assertion retained
+fixture-created directories. The scoped fixes were applied and the final
+25/25 suite passed. This is implementation remediation evidence, not E003
+experimental evidence.
+
+### State boundary
+
+The final standard-library-only suite passed 25/25 in 18.574 seconds (18.72
+seconds wall time), and `py_compile` passed. Confirmatory run, predictions,
+metrics, bootstrap, result, and production output paths remain absent;
+`run_authorized: false`, `run: absent`, `results: absent`, and
+`public_claim_eligibility: false` remain explicit. Independent implementation
+review and separate run authority are the next gate.

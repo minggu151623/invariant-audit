@@ -22,10 +22,16 @@ repository.
   files under `/private/tmp/invariant-audit-e003-v1/source/`; the three
   pre-remediation `.headers` sidecars were reversibly moved to
   `/private/tmp/invariant-audit-e003-v1-remediation-archive-20260901/`.
-- E003 implementation, run, result report, prediction, metric, and bootstrap
-  artifacts remain absent. Confirmatory isolation is preserved: acquisition
-  validation covered only gzip/UTF-8/JSONL format, byte hashes, byte counts,
-  and line counts; no event selection or scoring was performed.
+- The [M12 implementation-readiness record](../../milestones/M12-E003-implementation-readiness.md)
+  indexes the standard-library implementation and its guarded
+  development/calibration-only preflight. It proves 64 IssuesEvent + 64
+  PullRequestEvent bases and 512 cases in each non-confirmatory split, with
+  lookup hashes and repeated-preflight determinism recorded there. Independent
+  review remains pending.
+- E003 run, result report, prediction, metric, bootstrap, and production output
+  artifacts remain absent. Confirmatory isolation is preserved: the 2021 gzip
+  was not opened by implementation tests or preflight, and no event selection
+  or scoring was performed on it.
 
 The authoritative local-only freeze event occurred at
 `2026-08-31T19:59:22Z` UTC, after local manifest and payload verification, with
