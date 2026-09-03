@@ -668,3 +668,32 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   absent; `run_authorized: false`, `run: absent`, `results: absent`, and
   `public_claim_eligibility: false` remain explicit. Independent review and
   separate run authority are required next.
+
+## 2026-09-03 — M13 E003 confirmatory run and source-integrity failure
+
+- **Context:** Autonomous continuation under user directive
+  `user-2026-09-03-e003-goal`. Remediated M12 implementation was committed as
+  `915448450702d849fafe39b23b5c777e48b30dcf` with 29/29 tests passing.
+- **Execution:** Executed authorized single confirmatory run:
+  `python3 experiments/E003-external-transfer-validation/code/run_e003.py --run-id e003-20260903-001 --output-root . --source-manifest /private/tmp/invariant-audit-e003-v1/source-manifest.json`
+- **Observed outcome:** Run terminated with exit code `2`, `status: invalid`.
+  Runner failure: `pre-staging pipeline failure: duplicate event ID across source: confirmatory:16450 and confirmatory:16491`.
+- **Diagnosis:** Detailed inspection of external source fixtures in
+  `/private/tmp/invariant-audit-e003-v1/source/` revealed that the 2021
+  confirmatory shard contains 537 duplicate event IDs across multiple types
+  (289 PushEvent, 34 PullRequestEvent, 19 IssuesEvent, etc.), while development
+  (2019) and calibration (2020) shards contain 0 duplicates. This reflects
+  real-world upstream telemetry at-least-once delivery. Locked protocol E003-v1
+  Filter 1 explicitly forbids deduplication and treats any duplicate ID as a
+  source-integrity failure that rejects the run.
+- **Artifacts:** Concise invalid report written to
+  `experiments/E003-external-transfer-validation/results/run-e003-20260903-001.md`
+  (SHA-256 `5bf6c545f43333a6a3cc0d8ea8a8b2d3f7adfb4be0c0358d1cd75c17a8254305`,
+  258 bytes, 8 lines). Milestone M13 recorded in
+  `milestones/M13-E003-run-001-invalid.md`.
+- **Boundary:** M13 status is `invalid_run_recorded`. Authorization is consumed.
+  No metrics, evidence, data, predictions, bootstrap, or H3 claims exist.
+  Public claim eligibility remains `false`. Outer-loop reflection is required
+  to decide between protocol revision E003-v2 (with realistic stream deduplication)
+  or alternative collision-free fixture acquisition.
+

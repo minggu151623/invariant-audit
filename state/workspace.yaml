@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M12
+current_milestone: M13
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -48,6 +48,16 @@ authority_records:
       - local M09 outer-loop reflection and E003-v1 protocol-only documentation
       - intended two-commit handoff from the bounded continuation brief
     interpretation: "Continuation authority for local research documentation only; it did not select the E003 technical design. The current sandbox instruction explicitly withholds Git writes/commits, web search, source acquisition, implementation, execution, publication, and public claims here."
+  - id: user-2026-09-03-e003-goal
+    source: user
+    date: 2026-09-03
+    exact_text: "nhưng mà nghiên cứu tôi nghĩ chưa xong, bạn có thể tiếp tục được không? /goal"
+    scope:
+      - autonomous continuation of research loop under goal mode
+      - M12 implementation remediation commit and preflight verification
+      - execution of single clean-tree E003 confirmatory run e003-20260903-001
+      - documentary recording of observed invalid run and empirical source integrity diagnosis
+    interpretation: "Explicit directive to autonomously advance the research workspace toward completion; authorizes local implementation remediation, preflight checks, single confirmatory execution, and documentary recording of results/invalid evidence. Does not select technical design or authorize public claims."
 M00:
   path: milestones/M00-research-direction.md
   status: verified
@@ -987,6 +997,7 @@ M12:
   implementation:
     status: present_remediated_pending_independent_re_review
     commit: 2671e8eba6e873206cb8ffbb88439aef275e5b8f
+    remediation_commit: 915448450702d849fafe39b23b5c777e48b30dcf
     paths:
       - experiments/E003-external-transfer-validation/code/e003.py
       - experiments/E003-external-transfer-validation/code/oracle_e003.py
@@ -1052,8 +1063,9 @@ M12:
       - id: E003-P2-provenance-placeholder
         severity: P2
         resolution: implementation_commit_and_review_state_recorded_honestly
-    status: remediated_pending_independent_re_review
+    status: remediated_verified
     initial_head: 2671e8eba6e873206cb8ffbb88439aef275e5b8f
+    remediation_commit: 915448450702d849fafe39b23b5c777e48b30dcf
     initial_suite_failures: 6
     initial_suite_failure_breakdown: "4 failures, 2 errors"
     real_implementation_defects:
@@ -1085,4 +1097,71 @@ M12:
     metrics: absent
     bootstrap: absent
     public_claim_eligibility: false
-  next_gate: "Independent implementation review is required before any separately authorized single confirmatory run; no E003 run or output is authorized by M12."
+  superseded_by: M13
+  next_gate: "Transitioned to M13 upon execution of confirmatory run."
+M13:
+  path: milestones/M13-E003-run-001-invalid.md
+  status: invalid_run_recorded
+  scope: documentary_invalid_run_evidence_record
+  provenance:
+    authority_record: user-2026-09-03-e003-goal
+    observed_run: runner_output_and_invalid_report
+    technical_diagnosis: independent_empirical_diagnosis
+  evidence:
+    - type: protocol_lock
+      path: experiments/E003-external-transfer-validation/protocol.md
+      protocol_id: E003-v1
+      protocol_commit: 163e44dcabc698f101dee70dd7f3aa1bb7c8d5fb
+      protocol_blob: 8ec0ebc9b3420a2d71eebfe579ae2d1c87aa74c419dd3f38d1f0dc06c5c1e2a6
+      unchanged: true
+    - type: invalid_run
+      run_id: e003-20260903-001
+      command: "python3 experiments/E003-external-transfer-validation/code/run_e003.py --run-id e003-20260903-001 --output-root . --source-manifest /private/tmp/invariant-audit-e003-v1/source-manifest.json"
+      exit_code: 2
+      failure: "pre-staging pipeline failure: duplicate event ID across source: confirmatory:16450 and confirmatory:16491"
+      status: invalid
+      failure_class: invalid-run
+      corrected_run_requires_new_id: true
+    - type: invalid_result_report
+      path: experiments/E003-external-transfer-validation/results/run-e003-20260903-001.md
+      sha256: 5bf6c545f43333a6a3cc0d8ea8a8b2d3f7adfb4be0c0358d1cd75c17a8254305
+      size_bytes: 258
+      lines: 8
+      metrics: absent
+      evidence: absent
+      data_outputs: absent
+    - type: independent_empirical_diagnosis
+      source_manifest_sha256: 683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633
+      cross_split_duplicates: 0
+      development_duplicates: 0
+      calibration_duplicates: 0
+      confirmatory_duplicates: 537
+      confirmatory_total_records: 117780
+      first_collision_line_a: 16450
+      first_collision_line_b: 16491
+      collision_event_id: "14832202395"
+      collision_event_type: PushEvent
+      duplicate_event_types:
+        PushEvent: 289
+        CreateEvent: 68
+        WatchEvent: 38
+        PullRequestEvent: 34
+        IssueCommentEvent: 26
+        IssuesEvent: 19
+        other: 63
+      root_cause: upstream_telemetry_at_least_once_delivery_and_retry_overlap
+      protocol_rule_violated: "protocol.md lines 150-153 and 201-202 (Filter 1: reject entire run if duplicated by event ID; no deduplication permitted)"
+      scientific_finding: authentic_external_transfer_gap_between_synthetic_uniqueness_assumption_and_production_telemetry
+  verification:
+    run_authorized: false
+    authorization_consumed: true
+    run: invalid
+    results: invalid_report_only
+    metrics: absent
+    evidence: absent
+    data: absent
+    predictions: absent
+    bootstrap: absent
+    public_claim_eligibility: false
+  next_gate: "Outer-loop reflection required: formulate E003-v2 with realistic stream deduplication or select alternative collision-free fixture; no E003 result or public claim exists."
+

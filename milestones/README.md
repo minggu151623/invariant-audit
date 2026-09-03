@@ -4,12 +4,15 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M13 — E003 run 001 invalid evidence record](M13-E003-run-001-invalid.md):
+  current milestone; records the executed confirmatory run e003-20260903-001,
+  its invalid status (exit code 2), runner failure on duplicate event IDs
+  (537 duplicate lines in GH Archive 2021), concise invalid report, and
+  empirical diagnosis. No metrics, data, or E003 results exist.
 - [M12 — E003 implementation-readiness](M12-E003-implementation-readiness.md):
-  current milestone; records the standard-library implementation, guarded
+  preceding milestone; records the standard-library implementation, guarded
   development/calibration-only integration, exact selected/repository counts,
   calibration lookup hashes, deterministic preflight, and 29-test suite.
-  Independent review is pending; no confirmatory run, result, or production
-  output is authorized or present.
 - [M11 — E003 source acquisition freeze](M11-E003-source-acquisition.md):
   preceding milestone; records the audited three-file GH Archive cache, exact
   payload/manifest hashes, local-only freeze event, reversible sidecar archive,
