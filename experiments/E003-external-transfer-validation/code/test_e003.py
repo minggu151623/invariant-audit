@@ -381,6 +381,62 @@ class E003CoreTests(unittest.TestCase):
             e003.M1_CHECKS["identity"] = original_method
             oracle_e003._identity_relation = original_oracle
 
+    def test_result_report_emits_all_exclusion_counts_and_rejects_omissions(self) -> None:
+        manifest = _dummy_manifest()
+        scans = tuple(
+            e003.SourceScan(
+                split=split,
+                line_count=4,
+                repo_ids=frozenset(),
+                eligible=(),
+                exclusion_counts=(
+                    ("common_schema", index + 1),
+                    ("raw_type_action:[\"Other\",\"opened\"]", index + 2),
+                ),
+            )
+            for index, split in enumerate(e003.SPLITS)
+        )
+        bundle = e003.SourceBundle(manifest, scans, frozenset())
+
+        class BootstrapStub:
+            @staticmethod
+            def interval(_subgroup: str, _metric: str) -> dict[str, object]:
+                return {
+                    "lower": Fraction(0),
+                    "upper": Fraction(0),
+                    "usable_replicates": e003.BOOTSTRAP_REPLICATES,
+                    "status": "degenerate",
+                }
+
+        evidence = e003.run_independence_gates(
+            {"development": self.dev_cases},
+            oracle_e003.reference_oracle,
+        )
+        report = e003.build_result_markdown(
+            "e003-20260901-001",
+            manifest,
+            bundle,
+            {},
+            (),
+            (),
+            BootstrapStub(),
+            {method: "a" * 64 for method in e003.CALIBRATED_METHODS},
+            {name: "b" * 64 for name in ("predictions", "metrics", "bootstrap")},
+            evidence,
+        )
+        for scan in scans:
+            self.assertIn(
+                f"  {scan.split}: {e003.canonical_json_text(scan.exclusions())}",
+                report,
+            )
+        e003._validate_result_exclusion_counts(report, bundle)
+        omitted = "\n".join(
+            line for line in report.splitlines()
+            if not line.startswith("  calibration: ")
+        ) + "\n"
+        with self.assertRaises(e003.ProtocolError):
+            e003._validate_result_exclusion_counts(omitted, bundle)
+
     def test_fail_closed_oracle_and_methods_on_malformed_shapes(self) -> None:
         malformed = [None, [], {}, {"id": "1", "type": "IssuesEvent"}]
         for field in ("actor", "repo", "payload", "created_at", "public"):
@@ -728,6 +784,107 @@ class E003RunnerTests(unittest.TestCase):
         artifact.serialized = lambda name: contents[name]
         artifact.hashes = lambda: {name: hashlib.sha256(data).hexdigest() for name, data in contents.items()}
         return artifact
+
+    def test_runner_rejects_unapproved_manifest_before_payload_read(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="e003-manifest-gate-") as name:
+            root = Path(name)
+            manifest_path = _write_synthetic_source(
+                root,
+                {"development": [_raw_issue()]},
+            )
+            manifest = e003.load_manifest(manifest_path)
+            self.assertNotEqual(
+                manifest.manifest_sha256,
+                run_e003.AUDITED_SOURCE_MANIFEST_SHA256,
+            )
+            opened: list[str] = []
+
+            def payload_read(path: Path) -> bytes:
+                opened.append(path.name)
+                raise AssertionError("payload read occurred before manifest rejection")
+
+            with mock.patch.object(e003, "_read_source_bytes", side_effect=payload_read):
+                with self.assertRaisesRegex(
+                    run_e003.InvalidRunError,
+                    "audited source manifest SHA-256 mismatch",
+                ):
+                    run_e003._source_preflight(manifest_path, root / "source")
+            self.assertEqual(opened, [])
+
+    def test_runner_blocks_publication_when_perturbation_gate_fails(self) -> None:
+        measured_cases = e003.build_cases(
+            {
+                "development": (
+                    _source_event(_raw_issue()),
+                    _source_event(_raw_pull_request(), "development"),
+                )
+            },
+            oracle_e003.reference_oracle,
+        )
+        measured = e003.run_independence_gates(
+            measured_cases,
+            oracle_e003.reference_oracle,
+        )
+        e003.validate_independence_evidence(measured)
+        self.assertEqual(measured["status"], "pass")
+        self.assertTrue(measured["method_predicate_perturbation"]["method_changed"])
+        self.assertTrue(measured["method_predicate_perturbation"]["oracle_unchanged"])
+        self.assertTrue(measured["oracle_relation_perturbation"]["oracle_changed"])
+        self.assertTrue(measured["oracle_relation_perturbation"]["method_unchanged"])
+
+        with tempfile.TemporaryDirectory(prefix="e003-independence-gate-") as name:
+            root = Path(name)
+            output_root = root / "output"
+            repository = root / "repository"
+            repository.mkdir()
+            manifest_path = root / "manifest.json"
+            manifest_path.write_bytes(b"synthetic manifest placeholder")
+            run_id = "e003-20260901-006"
+
+            def failed_gate(
+                _cases: Mapping[str, Sequence[e003.Case]],
+                _oracle: object,
+            ) -> object:
+                raise e003.ProtocolError("oracle relation perturbation failure")
+
+            def fake_build(
+                *_args: object,
+                independence_gate_fn: Callable[..., object],
+            ) -> object:
+                independence_gate_fn({}, oracle_e003.reference_oracle)
+                raise AssertionError("failed gate returned")
+
+            with mock.patch.object(e003, "run_independence_gates", side_effect=failed_gate) as gate:
+                with mock.patch.object(e003, "build_pipeline", side_effect=fake_build):
+                    with self.assertRaisesRegex(
+                        run_e003.InvalidRunError,
+                        "pre-staging pipeline failure",
+                    ):
+                        run_e003.execute_run(
+                            run_id,
+                            output_root,
+                            manifest_path,
+                            repository_root=repository,
+                            protocol_guard_fn=lambda *_args: None,
+                            source_preflight_fn=lambda _path, _root: self._fake_manifest(root),
+                        )
+            self.assertEqual(gate.call_count, 1)
+            self.assertFalse(output_root.exists())
+            self.assertTrue(
+                all(
+                    not path.exists()
+                    for path in run_e003._final_paths(output_root, run_id).values()
+                )
+            )
+
+    def test_m12_provenance_placeholder_is_absent(self) -> None:
+        state = (REPOSITORY_ROOT / "state" / "workspace.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("current_m12_commit_full_hash_reported_in_handoff", state)
+        self.assertIn("implementation_remediated_pending_independent_re_review", state)
+        self.assertIn(
+            "commit: 2671e8eba6e873206cb8ffbb88439aef275e5b8f",
+            state,
+        )
 
     def test_cli_requires_explicit_run_id_output_root_and_manifest(self) -> None:
         parser = run_e003.build_argument_parser()

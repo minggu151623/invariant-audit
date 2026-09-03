@@ -26,6 +26,9 @@ RUN_ID_RE = re.compile(r"e003-[0-9]{8}-[0-9]{3}\Z")
 EXPERIMENT_ROOT = "experiments/E003-external-transfer-validation"
 FINALIZE_ORDER = ("predictions", "metrics", "bootstrap", "result")
 TWO_BUILD_CALLS = 2
+AUDITED_SOURCE_MANIFEST_SHA256 = (
+    "683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633"
+)
 
 
 class InvalidRunError(RuntimeError):
@@ -123,6 +126,17 @@ def _path_is_inside(path: Path, directory: Path) -> bool:
     return True
 
 
+def _verify_audited_manifest(manifest_path: Path) -> None:
+    """Pin the source manifest before any source payload can be opened."""
+
+    try:
+        manifest_bytes = manifest_path.read_bytes()
+    except OSError as error:
+        raise InvalidRunError("audited source manifest cannot be read") from error
+    if e003.sha256_hex(manifest_bytes) != AUDITED_SOURCE_MANIFEST_SHA256:
+        raise InvalidRunError("audited source manifest SHA-256 mismatch")
+
+
 def _protocol_guard(
     repository_root: Path,
     output_root: Path,
@@ -175,6 +189,7 @@ def _protocol_guard(
         raise InvalidRunError("source manifest must remain outside the repository")
     if not manifest_path.is_file():
         raise InvalidRunError("external source manifest is missing")
+    _verify_audited_manifest(manifest_path)
     for label, target in final_paths.items():
         if target.exists():
             raise InvalidRunError(f"output already exists: {label}")
@@ -193,7 +208,10 @@ def _source_preflight(
 ) -> e003.SourceManifest:
     """Verify the frozen manifest and all raw gzip bytes before parsing."""
 
+    _verify_audited_manifest(manifest_path)
     manifest = e003.load_manifest(manifest_path, source_root)
+    if manifest.manifest_sha256 != AUDITED_SOURCE_MANIFEST_SHA256:
+        raise InvalidRunError("audited source manifest changed during preflight")
     if _path_is_inside(manifest.source_root, _repository_root()):
         raise InvalidRunError("source cache must remain outside the repository")
     try:
@@ -369,6 +387,23 @@ def _validate_deterministic_build(
     return contents
 
 
+def _production_pipeline_factory(
+    run_id: str,
+    repository_root: Path,
+    manifest_path: Path,
+    source_root: Path | None,
+) -> e003.PipelineArtifacts:
+    """Build through the production path with the locked independence gates."""
+
+    return e003.build_pipeline(
+        run_id,
+        repository_root,
+        manifest_path,
+        source_root,
+        independence_gate_fn=e003.run_independence_gates,
+    )
+
+
 def execute_run(
     run_id: str,
     output_root: Path | str,
@@ -409,7 +444,7 @@ def execute_run(
     except Exception as error:
         raise InvalidRunError(f"source manifest/cache preflight failed: {error}") from error
 
-    factory = pipeline_factory or e003.build_pipeline
+    factory = pipeline_factory or _production_pipeline_factory
     artifact_validator = artifact_validator_fn or e003.validate_pipeline_artifacts
     try:
         first = factory(run_id, repository, manifest_path, manifest.source_root)

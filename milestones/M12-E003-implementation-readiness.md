@@ -1,14 +1,14 @@
 # M12 — E003 implementation-readiness
 
-Status: `implementation_ready_pending_independent_review`. This milestone
+Status: `implementation_remediated_pending_independent_re_review`. This milestone
 records implementation and development/calibration preflight evidence only. It
 does not authorize, reserve, or execute an E003 confirmatory run and is not an
 E003 result.
 
 ## Scope and provenance
 
-The bounded continuation began from the green uncommitted E003 code slice at
-the accepted acquisition HEAD `ca62f6e3cd9f10d7ed79b128b31d37caf974c573`.
+The bounded remediation began from implementation HEAD
+`2671e8eba6e873206cb8ffbb88439aef275e5b8f`.
 The locked protocol remains
 [E003-v1](../experiments/E003-external-transfer-validation/protocol.md),
 locked at commit `163e44dcabc698f101dee70dd7f3aa1bb7c8d5fb`, with protocol blob
@@ -78,7 +78,8 @@ metrics or evidence.
 ## Verification and remediation
 
 - `py_compile` passed for all four Python modules.
-- `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/E003-external-transfer-validation/code -p 'test_*.py' -v` passed **25/25** in **18.574 seconds** (`OK`; 18.72 seconds wall time).
+- Focused regressions passed **4/4** in **0.014 seconds** (`OK`).
+- `PYTHONDONTWRITEBYTECODE=1 python -m unittest discover -s experiments/E003-external-transfer-validation/code -p 'test_e003.py' -v` passed **29/29** in **16.897 seconds** (`OK`; 17.04 seconds wall time).
 - The suite covers oracle separation, source projection/selection/isolation,
   exact mutation and method arithmetic, calibration isolation, metric `NA`
   behavior, bootstrap determinism, schemas/hashes, import side effects,
@@ -89,12 +90,16 @@ metrics or evidence.
   fitter. Four were fixture/assertion mismatches: ablation expectations,
   missing synthetic pull-request bootstrap subgroup, a smoothed-calibration
   expected value, and temporary-directory cleanup. All were remediated in the
-  scoped implementation/tests and the final suite passed. This remediation is
+  scoped implementation/tests and the pre-remediation 25/25 suite passed. This remediation is
   not experiment evidence.
 
 ## Boundary and next gate
 
-`implementation_ready_pending_independent_review` is the current state.
+The independent review status was **HOLD** for four findings: audited manifest
+pinning before payload reads, complete per-source exclusion reporting, measured
+production oracle-independence gates, and a provenance placeholder. All four
+are remediated pending independent re-review. The current state is
+`implementation_remediated_pending_independent_re_review`.
 Confirmatory run, predictions, metrics, bootstrap, result report, and
 production output paths are absent; `run_authorized: false`, `run: absent`,
 `results: absent`, and `public_claim_eligibility: false` remain explicit.

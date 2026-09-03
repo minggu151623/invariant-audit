@@ -963,7 +963,7 @@ M11:
   next_gate: "Separate authority and independent review are required before E003 implementation or exactly one confirmatory run; no run is authorized by M11."
 M12:
   path: milestones/M12-E003-implementation-readiness.md
-  status: implementation_ready_pending_independent_review
+  status: implementation_remediated_pending_independent_re_review
   supersedes: M11
   scope: e003_implementation_and_development_calibration_preflight_only
   provenance:
@@ -974,7 +974,7 @@ M12:
       scope:
         - compute development/calibration-only integration evidence
         - update M12 and scoped indexes/findings/log/state
-        - rerun py_compile and the 25-test development suite
+        - rerun py_compile and the 29-test development suite
         - create exactly one local implementation commit
       exclusions:
         - confirmatory gzip read or scoring
@@ -985,8 +985,8 @@ M12:
         - push or public claim
     technical_design: "The locked E003-v1 protocol and scoped worker implementation are not user-selected scientific design."
   implementation:
-    status: present_pending_independent_review
-    commit: current_m12_commit_full_hash_reported_in_handoff
+    status: present_remediated_pending_independent_re_review
+    commit: 2671e8eba6e873206cb8ffbb88439aef275e5b8f
     paths:
       - experiments/E003-external-transfer-validation/code/e003.py
       - experiments/E003-external-transfer-validation/code/oracle_e003.py
@@ -1038,6 +1038,22 @@ M12:
     lookup_bytes_equal: true
     lookup_hashes_equal: true
   remediation:
+    independent_review_initial_status: HOLD
+    independent_review_findings:
+      - id: E003-P1-manifest-pin
+        severity: P1
+        resolution: audited_manifest_sha256_pinned_before_any_payload_read
+      - id: E003-P1-exclusion-report
+        severity: P1
+        resolution: required_per_source_exclusion_counts_emitted_and_validated
+      - id: E003-P2-independence-gates
+        severity: P2
+        resolution: production_runner_executes_measured_locked_perturbation_gates
+      - id: E003-P2-provenance-placeholder
+        severity: P2
+        resolution: implementation_commit_and_review_state_recorded_honestly
+    status: remediated_pending_independent_re_review
+    initial_head: 2671e8eba6e873206cb8ffbb88439aef275e5b8f
     initial_suite_failures: 6
     initial_suite_failure_breakdown: "4 failures, 2 errors"
     real_implementation_defects:
@@ -1051,10 +1067,10 @@ M12:
     evidence_classification: development_remediation_not_experiment_evidence
   verification:
     py_compile: pass
-    unittest_tests: 25
+    unittest_tests: 29
     unittest_status: OK
-    unittest_seconds: 18.574
-    unittest_wall_seconds: 18.72
+    unittest_seconds: 16.897
+    unittest_wall_seconds: 17.04
     protocol_unchanged: true
     acquisition_manifest_unchanged: true
     protected_paths_unchanged: true

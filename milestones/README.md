@@ -7,7 +7,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M12 — E003 implementation-readiness](M12-E003-implementation-readiness.md):
   current milestone; records the standard-library implementation, guarded
   development/calibration-only integration, exact selected/repository counts,
-  calibration lookup hashes, deterministic preflight, and 25-test suite.
+  calibration lookup hashes, deterministic preflight, and 29-test suite.
   Independent review is pending; no confirmatory run, result, or production
   output is authorized or present.
 - [M11 — E003 source acquisition freeze](M11-E003-source-acquisition.md):

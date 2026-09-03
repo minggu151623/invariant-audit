@@ -646,7 +646,7 @@ implementation and exactly one confirmatory run.
 
 M12 records implementation and development/calibration-only verification. It
 is not an E003 result and does not authorize a confirmatory run. The current
-state is `implementation_ready_pending_independent_review`.
+state is `implementation_remediated_pending_independent_re_review`.
 
 ### Implementation and integration evidence
 
@@ -692,15 +692,29 @@ the calibration callers passed development rows into the lookup fitter. Four
 were fixture/assertion mismatches: the ablation expected sets, the synthetic
 bootstrap fixture omitted the pull-request subgroup, the smoothed lookup
 expected `1/3` instead of `1/8`, and a temporary-directory assertion retained
-fixture-created directories. The scoped fixes were applied and the final
+fixture-created directories. The scoped fixes were applied and the pre-remediation
 25/25 suite passed. This is implementation remediation evidence, not E003
 experimental evidence.
 
 ### State boundary
 
-The final standard-library-only suite passed 25/25 in 18.574 seconds (18.72
+The final standard-library-only suite passed 29/29 in 16.897 seconds (17.04
 seconds wall time), and `py_compile` passed. Confirmatory run, predictions,
 metrics, bootstrap, result, and production output paths remain absent;
 `run_authorized: false`, `run: absent`, `results: absent`, and
 `public_claim_eligibility: false` remain explicit. Independent implementation
 review and separate run authority are the next gate.
+
+### Independent-review HOLD and remediation
+
+The initial independent review was **HOLD** for four findings: P1 audited
+manifest pinning before payload reads; P1 complete per-source exclusion counts;
+P2 measured production oracle-independence perturbation gates; and P2
+provenance placeholder state. The bounded remediation from initial HEAD
+`2671e8eba6e873206cb8ffbb88439aef275e5b8f` pins the audited manifest
+`683eef39cd26d2a7f6622689adc2cd9e357e78a770f77bf91e98513b859e4633`, validates
+all exclusion entries, flows measured gate evidence through artifacts, and
+records the real implementation commit. The focused four-test regression set
+passed; the full suite passed 29/29 in 16.897 seconds (17.04 seconds wall).
+The current state is `implementation_remediated_pending_independent_re_review`;
+confirmatory execution and E003 output remain absent and unauthorized.

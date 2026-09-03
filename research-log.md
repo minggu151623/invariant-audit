@@ -652,16 +652,17 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   `8adb4a38cbe92aed57d37c3e8e0812299e6dc57072434061427624ad6fda0f53`; two
   independent preflight builds matched in all recorded fields, lookup bytes,
   and lookup hashes.
-- **Testing:** `py_compile` passed. The full
-  `PYTHONDONTWRITEBYTECODE=1` unittest discovery passed **25/25** in 18.574
-  seconds (18.72 seconds wall time). The initial diagnostic had six failures
+- **Testing:** `py_compile` passed. The four focused regressions passed **4/4**
+  in 0.014 seconds. The full
+  `PYTHONDONTWRITEBYTECODE=1` unittest discovery passed **29/29** in 16.897
+  seconds (17.04 seconds wall time). The initial diagnostic had six failures
   (4 failures, 2 errors): two real implementation defects (mixed exclusion
   key bookkeeping and calibration-row isolation) and four fixture/assertion
   mismatches (ablation sets, missing bootstrap subgroup, expected smoothed
   value, and temporary-directory cleanup). All were remediated in scoped
   code/tests; this is development remediation, not experiment evidence.
 - **Boundary:** M12 state is
-  `implementation_ready_pending_independent_review`. The confirmatory gzip
+  `implementation_remediated_pending_independent_re_review`. The confirmatory gzip
   was not opened, selected, scored, or used for metrics/bootstrap. Run,
   predictions, metrics, bootstrap, result, and production output paths are
   absent; `run_authorized: false`, `run: absent`, `results: absent`, and

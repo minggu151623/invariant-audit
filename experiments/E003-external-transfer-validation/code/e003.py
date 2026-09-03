@@ -15,6 +15,7 @@ import csv
 import datetime as _datetime
 import hashlib
 import io
+import inspect
 import json
 import math
 import re
@@ -486,6 +487,24 @@ M1_CHECKS: dict[str, Callable[[Mapping[str, Any]], bool]] = {
     "state": _state_relation,
 }
 
+ORACLE_ONLY_METADATA_FIELDS = frozenset(
+    {
+        "truth",
+        "oracle_failure_set",
+        "schema_valid",
+        "split",
+        "source_file",
+        "source_line",
+        "source_sha256",
+        "source_manifest_sha256",
+        "input_sha256",
+        "variant_id",
+        "case_kind",
+        "status",
+    }
+)
+INDEPENDENCE_EVIDENCE_KEY = "oracle_independence"
+
 
 @dataclass(frozen=True)
 class ValidationResult:
@@ -522,6 +541,168 @@ def validate_method(payload: Any, method: str) -> ValidationResult:
     if method == "M1-no-state":
         return _validate_families(payload, ("identity",))
     raise ProtocolError(f"unknown method: {method}")
+
+
+def _source_text(value: Any, label: str) -> str:
+    try:
+        return inspect.getsource(value)
+    except (OSError, TypeError) as error:
+        raise ProtocolError(f"independence source inspection failed: {label}") from error
+
+
+def _metadata_references(source: str) -> tuple[str, ...]:
+    return tuple(
+        sorted(
+            field
+            for field in ORACLE_ONLY_METADATA_FIELDS
+            if re.search(rf"[\"']{re.escape(field)}[\"']", source)
+        )
+    )
+
+
+def _inspect_independence_sources(oracle_fn: Callable[[Mapping[str, Any]], Any]) -> dict[str, Any]:
+    """Inspect the locked oracle and method call boundary before probing it."""
+
+    oracle_module = inspect.getmodule(oracle_fn)
+    if oracle_module is None or oracle_module.__name__ != "oracle_e003":
+        raise ProtocolError("independence oracle module identity drift")
+    if getattr(oracle_fn, "__name__", None) != "reference_oracle":
+        raise ProtocolError("independence oracle callable identity drift")
+    oracle_source = _source_text(oracle_module, "oracle_e003")
+    if re.search(r"(?m)^\s*(?:from|import)\s+(?:e003|run_e003)\b", oracle_source):
+        raise ProtocolError("oracle source imports method or runner code")
+    oracle_method_references = tuple(
+        sorted(
+            token
+            for token in ("validate_method", "validate_b0", "validate_m1", "M1_CHECKS")
+            if re.search(rf"\b{re.escape(token)}\b", oracle_source)
+        )
+    )
+    if oracle_method_references:
+        raise ProtocolError("oracle source references method implementation")
+
+    validator_functions = (
+        ("validate_method", validate_method),
+        ("validate_b0", validate_b0),
+        ("validate_m1", validate_m1),
+        ("_validate_families", _validate_families),
+        ("schema_valid", schema_valid),
+        ("_common_schema", _common_schema),
+        ("_event_schema", _event_schema),
+        ("_identity_relation", _identity_relation),
+        ("_state_relation", _state_relation),
+    )
+    validator_sources = {
+        name: _source_text(function, name) for name, function in validator_functions
+    }
+    validator_metadata_references = tuple(
+        sorted(
+            {
+                field
+                for source in validator_sources.values()
+                for field in _metadata_references(source)
+            }
+        )
+    )
+    if validator_metadata_references:
+        raise ProtocolError("validator source accesses evaluator metadata")
+    for family in ("identity", "state"):
+        function = M1_CHECKS.get(family)
+        if not callable(function) or getattr(function, "__module__", None) != __name__:
+            raise ProtocolError("method predicate source identity drift")
+        if _metadata_references(_source_text(function, f"M1_CHECKS.{family}")):
+            raise ProtocolError("method predicate accesses evaluator metadata")
+
+    validator_digest = sha256_hex(
+        canonical_json_bytes(
+            {
+                name: sha256_hex(source.encode("utf-8"))
+                for name, source in validator_sources.items()
+            }
+        )
+    )
+    return {
+        "status": "pass",
+        "oracle_module": oracle_module.__name__,
+        "oracle_callable": oracle_fn.__name__,
+        "oracle_source_sha256": sha256_hex(oracle_source.encode("utf-8")),
+        "validator_source_sha256": validator_digest,
+        "oracle_method_references": list(oracle_method_references),
+        "validator_metadata_references": list(validator_metadata_references),
+        "metadata_fields_checked": sorted(ORACLE_ONLY_METADATA_FIELDS),
+    }
+
+
+class _MetadataAccessGuard(dict[str, Any]):
+    """Dictionary probe that fails if a method asks for evaluator metadata."""
+
+    @staticmethod
+    def _check(key: Any) -> None:
+        if key in ORACLE_ONLY_METADATA_FIELDS:
+            raise ProtocolError(f"method accessed evaluator metadata: {key}")
+
+    def __getitem__(self, key: Any) -> Any:
+        self._check(key)
+        return super().__getitem__(key)
+
+    def get(self, key: Any, default: Any = None) -> Any:
+        self._check(key)
+        return super().get(key, default)
+
+    def __contains__(self, key: object) -> bool:
+        self._check(key)
+        return super().__contains__(key)
+
+    def pop(self, key: Any, default: Any = None) -> Any:
+        self._check(key)
+        return super().pop(key, default)
+
+    def setdefault(self, key: Any, default: Any = None) -> Any:
+        self._check(key)
+        return super().setdefault(key, default)
+
+
+def _guard_metadata_payload(value: Any) -> Any:
+    if type(value) is dict:
+        return _MetadataAccessGuard(
+            {key: _guard_metadata_payload(item) for key, item in value.items()}
+        )
+    if type(value) is list:
+        return [_guard_metadata_payload(item) for item in value]
+    return value
+
+
+def _run_metadata_tripwire(payload: Mapping[str, Any]) -> dict[str, Any]:
+    guarded = _guard_metadata_payload(copy.deepcopy(payload))
+    if not isinstance(guarded, _MetadataAccessGuard):
+        raise ProtocolError("metadata tripwire payload construction failed")
+    for field in ORACLE_ONLY_METADATA_FIELDS:
+        guarded[field] = None
+
+    original_schema_valid = schema_valid
+    original_checks = dict(M1_CHECKS)
+
+    def _always_true(_payload: Mapping[str, Any]) -> bool:
+        return True
+
+    try:
+        globals()["schema_valid"] = lambda _payload: True
+        M1_CHECKS.clear()
+        M1_CHECKS.update({"identity": _always_true, "state": _always_true})
+        for method in METHODS:
+            result = validate_method(guarded, method)
+            if type(result.decision) is not bool:
+                raise ProtocolError("metadata tripwire returned a malformed decision")
+    finally:
+        globals()["schema_valid"] = original_schema_valid
+        M1_CHECKS.clear()
+        M1_CHECKS.update(original_checks)
+    return {
+        "status": "pass",
+        "methods_checked": list(METHODS),
+        "payload_count": 1,
+        "forbidden_fields": sorted(ORACLE_ONLY_METADATA_FIELDS),
+    }
 
 
 def project_event(raw: Any) -> tuple[dict[str, Any] | None, str | None]:
@@ -1222,6 +1403,195 @@ def _ordered_cases(cases_by_split: Mapping[str, Sequence[Case]]) -> tuple[Case, 
     return tuple(result)
 
 
+def _oracle_observation(result: Any) -> dict[str, Any]:
+    return {
+        "schema_valid": bool(getattr(result, "schema_valid", False)),
+        "truth": int(getattr(result, "truth", 0)),
+        "oracle_failure_set": list(getattr(result, "oracle_failure_set", ())),
+    }
+
+
+def _oracle_signature(
+    oracle_fn: Callable[[Mapping[str, Any]], Any],
+    payloads: Sequence[Mapping[str, Any]],
+) -> str:
+    return sha256_hex(
+        canonical_json_bytes([_oracle_observation(oracle_fn(payload)) for payload in payloads])
+    )
+
+
+def _method_signature(
+    payloads: Sequence[Mapping[str, Any]],
+    method: str,
+) -> str:
+    return sha256_hex(
+        canonical_json_bytes(
+            [
+                {
+                    "decision": result.decision,
+                    "raw_score": result.raw_score,
+                    "failed_families": list(result.failed_families),
+                    "schema_valid": result.schema_valid,
+                }
+                for result in (validate_method(payload, method) for payload in payloads)
+            ]
+        )
+    )
+
+
+def run_independence_gates(
+    cases_by_split: Mapping[str, Sequence[Case]],
+    oracle_fn: Callable[[Mapping[str, Any]], Any],
+) -> dict[str, Any]:
+    """Run the locked source, perturbation, and metadata-independence probes."""
+
+    cases = _ordered_cases(cases_by_split)
+    if not cases:
+        raise ProtocolError("independence gate has no probe cases")
+    oracle_probe_cases = tuple(
+        case for case in cases if case.variant_id == "I1-wrong-repository"
+    )
+    if not oracle_probe_cases:
+        raise ProtocolError("independence gate has no identity perturbation cases")
+    payloads = tuple(case.payload for case in cases)
+    oracle_probe_payloads = tuple(case.payload for case in oracle_probe_cases)
+
+    source_evidence = _inspect_independence_sources(oracle_fn)
+    metadata_evidence = _run_metadata_tripwire(payloads[0])
+    oracle_before = _oracle_signature(oracle_fn, payloads)
+    method_before = _method_signature(payloads, "M1")
+
+    original_checks = dict(M1_CHECKS)
+
+    def _always_true(_payload: Mapping[str, Any]) -> bool:
+        return True
+
+    try:
+        M1_CHECKS["identity"] = _always_true
+        method_after_method_perturbation = _method_signature(payloads, "M1")
+        oracle_after_method_perturbation = _oracle_signature(oracle_fn, payloads)
+    finally:
+        M1_CHECKS.clear()
+        M1_CHECKS.update(original_checks)
+    method_perturbation = {
+        "status": "pass",
+        "perturbed": "M1_CHECKS.identity=always_true",
+        "payload_count": len(payloads),
+        "method_signature_before": method_before,
+        "method_signature_after": method_after_method_perturbation,
+        "oracle_signature_before": oracle_before,
+        "oracle_signature_after": oracle_after_method_perturbation,
+        "method_changed": method_after_method_perturbation != method_before,
+        "oracle_unchanged": oracle_after_method_perturbation == oracle_before,
+    }
+    if not method_perturbation["method_changed"]:
+        raise ProtocolError("method predicate perturbation did not change method output")
+    if not method_perturbation["oracle_unchanged"]:
+        raise ProtocolError("method predicate perturbation changed oracle output")
+
+    oracle_module = inspect.getmodule(oracle_fn)
+    if oracle_module is None:
+        raise ProtocolError("oracle relation perturbation module is unavailable")
+    original_identity_relation = getattr(oracle_module, "_identity_relation", None)
+    if not callable(original_identity_relation):
+        raise ProtocolError("oracle identity relation is unavailable")
+
+    try:
+        setattr(oracle_module, "_identity_relation", _always_true)
+        oracle_after_oracle_perturbation = _oracle_signature(oracle_fn, payloads)
+        method_after_oracle_perturbation = _method_signature(payloads, "M1")
+    finally:
+        setattr(oracle_module, "_identity_relation", original_identity_relation)
+    oracle_perturbation = {
+        "status": "pass",
+        "perturbed": "oracle._identity_relation=always_true",
+        "payload_count": len(oracle_probe_payloads),
+        "method_signature_before": method_before,
+        "method_signature_after": method_after_oracle_perturbation,
+        "oracle_signature_before": oracle_before,
+        "oracle_signature_after": oracle_after_oracle_perturbation,
+        "method_unchanged": method_after_oracle_perturbation == method_before,
+        "oracle_changed": oracle_after_oracle_perturbation != oracle_before,
+        "identity_probe_case_count": len(oracle_probe_payloads),
+    }
+    if not oracle_perturbation["method_unchanged"]:
+        raise ProtocolError("oracle relation perturbation changed method output")
+    if not oracle_perturbation["oracle_changed"]:
+        raise ProtocolError("oracle relation perturbation did not change oracle output")
+
+    return {
+        "status": "pass",
+        "source_inspection": source_evidence,
+        "method_predicate_perturbation": method_perturbation,
+        "oracle_relation_perturbation": oracle_perturbation,
+        "validator_metadata_tripwire": metadata_evidence,
+    }
+
+
+def validate_independence_evidence(evidence: Any) -> None:
+    if not isinstance(evidence, Mapping) or evidence.get("status") != "pass":
+        raise ProtocolError("oracle-independence evidence is missing or failed")
+    required = (
+        "source_inspection",
+        "method_predicate_perturbation",
+        "oracle_relation_perturbation",
+        "validator_metadata_tripwire",
+    )
+    if any(not isinstance(evidence.get(name), Mapping) for name in required):
+        raise ProtocolError("oracle-independence evidence is incomplete")
+    source = evidence["source_inspection"]
+    if source.get("status") != "pass" or source.get("oracle_method_references"):
+        raise ProtocolError("oracle source-independence evidence is incomplete")
+    if source.get("validator_metadata_references"):
+        raise ProtocolError("validator metadata-independence evidence is incomplete")
+    method = evidence["method_predicate_perturbation"]
+    if (
+        method.get("status") != "pass"
+        or method.get("method_changed") is not True
+        or method.get("oracle_unchanged") is not True
+    ):
+        raise ProtocolError("method perturbation evidence is incomplete")
+    oracle = evidence["oracle_relation_perturbation"]
+    if (
+        oracle.get("status") != "pass"
+        or oracle.get("method_unchanged") is not True
+        or oracle.get("oracle_changed") is not True
+    ):
+        raise ProtocolError("oracle perturbation evidence is incomplete")
+    metadata = evidence["validator_metadata_tripwire"]
+    if metadata.get("status") != "pass" or not metadata.get("methods_checked"):
+        raise ProtocolError("metadata tripwire evidence is incomplete")
+    for section, fields in (
+        (source, ("oracle_source_sha256", "validator_source_sha256")),
+        (
+            method,
+            (
+                "method_signature_before",
+                "method_signature_after",
+                "oracle_signature_before",
+                "oracle_signature_after",
+            ),
+        ),
+        (
+            oracle,
+            (
+                "method_signature_before",
+                "method_signature_after",
+                "oracle_signature_before",
+                "oracle_signature_after",
+            ),
+        ),
+    ):
+        for field in fields:
+            if not isinstance(section.get(field), str) or re.fullmatch(
+                r"[0-9a-f]{64}", section[field]
+            ) is None:
+                raise ProtocolError("oracle-independence evidence hash is malformed")
+    for section in (method, oracle, metadata):
+        if type(section.get("payload_count")) is not int or section["payload_count"] <= 0:
+            raise ProtocolError("oracle-independence evidence count is malformed")
+
+
 def evaluate_cases(cases: Sequence[Case], method: str) -> list[dict[str, Any]]:
     if method not in METHODS:
         raise ProtocolError(f"unknown method: {method}")
@@ -1881,6 +2251,65 @@ def _mutation_summary(
     return ", ".join(pieces)
 
 
+def _validate_result_exclusion_counts(
+    result_markdown: str,
+    bundle: SourceBundle,
+) -> None:
+    scans = {scan.split: scan for scan in bundle.scans}
+    if len(scans) != len(bundle.scans) or set(scans) != set(SPLITS):
+        raise ProtocolError("result report requires one scan for every source split")
+    expected = {split: scans[split].exclusions() for split in SPLITS}
+    lines = result_markdown.splitlines()
+    if lines.count("exclusion_counts:") != 1 or lines.count("gate_status:") != 1:
+        raise ProtocolError("result report exclusion-count section is missing")
+    start = lines.index("exclusion_counts:")
+    end = lines.index("gate_status:")
+    entries = lines[start + 1:end]
+    if len(entries) != len(SPLITS):
+        raise ProtocolError("result report exclusion-count section is incomplete")
+    reported: dict[str, dict[str, int]] = {}
+    for expected_split, line in zip(SPLITS, entries):
+        prefix = f"  {expected_split}: "
+        if not line.startswith(prefix):
+            raise ProtocolError("result report exclusion-count split is missing")
+        encoded = line[len(prefix):]
+        try:
+            decoded = strict_json_loads(encoded)
+        except (ValueError, json.JSONDecodeError) as error:
+            raise ProtocolError("result report exclusion counts are not strict JSON") from error
+        if type(decoded) is not dict or canonical_json_text(decoded) != encoded:
+            raise ProtocolError("result report exclusion counts are not canonical JSON")
+        if any(type(value) is not int or value < 0 for value in decoded.values()):
+            raise ProtocolError("result report exclusion count is malformed")
+        reported[expected_split] = decoded
+    if reported != expected:
+        raise ProtocolError("result report exclusion counts are incomplete or incorrect")
+
+
+def _validate_result_independence_evidence(
+    result_markdown: str,
+    evidence: Mapping[str, Any],
+) -> None:
+    validate_independence_evidence(evidence)
+    prefix = "oracle_independence_evidence: "
+    lines = result_markdown.splitlines()
+    matches = [line[len(prefix):] for line in lines if line.startswith(prefix)]
+    if len(matches) != 1:
+        raise ProtocolError("result report independence evidence is missing")
+    encoded = matches[0]
+    try:
+        reported = strict_json_loads(encoded)
+    except (ValueError, json.JSONDecodeError) as error:
+        raise ProtocolError("result report independence evidence is not strict JSON") from error
+    if type(reported) is not dict or canonical_json_text(reported) != encoded:
+        raise ProtocolError("result report independence evidence is not canonical JSON")
+    if reported != dict(evidence):
+        raise ProtocolError("result report independence evidence does not match pipeline evidence")
+    expected_status = f"  method_oracle_independence: {evidence['status']}"
+    if lines.count(expected_status) != 1:
+        raise ProtocolError("result report independence gate status is missing")
+
+
 def build_result_markdown(
     run_id: str,
     manifest: SourceManifest,
@@ -1891,7 +2320,11 @@ def build_result_markdown(
     bootstrap: BootstrapResult,
     lookup_hashes: Mapping[str, str],
     artifact_hashes: Mapping[str, str],
+    independence_evidence: Mapping[str, Any] | None = None,
 ) -> str:
+    if independence_evidence is None:
+        raise ProtocolError("result report requires measured independence evidence")
+    validate_independence_evidence(independence_evidence)
     point_deltas = {
         subgroup: pair_deltas(
             prediction_rows, "confirmatory", subgroup
@@ -1923,7 +2356,7 @@ def build_result_markdown(
         repos = len({case.repo_id for case in cases_by_split[split]})
         lines.append(f"  {split}: bases={bases}, cases={len(cases_by_split[split])}, repositories={repos}")
     lines.append("exclusion_counts:")
-    for split in (name for name in SPLITS if name in bundle.scans):
+    for split in SPLITS:
         counts = bundle.scan_for(split).exclusions()
         lines.append(f"  {split}: {canonical_json_text(counts)}")
     lines.extend(
@@ -1934,13 +2367,17 @@ def build_result_markdown(
             "  projection_and_selection_determinism: pass",
             "  schema_oracle_and_mutation_known_answers: pass",
             "  repository_isolation_and_quotas: pass",
-            "  method_oracle_independence: pass",
+            f"  method_oracle_independence: {independence_evidence['status']}",
             "  calibration_isolation: pass",
             "  artifact_schema_and_size: pass",
             "  two_build_determinism: pass",
             "  bootstrap_replicates: pass",
             "calibration_lookup_sha256:",
         ]
+    )
+    lines.append(
+        "oracle_independence_evidence: "
+        + canonical_json_text(independence_evidence)
     )
     for method in CALIBRATED_METHODS:
         lines.append(f"  {method}: {lookup_hashes[method]}")
@@ -2121,6 +2558,16 @@ class PipelineArtifacts:
 
 
 def validate_pipeline_artifacts(artifacts: PipelineArtifacts) -> None:
+    sanity = getattr(artifacts, "sanity", None)
+    if not isinstance(sanity, Mapping):
+        raise ProtocolError("pipeline sanity evidence is missing")
+    independence_evidence = sanity.get(INDEPENDENCE_EVIDENCE_KEY)
+    validate_independence_evidence(independence_evidence)
+    _validate_result_exclusion_counts(artifacts.result_markdown, artifacts.bundle)
+    _validate_result_independence_evidence(
+        artifacts.result_markdown,
+        independence_evidence,
+    )
     if len(artifacts.prediction_rows) != len(SPLITS) * PREDICTIONS_PER_SPLIT:
         raise ProtocolError("prediction row count mismatch")
     if len(artifacts.metric_rows) != EXPECTED_METRIC_ROWS:
@@ -2166,6 +2613,10 @@ def build_pipeline(
     source_root: Path | str | None = None,
     *,
     oracle_fn: Callable[[Mapping[str, Any]], Any] | None = None,
+    independence_gate_fn: Callable[
+        [Mapping[str, Sequence[Case]], Callable[[Mapping[str, Any]], Any]],
+        Mapping[str, Any],
+    ] | None = None,
 ) -> PipelineArtifacts:
     """Build the complete future run in memory; this function never writes."""
 
@@ -2186,6 +2637,9 @@ def build_pipeline(
     cases_again = build_cases(selected_again, oracle)
     if _case_signature(cases) != _case_signature(cases_again):
         raise ProtocolError("complete case determinism gate failed")
+    independence_gate = independence_gate_fn or run_independence_gates
+    independence_evidence = independence_gate(cases, oracle)
+    validate_independence_evidence(independence_evidence)
     raw_rows = evaluate_all_methods(cases)
     calibration_rows = tuple(
         row for row in raw_rows if row.get("split") == "calibration"
@@ -2219,6 +2673,7 @@ def build_pipeline(
         bootstrap,
         lookup_hashes,
         {name: sha256_hex(data) for name, data in preliminary_serialized.items()},
+        independence_evidence,
     )
     outputs = tuple(
         (
@@ -2248,6 +2703,7 @@ def build_pipeline(
             "calibration_only": True,
             "bootstrap_replicates": bootstrap.replicate_count,
             "confirmatory_cases_scored": True,
+            INDEPENDENCE_EVIDENCE_KEY: independence_evidence,
         },
     )
     validate_pipeline_artifacts(artifacts)
