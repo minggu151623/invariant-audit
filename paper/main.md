@@ -1,208 +1,156 @@
-# InvariantAudit: Calibrating Semantic and State Invariants Across Synthetic Benchmarks and Real-World Telemetry Streams
+# InvariantAudit: Semantic and State Validation in Two Finite Synthetic Designs
 
-**Authors:** InvariantAudit Research Project  
-**Date:** September 2026  
-**Status:** Working Paper Draft (Verified Evidence Provenance M00–M13)  
-**Repository:** `invariant-audit`
-
----
+Status: corrected working draft, 2026-09-17; preliminary, not publication-ready.
+This draft supersedes numerical and interpretive errors in commit 265bd55.
+Public-claim eligibility remains false. No external performance result exists.
 
 ## Abstract
 
-Modern distributed and event-driven software architectures rely heavily on asynchronous event streams to coordinate business logic, microservice state, and audit logs. While syntactic schema validators (e.g., JSON Schema) verify primitive data types, they remain fundamentally blind to cross-field semantic relationships and state-machine transitions. We present **InvariantAudit**, a framework for specifying, calibrating, and auditing semantic and state invariants in software telemetry with non-parametric uncertainty estimation. We evaluate InvariantAudit across three rigorous experimental stages: (1) a finite synthetic benchmark (E001) where our calibrated invariant checker ($M_1$) achieves $+50.0\%$ balanced accuracy and eliminates false alarms ($\Delta \text{FPR} = -1.000$) over a schema-only baseline ($B_0$) without inflating false negatives ($\Delta \text{FNR} = 0.000$); (2) a heterogeneous specification stress test across 96 non-identical clusters and multi-fault regimes (E002), where $M_1$ maintains a $+40.2\%$ improvement in balanced accuracy and an $80.4\%$ reduction in false positive rate while preserving the zero-false-negative guardrail; and (3) an external transfer evaluation on $275,000+$ real-world events from the public GitHub Archive stream across three annual snapshots (E003). Crucially, the external transfer experiment revealed an authentic "lab-to-wild" gap: while laboratory benchmarks assume duplicate-free message delivery, the production telemetry stream contained 537 duplicate event deliveries per 117,780 records ($0.45\%$), causing an idealized fail-closed uniqueness constraint to invalidate the run. Our findings demonstrate that while semantic invariant checking significantly outclasses syntactic validation, practical telemetry auditors must explicitly decouple transport-level idempotency from application-level state semantics.
+We compare a schema-only validator (B0) with an invariant-aware validator (M1)
+in two deterministic synthetic constructions. The positive class is valid:
+false positives are invalid cases accepted, and false negatives are valid
+cases rejected. On E001, M1 improves balanced accuracy by 0.5 and reduces
+false acceptance by 1.0, without increasing false rejection. On E002, these
+differences are 0.401960784, -0.803921569, and zero; the locked specification-stress
+diagnostics also pass. Brier scores decrease, but fixed-bin expected calibration
+error (ECE) increases in both comparisons. E003-v1, an attempted external-fixture
+evaluation, stopped at its duplicate-ID source gate and produced no performance
+metrics or H3 outcome. These results support the specified finite comparisons,
+not production performance, general calibration improvement, or external validity.
 
----
+## Question and methods
 
-## 1. Introduction
+The project asks how semantic and state invariants can be validated while
+measuring false acceptance, false rejection, and probability-score behavior.
+The user approved this direction in [M00](../milestones/M00-research-direction.md).
+Detailed experiment designs are AI-suggested, not user-selected.
 
-Software systems increasingly operate as decoupled, distributed event graphs where state changes are propagated via JSON-encoded event streams (e.g., GitHub webhooks, Kafka messaging, cloud audit trails). In these environments, subtle corruptions—such as an issue marked with action `closed` while its inner state remains `open`, or a pull request URL referencing an mismatched repository identifier—can propagate silently through downstream analytical pipelines and automated workflows.
+E001 uses synthetic entity/ledger/event bundles with identity, conservation,
+transition-legality, and revision-consistency relations. E002 adds six
+heterogeneous synthetic signatures, bounded multi-fault recipes, a separately
+implemented replay/conservation oracle, and omission, overconstraint, and
+stale-transition checker regimes. These are constructed cases, not sampled
+repositories or measurements of naturally occurring software errors.
 
-Syntactic schema validation tools (e.g., JSON Schema, OpenAPI) ensure structural conformity: strings are strings, integers are integers, and required top-level keys exist. However, they lack the expressive power to enforce relational invariants across nested fields or assert state-transition constraints over time. Conversely, hand-written invariant checkers often suffer from catastrophic false-alarm rates or overfit to narrow edge cases, leading engineers to disable monitoring rules altogether.
+B0 checks each protocol's structural constraints. M1 also checks its selected
+semantic/state relations. This concerns the specific B0 implementation; it does
+not prove that every schema language is incapable of relational checks.
+The no-semantic and no-state ablations remove their respective predicates.
 
-To address this challenge, we investigate the following core research question:
-> *Can semantic and state invariants be systematically formulated, statistically calibrated, and evaluated against schema-only baselines to maximize balanced detection accuracy without inflating false-negative safety risks, and how do these formulations transfer from synthetic environments to external, real-world telemetry streams?*
+Each calibrated method fits a lookup on its calibration split:
+`p_valid(s) = (k_s + 1)/(n_s + 2)`, with a calibration-wide fallback for unseen
+scores. This is Laplace-smoothed empirical lookup, not isotonic regression.
+Classification decisions do not change with this confidence transformation.
+The no-calibration ablation uses the binary M1 decision as its probability.
+See the [E001 protocol](../experiments/E001-synthetic-invariant-calibration/protocol.md)
+and [E002 protocol](../experiments/E002-heterogeneous-specification-stress/protocol.md).
 
-To answer this question, we established InvariantAudit, an experimental research framework governed by strict protocol-before-results locking, clean-tree execution gates, and reproducible artifact hashing. Through three successive milestones, we demonstrate:
-1. **Semantic Superiority over Syntactic Baselines:** On controlled synthetic data (E001), calibrated invariant checking ($M_1$) achieves a balanced accuracy of $1.000$ compared to $0.500$ for a schema-only baseline ($B_0$), reducing the false positive rate from $1.000$ to $0.000$ while maintaining zero false negatives.
-2. **Robustness Under Heterogeneous Stress:** When subjected to 96 heterogeneous repository clusters with varying fault densities and multi-fault combinations (E002), $M_1$ reliably improves balanced accuracy by $+40.2\%$ ($\Delta \text{BA} = +0.40196$) and reduces the false alarm rate by $80.4\%$ ($\Delta \text{FPR} = -0.80392$) while satisfying a strict zero-false-negative guardrail ($\Delta \text{FNR} = 0.00000$).
-3. **The Empirical Real-World Transfer Gap:** When deploying the harness to real-world GitHub Archive dumps (E003, spanning 2019, 2020, and 2021), the strict fail-closed uniqueness assumption inherited from synthetic protocols triggered an execution invalidation on the 2021 confirmatory shard due to 537 duplicate event records generated by upstream at-least-once message collection. This empirical finding provides concrete evidence that real-world event streams exhibit transport-level duplications that must be explicitly separated from semantic state corruptions.
+With positive=valid, FPR is the fraction of invalid cases accepted; FNR is the
+fraction of valid cases rejected. Balanced accuracy averages valid acceptance
+and invalid rejection rates. Brier is mean squared probability error. ECE uses
+ten fixed probability bins and compares each bin's mean p_valid with mean truth.
+Brier is not a pure calibration measure; see the existing
+[literature foundation](../literature/survey.md#probability-confidence-and-calibration).
 
----
+The primary M1-minus-B0 rule requires the 95% paired cluster-bootstrap BA
+interval to be strictly positive, the FPR interval strictly negative, and the
+point FNR delta nonpositive. E002 additionally requires its subgroup-direction
+and three co-primary stress conditions. Secondary confidence metrics do not
+determine whether H1/H2 is supported.
 
-## 2. Related Work
+## E001: valid finite synthetic result
 
-### 2.1 Runtime Invariant Detection and Monitoring
-Dynamic invariant detection, pioneered by Daikon (Ernst et al., 2007), infers program invariants over operational execution traces. Similarly, DIDUCE (Hangal & Lam, 2002) dynamically detects invariant anomalies to localize software bugs. While dynamic invariant tools focus on program variables and call stacks, InvariantAudit addresses serialized, semi-structured event payloads exchanged across service boundaries, where specifications must balance cross-field relations against varying schema versions.
+Run `e001-20260825-001` has 256 development, 256 calibration, and 512
+confirmatory cases. The confirmatory set contains 64 clusters and uses 10,000
+paired bootstrap replicates. These numbers come from the
+[locked result](../experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md).
 
-### 2.2 Metamorphic Testing and Mutation Analysis
-Metamorphic testing (Chen et al., 1998, 2018) provides a mechanism to test software without an oracle by leveraging metamorphic relations between inputs and outputs. In InvariantAudit, we employ metamorphic mutations to systematically evaluate how invariant checkers behave when single or multiple fields are perturbed, ensuring that the validator detects targeted corruptions without reacting to irrelevant payload variations.
+| Metric | B0 | M1 | Delta M1-B0 |
+| --- | ---: | ---: | ---: |
+| Balanced accuracy | 0.5 | 1 | 0.5 |
+| FPR (false acceptance) | 1 | 0 | -1 |
+| FNR (false rejection) | 0 | 0 | 0 |
+| Brier | 0.25 | 0.00005917159763 | -0.2499408284 |
+| ECE | 0 | 0.007692307692 | 0.007692307692 |
 
-### 2.3 Statistical Probability Calibration
-In safety-critical classification, raw prediction scores often fail to reflect empirical event probabilities (Guo et al., 2017). Non-parametric isotonic regression (Zadrozny & Elkan, 2002) and Platt scaling (Platt, 1999) calibrate raw model outputs into reliable probability estimators. InvariantAudit applies discrete isotonic calibration to multi-predicate invariant violations on a dedicated calibration split, evaluating Brier score and Expected Calibration Error (ECE) under cluster bootstrap sampling.
+H1 is supported under the locked rule. All paired intervals collapse to their
+point estimates because the constructed cluster signatures are identical.
+This does not establish negligible uncertainty beyond the finite construction.
+Both no-semantic and no-state ablations have BA 0.75 and FPR 0.5.
+The no-calibration ablation already has Brier=ECE=0 and identical decisions:
+this experiment does not demonstrate a benefit from adding the lookup.
+The secondary prediction of lower ECE was not supported.
 
----
+## E002: latest valid performance result
 
-## 3. Methodology & Invariant Formulation
+Run `e002-20260825-002` has 912 cases in 96 synthetic clusters in total;
+228/228/456 cases form the development/calibration/confirmatory sets, with
+48 confirmatory clusters. These values and all intervals below come from the
+[valid report](../experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md).
 
-### 3.1 Event Taxonomy and Invariant Relations
-We focus on canonical software development lifecycle events, specifically `IssuesEvent` and `PullRequestEvent`. Each event payload $x$ is evaluated across three nested invariant tiers:
+| Metric | B0 | M1 | Delta M1-B0 | 95% paired bootstrap CI for delta |
+| --- | ---: | ---: | ---: | --- |
+| Balanced accuracy | 0.598039216 | 1.000000000 | 0.401960784 | [0.383254717, 0.422077922] |
+| FPR (false acceptance) | 0.803921569 | 0.000000000 | -0.803921569 | [-0.844327177, -0.767281106] |
+| FNR (false rejection) | 0.000000000 | 0.000000000 | 0.000000000 | [0.000000000, 0.000000000] |
+| Brier | 0.091937429 | 0.000247903 | -0.091689527 | [-0.096349544, -0.087346241] |
+| ECE | 0.007408873 | 0.012631635 | 0.005222762 | [0.003377133, 0.007432312] |
 
-1. **Common Syntactic Schema:**
-   $$\phi_{\text{schema}}(x) \iff x.\text{id} \in \mathbb{N} \land x.\text{type} \in \mathcal{T} \land x.\text{repo} \in \mathcal{R} \land x.\text{actor} \in \mathcal{A}$$
-2. **Semantic Identity Invariants:**
-   Asserts cross-field consistency between top-level identifiers and nested entity URLs:
-   $$\phi_{\text{identity}}(x) \iff x.\text{payload}.\text{issue}.\text{number} = \text{ExtractNumber}(x.\text{payload}.\text{issue}.\text{url}) \land x.\text{repo}.\text{url} = x.\text{payload}.\text{issue}.\text{repository\_url}$$
-3. **Semantic State Invariants:**
-   Asserts logical consistency between high-level actions and discrete entity lifecycle states:
-   $$\phi_{\text{state}}(x) \iff \begin{cases} 
-   x.\text{payload}.\text{issue}.\text{state} = \text{"open"}, & \text{if } x.\text{action} \in \{\text{"opened"}, \text{"reopened"}\} \\
-   x.\text{payload}.\text{issue}.\text{state} = \text{"closed"}, & \text{if } x.\text{action} = \text{"closed"}
-   \end{cases}$$
-   For pull requests, the state invariant additionally enforces that `merged = true` is valid only when `action = closed` and `state = closed`.
+Delta BA is a 40.1960784 percentage-point increase, not a 40.2% relative gain.
+Deltas are calculated from exact statistics before rounding, rather than by
+subtracting displayed rounded cells. H2 is supported and the FNR guardrail
+passes. Co-primary d1 has delta FPR 0.352941176 and CI
+[0.340425532, 0.366412214]; d2 and d3 each have delta FNR 1 and CI [1,1].
+Omission accepts invalid conservation cases; overconstraint and stale rules
+reject valid cases. These bounded failures do not demonstrate robustness to
+arbitrary incorrect specifications.
 
-### 3.2 Evaluated Methods
-- **$B_0$ (Schema-Only Baseline):** Accepts any event satisfying $\phi_{\text{schema}}(x)$. Rejects only malformed JSON or schema-missing payloads.
-- **$M_1$ (Calibrated Invariant Checker):** Evaluates the conjunction of schema, identity, and state invariants:
-  $$f_{M_1}(x) = \phi_{\text{schema}}(x) \land \phi_{\text{identity}}(x) \land \phi_{\text{state}}(x)$$
-  Its raw classification is calibrated into posterior probability scores using an empirical lookup table fitted exclusively on a held-out calibration split.
-- **Ablation Variants:**
-  - $M_1\text{-no-identity}$: Invariant checker with identity checks disabled.
-  - $M_1\text{-no-state}$: Invariant checker with state-machine checks disabled.
-  - $M_1\text{-no-calibration}$: Uncalibrated binary thresholding.
+Run 001 remains invalid: exact-versus-rounded Brier arithmetic in its report
+validator caused `D9_OR_NA`. Its report is not part of H2 evidence.
+The valid run followed an implementation correction and separate authorization;
+see [M08](../milestones/M08-E002-run-002-valid.md).
 
-### 3.3 Evaluation Metrics and Pre-Registered Hypotheses
-We measure performance on held-out confirmatory splits using:
-- **Balanced Accuracy (BA):** $\frac{1}{2}(\text{TPR} + \text{TNR})$
-- **False Positive Rate (FPR):** $\frac{\text{FP}}{\text{FP} + \text{TN}}$
-- **False Negative Rate (FNR):** $\frac{\text{FN}}{\text{FN} + \text{TP}}$
-- **Brier Score:** Mean squared difference between predicted probabilities and true binary labels.
-- **Expected Calibration Error (ECE):** Weighted absolute difference between accuracy and confidence across probability bins.
+## E003: invalid source gate, no external performance result
 
-**Primary Guardrail Rule:** Any candidate method $M$ must satisfy:
-$$\Delta \text{BA}_{M - B_0} > 0, \quad \Delta \text{FPR}_{M - B_0} < 0, \quad \Delta \text{FNR}_{M - B_0} \le 0$$
-where intervals are estimated via paired cluster bootstrap with 10,000 resamples.
+E003-v1 preselected three GH Archive hourly shards. M11 records 67,145,
+90,940, and 117,780 records, totaling 275,865 source records. This is an input
+inventory, not the number of evaluated cases. E003 would select external clean
+events and create artificial negatives, so even a valid run would not estimate
+naturally occurring error prevalence.
 
----
+The M12 preflight scanned only development/calibration: 2,178 repository IDs
+shared by those two groups were excluded. Its 5,408 and 9,435 eligible-event
+counts do not establish isolation across all three shards.
+The implementation review was HOLD followed by remediation; M12 still says
+independent re-review pending. No independent re-review acceptance is established
+by the preserved M13 record.
 
-## 4. Experimental Results
+Run `e003-20260903-001` exited 2 on duplicate event IDs at confirmatory lines
+16450 and 16491. The locked protocol rejects any duplicated ID before type
+filtering and forbids deduplication. No predictions, metrics, bootstrap, or H3
+outcome were produced. [M13](../milestones/M13-E003-run-001-invalid.md) reports a
+subsequent diagnostic count of 537 duplicate occurrences in the 2021 shard and
+zero in the earlier shards. At resumption the external temporary cache/manifest
+were missing, so those historical counts required recovery and re-verification.
+Follow-up source diagnosis is tracked separately as E004.
 
-```
-+-------------------------------------------------------------------------------+
-|                       InvariantAudit Experimental Trajectory                  |
-+-------------------------------------------------------------------------------+
-| E001: Finite Synthetic Baseline (M02)                                         |
-| - Balanced Accuracy: B0 = 0.500 | M1 = 1.000 (Delta = +0.500)                 |
-| - False Positive Rate: B0 = 1.000 | M1 = 0.000 (Delta = -1.000)               |
-| - False Negative Rate: 0.000 (Guardrail Preserved)                            |
-+-------------------------------------------------------------------------------+
-                                      |
-                                      v
-+-------------------------------------------------------------------------------+
-| E002: Heterogeneous Specification Stress (M08)                                |
-| - 96 heterogeneous clusters, 6 distinct fault profiles, 912 cases             |
-| - Balanced Accuracy: Delta = +0.40196 (95% CI > 0)                            |
-| - False Positive Rate: Delta = -0.80392 (95% CI < 0)                          |
-| - False Negative Rate: Delta = 0.00000 (Guardrail Preserved)                  |
-| - Brier Delta: -0.09169 | Primary Hypothesis H2 Supported                     |
-+-------------------------------------------------------------------------------+
-                                      |
-                                      v
-+-------------------------------------------------------------------------------+
-| E003: External Transfer Validation on GitHub Archive (M11-M13)                |
-| - 3 annual public shards: 2019 (67,145), 2020 (90,940), 2021 (117,780)        |
-| - Cross-split repository isolation: 2,178 shared repos excluded               |
-| - Confirmatory execution: Triggered source-integrity fail-close               |
-| - Discovery: 537 duplicate event deliveries in 2021 GH Archive stream         |
-| - Key Finding: At-least-once delivery breaks synthetic uniqueness assumptions |
-+-------------------------------------------------------------------------------+
-```
+Duplicate IDs alone do not identify a delivery mechanism. Retries, overlapping
+collection, or other causes remain hypotheses; no source in the repository
+establishes the cause of these particular duplicates. The former attribution
+to at-least-once delivery is withdrawn. Any revised policy must first distinguish
+identical repeats from conflicting payloads and preserve the invalid v1 record.
 
-### 4.1 Experiment 1 (E001): Finite Synthetic Calibration
+## Limitations and conclusion
 
-In E001 (Milestone M02), we evaluated $B_0$ and $M_1$ on 1,024 synthetic cases partitioned across development (256), calibration (256), and confirmatory (512) splits with 64 repository clusters.
+E001's oracle is recipe-coupled; E002's separately implemented oracle still
+shares a hand-specified synthetic design. Bootstrap intervals describe the
+finite resampling scheme, not a representative population. ECE worsens in both
+M1-B0 comparisons despite lower Brier; improved probability calibration is not
+established. E003 failed before evaluation. No production, external-validity,
+generalization, novelty, safety, or public-claim conclusion follows.
 
-| Method | Balanced Accuracy | FPR | FNR | Brier Score | ECE |
-|---|---|---|---|---|---|
-| Baseline $B_0$ | $0.500$ | $1.000$ | $0.000$ | $0.2500$ | $0.0000$ |
-| InvariantAudit $M_1$ | **$1.000$** | **$0.000$** | **$0.000$** | **$0.000059$** | $0.00769$ |
-| **Paired $\Delta (M_1 - B_0)$** | **$+0.500$** | **$-1.000$** | **$0.000$** | **$-0.24994$** | $+0.00769$ |
-
-**Analysis:** Because baseline $B_0$ only inspects top-level schema compliance, it classifies all semantic negative mutations as valid, leading to a catastrophic $100\%$ false alarm rate on corrupted cases. $M_1$ achieves perfect separation on the single-fault synthetic set while preserving zero false negatives.
-
-### 4.2 Experiment 2 (E002): Heterogeneous Specification Stress
-
-In E002 (Milestone M08), we evaluated the methods under severe specification misspecification across 96 heterogeneous clusters, 6 non-identical signatures, and multi-fault combinations, totaling 912 evaluation cases.
-
-| Metric | Baseline $B_0$ | InvariantAudit $M_1$ | Paired Delta ($M_1 - B_0$) | 95% Bootstrap CI |
-|---|---|---|---|---|
-| Balanced Accuracy | $0.59804$ | **$1.00000$** | **$+0.40196$** | $[+0.37255, +0.43137]$ |
-| False Positive Rate | $0.80392$ | **$0.00000$** | **$-0.80392$** | $[-0.86275, -0.74510]$ |
-| False Negative Rate | $0.00000$ | **$0.00000$** | **$0.00000$** | $[0.00000, 0.00000]$ |
-| Brier Score | $0.20098$ | **$0.10929$** | **$-0.09169$** | $[-0.10421, -0.07917]$ |
-| ECE | $0.00000$ | $0.00522$ | $+0.00522$ | $[+0.00210, +0.00835]$ |
-
-**Analysis:** Despite heterogeneous noise and simultaneous multi-fault corruptions, $M_1$ maintained a $40.2\%$ gain in balanced accuracy and reduced false positives by $80.4\%$, with empirical cluster bootstrap confirming that the $95\%$ confidence intervals exclude zero. The safety guardrail ($\Delta \text{FNR} \le 0$) was strictly satisfied.
-
-### 4.3 Experiment 3 (E003): External Transfer and Source-Integrity Invalidation
-
-Following the M09 decision to test external transfer beyond synthetic generators, E003 ingested three frozen public hourly dumps from GitHub Archive (`2019-01-15-12.json.gz`, `2020-01-15-12.json.gz`, and `2021-01-15-12.json.gz`).
-
-To ensure strict group isolation, all 2,178 repositories appearing in multiple annual splits were excluded prior to case selection, leaving 5,408 eligible events in development and 9,435 in calibration.
-
-During the single authorized confirmatory execution (`e003-20260903-001`), the runner executed standard-library pre-staging checks. When parsing the 2021 confirmatory shard, the pipeline detected duplicate canonical event IDs:
-```text
-ProtocolError: duplicate event ID across source: confirmatory:16450 and confirmatory:16491
-status: invalid
-exit_code: 2
-```
-
-An independent forensic audit of the three source shards revealed:
-- **Development (2019):** 67,145 records, **0 duplicate IDs**.
-- **Calibration (2020):** 90,940 records, **0 duplicate IDs**.
-- **Confirmatory (2021):** 117,780 records, **537 duplicate event IDs** (first collision at lines 16450 and 16491: `PushEvent` on `La-Z-fandy/Personalsite.github.io`, ID `14832202395`).
-- Cross-split duplicate ID count across the three years was exactly `0`.
-
-The duplicate IDs spanned multiple event types: 289 `PushEvent`, 68 `CreateEvent`, 38 `WatchEvent`, 34 `PullRequestEvent`, 26 `IssueCommentEvent`, and 19 `IssuesEvent`.
-
-Under locked protocol E003-v1 (Section 1.1 & Section 2, Filter 1), the protocol specified:
-> *"The source record's raw `id` is the canonical `event_id` and must be unique across all three shards. Any duplicate event ID, including a duplicate with different bytes, is a source-integrity failure; no deduplication choice is permitted."*
-
-In accordance with our pre-registered protocol, the harness refused to perform ad-hoc deduplication and cleanly failed closed, recording the invalid run in Milestone M13.
-
----
-
-## 5. Discussion & The Synthetic-to-Real Transfer Gap
-
-The unexpected invalidation of E003 provides one of the most critical empirical insights of this research: **the fundamental divergence between synthetic invariant assumptions and real-world distributed telemetry.**
-
-In synthetic software engineering research, data generators produce neat, uniquely keyed streams. When researchers design invariant checks, they naturally formalize uniqueness as a fundamental integrity invariant. However, in production distributed systems:
-1. **At-Least-Once Delivery Semantics:** Public event streams (like GH Archive and webhook delivery systems) operate over at-least-once message queues (Kafka, SQS, HTTP webhooks with exponential retries). Network partitions and polling timeouts inevitably produce duplicate deliveries of the same event ID within an aggregation window.
-2. **The Invariant Tiering Principle:** An invariant auditor cannot treat transport-level anomalies identically to semantic payload corruptions. If transport-level duplicates trigger a full system abort, the monitor will fail in production. Instead, runtime invariant architectures must adopt a **two-tier verification model**:
-   - **Tier 1 (Idempotency & Transport):** Deduplicates records by primary identifier within a sliding operational window.
-   - **Tier 2 (Relational & State Semantics):** Evaluates semantic identity and state-machine transitions on deduplicated streams.
-
----
-
-## 6. Threats to Validity & Limitations
-
-- **Source Breadth:** While the external validation utilized over 275,000 events, it was sourced exclusively from GitHub Archive. Telemetry from other distributed systems (e.g., Kubernetes audit logs, Stripe webhooks) may exhibit distinct corruption patterns.
-- **Reference Oracle Independence:** In E001 and E002, the reference oracle was separated by design, but synthetic mutations may not capture the full complexity of human developer errors.
-- **Protocol Fail-Closed Rigidity:** The locked E003-v1 protocol deliberately prohibited ad-hoc deduplication. While this ensured zero data snooping and preserved scientific integrity, it necessitated a protocol revision cycle ($E003\text{-v2}$) to handle at-least-once delivery.
-
----
-
-## 7. Conclusion
-
-This paper introduced InvariantAudit, demonstrating that schema validation alone is fundamentally insufficient for maintaining integrity in event-driven software architectures. Through controlled synthetic experiments (E001 and E002), we proved that calibrated semantic and state invariants dramatically enhance balanced detection accuracy ($+40.2\%$ to $+50.0\%$) and virtually eliminate false positive alerts without increasing false negatives. Furthermore, our external transfer experiment on GitHub Archive (E003) exposed an authentic transfer gap: real-world distributed streams violate idealized uniqueness assumptions through upstream collection duplicates. We conclude that robust runtime invariant auditing requires combining calibrated semantic invariant checkers with transport-level idempotency layers.
-
----
-
-## References
-
-- Chen, T. Y., Cheung, S. C., & Yiu, S. M. (1998). Metamorphic testing: a new approach for generating next test cases. *Technical Report HKUST-CS98-01*.
-- Chen, T. Y., Kuo, F. C., Liu, H., Poon, P. L., Towey, D., Tse, T. H., & Zhou, Z. Q. (2018). Metamorphic testing: A review of challenges and opportunities. *ACM Computing Surveys (CSUR)*, 51(1), 1-27.
-- Ernst, M. D., Perkins, J. H., Guo, P. J., McCamant, S., Pacheco, C., Tschantz, M. S., & Xiao, C. (2007). The Daikon system for dynamic detection of likely invariants. *Science of Computer Programming*, 69(1-3), 35-45.
-- Guo, C., Pleiss, G., Sun, Y., & Weinberger, K. Q. (2017). On calibration of modern neural networks. In *International Conference on Machine Learning (ICML)* (pp. 1321-1330).
-- Hangal, S., & Lam, M. S. (2002). Tracking down software bugs using automatic anomaly detection. In *Proceedings of the 24th International Conference on Software Engineering (ICSE)* (pp. 291-301).
-- Platt, J. (1999). Probabilistic outputs for support vector machines and comparisons to regularized likelihood methods. *Advances in Large Margin Classifiers*, 10(3), 61-74.
-- Zadrozny, B., & Elkan, C. (2002). Transforming classifier scores into accurate multiclass probability estimates. In *Proceedings of the Eighth ACM SIGKDD International Conference on Knowledge Discovery and Data Mining* (pp. 694-699).
+Within two locked finite constructions, M1 rejects more invalid cases than B0
+without increasing rejection of valid cases. The unresolved question is transfer
+to external records under a defensible, predeclared source policy. Source
+duplication diagnosis and E003-v2 design are subsequent work, not retroactive
+validation of E003-v1.

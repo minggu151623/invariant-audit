@@ -1,5 +1,21 @@
 # Findings
 
+## Current reading guide — 2026-09-17 correction (M14)
+
+Sections below retain historical stage language. Current state is M14. E001 and
+E002 run 002 remain the only valid performance results, restricted to finite
+synthetic designs. E003-v1 is invalid with no H3 outcome. Its old cache/manifest
+was missing at resumption. E004 will diagnose duplicate payload structure on
+hash-matched recovered source under a separately locked protocol.
+
+The paper is corrected against result artifacts: E002 Brier/ECE values and CIs,
+positive=valid terminology, Laplace-smoothed lookup, percentage points, and
+two-split preflight scope. FPR means false acceptance, not false alarm on a valid
+record. ECE increases in both comparisons; lower Brier does not prove generally
+improved calibration. The historical attribution of duplicates to at-least-once
+delivery/retries is withdrawn: their cause is unknown. No observed documentary
+error is attributed to a worker model without evidence.
+
 This document separates user authority, protocol/design provenance, observed
 E001 results, and reviewer/design inference. M02 is verified only within the
 finite synthetic E001 design; `public_claim_eligibility` is `false`.
@@ -775,4 +791,3 @@ The next gate requires an outer-loop decision:
 1. Formulate and lock `E003-v2` with realistic streaming deduplication (e.g., deduplicate upon first occurrence in line order or record duplicate delivery as an explicit natural exclusion class).
 2. Or acquire an alternative public hourly snapshot that happens to possess zero duplicates.
 Any future run requires a protocol lock, new run ID, and clean preflight.
-

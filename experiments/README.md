@@ -40,8 +40,8 @@ CSV/JSONL is row-data source.
   `public_claim_eligibility` is `false`.
 - [M06 E002 validator-remediation gate](../milestones/M06-E002-validator-remediation.md)
   records the exact-delta fix and independent acceptance. The invalid run
-  remains the only E002 execution; a corrected run requires a new run ID and
-  separate explicit authorization.
+  was the only E002 execution at M06; M08 subsequently records the valid
+  corrected run.
 - [M07 E002 corrected-run technical-readiness gate](../milestones/M07-E002-corrected-run-readiness.md)
   records the final development-test-boundary remediation and technical
   readiness for candidate `e002-20260825-002`, subject to runtime preflight at
@@ -74,6 +74,8 @@ CSV/JSONL is row-data source.
   fixtures and canonical source manifest are frozen outside Git with hashes,
   byte counts, decompressed JSONL line counts, and HTTP metadata. M12 records
   the scoped implementation and development/calibration-only preflight; the
-  implementation is pending independent review. E003 still has no run,
-  result, prediction, metric, bootstrap, or production output, and the 2021
-  confirmatory content was not selected or scored.
+  implementation re-review acceptance is not documented. M13 records the later
+  invalid run, rejected before scoring for duplicate source IDs. Only an
+  invalid report exists; no E003 performance result or metric exists. The
+  temporary cache was missing at 2026-09-17 resumption. E004 investigates
+  hash-matched source recovery and duplicate structure separately.

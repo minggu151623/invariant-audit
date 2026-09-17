@@ -1,5 +1,10 @@
 # LinkedIn Research Publication Post
 
+> WITHDRAWN DRAFT — 2026-09-17. Do not publish this historical copy. It contains
+> incorrect false-alarm terminology, unsupported causal explanations, and
+> overstates external validation/publication. Use paper/main.md for the corrected
+> evidence boundary. The text below is retained only as historical provenance.
+
 **Formula:** F19 (Anecdote-Meets-Evidence Bridge) + F10 (Contrarian Reality Check)  
 **Target Length:** ~1,100 characters (optimal algorithm sweet spot)  
 **Audience:** AI Engineers, Staff Backend/Platform Engineers, Tech Leads, MLOps practitioners

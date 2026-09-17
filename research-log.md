@@ -1,5 +1,18 @@
 # Research log
 
+## 2026-09-17 — M14 correction and E004 design
+
+- User authorized continued research; technical choices are AI-suggested.
+- Corrected paper/outline against immutable E001/E002 results/protocols:
+  table errors, class orientation, calibration method, scope and overclaims.
+  Withdrew the historical LinkedIn draft. No public action was taken.
+- E003-v1 invalidation is preserved. No model-specific cause for errors is
+  established. Duplicate-delivery causal attribution is unestablished.
+- Proposed E004 with fixed original source hashes, a separate protocol lock,
+  raw/canonical/conflicting categories and dictionary-versus-sort verification.
+  It is exploratory follow-up to M13, not external performance evidence.
+  Original temporary cache/manifest were absent at resumption.
+
 Bootstrap was pre-experiment. The current outer-loop state is recorded in the
 2026-08-25 reflection below.
 
@@ -696,4 +709,3 @@ Bootstrap was pre-experiment. The current outer-loop state is recorded in the
   Public claim eligibility remains `false`. Outer-loop reflection is required
   to decide between protocol revision E003-v2 (with realistic stream deduplication)
   or alternative collision-free fixture acquisition.
-

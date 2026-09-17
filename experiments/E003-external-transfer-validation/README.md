@@ -1,5 +1,14 @@
 # E003 external-transfer validation
 
+Current-status correction (2026-09-17): the acquisition/M12 descriptions below
+are historical. M13 records run e003-20260903-001 as invalid at the duplicate-ID
+source gate, with an invalid report and no performance metrics. The temporary
+source cache/manifest were absent at resumption. E004 tracks recovery and source
+diagnosis separately; E003-v1 remains unchanged and invalid. Accepted independent
+post-remediation implementation review is not recorded.
+
+## Historical M11/M12 record
+
 This directory contains the locked E003-v1 design and its completed, audited
 read-only source-acquisition record. The three exact, time-separated GH Archive
 hourly JSON fixtures are frozen outside Git; no raw source is placed in this

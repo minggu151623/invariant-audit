@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M13
+current_milestone: M14
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1149,9 +1149,9 @@ M13:
         IssueCommentEvent: 26
         IssuesEvent: 19
         other: 63
-      root_cause: upstream_telemetry_at_least_once_delivery_and_retry_overlap
+      root_cause: unestablished_delivery_mechanism_hypothesis_only_corrected_M14
       protocol_rule_violated: "protocol.md lines 150-153 and 201-202 (Filter 1: reject entire run if duplicated by event ID; no deduplication permitted)"
-      scientific_finding: authentic_external_transfer_gap_between_synthetic_uniqueness_assumption_and_production_telemetry
+      scientific_finding: historical_source_duplicate_diagnostic_not_external_performance_evidence
   verification:
     run_authorized: false
     authorization_consumed: true
@@ -1164,4 +1164,15 @@ M13:
     bootstrap: absent
     public_claim_eligibility: false
   next_gate: "Outer-loop reflection required: formulate E003-v2 with realistic stream deduplication or select alternative collision-free fixture; no E003 result or public claim exists."
-
+M14:
+  path: milestones/M14-evidence-correction-and-source-diagnosis.md
+  status: documentary_correction_and_E004_protocol_design
+  authority: user_2026_09_17_continue_research
+  design_provenance: ai_suggested
+  source_cache_at_resumption: absent
+  E003_v1_status: invalid_no_H3_outcome
+  E004_protocol: experiments/E004-source-duplicate-diagnosis/protocol.md
+  E004_classification: exploratory_source_diagnosis_informed_by_M13
+  E004_result: absent
+  public_claim_eligibility: false
+  next_gate: lock_E004_before_implementation_and_source_diagnosis

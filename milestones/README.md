@@ -4,8 +4,11 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M14 — Evidence correction and E004 design](M14-evidence-correction-and-source-diagnosis.md):
+  current continuation; corrects paper/state and prepares a separate source audit.
+
 - [M13 — E003 run 001 invalid evidence record](M13-E003-run-001-invalid.md):
-  current milestone; records the executed confirmatory run e003-20260903-001,
+  historical invalid-run milestone; records the executed run e003-20260903-001,
   its invalid status (exit code 2), runner failure on duplicate event IDs
   (537 duplicate lines in GH Archive 2021), concise invalid report, and
   empirical diagnosis. No metrics, data, or E003 results exist.
