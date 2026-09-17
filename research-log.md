@@ -1,5 +1,26 @@
 # Research log
 
+## 2026-09-17 — M15 E004 completion and outer-loop synthesis
+
+- Locked E004 in 1bf1a4a, implemented/tested in 648a607, then ran exactly once
+  on a clean worktree: e004-20260917-001, exit 0, valid_source_diagnostic_only.
+- Recovered the exact three public source shards outside Git. All original
+  compressed hashes, byte sizes, JSONL counts and reconstructed manifest match.
+  New acquisition metadata is dated today, not backdated to M11.
+- Confirmatory: 117,780 records, 117,243 unique IDs, 537 extra occurrences;
+  all full raw-line hashes match the first occurrence. No canonical-only
+  equivalents, conflicting groups or cross-shard repeated IDs. Max multiplicity
+  two. Development/calibration have no duplicate IDs.
+- Nineteen synthetic tests pass; dictionary/sort outputs and separate aggregate
+  arithmetic/hash checks agree. One-agent verification, not independent review.
+  No causal delivery-mechanism conclusion follows.
+- Outer loop retains BROADEN. Propose conservative exact-repeat collapse in
+  E003-v2 with conflict rejection; separately lock, test and independently
+  review before any exploratory reused-source performance run. E003-v1 stays
+  invalid; no H3/external-performance result exists.
+- Evidence/hashes and next gates: [M15](milestones/M15-E004-source-diagnosis.md).
+  No push, publication, delegation or ARA epilogue writes were performed.
+
 ## 2026-09-17 — M14 correction and E004 design
 
 - User authorized continued research; technical choices are AI-suggested.
@@ -13,8 +34,8 @@
   It is exploratory follow-up to M13, not external performance evidence.
   Original temporary cache/manifest were absent at resumption.
 
-Bootstrap was pre-experiment. The current outer-loop state is recorded in the
-2026-08-25 reflection below.
+Bootstrap was pre-experiment. Earlier entries below retain their historical
+outer-loop state; the current state is M15 above.
 
 ## 2026-08-19 — M00 direction record
 

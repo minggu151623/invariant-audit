@@ -77,5 +77,10 @@ CSV/JSONL is row-data source.
   implementation re-review acceptance is not documented. M13 records the later
   invalid run, rejected before scoring for duplicate source IDs. Only an
   invalid report exists; no E003 performance result or metric exists. The
-  temporary cache was missing at 2026-09-17 resumption. E004 investigates
-  hash-matched source recovery and duplicate structure separately.
+  temporary cache was missing at 2026-09-17 resumption and recovered under E004.
+- [E004 source diagnosis](E004-source-duplicate-diagnosis/results/e004-20260917-001.md)
+  completed one exploratory audit on hash-matched recovered sources: 537
+  byte-identical extra occurrences, no conflicting ID groups and no cross-shard
+  repeated IDs. Nineteen synthetic tests and dictionary/sort differential checks
+  pass; no independent review or performance result is implied. See
+  [M15](../milestones/M15-E004-source-diagnosis.md) for evidence and E003-v2 gates.

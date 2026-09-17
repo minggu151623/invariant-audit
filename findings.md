@@ -1,12 +1,19 @@
 # Findings
 
-## Current reading guide — 2026-09-17 correction (M14)
+## Current reading guide — 2026-09-17 source diagnosis (M15)
 
-Sections below retain historical stage language. Current state is M14. E001 and
+Sections below retain historical stage language. Current state is M15. E001 and
 E002 run 002 remain the only valid performance results, restricted to finite
 synthetic designs. E003-v1 is invalid with no H3 outcome. Its old cache/manifest
-was missing at resumption. E004 will diagnose duplicate payload structure on
-hash-matched recovered source under a separately locked protocol.
+was missing at resumption and is now recovered with original hashes/counts.
+E004 run e004-20260917-001 found 537 byte-identical extra occurrences, 537
+repeated groups of size two, zero conflicting groups and zero cross-shard
+repeated IDs. No canonical-only equivalents occurred. The 2021 shard has
+117,780 records and 117,243 unique IDs. This is an exploratory source diagnostic,
+not H3/performance evidence. Two aggregation methods agree, with a shared parser
+and one agent, not an independent reviewer. See [M15](milestones/M15-E004-source-diagnosis.md).
+The next step is a separate E003-v2 protocol lock and implementation/review gate;
+reusing inspected sources cannot be represented as pristine holdout confirmation.
 
 The paper is corrected against result artifacts: E002 Brier/ECE values and CIs,
 positive=valid terminology, Laplace-smoothed lookup, percentage points, and

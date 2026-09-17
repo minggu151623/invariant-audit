@@ -132,13 +132,33 @@ outcome were produced. [M13](../milestones/M13-E003-run-001-invalid.md) reports 
 subsequent diagnostic count of 537 duplicate occurrences in the 2021 shard and
 zero in the earlier shards. At resumption the external temporary cache/manifest
 were missing, so those historical counts required recovery and re-verification.
-Follow-up source diagnosis is tracked separately as E004.
+Follow-up source diagnosis is tracked separately as E004 below.
 
 Duplicate IDs alone do not identify a delivery mechanism. Retries, overlapping
 collection, or other causes remain hypotheses; no source in the repository
 establishes the cause of these particular duplicates. The former attribution
 to at-least-once delivery is withdrawn. Any revised policy must first distinguish
 identical repeats from conflicting payloads and preserve the invalid v1 record.
+
+## E004: exploratory source diagnosis, not performance validation
+
+The separately locked E004 protocol was implemented before one clean-tree run
+`e004-20260917-001`. The three original shards were recovered with every pinned
+compressed hash, byte size and record count matching; the reconstructed manifest
+also matches. The [diagnostic report](../experiments/E004-source-duplicate-diagnosis/results/e004-20260917-001.md)
+finds 537 extra occurrences in 537 ID groups in the 2021 shard, all with full
+raw-line SHA-256 equal to the first occurrence (excluding line terminators).
+Every repeated ID occurs twice: 117,780 records contain 117,243 unique IDs.
+No conflicting full canonical object, formatting-only equivalent, earlier-shard
+duplicate or cross-shard repeated ID was found. This does not prove repository
+independence or identify the delivery mechanism.
+
+Nineteen synthetic tests pass; dictionary and sort/groupby aggregation agree.
+These share a parser and one author, so they are not independent review. E004
+is exploratory follow-up informed by M13, on only three fixed shards. Its result
+supports proposing conservative exact-repeat collapse in E003-v2, not its
+general safety. A separate protocol and implementation/review gate remain
+necessary; reuse of inspected sources must not be called pristine confirmation.
 
 ## Limitations and conclusion
 
@@ -152,5 +172,5 @@ generalization, novelty, safety, or public-claim conclusion follows.
 Within two locked finite constructions, M1 rejects more invalid cases than B0
 without increasing rejection of valid cases. The unresolved question is transfer
 to external records under a defensible, predeclared source policy. Source
-duplication diagnosis and E003-v2 design are subsequent work, not retroactive
-validation of E003-v1.
+duplication has now been diagnosed in E004. E003-v2 design is subsequent work;
+neither the diagnostic nor a revised policy retroactively validates E003-v1.

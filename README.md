@@ -8,9 +8,11 @@ Infrastructure: no paid API; no external GPU.
 
 Status: E001 and E002 have verified finite-synthetic results. E003-v1 run
 e003-20260903-001 is invalid after a duplicate-ID source-gate failure (M13).
-There is no external performance result. The 2026-09-17 continuation corrects
-the paper and investigates duplicate structure under a separately locked E004
-source-diagnostic protocol; see the canonical state and latest milestone.
+There is no external performance result. The 2026-09-17 continuation corrected
+the paper and completed separately locked E004: all 537 extra occurrences are
+byte-identical repeats; no conflicting ID groups or cross-shard repeated IDs
+were found. This is an exploratory source diagnostic only; see
+[M15](milestones/M15-E004-source-diagnosis.md).
 
 The repository contains verified local evidence for the finite synthetic E001
 and E002 designs. Those results are evidence for their locked constructions
@@ -19,9 +21,11 @@ generalization, novelty, safety, or public-claim eligibility.
 
 The current outer-loop decision is **BROADEN**: the largest unresolved gap is
 transfer to externally authored structured records. The historical source cache
-outside Git was missing at resumption. Its recorded hashes remain the recovery
-target. An invalid source gate is not H3 evidence; E003-v2 requires a new lock
-and a distinction between identical repeats and conflicting payloads.
+outside Git was missing at resumption and has now been recovered with all
+original byte hashes/counts and manifest digest matching. An invalid source
+gate is not H3 evidence. E003-v2 is proposed, not locked or run: it requires a
+predeclared exact-repeat policy, independent implementation acceptance and
+disclosure that the reused shards are no longer an uninspected holdout.
 
 ## Verified experiments
 

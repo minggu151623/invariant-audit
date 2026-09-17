@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M14
+current_milestone: M15
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1176,3 +1176,32 @@ M14:
   E004_result: absent
   public_claim_eligibility: false
   next_gate: lock_E004_before_implementation_and_source_diagnosis
+  superseded_by: M15
+M15:
+  path: milestones/M15-E004-source-diagnosis.md
+  status: valid_source_diagnostic_only
+  classification: exploratory_followup_to_M13
+  authority: user_2026_09_17_continue_research
+  design_provenance: ai_suggested
+  protocol_commit: 1bf1a4a9a7f73c0ce1cc7aad4e4c74eaf3e03c51
+  implementation_commit: 648a60759759f932a1a741a93a914115c5963a0b
+  run_id: e004-20260917-001
+  report: experiments/E004-source-duplicate-diagnosis/results/e004-20260917-001.md
+  result_json: experiments/E004-source-duplicate-diagnosis/results/e004-20260917-001.json
+  result_json_sha256: d66a249c041d722d34254dcb06984ee8eb15caf5878740191a22e75510fb0d59
+  recovered_cache: /Users/mac/Library/Caches/InvariantAudit/E003-v1-20260917
+  original_source_pins: matched
+  raw_records: 275865
+  unique_ids: 275328
+  confirmatory_extra_occurrences: 537
+  raw_identical_extras: 537
+  conflict_id_groups: 0
+  cross_shard_shared_id_groups: 0
+  synthetic_tests: 19
+  synthetic_tests_status: pass
+  differential_aggregation: pass_shared_parser_single_agent
+  independent_review: absent
+  E003_v1_status: invalid_no_H3_outcome
+  E003_v2_status: proposed_not_locked_not_implemented_not_run
+  public_claim_eligibility: false
+  next_gate: separate_E003_v2_lock_then_implementation_and_independent_acceptance

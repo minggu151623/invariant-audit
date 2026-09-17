@@ -21,7 +21,7 @@ The paper remains preliminary; public_claim_eligibility=false.
 | Probability calibration generally improves | Brier falls but ECE rises in both reports; E001 binary ablation is already perfect | Not established |
 | Confidence mapping uses isotonic regression | E001/E002/E003 protocol formulas | Incorrect; Laplace-smoothed empirical lookup |
 | E003 established external performance | M13 and invalid report | Incorrect; no H3 outcome or performance metrics |
-| M13 documents duplicate IDs in one source shard | M13 diagnostic record | Historical diagnostic; re-verification tracked in E004 |
+| The recovered 2021 shard has 537 byte-identical extra occurrences and no conflicting ID groups | E004 run e004-20260917-001, M15 | Exploratory source diagnostic only, not performance validation |
 | At-least-once delivery/retries caused duplicates | No supporting causal evidence in repository | Hypothesis only |
 | Harness guarantees absence of contamination or general reproducibility | Tests, hashes and recorded gates | No universal guarantee; bounded process checks |
 

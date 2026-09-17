@@ -4,8 +4,13 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M15 — E004 recovered-source diagnosis](M15-E004-source-diagnosis.md):
+  current milestone; one valid exploratory diagnostic found 537 byte-identical
+  extra occurrences, no conflicting groups, and no cross-shard repeated IDs.
+  No external performance result. E003-v2 is proposed, not locked or run.
+
 - [M14 — Evidence correction and E004 design](M14-evidence-correction-and-source-diagnosis.md):
-  current continuation; corrects paper/state and prepares a separate source audit.
+  preceding correction/design milestone; completed source audit is in M15.
 
 - [M13 — E003 run 001 invalid evidence record](M13-E003-run-001-invalid.md):
   historical invalid-run milestone; records the executed run e003-20260903-001,

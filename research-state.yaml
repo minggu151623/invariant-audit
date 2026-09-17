@@ -2,4 +2,4 @@ schema_version: 1
 canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
-milestone_path: milestones/M14-evidence-correction-and-source-diagnosis.md
+milestone_path: milestones/M15-E004-source-diagnosis.md

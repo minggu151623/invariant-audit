@@ -1,5 +1,11 @@
 # M13 — E003 run 001 invalid evidence record
 
+Correction, 2026-09-17: the delivery-mechanism attribution below is withdrawn;
+it was an inference, not an established root cause. Historical text is retained
+for provenance. [M15](M15-E004-source-diagnosis.md) reports a new hash-pinned audit
+establishing byte-identical repeats, not their upstream cause. The old temporary
+cache path below is historical; recovery uses a new path. E003-v1 stays invalid.
+
 Status: `invalid_run_recorded`. The authorized local run is recorded as
 invalid; protocol assumption revision or alternative fixture selection is
 pending; no valid E003 result exists.
