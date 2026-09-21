@@ -5,6 +5,13 @@ CSV/JSONL is row-data source.
 
 ## Current boundary
 
+- [E003-v2 exact-repeat transfer](E003-v2-exact-repeat-transfer/protocol.md)
+  is locked at b9cae97 with exploratory reused-source classification. The
+  [source component](E003-v2-exact-repeat-transfer/code/README.md) passes 22
+  synthetic tests; full pipeline and independent acceptance remain pending.
+  No v2 performance run/result exists. Current milestone is
+  [M16](../milestones/M16-E003-v2-protocol-and-normalizer.md).
+
 - [E001 synthetic invariant calibration protocol](E001-synthetic-invariant-calibration/protocol.md)
   is the M01 documentary protocol, locked by commit
   `d8b26d21e9692ace19436d78461460940043f5c7` with subject

@@ -12,7 +12,10 @@ There is no external performance result. The 2026-09-17 continuation corrected
 the paper and completed separately locked E004: all 537 extra occurrences are
 byte-identical repeats; no conflicting ID groups or cross-shard repeated IDs
 were found. This is an exploratory source diagnostic only; see
-[M15](milestones/M15-E004-source-diagnosis.md).
+[M15](milestones/M15-E004-source-diagnosis.md). On 2026-09-21, E003-v2 was
+separately locked and its source-normalization component passed 22 synthetic
+tests; see current [M16](milestones/M16-E003-v2-protocol-and-normalizer.md).
+The full v2 pipeline and independent acceptance remain pending; no v2 run exists.
 
 The repository contains verified local evidence for the finite synthetic E001
 and E002 designs. Those results are evidence for their locked constructions
@@ -23,9 +26,9 @@ The current outer-loop decision is **BROADEN**: the largest unresolved gap is
 transfer to externally authored structured records. The historical source cache
 outside Git was missing at resumption and has now been recovered with all
 original byte hashes/counts and manifest digest matching. An invalid source
-gate is not H3 evidence. E003-v2 is proposed, not locked or run: it requires a
-predeclared exact-repeat policy, independent implementation acceptance and
-disclosure that the reused shards are no longer an uninspected holdout.
+gate is not H3 evidence. E003-v2 locks a conservative exact-repeat policy and
+discloses that reused shards are no longer an uninspected holdout. Full
+implementation/tests and independent acceptance are required before execution.
 
 ## Verified experiments
 

@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M15
+current_milestone: M16
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1205,3 +1205,27 @@ M15:
   E003_v2_status: proposed_not_locked_not_implemented_not_run
   public_claim_eligibility: false
   next_gate: separate_E003_v2_lock_then_implementation_and_independent_acceptance
+  superseded_by: M16
+M16:
+  path: milestones/M16-E003-v2-protocol-and-normalizer.md
+  status: protocol_locked_partial_implementation
+  date: 2026-09-21
+  user_instruction: "được rồi tiếp tục đi"
+  design_provenance: ai_suggested
+  protocol_id: E003-v2
+  protocol_path: experiments/E003-v2-exact-repeat-transfer/protocol.md
+  protocol_commit: b9cae977cfa9640e1ad4064bfccbbebe945b81fb
+  protocol_sha256: 2c7b76290f0d9128910f7f3c565a68374a432f9f2507976a8fd68e8495bcba15
+  component_commit: 87ccd6922854ea8c6d5e4e2faaaff216b8bf0e1d
+  classification: exploratory_reused_sources
+  source_normalizer: implemented_synthetic_tests_pass
+  synthetic_tests: 22
+  full_pipeline: not_implemented
+  real_source_v2_integration: not_run
+  independent_acceptance: absent
+  v2_manifest_file: not_created
+  performance_execution: gated_not_run
+  E003_v1_status: invalid_no_H3_outcome
+  E003_v2_result: absent
+  public_claim_eligibility: false
+  next_gate: complete_v2_integration_and_tests_then_independent_acceptance

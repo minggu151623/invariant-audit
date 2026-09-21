@@ -1,5 +1,21 @@
 # Research log
 
+## 2026-09-21 — M16 E003-v2 protocol lock and source component
+
+- Resumed from clean M15 commit 6c9b4d0 on user instruction `được rồi tiếp tục đi`.
+- Locked E003-v2 amendment in b9cae97 before implementation. V1 is incorporated
+  by immutable hash; changes are explicit. All source reuse is exploratory.
+- Implemented pure exact-repeat normalization in 87ccd69 with full-byte
+  comparison, strict parsing, atomic return, original coordinates, all-type
+  repository index and explicit production pins. No v1 imports or mutations.
+- Synthetic suite: 22 tests PASS (0.003 s). No real shard content was opened,
+  no v2 manifest written and no performance scoring performed. Manifest expected
+  hash calculation read original manifest metadata only.
+- Full evaluation integration, transactional runner, guarded two-split tests
+  and independent acceptance remain open. This is partial implementation, not
+  a valid external result. See [M16](milestones/M16-E003-v2-protocol-and-normalizer.md).
+- No network, delegation, push, publication, automation or epilogue writes.
+
 ## 2026-09-17 — M15 E004 completion and outer-loop synthesis
 
 - Locked E004 in 1bf1a4a, implemented/tested in 648a607, then ran exactly once
@@ -35,7 +51,7 @@
   Original temporary cache/manifest were absent at resumption.
 
 Bootstrap was pre-experiment. Earlier entries below retain their historical
-outer-loop state; the current state is M15 above.
+outer-loop state; the current state is M16 above.
 
 ## 2026-08-19 — M00 direction record
 

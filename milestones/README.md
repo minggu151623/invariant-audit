@@ -4,8 +4,12 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M16 — E003-v2 lock and source component](M16-E003-v2-protocol-and-normalizer.md):
+  current milestone; separately locked exploratory protocol and source normalizer
+  with 22 passing synthetic tests. Full pipeline/review pending; no v2 run/result.
+
 - [M15 — E004 recovered-source diagnosis](M15-E004-source-diagnosis.md):
-  current milestone; one valid exploratory diagnostic found 537 byte-identical
+  preceding milestone; one valid exploratory diagnostic found 537 byte-identical
   extra occurrences, no conflicting groups, and no cross-shard repeated IDs.
   No external performance result. E003-v2 is proposed, not locked or run.
 

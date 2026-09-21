@@ -159,6 +159,10 @@ is exploratory follow-up informed by M13, on only three fixed shards. Its result
 supports proposing conservative exact-repeat collapse in E003-v2, not its
 general safety. A separate protocol and implementation/review gate remain
 necessary; reuse of inspected sources must not be called pristine confirmation.
+As of 2026-09-21, [M16](../milestones/M16-E003-v2-protocol-and-normalizer.md)
+records the separate E003-v2 protocol lock and a source component with 22 passing
+synthetic tests. Full pipeline integration/review and performance execution are
+pending. These engineering checks add no external performance evidence.
 
 ## Limitations and conclusion
 
@@ -172,5 +176,5 @@ generalization, novelty, safety, or public-claim conclusion follows.
 Within two locked finite constructions, M1 rejects more invalid cases than B0
 without increasing rejection of valid cases. The unresolved question is transfer
 to external records under a defensible, predeclared source policy. Source
-duplication has now been diagnosed in E004. E003-v2 design is subsequent work;
+duplication has now been diagnosed in E004. E003-v2 is locked but only partially implemented;
 neither the diagnostic nor a revised policy retroactively validates E003-v1.
