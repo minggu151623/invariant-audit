@@ -4,9 +4,15 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 ## Current milestones
 
+- [M17 — E003-v2 adapter integration](M17-E003-v2-adapter.md):
+  current milestone; source filtering and selection adapter integrated and verified
+  (39 total synthetic tests passing: 22 normalizer + 17 adapter). Remaining pipeline stages
+  (evaluation/calibration/bootstrap versioning, transactionality guards, guarded 2019/2020 integration)
+  and independent acceptance remain pending; no v2 run/result.
+
 - [M16 — E003-v2 lock and source component](M16-E003-v2-protocol-and-normalizer.md):
-  current milestone; separately locked exploratory protocol and source normalizer
-  with 22 passing synthetic tests. Full pipeline/review pending; no v2 run/result.
+  preceding milestone; separately locked exploratory protocol and source normalizer
+  with 22 passing synthetic tests. Superseded by M17.
 
 - [M15 — E004 recovered-source diagnosis](M15-E004-source-diagnosis.md):
   preceding milestone; one valid exploratory diagnostic found 537 byte-identical

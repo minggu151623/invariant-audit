@@ -1,5 +1,32 @@
 # Research log
 
+## 2026-09-21 — M17 E003-v2 source filtering and selection adapter
+
+- User instruction: `được rồi tiếp tục công việc nghiên cứu đi`. Authority is
+  continuation for local milestone commits without push; technical design and
+  implementation architecture are AI-suggested (author: Gemini 3.8 Flash high via AGY in Herdr ipse).
+- Implementation commit: `28f74d56eb9d4813139279da445c32fd10ec973e` (`adapter_v2.py`,
+  `test_adapter_v2.py`, `code/README.md`).
+- Pure in-memory source adapter implements:
+  `normalization -> v1 pinned pure projection/oracle helpers -> first reason exclusions -> all-type/all-requested-split repo isolation -> deterministic quotas/caps/diversity`,
+  retaining original source coordinates throughout.
+- Protocol and helper pins verified: both locked protocol SHA-256 digests unchanged
+  (E003-v2 `2c7b762...`, E003-v1 `8ec0ebc...`); unversioned pure helpers loaded with
+  SHA-256 digest validation (`e003.py` `cd21b21...`, `oracle_e003.py` `0bfc2be...`).
+- Test execution: orchestrator independently ran all 39 synthetic tests (22 source normalizer + 17 adapter):
+  `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s experiments/E003-v2-exact-repeat-transfer/code -p 'test_*.py' -v`.
+  All 39 pass in 0.312 s. Initial 35 tests had 1 failure 9 errors; after first remediation
+  2 fixture failures remained; now all 39 pass.
+- Bounded review scope: bounded synthetic unit tests verify in-memory adapter behavior.
+  No real sources were read; no independent full-pipeline acceptance. Old and new raw
+  data/metrics/run remain absent.
+- Classification: `exploratory_reused_sources`; `public_claim_eligibility: false`.
+- Next gates (remaining M16 priorities 2–5): evaluation/calibration/bootstrap version identities,
+  guards/transactionality, guarded 2019/2020 integration, and full independent acceptance
+  before performance execution. See [M17](milestones/M17-E003-v2-adapter.md).
+- No network, source-cache/real shards, run/scoring/calibration, protocol edits,
+  E001-E004 evidence edits, external actions, push, or publication.
+
 ## 2026-09-21 — M16 E003-v2 protocol lock and source component
 
 - Resumed from clean M15 commit 6c9b4d0 on user instruction `được rồi tiếp tục đi`.
@@ -51,7 +78,7 @@
   Original temporary cache/manifest were absent at resumption.
 
 Bootstrap was pre-experiment. Earlier entries below retain their historical
-outer-loop state; the current state is M16 above.
+outer-loop state; the current state is M17 above.
 
 ## 2026-08-19 — M00 direction record
 

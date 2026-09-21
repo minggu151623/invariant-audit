@@ -13,9 +13,12 @@ the paper and completed separately locked E004: all 537 extra occurrences are
 byte-identical repeats; no conflicting ID groups or cross-shard repeated IDs
 were found. This is an exploratory source diagnostic only; see
 [M15](milestones/M15-E004-source-diagnosis.md). On 2026-09-21, E003-v2 was
-separately locked and its source-normalization component passed 22 synthetic
-tests; see current [M16](milestones/M16-E003-v2-protocol-and-normalizer.md).
-The full v2 pipeline and independent acceptance remain pending; no v2 run exists.
+separately locked, its source-normalization component passed 22 synthetic tests
+(M16), and its source filtering and selection adapter was integrated and verified
+with 17 adapter tests (39 total synthetic tests passing); see current
+[M17](milestones/M17-E003-v2-adapter.md). Remaining pipeline stages
+(evaluation/calibration/bootstrap versioning, transactionality guards, guarded
+2019/2020 integration) and independent acceptance remain pending; no v2 run exists.
 
 The repository contains verified local evidence for the finite synthetic E001
 and E002 designs. Those results are evidence for their locked constructions

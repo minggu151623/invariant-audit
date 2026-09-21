@@ -2,4 +2,4 @@ schema_version: 1
 canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
-milestone_path: milestones/M16-E003-v2-protocol-and-normalizer.md
+milestone_path: milestones/M17-E003-v2-adapter.md

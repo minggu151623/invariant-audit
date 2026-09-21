@@ -1,8 +1,8 @@
 # Findings
 
-## Current reading guide — 2026-09-21 E003-v2 lock/component (M16)
+## Current reading guide — 2026-09-21 E003-v2 adapter integration (M17)
 
-Sections below retain historical stage language. Current state is M16. E001 and
+Sections below retain historical stage language. Current state is M17. E001 and
 E002 run 002 remain the only valid performance results, restricted to finite
 synthetic designs. E003-v1 is invalid with no H3 outcome. Its old cache/manifest
 was missing at resumption and is now recovered with original hashes/counts.
@@ -12,13 +12,16 @@ repeated IDs. No canonical-only equivalents occurred. The 2021 shard has
 117,780 records and 117,243 unique IDs. This is an exploratory source diagnostic,
 not H3/performance evidence. Two aggregation methods agree, with a shared parser
 and one agent, not an independent reviewer. See [M15](milestones/M15-E004-source-diagnosis.md).
-E003-v2 is now separately locked (b9cae97); a pure source-normalization component
-(87ccd69) passes 22 synthetic tests. It compares full raw bytes before projection,
-rejects nonidentical/cross-shard repeats and preserves first source coordinates.
-This is partial engineering progress, not a new scientific result. Next: integrate
-the full v2 pipeline, test it and obtain independent acceptance before scoring.
+E003-v2 is separately locked (b9cae97); its pure source-normalization component
+(87ccd69) and source adapter (28f74d5) pass all 39 synthetic tests (22 normalizer
++ 17 adapter). The adapter implements normalization -> v1 pinned pure projection/oracle
+helpers -> first-reason exclusions -> all-type/all-requested-split repo isolation ->
+deterministic quotas/caps/diversity, retaining original coordinates.
+This is partial engineering progress, not a new scientific result. Next: complete
+evaluation/calibration/bootstrap version identities, transactionality guards,
+guarded 2019/2020 integration, and obtain independent acceptance before execution.
 Reusing inspected sources cannot be represented as pristine holdout confirmation.
-See [M16](milestones/M16-E003-v2-protocol-and-normalizer.md).
+See [M17](milestones/M17-E003-v2-adapter.md).
 
 The paper is corrected against result artifacts: E002 Brier/ECE values and CIs,
 positive=valid terminology, Laplace-smoothed lookup, percentage points, and
