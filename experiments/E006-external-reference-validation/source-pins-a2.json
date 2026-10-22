@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "bytes": 255295,
+      "path": "datasets/beers/dirty.csv",
+      "sha256": "7110bf4931a9445a1675e544d6c996817c739136239f8a2b02e088c7ec0a1f68"
+    },
+    {
+      "bytes": 233019,
+      "path": "datasets/beers/clean.csv",
+      "sha256": "373227df59ad197e154dd5149125789e415019535c7223355e9486ee1b3b93de"
+    },
+    {
+      "bytes": 154776,
+      "path": "datasets/flights/dirty.csv",
+      "sha256": "1b5c1afa10aa0e7c20fd7e14d05c56772715b2771aa0f5fa67ed1709e1eecd46"
+    },
+    {
+      "bytes": 173159,
+      "path": "datasets/flights/clean.csv",
+      "sha256": "0acfcfd8985b06fdd363965c9e8d9522c43e7589a93d79ae7dc311e1c37fdf3b"
+    },
+    {
+      "bytes": 273084,
+      "path": "datasets/rayyan/dirty.csv",
+      "sha256": "7e25e6db262b0c72ca2d9735d5959599cf5a582e1c705459507c7b45d0d1d174"
+    },
+    {
+      "bytes": 272785,
+      "path": "datasets/rayyan/clean.csv",
+      "sha256": "23159f43c0706782388ed8957ad0c74eb7b88bc98f34d65bd49296e186d4673f"
+    },
+    {
+      "bytes": 4716,
+      "path": "README.md",
+      "sha256": "1ea1aafa0f4ad9989db4ef659497259f164c5c3a2a17febb497647bfd65bb1ea"
+    },
+    {
+      "bytes": 11346,
+      "path": "LICENSE.md",
+      "sha256": "cc50ffdf979a5b33c26bb6700d650542c0a231083abb92d68ff21da1dc3d850e"
+    },
+    {
+      "bytes": 5539,
+      "path": "raha/dataset.py",
+      "sha256": "43805c3daeca0addeed1ca1b8fb4927ccedf6b98994856deea93dc0c4756ac1b"
+    }
+  ],
+  "source_commit": "7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c"
+}
