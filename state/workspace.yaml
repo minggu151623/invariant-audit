@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M17
+current_milestone: M18
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1269,7 +1269,23 @@ research_destination:
 E005:
   protocol_path: experiments/E005-benchmark-evidence-audit/protocol.md
   protocol_id: E005-v1
-  status: protocol_pending_lock
+  status: valid_exploratory_reanalysis
   classification: exploratory_reanalysis
-  implementation: absent
-  run: absent
+  protocol_commit: 2e6f7c2ec236ebce2bf72f3a026b2ea6de3a80e1
+  protocol_sha256: 9bae4acac225afd19a14fefb1dc7ab322a50b6d0b3331547d6e270f8910c5baa
+  implementation_commit: 167f721565d68cc80b54340a3533e3b414deedd8
+  run: e005-20261022-001
+  result_path: experiments/E005-benchmark-evidence-audit/results/run-e005-20261022-001.md
+  synthetic_tests: 21
+  metric_comparisons: 195
+  independent_review: absent
+  public_claim_eligibility: false
+
+M18:
+  path: milestones/M18-arxiv-evidence-audit.md
+  status: verified_within_exploratory_reanalysis
+  date: 2026-10-22
+  verification_scope: numerical_and_artifact_self_review
+  independent_acceptance: absent
+  public_claim_eligibility: false
+  next_gate: related_work_manuscript_render_and_substantive_review

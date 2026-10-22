@@ -783,3 +783,14 @@ framing is a methods case study of benchmark construction and score behavior.
 Locked a separate exploratory reanalysis protocol for the already inspected
 E001/E002 row artifacts; no new performance run or E003 gate bypass. See
 [arXiv plan](paper/arxiv-plan.md) and [E005 protocol](experiments/E005-benchmark-evidence-audit/protocol.md).
+
+## 2026-10-22 — E005 valid exploratory audit and M18
+
+After protocol 2e6f7c2, implemented E005 at 167f721 and passed 21 synthetic
+tests. One run e005-20261022-001 completed with byte-identical double builds.
+Four original hashes matched, 39 summary rows and 12 score groups were produced,
+and all 195 metric comparisons passed. The Brier decomposition exposes increased
+resolution alongside worse score-group reliability; the binary ablation remains
+perfect on these constructions. Same-agent verification is bounded and is not
+independent acceptance. No original input, protocol, performance run or unrelated
+user artifact was changed. See M18 and the E005 result/checks.

@@ -1,8 +1,27 @@
 # Findings
 
+## Current reading guide — 2026-10-22 arXiv evidence audit (M18)
+
+The user selected an arXiv paper as the research destination. E005, separately
+locked before implementation, audited the already inspected E001/E002 artifacts
+with a fresh metric implementation: all 195 metric comparisons pass; exact
+score-group Brier decomposition holds in all 39 split/method rows. M1 lowers
+Brier by increasing resolution while finite score-group reliability worsens in
+both designs. Its binary ablation has zero Brier/ECE. E001 has one distinct
+statistic signature among 64 evaluation clusters; E002 has six among 48. These
+are descriptive counts, not effective sample sizes. Calibration-only lookup
+reconstruction is compatible with all predictions; it does not prove historical
+absence of leakage. See [M18](milestones/M18-arxiv-evidence-audit.md).
+
+Candidate paper: a bounded methods case study of perfect constructed scores and
+measurement interpretation. Neither a new validation algorithm nor broad
+external validity is claimed. Independent review and novelty assessment remain
+open; public-claim eligibility is false. E003-v2 is unchanged at the M17 gate.
+The following M17 and earlier sections are historical.
+
 ## Current reading guide — 2026-09-21 E003-v2 adapter integration (M17)
 
-Sections below retain historical stage language. Current state is M17. E001 and
+At the historical M17 stage: E001 and
 E002 run 002 remain the only valid performance results, restricted to finite
 synthetic designs. E003-v1 is invalid with no H3 outcome. Its old cache/manifest
 was missing at resumption and is now recovered with original hashes/counts.

@@ -1,0 +1,1439 @@
+{
+  "checks": {
+    "E001": {
+      "binary_ablation_decision_mismatches": 0,
+      "brier_identity_exact": true,
+      "calibration_compatible_with_calibration_only_fit": true,
+      "case_counts": {
+        "calibration": 256,
+        "confirmatory": 512,
+        "development": 256
+      },
+      "cross_split_cluster_overlap": 0,
+      "cross_split_input_hash_overlap": {
+        "calibration:confirmatory": 0,
+        "development:calibration": 0,
+        "development:confirmatory": 0
+      },
+      "historical_no_leakage_proven": false,
+      "metric_agreement": true,
+      "metric_comparisons": [
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000750",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000750",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000802",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000000343",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000000343",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000001013",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000000343",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000000343",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000000001013",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000000000308",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E001",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        }
+      ]
+    },
+    "E002": {
+      "binary_ablation_decision_mismatches": 0,
+      "brier_identity_exact": true,
+      "calibration_compatible_with_calibration_only_fit": true,
+      "case_counts": {
+        "calibration": 228,
+        "confirmatory": 456,
+        "development": 228
+      },
+      "cross_split_cluster_overlap": 0,
+      "cross_split_input_hash_overlap": {
+        "calibration:confirmatory": 0,
+        "development:calibration": 0,
+        "development:confirmatory": 0
+      },
+      "historical_no_leakage_proven": false,
+      "metric_agreement": true,
+      "metric_comparisons": [
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000313725490",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000372549020",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000423361751",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000313725490",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000372549020",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000423361751",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000313725490",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000372549020",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "brier",
+          "signed_difference": "0.000000000423361751",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "B0",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "-0.000000000081481270",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000192982456",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "-0.000000000081481270",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000192982456",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "brier",
+          "signed_difference": "-0.000000000081481270",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1",
+          "metric": "ece",
+          "signed_difference": "-0.000000000192982456",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000411764706",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000176470588",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "brier",
+          "signed_difference": "-0.000000000436685482",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "ece",
+          "signed_difference": "0.000000000368421053",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000411764706",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000176470588",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "brier",
+          "signed_difference": "-0.000000000436685482",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "ece",
+          "signed_difference": "0.000000000368421053",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000411764706",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fpr",
+          "signed_difference": "-0.000000000176470588",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "brier",
+          "signed_difference": "-0.000000000436685482",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-omit-conservation",
+          "metric": "ece",
+          "signed_difference": "0.000000000368421053",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "brier",
+          "signed_difference": "0.000000000378752927",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "ece",
+          "signed_difference": "0.000000000035087719",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "brier",
+          "signed_difference": "0.000000000378752927",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "ece",
+          "signed_difference": "0.000000000035087719",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "brier",
+          "signed_difference": "0.000000000378752927",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-overconstraint",
+          "metric": "ece",
+          "signed_difference": "0.000000000035087719",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "brier",
+          "signed_difference": "0.000000000104142190",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "ece",
+          "signed_difference": "-0.000000000385964912",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "brier",
+          "signed_difference": "0.000000000104142190",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "ece",
+          "signed_difference": "-0.000000000385964912",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000333333333",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "fnr",
+          "signed_difference": "0.000000000333333333",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "brier",
+          "signed_difference": "0.000000000104142190",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-stale-transition",
+          "metric": "ece",
+          "signed_difference": "-0.000000000385964912",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-semantic",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "balanced_accuracy",
+          "signed_difference": "-0.000000000235294118",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fpr",
+          "signed_difference": "0.000000000470588235",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "brier",
+          "signed_difference": "-0.000000000051179323",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-state",
+          "metric": "ece",
+          "signed_difference": "-0.000000000210526316",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "development"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "calibration"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "balanced_accuracy",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fpr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "fnr",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "brier",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        },
+        {
+          "experiment": "E002",
+          "method": "M1-no-calibration",
+          "metric": "ece",
+          "signed_difference": "0.000000000000000000",
+          "split": "confirmatory"
+        }
+      ]
+    }
+  },
+  "classification": "exploratory_reanalysis",
+  "implementation_commit": "167f721565d68cc80b54340a3533e3b414deedd8",
+  "independent_review": false,
+  "inputs": [
+    {
+      "bytes": 2966528,
+      "path": "data/E001-v1-predictions.jsonl",
+      "sha256": "be5e5e2a6c3f33778a34af69d79ec4f14e3b2c0cba2f371ecc004310b7c9559a"
+    },
+    {
+      "bytes": 162200,
+      "path": "data/E001-v1-metrics.csv",
+      "sha256": "ae7c32be651b5dfe175ca0537aa3cb8283acbd7063b14e15b8ec386f0d6a20cb"
+    },
+    {
+      "bytes": 6556304,
+      "path": "data/E002-v1-predictions.jsonl",
+      "sha256": "bcb34aad4338fdfbffe07be1843769b360bf4e8c422d855a9ce605350fad13b7"
+    },
+    {
+      "bytes": 116260,
+      "path": "data/E002-v1-metrics.csv",
+      "sha256": "f000348d385550745480066fce2d691686728ebe2bfcf7bd96e7231e4b1e5ca3"
+    }
+  ],
+  "protocol_commit": "2e6f7c2ec236ebce2bf72f3a026b2ea6de3a80e1",
+  "protocol_id": "E005-v1",
+  "protocol_sha256": "9bae4acac225afd19a14fefb1dc7ab322a50b6d0b3331547d6e270f8910c5baa",
+  "public_claim_eligibility": false,
+  "run_id": "e005-20261022-001"
+}
