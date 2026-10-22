@@ -1427,3 +1427,13 @@ goal_execution_audit:
   no_meaningful_independent_next_action: true
   requested_goal_status: blocked
   resume_condition: owner_review_response_and_owner_selected_license_account_submission_steps
+
+owner_review_followup:
+  date: 2026-10-23
+  source: direct_user_reply_to_async_review_question
+  exact_reply: "Chưa duyệt; cần bản giải thích tiếng Việt"
+  review_approval: not_given
+  requested_next_action: explain_current_manuscript_in_Vietnamese
+  explanation_basis: paper/reading-guide-vi.md_and_current_verified_manuscript
+  understanding_confirmed: false
+  publication_or_license_authorization: not_given

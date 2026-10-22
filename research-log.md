@@ -860,3 +860,13 @@ Sent a concrete async question about owner review of the named 12-page draft;
 no reply yet. No scientific rerun, source/PDF change, account or upload. Goal
 not achieved; owner review and submission/account/license steps remain open.
 This turn made concrete progress; no-progress streak zero.
+
+## 2026-10-23 — owner requests Vietnamese explanation
+
+The owner answered the concrete review question: “Chưa duyệt; cần bản giải thích
+tiếng Việt”. This is a request for explanation, not manuscript acceptance or a
+license/publication decision. Read the current Vietnamese walkthrough and author
+metadata, then explain the research question, synthetic-vs-reference evidence,
+attribution tradeoff, Brier interpretation and remaining scientific limits in
+chat. No experiment, PDF, source ZIP or M22 bundle member is changed. Owner
+understanding/approval remains unconfirmed.
