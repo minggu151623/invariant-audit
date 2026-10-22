@@ -16,11 +16,13 @@ ROOT = Path(__file__).resolve().parents[3]
 REPORT = ROOT / 'experiments/E006-external-reference-validation/results/run-e006-20261022-001.md'
 
 
-def run():
+def run(source_root=None, verify_sources=True):
     manifest = json.loads((ROOT / 'data/E006-v1-source-manifest.json').read_text())
-    for item in manifest['files']:
-        content = (Path(manifest['source_root']) / item['path']).read_bytes()
-        assert len(content) == item['bytes'] and sha256(content).hexdigest() == item['sha256']
+    if verify_sources:
+        source = Path(source_root) if source_root is not None else Path(manifest['source_root'])
+        for item in manifest['files']:
+            content = (source / item['path']).read_bytes()
+            assert len(content) == item['bytes'] and sha256(content).hexdigest() == item['sha256']
     artifact_hashes = re.findall(r'`(data/[^`]+)` SHA-256 `([0-9a-f]{64})`', REPORT.read_text())
     assert len(artifact_hashes) == 5
     for name, digest in artifact_hashes:
@@ -104,7 +106,7 @@ def run():
             assert difference <= 2e-12
             interval_difference = max(interval_difference, difference)
     return {'status': 'pass', 'scope': 'post_run_delivery_arithmetic_and_integrity_self_review',
-            'source_files_hash_verified': 9, 'delivered_artifacts_hash_verified': 5,
+            'source_files_hash_verified': len(manifest['files']) if verify_sources else 0, 'delivered_artifacts_hash_verified': 5,
             'prediction_rows': len(seen), 'point_rows': len(metrics), 'point_metric_comparisons': len(metrics)*5,
             'bootstrap_rows': sum(map(len, blocks.values())), 'interval_rows': len(intervals),
             'maximum_probability_serialization_error': max_probability_error,

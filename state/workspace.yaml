@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M21
+current_milestone: M22
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1363,3 +1363,22 @@ M21:
   submitted: false
   public_claim_eligibility: false
   next_gate: portable_evidence_verification_and_substantive_owner_review
+
+M22:
+  path: milestones/M22-portable-evidence-bundle.md
+  status: verified_portable_evidence_audit
+  date: 2026-10-23
+  evidence_bundle: paper/evidence-review-bundle.zip
+  manifest: reproducibility/bundle-manifest.json
+  verification: milestones/M22-portable-verification.json
+  archive_members: 35
+  standalone_offline_verification: pass
+  relocated_source_verification: nine_pins_pass
+  E005_rebuilt_outputs_byte_identical: 4
+  E006_point_metric_comparisons: 720
+  E006_interval_endpoints_verified: 84
+  full_performance_reexecution: false
+  independent_acceptance: absent
+  submitted: false
+  public_claim_eligibility: false
+  next_gate: substantive_owner_review_and_archival_interest_assessment

@@ -1,5 +1,19 @@
 # Findings
 
+## Current delivery state — 2026-10-23 (M22)
+
+The portable 35-file evidence bundle passes from a fresh extracted directory
+without Git or the original cache: all four E005 outputs reproduce byte for
+byte and E006's 720 metric comparisons and 84 interval endpoints verify.
+Optional --source-root also checks all nine original source pins. The default
+offline result explicitly does not verify those source bytes. Corrupted member
+and optimized-Python controls are rejected. This audits frozen evidence, not a
+new performance run or independent review. See [M22](milestones/M22-portable-evidence-bundle.md).
+
+M21 remains the current named PDF; M20 the latest scientific result. Responsible
+owner review and substantive scientific/archival-interest assessment remain
+open. No account/submission/public-push action occurred; goal remains active.
+
 ## Current manuscript state — 2026-10-23 (M21)
 
 The expanded 12-page manuscript now integrates E005 and E006, including all four
@@ -9,8 +23,8 @@ appears correctly with Vietnamese diacritics. All final pages were inspected;
 the four-file source ZIP compiles in isolation with matching text and no layout
 warnings. See [M21](milestones/M21-external-reference-manuscript.md).
 
-Owner and independent scientific review, portable evidence packaging and the
-submission process remain open. The goal is active; no submission or public
+Owner and independent scientific review and the submission process remain
+open; M22 now supplies portable evidence packaging. The goal is active; no submission or public
 push occurred. M20 remains the latest scientific result. The following stages
 are historical; M19's eight-page preview has been superseded.
 

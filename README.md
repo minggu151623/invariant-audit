@@ -32,8 +32,10 @@ E003-v2 remains at [M17](milestones/M17-E003-v2-adapter.md) with its gate unchan
 The source A1 failure and A2 metadata-only header correction are preserved.
 
 The new audit/study/manuscript lack independent scientific acceptance. Substantive owner
-review, portable release packaging and the submission
-process remain open. `public_claim_eligibility=false`. No arXiv posting is
+review, public release and the submission
+process remain open. A [portable evidence verifier](reproducibility/README.md)
+and [review bundle](paper/evidence-review-bundle.zip) now support frozen-output
+verification without Git, NumPy, TeX or a machine-specific cache. `public_claim_eligibility=false`. No arXiv posting is
 guaranteed and no submission or public push has occurred.
 
 ## Verified experiments

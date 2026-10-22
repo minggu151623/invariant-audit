@@ -90,3 +90,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M21: named external-reference manuscript](M21-external-reference-manuscript.md):
   current 12-page PDF and four-file source ZIP; artifact checks pass, substantive
   review and submission remain open.
+
+- [M22: portable evidence verification](M22-portable-evidence-bundle.md):
+  extracted offline/relocated-source checks pass; frozen-evidence self-review,
+  not full experiment reexecution or independent acceptance.

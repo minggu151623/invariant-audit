@@ -32,5 +32,6 @@ python3 paper/package_source.py
 
 Pandoc is required for Markdown conversion. E005 itself is standard-library
 only; E006 uses the frozen Python 3.13.5/NumPy 2.1.3 environment. Neither study
-depends on the document-rendering tools. Original run paths are local; a portable
-reproduction verifier/evidence bundle remains next release work.
+depends on the document-rendering tools. Original full-run paths are local. The portable evidence verifier and review
+bundle are documented in ../reproducibility/README.md; they audit frozen
+outputs without a full experiment rerun.

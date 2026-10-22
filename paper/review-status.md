@@ -48,8 +48,11 @@ No independent acceptance, submission or arXiv moderation outcome is claimed.
    numerical mistakes but are not independent scientific review. The owner must
    understand and review the exact bounded claims before taking authorship.
 4. Reproduction: original runs are preserved at exact implementation commits and
-   source pins. Their local cache paths are machine-specific. A portable verifier
-   and compact research-evidence bundle remain useful next work before release.
+   source pins. A portable standard-library evidence verifier and review bundle
+   now reconstruct E005 and audit E006 serialized metrics/intervals without Git
+   or the original cache. Optional --source-root checks all nine external pins.
+   This is an evidence audit, not full performance-harness reexecution; original
+   full-run paths remain machine-specific. See ../reproducibility/README.md.
 5. Sources: Murphy metadata/three-part abstract were verified from the publisher
    index; direct full text returned 403. The manuscript gives its own binary
    identity proof. The related-work search is focused rather than systematic.

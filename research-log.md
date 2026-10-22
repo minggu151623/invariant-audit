@@ -836,3 +836,15 @@ directory with identical page text and no layout warnings. Responsible owner
 review and independent scientific assessment remain pending. Goal active;
 portable evidence verification is the next local release task. No public push
 or submission.
+
+## 2026-10-23 — portable evidence review bundle, M22
+
+Added a separate standard-library verifier and explicit 35-member evidence ZIP.
+Extracted verification works without Git from a foreign working directory:
+E005's four outputs match byte for byte; E006's 720 point comparisons and 84
+interval endpoints pass. The optional source-root invocation checks nine source
+pins, while offline output reports those bytes unchecked. Altered-member and
+Python -O controls fail as expected. Extended only the post-run delivery checker
+for portable source access; frozen performance implementations/protocols/results
+are unchanged. No new performance run or independent review is claimed. Goal
+active; current named manuscript is M21, scientific result remains M20.
