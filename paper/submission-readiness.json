@@ -1,0 +1,38 @@
+{
+  "current_artifacts": {
+    "arxiv-preview.pdf": "444c900ef8176c1919c780534e98daebf97ec7fa5809297fa2cacfb160e8b8cf",
+    "arxiv-source-draft.zip": "f2ef5ec66ceffc71f96943b7e7ef163ac91d35699b51b1f2c57367e73c3e50d9",
+    "main.md": "ff35790c823260bb479441a3a6d91de8e03c5034f20b17d7d9f8e8024de7a0d8"
+  },
+  "date": "2026-10-23",
+  "goal_complete": false,
+  "official_guidance_checked": [
+    "https://info.arxiv.org/help/submit/index.html",
+    "https://info.arxiv.org/help/prep.html",
+    "https://info.arxiv.org/help/faq/texlive.html",
+    "https://info.arxiv.org/help/faq/font-info-tl2025.html",
+    "https://info.arxiv.org/help/endorsement.html",
+    "https://info.arxiv.org/help/license/index.html",
+    "https://info.arxiv.org/help/moderation/index.html",
+    "https://arxiv.org/category_taxonomy"
+  ],
+  "previous_goal_turn": "progress_M21_named_manuscript_and_M22_portable_evidence",
+  "requirements": {
+    "actual_submission": "not_done",
+    "archival_interest": "unresolved_no_moderation_outcome",
+    "arxiv_account": "absent_per_user_reply",
+    "arxiv_server_compile_and_pdf_review": "not_run",
+    "author_name_and_affiliation": "user_supplied_in_manuscript",
+    "category": "candidate_only_not_confirmed",
+    "endorsement": "unknown_requires_actual_account_submission_flow",
+    "frozen_evidence_portable_verification": "pass_M22",
+    "independent_scientific_review": "absent_project_quality_limitation_not_claimed_arxiv_requirement",
+    "license": "unselected",
+    "local_source_compile_and_visual_review": "pass_Tectonic_only",
+    "metadata_live_form_rendering": "not_tested",
+    "owner_substantive_review": "pending",
+    "public_arxiv_record": "absent",
+    "remove_working_draft_markers_after_approval": "pending"
+  },
+  "status": "not_submission_ready"
+}

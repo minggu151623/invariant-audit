@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M22
+current_milestone: M23
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1382,3 +1382,29 @@ M22:
   submitted: false
   public_claim_eligibility: false
   next_gate: substantive_owner_review_and_archival_interest_assessment
+
+M23:
+  path: milestones/M23-owner-reading-and-submission-preparation.md
+  status: local_submission_fields_prepared_owner_review_pending
+  date: 2026-10-23
+  previous_goal_turn: progress_M21_M22
+  current_goal_turn: progress
+  consecutive_no_progress_turns: 0
+  reading_guide: paper/reading-guide-vi.md
+  submission_guide: paper/submission-guide-vi.md
+  fields: paper/submission-fields-draft.json
+  readiness: paper/submission-readiness.json
+  abstract_characters: 1419
+  processor_candidate: xelatex
+  local_compile: verified_Tectonic_only
+  arxiv_server_compile: not_run
+  owner_review_request: async_sent_no_reply_yet
+  license: unselected
+  category: unconfirmed_cs_SE_candidate
+  arxiv_account_exists: false_per_user_reply
+  endorsement_status: unknown
+  independent_scientific_review: absent
+  submitted: false
+  public_arxiv_record: absent
+  goal_complete: false
+  next_gate: owner_substantive_review_then_account_and_license_submission_steps

@@ -1,5 +1,20 @@
 # Findings
 
+## Current submission preparation — 2026-10-23 (M23)
+
+A Vietnamese reading walkthrough and concrete submission fields now accompany
+M21's named paper. All 12 walkthrough percentages match E006. The exact abstract
+is 1419 ASCII characters; official guidance supports XeLaTeX and the four font
+filenames in the current source. No arXiv server build has been performed.
+See [M23](milestones/M23-owner-reading-and-submission-preparation.md) and the
+[readiness audit](paper/submission-readiness.json).
+
+The owner-review question is pending. Name/affiliation are supplied; approval
+of the contents, category/license, account/endorsement and actual posting are
+not. The goal remains active and unachieved. Previous turn and this milestone
+are progress; no-progress streak is zero. Further action must address a concrete
+issue or human feedback, rather than manufacture experiments/status documents.
+
 ## Current delivery state — 2026-10-23 (M22)
 
 The portable 35-file evidence bundle passes from a fresh extracted directory

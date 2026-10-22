@@ -4,6 +4,10 @@ Research question: How can semantic and state invariants be validated while cali
 
 Scope: local research; arXiv manuscript in preparation.
 
+Current submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
+[reading guide in Vietnamese](paper/reading-guide-vi.md), and
+[submission instructions](paper/submission-guide-vi.md). Owner review is pending.
+
 Infrastructure: no paid API; no external GPU.
 
 Target (user-selected on 2026-10-22): an evidence-audited arXiv manuscript and

@@ -848,3 +848,15 @@ Python -O controls fail as expected. Extended only the post-run delivery checker
 for portable source access; frozen performance implementations/protocols/results
 are unchanged. No new performance run or independent review is claimed. Goal
 active; current named manuscript is M21, scientific result remains M20.
+
+## 2026-10-23 — owner walkthrough and submission fields, M23
+
+Classified the previous goal turn as progress (M21/M22). Checked current arXiv
+primary guidance and the four actual OpenType font filenames. Prepared a
+Vietnamese scientific walkthrough, exact 1419-character abstract, review-only
+metadata and hash-bound completion/readiness audit. Verified 12 guide table
+percentages, field invariants/local links and unchanged M22 bundle membership.
+Sent a concrete async question about owner review of the named 12-page draft;
+no reply yet. No scientific rerun, source/PDF change, account or upload. Goal
+not achieved; owner review and submission/account/license steps remain open.
+This turn made concrete progress; no-progress streak zero.

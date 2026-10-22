@@ -94,3 +94,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M22: portable evidence verification](M22-portable-evidence-bundle.md):
   extracted offline/relocated-source checks pass; frozen-evidence self-review,
   not full experiment reexecution or independent acceptance.
+
+- [M23: owner reading and submission preparation](M23-owner-reading-and-submission-preparation.md):
+  Vietnamese walkthrough, concrete fields and current official-guidance check;
+  owner-review request pending, goal not achieved.
