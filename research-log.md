@@ -808,3 +808,18 @@ User replied that they have no arXiv account/materials yet and tentatively expec
 sole authorship; name and affiliation remain unknown. Recorded metadata without
 inventing identity. Scientific scope/novelty and independent review remain open.
 Goal stays active; no push, upload or account creation.
+
+## 2026-10-22 — E006 external reference study, M20
+
+Classified previous goal turn as progress (E005/M19). The narrow case study was
+not sufficient evidence to close the arXiv goal. Found external Raha references
+and close Jung 2025 prior work; credited that overlap rather than claiming a new
+general error-model insight. Locked source acquisition A1 (0177cc2), preserved
+its pre-row header failure, then locked A2 (d83c5aa) for exactly two Beers aliases.
+Locked full evaluation at 0a0d6ac before paired row inspection, implemented at
+aa8e553 with 22 passing tests and executed one valid run. Double-build bytes
+match; 193424 predictions, 144 metric rows, 840000 replicates and 84 intervals.
+Post-run serialized arithmetic verification passes. H6a/H6c support is bounded;
+H6b remains mixed because the Flights calibration interval crosses zero. No
+retuning, new seed, source substitution or scientific-rule change after outcomes.
+Next is manuscript expansion with attribution/score tradeoffs. Goal active.

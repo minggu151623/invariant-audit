@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M19
+current_milestone: M20
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1312,3 +1312,33 @@ M19:
   submitted: false
   public_claim_eligibility: false
   next_gate: strengthen_or_substantively_review_case_study_contribution
+
+E006:
+  protocol_path: experiments/E006-external-reference-validation/protocol.md
+  protocol_id: E006-v1
+  protocol_commit: 0a0d6ac712422192b90cda02634f8d6084bf06d3
+  implementation_commit: aa8e553580af9e368780f6c4b68a4bd8eadb7bf6
+  classification: predeclared_external_reference_validation
+  acquisition_A1: invalid_header_mismatch_preserved
+  acquisition_A2: explicit_metadata_alias_recovery
+  source_manifest_sha256: 96e7529355eac100de47f2c957b8a1a5252d4c220c285d5fd46d871d62716342
+  status: valid_fixed_external_reference_run
+  run_id: e006-20261022-001
+  result: experiments/E006-external-reference-validation/results/run-e006-20261022-001.md
+  synthetic_tests: 22
+  delivery_point_metric_comparisons: 720
+  bootstrap_intervals: 84
+  bootstrap_replicates_per_interval: 10000
+  H6a: supported_within_fixed_design
+  H6b: mixed_not_supported
+  H6c: supported_within_fixed_design_with_FPR_tradeoff
+  independent_review: absent
+  public_claim_eligibility: false
+M20:
+  path: milestones/M20-external-reference-results.md
+  status: verified_within_fixed_external_reference_design
+  date: 2026-10-22
+  verification: milestones/M20-delivery-verification.json
+  independent_acceptance: absent
+  public_claim_eligibility: false
+  next_gate: broaden_manuscript_with_external_reference_and_mixed_calibration_evidence

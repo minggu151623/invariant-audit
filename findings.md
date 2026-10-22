@@ -1,5 +1,21 @@
 # Findings
 
+## Current research state — 2026-10-22 external reference validation (M20)
+
+E006-v1 adds one valid fixed-source study on Beers, Flights and Rayyan, using
+outside reference corrections and fixed simple FD-attribution policies, not the
+original M1. All 720 serialized point checks and 84 bootstrap quantiles pass.
+Rall makes cell-reference errors in all three; Rmode reduces false rejection
+relative to Rall but raises false acceptance on Flights/Rayyan. The Rmode
+lookup Brier-improvement prediction is mixed: Flights CI crosses zero. This
+contrasts imperfect reference agreement with the original perfect constructed
+scores without establishing causal M1 transfer. The source A1 header failure
+and A2 explicit metadata correction are preserved. See [M20](milestones/M20-external-reference-results.md).
+
+The 8-page M19 manuscript is now stale relative to these new results and needs
+updating. E003-v2 remains unexecuted; independent scientific acceptance, owner
+metadata and submission remain unresolved. Goal remains active.
+
 ## Current manuscript state — 2026-10-22 (M19)
 
 An 8-page English working manuscript and a minimal LaTeX source ZIP now exist.

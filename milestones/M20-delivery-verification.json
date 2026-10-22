@@ -1,0 +1,16 @@
+{
+  "bootstrap_rows": 840000,
+  "delivered_artifacts_hash_verified": 5,
+  "independent_scientific_review": false,
+  "interval_rows": 84,
+  "maximum_exported_interval_difference": 8.999884171245753e-13,
+  "maximum_exported_point_metric_difference": 9.180468885094939e-13,
+  "maximum_probability_serialization_error": 4.887030777441736e-13,
+  "point_metric_comparisons": 720,
+  "point_rows": 144,
+  "prediction_rows": 193424,
+  "report_sha256": "95e7adbd7c5a2bc628f1df8b7fe2c8f13cddf8334bda4569e7e375891ed5edc3",
+  "scope": "post_run_delivery_arithmetic_and_integrity_self_review",
+  "source_files_hash_verified": 9,
+  "status": "pass"
+}
