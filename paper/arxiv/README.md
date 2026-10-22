@@ -1,12 +1,12 @@
 # Manuscript rendering project
 
-`main.tex` is the main file and `body.tex` is generated from `../main.md`.
-`images/brier-decomposition.pdf` is generated from the frozen E005 summary by
-`../plot_e005.py`. Markdown and data remain authoritative. The local preview is
-an incomplete author-review draft; author metadata and substantive review remain
-pending. Do not label a compilable draft as an accepted or submitted paper.
+`main.tex` is the main file. `body.tex` is generated from `../main.md`.
+The two figures in images/ are generated from the frozen E005/E006 tables by
+`../plot_e005.py` and `../plot_e006.py`. Markdown/data remain authoritative.
 
-The source archive, when generated, contains only main.tex, body.tex and the
-referenced figure PDF. It does not contain raw events, auxiliary TeX files,
-preview output or unrelated workspace files. The archive is a draft source
-bundle, not a completed submission.
+The minimal draft source ZIP contains main.tex, body.tex,
+images/brier-decomposition.pdf and images/external-reference-contrasts.pdf.
+It excludes preview output, PNG review images, auxiliary files and raw data.
+
+The 12-page preview and source ZIP are review drafts. The user-supplied author is
+Trần Vũ Bảo Minh (Independent Researcher); owner and scientific review are pending. Do not label compilation as paper acceptance.

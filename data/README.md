@@ -40,3 +40,15 @@ resolved through the companion checks JSON and result report.
 
 No row or source cache was used as a new pristine holdout. Same-author
 reimplementation is self-review, not independent acceptance.
+
+## E006-v1 external-reference diagnostic
+
+One valid run e006-20261022-001, implementation aa8e553, result/verification
+5adbb14 (M20). Six outputs form a provenance-linked set: coordinate-only
+[predictions](E006-v1-predictions.csv.gz), [144 point rows](E006-v1-metrics.csv),
+[840000 bootstrap replicates](E006-v1-bootstrap.csv.gz),
+[84 intervals](E006-v1-intervals.csv), [checks](E006-v1-checks.json) and
+[report](../experiments/E006-external-reference-validation/results/run-e006-20261022-001.md).
+The source manifest records exact upstream commit and nine byte pins; source
+CSV payloads stay outside Git. The acquisition A1 header failure and A2 explicit
+alias correction are preserved. No independent reviewer acceptance is implied.

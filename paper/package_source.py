@@ -6,11 +6,11 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 PROJECT = ROOT / 'paper/arxiv'
-MEMBERS = ('main.tex', 'body.tex', 'images/brier-decomposition.pdf')
+MEMBERS = ('main.tex', 'body.tex', 'images/brier-decomposition.pdf', 'images/external-reference-contrasts.pdf')
 DESTINATION = ROOT / 'paper/arxiv-source-draft.zip'
 with zipfile.ZipFile(DESTINATION, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
     for member in MEMBERS:
-        info = zipfile.ZipInfo(member, date_time=(2026, 10, 22, 0, 0, 0))
+        info = zipfile.ZipInfo(member, date_time=(2026, 10, 23, 0, 0, 0))
         info.compress_type = zipfile.ZIP_DEFLATED
         info.external_attr = 0o100644 << 16
         archive.writestr(info, (PROJECT / member).read_bytes())

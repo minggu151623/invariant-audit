@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M20
+current_milestone: M21
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1342,3 +1342,24 @@ M20:
   independent_acceptance: absent
   public_claim_eligibility: false
   next_gate: broaden_manuscript_with_external_reference_and_mixed_calibration_evidence
+
+M21:
+  path: milestones/M21-external-reference-manuscript.md
+  status: verified_rendered_owner_review_draft
+  date: 2026-10-23
+  manuscript: paper/main.md
+  preview: paper/arxiv-preview.pdf
+  source_archive: paper/arxiv-source-draft.zip
+  render_verification: paper/render-verification.json
+  pdf_pages: 12
+  author_name: "Trần Vũ Bảo Minh"
+  affiliation: Independent Researcher
+  author_metadata_source: user_reply_2026_10_23
+  intended_author_count: 1
+  author_count_status: tentative_user_reply
+  arxiv_account_exists: false
+  owner_review: pending
+  independent_acceptance: absent
+  submitted: false
+  public_claim_eligibility: false
+  next_gate: portable_evidence_verification_and_substantive_owner_review

@@ -12,30 +12,29 @@ benchmark construction and measurement, not a new validation algorithm. See
 [arXiv plan](paper/arxiv-plan.md), [working manuscript](paper/main.md), and
 [review status](paper/review-status.md).
 
-Current manuscript milestone: [M19](milestones/M19-arxiv-working-manuscript.md),
-with an 8-page [preview](paper/arxiv-preview.pdf) and minimal
-[source draft](paper/arxiv-source-draft.zip). The latest scientific audit is
-[M18](milestones/M18-arxiv-evidence-audit.md).
-A separately locked exploratory E005 audit independently reimplemented metric
-arithmetic on the frozen E001/E002 outputs: all 195 overall metric comparisons
-agree within declared rounding tolerances. Exact Brier decomposition explains
-why resolution improves while finite score-group reliability and ECE worsen.
-The binary M1 ablation has zero Brier/ECE in these constructions. E001 has
-one statistic signature among 64 evaluation clusters, E002 six among 48; those
-counts are diagnostics, not effective sample sizes.
+Latest scientific milestone: [M20](milestones/M20-external-reference-results.md).
+A new, predeclared external-reference study compares fixed rule-attribution
+policies on Beers, Flights and Rayyan. It preserves the tradeoff between rejecting
+correct cells and accepting incorrect ones, and a mixed lookup-score prediction
+whose Flights interval crosses zero. All 720 exported point checks and 84
+bootstrap intervals pass delivery verification.
 
-E001/E002 remain the only valid performance experiments, restricted to finite
-synthetic designs. E003-v1 is invalid with no external hypothesis/performance
-result. E004 diagnosed 537 byte-identical extra occurrences in its fixed 2021
-source. E003-v2 remains at [M17](milestones/M17-E003-v2-adapter.md): the source
-normalizer and adapter are implemented with 39 passing synthetic tests, while
-full pipeline integration and independent acceptance remain pending. The new
-publication target does not bypass that gate or relabel inspected data as a
-pristine holdout.
+The manuscript now includes E005's audit of two finite synthetic constructions
+and E006's three fixed reference datasets. It has 12 pages, nine references and
+two source-linked figures; see the [preview](paper/arxiv-preview.pdf),
+[minimal source draft](paper/arxiv-source-draft.zip), and
+[owner review guide](paper/owner-review-vi.md).
 
-The new audit and manuscript have no independent scientific acceptance. Owner
-metadata, substantive review and the separate submission action remain open.
-`public_claim_eligibility=false`. No arXiv posting is guaranteed.
+E006's policies are not the original M1. Its cell-correction labels, context
+and task differ, so this does not establish causal M1 transfer or deployment
+performance. E003-v1 remains invalid, E004 stays a source diagnostic, and
+E003-v2 remains at [M17](milestones/M17-E003-v2-adapter.md) with its gate unchanged.
+The source A1 failure and A2 metadata-only header correction are preserved.
+
+The new audit/study/manuscript lack independent scientific acceptance. Substantive owner
+review, portable release packaging and the submission
+process remain open. `public_claim_eligibility=false`. No arXiv posting is
+guaranteed and no submission or public push has occurred.
 
 ## Verified experiments
 
@@ -44,6 +43,8 @@ metadata, substantive review and the separate submission action remain open.
 - [E002 heterogeneous specification stress](experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md): valid
   confirmatory result within the finite synthetic E002-v1 design; the earlier
   invalid run is preserved separately.
+- [E006 fixed external-reference study](experiments/E006-external-reference-validation/results/run-e006-20261022-001.md):
+  valid within its distinct fixed rule-attribution/reference-correction design.
 - Row-level artifacts are indexed in [data/README.md](data/README.md).
 
 The historical M09 human-readable synthesis is

@@ -1,10 +1,12 @@
 {
   "status": "author_review_draft_not_submitted",
-  "title": "When Perfect Validation Scores Reflect Test Construction: An Audit of Semantic and State Invariant Benchmarks",
+  "title": "Auditing Invariant Validation Benchmarks: Construction, Error Attribution, and Probability Scores",
   "planned_author_count": 1,
   "author_count_status": "user_tentative_single_author",
-  "authors": [],
-  "affiliation": null,
+  "authors": [
+    "Trần Vũ Bảo Minh"
+  ],
+  "affiliation": "Independent Researcher",
   "arxiv_account_exists": false,
   "account_status_source": "user_reply_2026-10-22",
   "endorsement_status": "unknown",
@@ -13,5 +15,6 @@
   "license": null,
   "owner_review": "pending",
   "independent_scientific_review": "absent",
-  "public_claim_eligibility": false
+  "public_claim_eligibility": false,
+  "author_metadata_source": "user_reply_2026-10-23"
 }

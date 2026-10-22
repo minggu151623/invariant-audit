@@ -19,9 +19,9 @@ def prepare():
         tex = subprocess.check_output([
             "pandoc", str(source), "--from=markdown", "--to=latex",
             "--top-level-division=section", "--shift-heading-level-by=-1"], text=True)
-    tex = tex.replace("arxiv/images/brier-decomposition.pdf", "images/brier-decomposition.pdf")
-    tex = tex.replace(r"\includegraphics{images/brier-decomposition.pdf}",
-                      r"\includegraphics[width=\linewidth]{images/brier-decomposition.pdf}")
+    tex = tex.replace("arxiv/images/", "images/")
+    tex = re.sub(r"\\includegraphics\{(images/[^{}]+\.pdf)\}",
+                 lambda match: r"\includegraphics[width=\linewidth]{"+match.group(1)+"}", tex)
     tex = re.sub(r"\\texttt\{([^{}]{50,})\}", lambda match: r"\path|" +
                  match.group(1).replace(r"\_", "_").replace(r"\ ", " ") + "|", tex)
     def keep_table_together(match):
@@ -33,6 +33,9 @@ def prepare():
                  keep_table_together, tex, flags=re.DOTALL)
     (PROJECT / "body.tex").write_text(tex)
     main = (PROJECT / "main.tex").read_text()
+    title = markdown.splitlines()[0].removeprefix('# ')
+    title = title.replace(': ', ':\\\\\n', 1)
+    main = re.sub(r"\\title\{.*?\}\n", lambda _match: r"\title{"+title+"}\n", main, flags=re.DOTALL)
     if "secnumdepth" not in main:
         main = main.replace(r"\begin{document}", "\\setcounter{secnumdepth}{0}\n\\begin{document}")
     (PROJECT / "main.tex").write_text(main)

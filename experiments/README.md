@@ -98,3 +98,11 @@ CSV/JSONL is row-data source.
 [valid exploratory result](E005-benchmark-evidence-audit/results/run-e005-20261022-001.md).
 This audits existing E001/E002 rows with an independent metric implementation;
 it is not a new performance experiment or independent reviewer acceptance.
+
+## E006 — fixed external-reference validation
+
+[Protocol](E006-external-reference-validation/protocol.md) locked before paired
+row inspection; [valid result](E006-external-reference-validation/results/run-e006-20261022-001.md).
+Four simple attribution policies and binary/lookup probabilities on three fixed
+reference tables. H6b is mixed; task and FPR/FNR tradeoffs are retained.
+This is not Raha replication, original M1 transfer or an E003 gate bypass.

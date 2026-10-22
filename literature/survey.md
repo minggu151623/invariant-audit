@@ -304,3 +304,14 @@ problem; Murphy's known decomposition and Guo/Nixon ground the measurement
 interpretation. No novelty claim for those concepts is made. E005 supplies the
 new repository-specific observations. This is not a systematic literature review;
 independent assessment of archival interest and generality remains open.
+
+## E006 external-reference extension (2026-10-22)
+
+[Raha source/label note](notes/raha-2019-external-reference.md) records the
+outside reference provenance and published prior attribution warning.
+[Jung 2025 overlap note](notes/jung-2025-realistic-errors.md) records close prior
+work on error-model effects. Those broad ideas are not novel contributions of
+this project. E006/M20 adds a locked three-dataset attribution and probability
+contrast, with a preserved mixed calibration prediction; see its protocol and
+valid report. No comparison to the Raha implementation or causal M1 transfer
+claim is made.

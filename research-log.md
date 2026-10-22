@@ -823,3 +823,16 @@ Post-run serialized arithmetic verification passes. H6a/H6c support is bounded;
 H6b remains mixed because the Flights calibration interval crosses zero. No
 retuning, new seed, source substitution or scientific-rule change after outcomes.
 Next is manuscript expansion with attribution/score tradeoffs. Goal active.
+
+## 2026-10-23 — named external-reference manuscript, M21
+
+Integrated the frozen E006 outcomes into the manuscript with all four policies,
+paired intervals, mixed H6b, close prior work and a complete configuration
+appendix. No experiment was retuned. User supplied Trần Vũ Bảo Minh and
+Independent Researcher; retained exact name/order/diacritics. Switched the
+preview to distributed OpenType Latin Modern fonts and verified the extracted
+name. All 12 final pages were inspected; the four-file ZIP compiled in a fresh
+directory with identical page text and no layout warnings. Responsible owner
+review and independent scientific assessment remain pending. Goal active;
+portable evidence verification is the next local release task. No public push
+or submission.

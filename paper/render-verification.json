@@ -1,25 +1,35 @@
 {
-  "author_metadata_complete": false,
-  "body_tex_sha256": "2b71c2d65f9b2b15de3a4075f4061a6eb44602a7723c5298348229d6dbb9e4de",
-  "date": "2026-10-22",
+  "affiliation": "Independent Researcher",
+  "author_metadata_complete": true,
+  "author_name": "Trần Vũ Bảo Minh",
+  "author_name_extracted_exactly": true,
+  "body_tex_sha256": "1293a0564829fa8784eb42658b6c072d63502e0a7773cd70cabda4981fbc5154",
+  "date": "2026-10-23",
   "engine": "Tectonic 0.17.0 isolated official release",
+  "external_primary_table_rows_verified_against_frozen_csv": 12,
+  "figure_count": 2,
   "fresh_pdf_text_matches_preview_all_pages": true,
   "fresh_source_compilation": "pass",
   "independent_scientific_acceptance": false,
-  "markdown_sha256": "453bdce29c413bc6294372cc4cdcdf3223a023c985f0e4e26a9a886dbb51ffc6",
-  "native_compiler_first_attempt": "timed_out_resource_download",
+  "markdown_sha256": "ff35790c823260bb479441a3a6d91de8e03c5034f20b17d7d9f8e8024de7a0d8",
+  "native_compiler_first_attempt": "historical_resource_download_timeout",
   "overfull_underfull_or_missing_character_warnings": 0,
-  "pdf_pages": 8,
-  "preview_pdf_sha256": "b7c8412cc3b25e10ec4e330b3c7662ee975a11af66c120bb5f559ca5429a075c",
+  "pdf_pages": 12,
+  "preview_pdf_sha256": "444c900ef8176c1919c780534e98daebf97ec7fa5809297fa2cacfb160e8b8cf",
+  "scientific_evidence_milestones": [
+    "M18",
+    "M20"
+  ],
   "source_members": {
-    "body.tex": "2b71c2d65f9b2b15de3a4075f4061a6eb44602a7723c5298348229d6dbb9e4de",
+    "body.tex": "1293a0564829fa8784eb42658b6c072d63502e0a7773cd70cabda4981fbc5154",
     "images/brier-decomposition.pdf": "84f055f99583e1b499bcd9dbc4a80b5e8c0ade4d5cf5005cbf00f37fa84bdd1b",
-    "main.tex": "31ae0bc1adbb2664b65a873072383b94d76959e8c5a0c05233db143c67c44461"
+    "images/external-reference-contrasts.pdf": "522baca7f022ceed2bc891375bb936969594dcd254824ca36dd045e2b41e2375",
+    "main.tex": "fc0520adc53900d20ea2ca71babb86b4fbe79d1daa043d1dae2f894dcebef15a"
   },
-  "source_zip_sha256": "bd30aa544f181b69782dd135665451d9b7d5f5c580d499d6eb4f54657b98354a",
-  "status": "verified_rendered_author_review_draft",
+  "source_zip_sha256": "f2ef5ec66ceffc71f96943b7e7ef163ac91d35699b51b1f2c57367e73c3e50d9",
+  "status": "verified_rendered_author_review_draft_E006_extension",
   "submitted": false,
-  "visual_inspection": "all pages rendered and inspected after table/path fixes; no clipping or overlap observed",
+  "visual_inspection": "All 12 final named pages inspected; Vietnamese glyphs, tables and figures display correctly; no clipping/overlap observed.",
   "visually_inspected_pages": [
     1,
     2,
@@ -28,7 +38,11 @@
     5,
     6,
     7,
-    8
+    8,
+    9,
+    10,
+    11,
+    12
   ],
   "zip_crc": "pass"
 }

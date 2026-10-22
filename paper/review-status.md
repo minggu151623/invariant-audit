@@ -1,65 +1,73 @@
 # Manuscript review status
 
-Date: 2026-10-22. Scope: author self-review of the arXiv-directed draft.
-No independent acceptance or arXiv moderation outcome is claimed.
+Updated 2026-10-23 after E006/M20 and the named manuscript expansion. Scope: computational and manuscript self-review.
+No independent acceptance, submission or arXiv moderation outcome is claimed.
 
-## Scientific review
+## Completed evidence checks
 
-- Numerical support: E005 independently reimplements metric arithmetic and
-  reproduces all 195 overall comparisons. Source hashes, 39 summary rows,
-  12 score groups and exact Brier identities are recorded by M18 at 8692937.
-- Interpretation: the abstract and conclusion are a finite case study. They do
-  not claim new invariant-checking technology, improved calibration, external
-  accuracy, causal duplicate mechanisms, or representative uncertainty.
-- Formal statements: the agreement proposition is conditional, not a causal
-  test that oracle independence forces perfection. The smoothing statement
-  assumes label-pure raw-score groups across both splits, and the ECE result
-  additionally excludes cancellation within bins. The resampling statement
-  concerns identical sufficient-statistic vectors and a fixed resample size.
-- Calibration: REL is empirical exact-score grouping, not a population estimate.
-  ECE is positive-class, ten-bin ECE, not maximum-confidence ECE. Serialization
-  tolerances and calibration-reconstruction limitations are explicit.
-- Statistical scope: signature counts are not effective sample sizes. The old
-  bootstrap intervals are quoted as fixed-design results and were not rerun.
-- Generative-AI use: a dedicated disclosure names its substantial roles in
-  planning, implementation, audit analysis and drafting. It does not claim
-  completed human verification or list AI as an author.
-- External evidence: E003-v1 is invalid; E004 is a source diagnostic; E003-v2 is
-  incomplete and unexecuted. None is described as external performance validation.
+- E005/M18 at 8692937: 195 overall metric comparisons reproduce; finite exact
+  score-group decomposition and original cluster-signature counts are checked.
+- E006/M20 at 5adbb14: one predeclared external-reference run, four fixed rule
+  policies across Beers/Flights/Rayyan. Twenty-two synthetic tests pass. The
+  193424 predictions, 144 point rows, 840000 bootstrap rows and 84 intervals
+  have double-build byte agreement. A post-run serialized audit verifies 720
+  point comparisons, all quantiles and nine source pins within 2e-12.
+- H6b remains mixed because Flights' lookup-minus-binary Brier interval crosses
+  zero. H6c's lower false rejection is shown together with false acceptance
+  increases. Rayyan's BA difference interval crosses zero and is not hidden.
+- Rall is described as a conservative suspect set, not a promise of precise
+  error localization. Correctness of FD conflict detection is a different task
+  from agreement with cell corrections. Shared empty reference values illustrate
+  a distinction between reference-correct and application-valid.
+- Lookup uses raw-score granularity; binary collapses nonzero scores. Their
+  score difference can change both reliability and resolution, and is not a
+  calibration-only causal effect. No claim of causal M1 transfer is made.
+- Two perfect synthetic constructions and the external policies are distinct
+  methods/tasks. E003-v1 stays invalid; E004 stays diagnostic; E003-v2 stays
+  unexecuted at its original gate. Source A1's header failure and A2 correction
+  are preserved rather than retroactively marked valid.
+- Nine references now include close work: Raha already notes attribution
+  ambiguity, Jung 2025 already studies error-model effects. Neither broad idea,
+  the Brier decomposition nor simple constraint checking is claimed as new.
+- Mathematical explanations are conditional and distinguish finite empirical
+  REL from population calibration. Signature counts are not effective sample
+  sizes. External intervals describe fixed datasets/components.
+- Significant generative-AI use is disclosed. There is no assertion that a human
+  has already independently verified or approved the contents.
 
-## Unresolved substantive objections
+## Remaining substantive issues
 
-1. Archival interest: the mathematical mechanisms are elementary and known.
-   Two constructions from one project may be too narrow a contribution. The
-   paper now presents a reproducible case study and clearly credits the known
-   ideas, but an independent reviewer still needs to judge whether the combined
-   empirical account is useful enough. If not, broaden the study before submission.
-2. External correctness: no independently labeled natural-error dataset exists
-   in this evidence set. Any stronger generalization claim needs new evidence;
-   completing a controlled mutation pipeline alone would not resolve this issue.
-3. Common author: a fresh metric implementation and synthetic tests do not
-   constitute independent scientific review. Neither the analysis nor the
-   manuscript is independently accepted.
-4. Source verification: Murphy metadata and the three-component abstract were
-   verified through the publisher index; direct full text returned 403. The
-   manuscript proves its finite binary identity explicitly and does not quote an
-   unchecked equation from that source. Remaining references have primary or
-   institutional records; the related-work search was focused, not exhaustive.
+1. Archival interest: external-reference evidence improves the case beyond two
+   internally designed benchmarks, but the general ideas and simple policies
+   are established. Whether the integrated quantitative case is substantial
+   enough remains a review question, not something a PDF build proves.
+2. Reference semantics: outside corrected tables are not independently adjudicated
+   world truth. Normalization and retained reference blanks affect labels; the
+   transductive dirty-defined components may not represent true entities.
+3. Common authorship: rational arithmetic and separate implementations detect
+   numerical mistakes but are not independent scientific review. The owner must
+   understand and review the exact bounded claims before taking authorship.
+4. Reproduction: original runs are preserved at exact implementation commits and
+   source pins. Their local cache paths are machine-specific. A portable verifier
+   and compact research-evidence bundle remain useful next work before release.
+5. Sources: Murphy metadata/three-part abstract were verified from the publisher
+   index; direct full text returned 403. The manuscript gives its own binary
+   identity proof. The related-work search is focused rather than systematic.
 
-## Owner inputs and submission gate
+## Owner and submission status
 
-Actual author names/order, affiliations, responsible submitter, category and
-license remain unconfirmed. Account/endorsement status is unknown. The preview
-and source bundle are review drafts. The owner must review a concrete final
-manuscript before a separate external submission action. No upload, push or
-external messaging has occurred in this continuation.
+The user tentatively expects sole authorship and stated they have no arXiv
+account. On 2026-10-23 they supplied the exact name Trần Vũ Bảo Minh and
+affiliation Independent Researcher; both appear in the manuscript. Category
+and license remain unconfirmed. Endorsement requirements have not been checked against an account.
+The owner has not reviewed the updated E006 manuscript. Do not invent these
+facts, create an identity from Git metadata, contact endorsers, or mark this
+working draft as submitted/accepted.
 
-## Rendering verification
+## Rendering
 
-Recorded in `render-verification.json` after compilation and page inspection.
-Native editor compilation initially timed out downloading TeX resources; an
-isolated official Tectonic 0.17.0 binary is used as a local rendering fallback.
-The downloaded archive SHA-256 was checked against the official release asset:
-`a3f1cac7c5678f01661a92212f58480ae3b0634115d880dbc59e2953ded45667`.
-No global TeX installation was made. This rendering runtime is separate from
-E005, which used only Python's standard library and did not access the network.
+`render-verification.json` records the current preview and minimal-source checks.
+The preview/source ZIP are derived review artifacts; the Markdown and frozen
+study artifacts remain authoritative. The first native compile previously
+ timed out downloading resources; an isolated hash-checked official Tectonic
+0.17.0 binary is the local fallback. No global TeX installation was made.

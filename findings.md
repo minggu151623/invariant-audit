@@ -1,5 +1,19 @@
 # Findings
 
+## Current manuscript state — 2026-10-23 (M21)
+
+The expanded 12-page manuscript now integrates E005 and E006, including all four
+external policies, the false-rejection/acceptance tradeoff and the mixed Brier
+prediction. User-supplied author Trần Vũ Bảo Minh, Independent Researcher,
+appears correctly with Vietnamese diacritics. All final pages were inspected;
+the four-file source ZIP compiles in isolation with matching text and no layout
+warnings. See [M21](milestones/M21-external-reference-manuscript.md).
+
+Owner and independent scientific review, portable evidence packaging and the
+submission process remain open. The goal is active; no submission or public
+push occurred. M20 remains the latest scientific result. The following stages
+are historical; M19's eight-page preview has been superseded.
+
 ## Current research state — 2026-10-22 external reference validation (M20)
 
 E006-v1 adds one valid fixed-source study on Beers, Flights and Rayyan, using
@@ -12,9 +26,8 @@ contrasts imperfect reference agreement with the original perfect constructed
 scores without establishing causal M1 transfer. The source A1 header failure
 and A2 explicit metadata correction are preserved. See [M20](milestones/M20-external-reference-results.md).
 
-The 8-page M19 manuscript is now stale relative to these new results and needs
-updating. E003-v2 remains unexecuted; independent scientific acceptance, owner
-metadata and submission remain unresolved. Goal remains active.
+At M20, the 8-page M19 manuscript needed updating; M21 now supplies that update.
+E003-v2 remains unexecuted and scientific acceptance/submission remain unresolved.
 
 ## Current manuscript state — 2026-10-22 (M19)
 

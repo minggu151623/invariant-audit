@@ -83,3 +83,10 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 - [M19: rendered arXiv-directed draft](M19-arxiv-working-manuscript.md):
   verified PDF/source artifacts; scientific and owner review remain open.
+
+- [M20: external-reference results](M20-external-reference-results.md): fixed
+  three-dataset study and delivery verification; independent review remains absent.
+
+- [M21: named external-reference manuscript](M21-external-reference-manuscript.md):
+  current 12-page PDF and four-file source ZIP; artifact checks pass, substantive
+  review and submission remain open.
