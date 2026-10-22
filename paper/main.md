@@ -1,180 +1,207 @@
-# InvariantAudit: Semantic and State Validation in Two Finite Synthetic Designs
+# When Perfect Validation Scores Reflect Test Construction: An Audit of Semantic and State Invariant Benchmarks
 
-Status: corrected working draft, 2026-09-17; preliminary, not publication-ready.
-This draft supersedes numerical and interpretive errors in commit 265bd55.
-Public-claim eligibility remains false. No external performance result exists.
+Working manuscript, 22 October 2026. Author metadata and independent review are pending. Scientific conclusions are restricted to the constructions described below.
 
 ## Abstract
 
-We compare a schema-only validator (B0) with an invariant-aware validator (M1)
-in two deterministic synthetic constructions. The positive class is valid:
-false positives are invalid cases accepted, and false negatives are valid
-cases rejected. On E001, M1 improves balanced accuracy by 0.5 and reduces
-false acceptance by 1.0, without increasing false rejection. On E002, these
-differences are 0.401960784, -0.803921569, and zero; the locked specification-stress
-diagnostics also pass. Brier scores decrease, but fixed-bin expected calibration
-error (ECE) increases in both comparisons. E003-v1, an attempted external-fixture
-evaluation, stopped at its duplicate-ID source gate and produced no performance
-metrics or H3 outcome. These results support the specified finite comparisons,
-not production performance, general calibration improvement, or external validity.
+Invariant-aware validators can outperform structural baselines on constructed errors without establishing their performance on independently labeled records. We examine this distinction in two finite synthetic validation designs and a failed external-fixture attempt. The invariant-aware method has balanced accuracy 1, while the baseline has 0.5 and 0.5980. A separate, protocol-locked exploratory audit recomputes 195 overall split/method metric comparisons from frozen prediction artifacts; all agree within declared serialization tolerances. Exact finite score-group Brier decomposition shows that improved resolution accounts for lower Brier scores even as empirical reliability worsens. A binary-probability ablation has zero Brier score and zero expected calibration error with unchanged decisions. We find one distinct cluster-statistic signature among 64 evaluation clusters in the first design and six among 48 in the second. These counts describe limits of the resampling evidence without estimating effective sample size. Conditional arguments connect perfect finite agreement, Laplace smoothing and degenerate resampling to test construction. The contribution is an auditable methods case study, rather than a new validator or evidence of production accuracy.
 
-## Question and methods
+## 1. Introduction
 
-The project asks how semantic and state invariants can be validated while
-measuring false acceptance, false rejection, and probability-score behavior.
-The user approved this direction in [M00](../milestones/M00-research-direction.md).
-Detailed experiment designs are AI-suggested, not user-selected.
+A structural validator may verify required fields and primitive types, while an invariant checker may also compare identities, conservation relations or state transitions. A benchmark that injects violations of the additional relations will often favor the invariant-aware method. The scientific question is what that comparison establishes beyond correct handling of the selected construction.
 
-E001 uses synthetic entity/ledger/event bundles with identity, conservation,
-transition-legality, and revision-consistency relations. E002 adds six
-heterogeneous synthetic signatures, bounded multi-fault recipes, a separately
-implemented replay/conservation oracle, and omission, overconstraint, and
-stale-transition checker regimes. These are constructed cases, not sampled
-repositories or measurements of naturally occurring software errors.
+We examine our own benchmark artifacts, rather than an unrelated deployed system. The initial comparison produced large improvements and perfect invariant-aware decisions. However, benchmark truth, fault inventory and validator were developed under closely related specifications. Probability-score improvements were also easy to overinterpret: lower Brier scores appeared alongside higher expected calibration error (ECE). An attempted extension to public event fixtures later stopped before evaluation because its source contract rejected repeated IDs.
 
-B0 checks each protocol's structural constraints. M1 also checks its selected
-semantic/state relations. This concerns the specific B0 implementation; it does
-not prove that every schema language is incapable of relational checks.
-The no-semantic and no-state ablations remove their respective predicates.
+We ask three questions. RQ1: do separately recomputed metrics and alignment checks support the reported finite comparisons? RQ2: which components explain the probability-score changes? RQ3: what do repeated cluster statistics and the external source failure imply about the scope of evidence?
 
-Each calibrated method fits a lookup on its calibration split:
-`p_valid(s) = (k_s + 1)/(n_s + 2)`, with a calibration-wide fallback for unseen
-scores. This is Laplace-smoothed empirical lookup, not isotonic regression.
-Classification decisions do not change with this confidence transformation.
-The no-calibration ablation uses the binary M1 decision as its probability.
-See the [E001 protocol](../experiments/E001-synthetic-invariant-calibration/protocol.md)
-and [E002 protocol](../experiments/E002-heterogeneous-specification-stress/protocol.md).
+The contribution combines a traceable case study, a standalone artifact audit and conditional explanations of the observed behavior. Invariant checking, the oracle problem, Brier decomposition and calibration caveats are established ideas. We do not present them as new. The empirical contribution is their application to these particular versioned constructions, including the negative calibration finding and preservation of an invalid external attempt.
 
-With positive=valid, FPR is the fraction of invalid cases accepted; FNR is the
-fraction of valid cases rejected. Balanced accuracy averages valid acceptance
-and invalid rejection rates. Brier is mean squared probability error. ECE uses
-ten fixed probability bins and compares each bin's mean p_valid with mean truth.
-Brier is not a pure calibration measure; see the existing
-[literature foundation](../literature/survey.md#probability-confidence-and-calibration).
+## 2. Related work and position
 
-The primary M1-minus-B0 rule requires the 95% paired cluster-bootstrap BA
-interval to be strictly positive, the FPR interval strictly negative, and the
-point FNR delta nonpositive. E002 additionally requires its subgroup-direction
-and three co-primary stress conditions. Secondary confidence metrics do not
-determine whether H1/H2 is supported.
+Schelter et al. [1] combine declarative data-quality constraints with user-defined checks and scalable execution. Breck et al. [2] study validation for machine-learning data pipelines. Practical validation thus extends beyond primitive record shapes; our narrow structural baseline does not represent all schema languages or data-quality systems. We make no comparative performance claim against these systems.
 
-## E001: valid finite synthetic result
+Barr et al. [3] examine the difficulty of deciding whether observed software behavior is correct. Our case illustrates a related distinction: separate implementations of an oracle and checker reduce shared-code risk while potentially retaining a shared specification. Agreement does not establish that this specification captures an external task.
 
-Run `e001-20260825-001` has 256 development, 256 calibration, and 512
-confirmatory cases. The confirmatory set contains 64 clusters and uses 10,000
-paired bootstrap replicates. These numbers come from the
-[locked result](../experiments/E001-synthetic-invariant-calibration/results/run-e001-20260825-001.md).
+Murphy [4] separates probability-score behavior into reliability, resolution and uncertainty. We use an exact finite binary score-group form and provide its algebra below. Guo et al. [5] study confidence calibration; Nixon et al. [6] examine how calibration-measure choices affect conclusions. Our validators are deterministic rule systems, not neural networks. These sources ground measurement terminology rather than supply evidence about our methods. Our ECE compares positive-class probability with observed positive frequency, not maximum-class confidence with classification correctness.
 
-| Metric | B0 | M1 | Delta M1-B0 |
-| --- | ---: | ---: | ---: |
-| Balanced accuracy | 0.5 | 1 | 0.5 |
-| FPR (false acceptance) | 1 | 0 | -1 |
-| FNR (false rejection) | 0 | 0 | 0 |
-| Brier | 0.25 | 0.00005917159763 | -0.2499408284 |
-| ECE | 0 | 0.007692307692 | 0.007692307692 |
+This is a focused comparison with relevant foundations, not a systematic literature review. The case documents an instance of known measurement concerns, with arithmetic that can be checked from frozen rows. It does not establish a new general limitation of validation systems.
 
-H1 is supported under the locked rule. All paired intervals collapse to their
-point estimates because the constructed cluster signatures are identical.
-This does not establish negligible uncertainty beyond the finite construction.
-Both no-semantic and no-state ablations have BA 0.75 and FPR 0.5.
-The no-calibration ablation already has Brier=ECE=0 and identical decisions:
-this experiment does not demonstrate a benefit from adding the lookup.
-The secondary prediction of lower ECE was not supported.
+## 3. Designs and evidence status
 
-## E002: latest valid performance result
+### 3.1. Methods and positive class
 
-Run `e002-20260825-002` has 912 cases in 96 synthetic clusters in total;
-228/228/456 cases form the development/calibration/confirmatory sets, with
-48 confirmatory clusters. These values and all intervals below come from the
-[valid report](../experiments/E002-heterogeneous-specification-stress/results/run-e002-20260825-002.md).
+The positive class is **valid**. A false positive is an invalid case accepted; a false negative is a valid case rejected. We use
 
-| Metric | B0 | M1 | Delta M1-B0 | 95% paired bootstrap CI for delta |
-| --- | ---: | ---: | ---: | --- |
-| Balanced accuracy | 0.598039216 | 1.000000000 | 0.401960784 | [0.383254717, 0.422077922] |
-| FPR (false acceptance) | 0.803921569 | 0.000000000 | -0.803921569 | [-0.844327177, -0.767281106] |
-| FNR (false rejection) | 0.000000000 | 0.000000000 | 0.000000000 | [0.000000000, 0.000000000] |
-| Brier | 0.091937429 | 0.000247903 | -0.091689527 | [-0.096349544, -0.087346241] |
-| ECE | 0.007408873 | 0.012631635 | 0.005222762 | [0.003377133, 0.007432312] |
+$$
+\mathrm{BA}=\tfrac12\left(\frac{TP}{TP+FN}+\frac{TN}{TN+FP}\right),\quad
+\mathrm{FPR}=\frac{FP}{TN+FP},\quad \mathrm{FNR}=\frac{FN}{TP+FN}.
+$$
 
-Delta BA is a 40.1960784 percentage-point increase, not a 40.2% relative gain.
-Deltas are calculated from exact statistics before rounding, rather than by
-subtracting displayed rounded cells. H2 is supported and the FNR guardrail
-passes. Co-primary d1 has delta FPR 0.352941176 and CI
-[0.340425532, 0.366412214]; d2 and d3 each have delta FNR 1 and CI [1,1].
-Omission accepts invalid conservation cases; overconstraint and stale rules
-reject valid cases. These bounded failures do not demonstrate robustness to
-arbitrary incorrect specifications.
+B0 applies each protocol's structural rules. M1 adds its selected semantic and state relations. The no-semantic and no-state ablations remove the corresponding predicates. The no-calibration ablation preserves M1's decisions and reports each binary decision as its probability. B0 is deliberately limited; the study does not show that relational validation is impossible with richer schemas or existing constraint systems.
 
-Run 001 remains invalid: exact-versus-rounded Brier arithmetic in its report
-validator caused `D9_OR_NA`. Its report is not part of H2 evidence.
-The valid run followed an implementation correction and separate authorization;
-see [M08](../milestones/M08-E002-run-002-valid.md).
+Each calibrated method fits a calibration-only lookup on raw score $s$:
 
-## E003: invalid source gate, no external performance result
+$$
+\widehat p(y=1\mid s)=\frac{k_s+1}{n_s+2},
+$$
 
-E003-v1 preselected three GH Archive hourly shards. M11 records 67,145,
-90,940, and 117,780 records, totaling 275,865 source records. This is an input
-inventory, not the number of evaluated cases. E003 would select external clean
-events and create artificial negatives, so even a valid run would not estimate
-naturally occurring error prevalence.
+where $n_s$ is the calibration score-group size and $k_s$ its positive count. An unseen score uses the formula on all calibration cases. This is Laplace-smoothed empirical lookup, not isotonic regression. It does not change classification decisions.
 
-The M12 preflight scanned only development/calibration: 2,178 repository IDs
-shared by those two groups were excluded. Its 5,408 and 9,435 eligible-event
-counts do not establish isolation across all three shards.
-The implementation review was HOLD followed by remediation; M12 still says
-independent re-review pending. No independent re-review acceptance is established
-by the preserved M13 record.
+### 3.2. Synthetic constructions
 
-Run `e003-20260903-001` exited 2 on duplicate event IDs at confirmatory lines
-16450 and 16491. The locked protocol rejects any duplicated ID before type
-filtering and forbids deduplication. No predictions, metrics, bootstrap, or H3
-outcome were produced. [M13](../milestones/M13-E003-run-001-invalid.md) reports a
-subsequent diagnostic count of 537 duplicate occurrences in the 2021 shard and
-zero in the earlier shards. At resumption the external temporary cache/manifest
-were missing, so those historical counts required recovery and re-verification.
-Follow-up source diagnosis is tracked separately as E004 below.
+E001 creates entity, ledger and event bundles with identity, conservation, transition-legality and revision-consistency relations. Its complete synthetic oracle is coupled to its recipes. E002 adds six heterogeneous cluster types, bounded multiple-fault recipes and a separately implemented replay/conservation oracle. Omitted conservation, overconstraints and stale transitions are deliberate specification stressors.
 
-Duplicate IDs alone do not identify a delivery mechanism. Retries, overlapping
-collection, or other causes remain hypotheses; no source in the repository
-establishes the cause of these particular duplicates. The former attribution
-to at-least-once delivery is withdrawn. Any revised policy must first distinguish
-identical repeats from conflicting payloads and preserve the invalid v1 record.
+Table 1. Original case counts and evaluation clusters. Clusters group related cases from one constructed base or template instance.
 
-## E004: exploratory source diagnosis, not performance validation
+| Design | Development | Calibration | Evaluation | Evaluation clusters |
+| --- | ---: | ---: | ---: | ---: |
+| E001 | 256 | 256 | 512 | 64 |
+| E002 | 228 | 228 | 456 | 48 |
 
-The separately locked E004 protocol was implemented before one clean-tree run
-`e004-20260917-001`. The three original shards were recovered with every pinned
-compressed hash, byte size and record count matching; the reconstructed manifest
-also matches. The [diagnostic report](../experiments/E004-source-duplicate-diagnosis/results/e004-20260917-001.md)
-finds 537 extra occurrences in 537 ID groups in the 2021 shard, all with full
-raw-line SHA-256 equal to the first occurrence (excluding line terminators).
-Every repeated ID occurs twice: 117,780 records contain 117,243 unique IDs.
-No conflicting full canonical object, formatting-only equivalent, earlier-shard
-duplicate or cross-shard repeated ID was found. This does not prove repository
-independence or identify the delivery mechanism.
+The evaluation split is historically named `confirmatory`. Original protocols were locked before their valid runs. E005, the audit in this paper, was locked after those results had been inspected and is explicitly exploratory. It does not create an untouched replication. E002's earlier invalid run is excluded; its valid run followed a report-validator correction preserved in the repository.
 
-Nineteen synthetic tests pass; dictionary and sort/groupby aggregation agree.
-These share a parser and one author, so they are not independent review. E004
-is exploratory follow-up informed by M13, on only three fixed shards. Its result
-supports proposing conservative exact-repeat collapse in E003-v2, not its
-general safety. A separate protocol and implementation/review gate remain
-necessary; reuse of inspected sources must not be called pristine confirmation.
-As of 2026-09-21, [M16](../milestones/M16-E003-v2-protocol-and-normalizer.md)
-records the separate E003-v2 protocol lock and a source component with 22 passing
-synthetic tests. Full pipeline integration/review and performance execution are
-pending. These engineering checks add no external performance evidence.
+### 3.3. External sources
 
-## Limitations and conclusion
+E003-v1 selected three fixed GH Archive hourly files [7], with 67,145, 90,940 and 117,780 records. It planned oracle-filtered clean bases and artificial mutations. Even success would not estimate naturally occurring error prevalence. The run stopped on repeated event IDs in the 2021 file before generating predictions or performance metrics. It supplies no external hypothesis outcome.
 
-E001's oracle is recipe-coupled; E002's separately implemented oracle still
-shares a hand-specified synthetic design. Bootstrap intervals describe the
-finite resampling scheme, not a representative population. ECE worsens in both
-M1-B0 comparisons despite lower Brier; improved probability calibration is not
-established. E003 failed before evaluation. No production, external-validity,
-generalization, novelty, safety, or public-claim conclusion follows.
+A separately locked E004 diagnostic found 537 extra occurrences in 537 groups of size two. Every extra occurrence matched its first raw line byte for byte, excluding line endings. No conflicting repeated-ID group or cross-file repeated ID was found in these files. The cause of the duplicates is unknown. E003-v2's revised policy is informed by those observations and remains unexecuted; reused sources cannot become a pristine holdout by renaming a split. We retain the failed attempt as a limitation.
 
-Within two locked finite constructions, M1 rejects more invalid cases than B0
-without increasing rejection of valid cases. The unresolved question is transfer
-to external records under a defensible, predeclared source policy. Source
-duplication has now been diagnosed in E004. E003-v2 is locked but only partially implemented;
-neither the diagnostic nor a revised policy retroactively validates E003-v1.
+## 4. Exploratory audit protocol
+
+E005-v1 was committed before implementation and one data execution. Its four immutable inputs contain 5,120 E001 and 7,296 E002 prediction rows, plus 75 and 243 metric rows. SHA-256 pins are verified before parsing. The audit imports neither original metric implementation and does not rerun the old experiments or bootstraps.
+
+Serialized probabilities are parsed as exact decimal rationals. The audit rejects duplicate JSON or case/method keys, invalid types, incomplete method coverage, and per-case disagreement in truth, input hash or cluster identity. It checks split disjointness of bases/clusters and counts cross-split input-hash overlap. None was found here; that does not exclude every form of leakage.
+
+Every overall split/method row is checked. Confusion counts must agree exactly; absolute metric tolerances are $10^{-9}$ for E001 and $2\times10^{-9}$ for E002, allowing serialization and displayed rounding. ECE uses ten equal-width bins, lower bound included and upper bound excluded, except that the final bin includes 1:
+
+$$
+\mathrm{ECE}_{10}=\sum_{b=0}^{9}\frac{N_b}{N}|\overline p_b-\overline y_b|.
+$$
+
+The audit reconstructs lookups using calibration rows only and checks every stored probability. Success establishes compatibility with that rule, not historical proof of which rows were used during fitting. Binary-ablation probabilities must equal decisions exactly.
+
+For each distinct serialized probability $p_g$, let $w_g=N_g/N$ and let $f_g$ be its group's observed positive frequency. With overall frequency $\bar y$,
+
+$$
+\begin{aligned}
+\mathrm{REL}&=\sum_g w_g(p_g-f_g)^2, &
+\mathrm{RES}&=\sum_g w_g(f_g-\bar y)^2,\\
+\mathrm{UNC}&=\bar y(1-\bar y), &
+\mathrm{BS}&=\mathrm{REL}-\mathrm{RES}+\mathrm{UNC}.
+\end{aligned}
+$$
+
+These are exact score groups, not ECE bins. Within-group mean squared error is $(p_g-f_g)^2+f_g(1-f_g)$. Weighted outcome variances satisfy
+
+$$
+\sum_g w_g f_g(1-f_g)=\bar y(1-\bar y)-\sum_g w_g(f_g-\bar y)^2.
+$$
+
+Substitution proves the stated binary Brier identity. The audit requires zero rational residual. This finite-sample identity does not make REL a consistent population-calibration estimate in arbitrary small or singleton groups.
+
+For each method, we also count distinct cluster-statistic signatures: TP/TN/FP/FN, summed squared probability error, and each ECE bin's count, probability sum and truth sum. IDs and row order are omitted. This diagnoses statistic diversity and does not estimate effective sample size.
+
+The implementation passed 21 synthetic tests, covering mixed-label score groups, bin boundaries, lookup fallback, rounding and late write failures. All four outputs are built twice and compared byte for byte before the report is published last. Tests and the separate implementation share an author and environment; independent scientific acceptance remains absent.
+
+## 5. Results
+
+### 5.1. Metric agreement and finite performance
+
+All 195 overall split/method metric comparisons pass. Maximum absolute differences from frozen CSV values are $1.013\times10^{-15}$ for E001 and $4.706\times10^{-10}$ for E002. Confusion counts agree exactly. Alignment, split disjointness and lookup-compatibility checks pass. Every one of the 39 split/method rows satisfies the Brier identity exactly.
+
+Table 2. Evaluation metrics recomputed from frozen rows. Binary is the no-calibration ablation with unchanged decisions.
+
+| Design | Method | BA | FPR | FNR | Brier | ECE |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| E001 | B0 | 0.500000 | 1.000000 | 0 | 0.25000000 | 0 |
+| E001 | M1 | 1.000000 | 0 | 0 | 0.00005917 | 0.00769231 |
+| E001 | Binary | 1.000000 | 0 | 0 | 0 | 0 |
+| E002 | B0 | 0.598039 | 0.803922 | 0 | 0.09193743 | 0.00740887 |
+| E002 | M1 | 1.000000 | 0 | 0 | 0.00024790 | 0.01263163 |
+| E002 | Binary | 1.000000 | 0 | 0 | 0 | 0 |
+
+The original 10,000-replicate paired cluster bootstrap gives E001 point intervals for BA difference 0.5 and FPR difference -1. E002 intervals are [0.383254717, 0.422077922] for BA difference and [-0.844327177, -0.767281106] for FPR difference. FNR difference is zero in both designs. These are original finite-design intervals, not new E005 estimates for a sampled deployment population.
+
+In E002, omitted conservation yields FPR 0.117647; overconstraint and stale-transition checkers each yield FNR 0.833333. These bounded failures expose dependence on the selected contract. They do not establish robustness to arbitrary incorrect specifications.
+
+### 5.2. Resolution explains lower Brier
+
+Table 3. Exact-score decomposition on evaluation rows. Lower REL indicates lower empirical group reliability loss; higher RES distinguishes groups with different outcome frequencies. Display rounding can obscure the exact identity.
+
+| Design | Method | REL | RES | UNC | Brier |
+| --- | --- | ---: | ---: | ---: | ---: |
+| E001 | B0 | 0 | 0 | 0.250000000 | 0.250000000 |
+| E001 | M1 | 0.000059172 | 0.250000000 | 0.250000000 | 0.000059172 |
+| E002 | B0 | 0.000112121 | 0.002357518 | 0.094182825 | 0.091937429 |
+| E002 | M1 | 0.000247903 | 0.094182825 | 0.094182825 | 0.000247903 |
+
+E001 B0 reports 0.5 on a balanced evaluation set: ECE and REL are zero but resolution is absent. M1 separates labels perfectly, increasing RES to 0.25. Smoothed probabilities remain inside the endpoints, giving positive REL. The resolution increase dominates the Brier change.
+
+In E002, RES increases by approximately 0.091825308 and REL by 0.000135781. The net Brier change is approximately -0.091689527. Lower Brier therefore coexists with worse empirical score-group reliability and higher ten-bin ECE. This is a result about these rows, not population calibration.
+
+![Evaluation Brier decomposition: bars show REL, minus RES and UNC; dots mark their sum, the Brier score. A separate reliability panel reveals its small increases. Source: E005-v1-summary.csv, evaluation rows.](arxiv/images/brier-decomposition.pdf)
+
+### 5.3. Statistic diversity and uncertainty
+
+For every method, E001 has one distinct signature among 64 evaluation clusters. Every bootstrap draw therefore repeats the same vector in the same number of clusters. More replicates cannot introduce variation absent from the resampling units.
+
+E002 has six signatures among 48 clusters for every method. Variation in baseline behavior permits nondegenerate paired intervals, while perfect M1 decisions persist across its constructed fault inventory. Six signatures alone do not imply six independent observations or an effective sample size of six.
+
+## 6. Conditional explanations and falsification
+
+### 6.1. Agreement on constructed support
+
+Let $S$ be finite evaluated support with oracle labels $O(x)$. If checker $V$ agrees with $O$ on every $x\in S$, and both labels occur, then FP=FN=0 and BA=1 on $S$. This follows directly from the confusion definitions and makes no statement about $x\notin S$.
+
+When one specification supplies labels and injected violations, perfect agreement may show conformance to that construction without validating the specification against external truth. This is conditional: separate oracle code does not force perfect agreement, and either implementation could be wrong. Our empirical result is rowwise agreement; attributing its limited external reach to shared design is an interpretation. Independently supplied labels exposing disagreements would falsify an extension of agreement beyond $S$.
+
+### 6.2. Smoothing a perfect binary predictor
+
+Suppose each raw-score group has a common label in both calibration and evaluation. With $n_g$ calibration cases, smoothing predicts $1/(n_g+2)$ or $1-1/(n_g+2)$. Each evaluation error is then $1/(n_g+2)^2$, while the perfect binary predictor has zero error:
+
+$$
+\mathrm{BS}_{\mathrm{smooth}}=
+\sum_g\frac{N_g^{\mathrm{eval}}}{N^{\mathrm{eval}}}\frac{1}{(n_g+2)^2}>0.
+$$
+
+If each ECE bin combines only groups whose errors have the same sign, ECE is the corresponding weighted average of $1/(n_g+2)$. These formulas concern lookup probabilities before serialization; the audit checks stored decimals within declared tolerances. The observed pure M1 probability groups exhibit this pattern. It does not show that smoothing is harmful under noise, score overlap, sampling uncertainty or deployment shift. Hard probabilities are not justified without knowledge that agreement continues outside the evaluated support.
+
+### 6.3. Repeated-cluster resampling
+
+If all clusters have the same sufficient-statistic vector, drawing the original number of clusters always gives the same sum. Any statistic computed solely from that sum is constant. This explains E001's degenerate intervals without implying that deployment error is known. A distinct vector changing the aggregate would falsify this explanation; none occurs in the locked E005 measurement.
+
+## 7. Threats to validity and implications
+
+Only two hand-designed benchmark families are analyzed. They are not randomly sampled tasks, validators or error mechanisms. E001 truth is recipe-coupled; E002's separate oracle shares its specified world with M1. E005 questions were motivated by already inspected results. Locking E005 prevents subsequent protocol adjustment but cannot remove this exploratory selection.
+
+Exact arithmetic addresses numerical agreement, not specification correctness or independent review. One author can reproduce a conceptual error in multiple implementations. Hashes establish identity and lookup reconstruction establishes compatibility; neither proves universal absence of leakage or historical fitting order.
+
+REL can misleadingly suggest calibration quality in small score groups; ECE can hide within-bin heterogeneity. Their direction agrees here but both limitations remain. Class balance and selected corruption mix shape the results. Original intervals are conditional on synthetic constructions, not a deployment population.
+
+External provenance also does not supply independent labels. Oracle-filtering public records and injecting known violations remains a controlled-error evaluation. Stronger transfer evidence requires independently justified labels and a protocol preserving selection effects and failures. The invalid E003 attempt and its source diagnostic do not provide that evidence.
+
+The practical implication is to report decision errors, score components, specification dependence and resampling diversity together. These are interpretive checks, not universal numeric acceptance thresholds. A wider study of independent labels and additional validator families would be needed to establish how common these effects are.
+
+## 8. Conclusion
+
+The finite B0/M1 differences survive a separate metric reimplementation. Their interpretation changes when score and resampling structure are explicit: higher resolution explains lower Brier while empirical reliability and ECE worsen; repeated statistics explain degenerate intervals. Perfect classification remains evidence of agreement on selected support. The case supports a bounded audit of benchmark evidence and leaves performance against independently labeled external records unresolved.
+
+## Reproducibility and provenance
+
+The local companion artifact preserves original predictions, metrics, protocols and valid result records. E005 protocol commit is `2e6f7c2ec236ebce2bf72f3a026b2ea6de3a80e1`; implementation commit is `167f721565d68cc80b54340a3533e3b414deedd8`; result and bounded computational verification are recorded at `8692937` and milestone M18. It produces 39 summary rows, 12 score groups and a JSON check record with 195 signed differences and input identities.
+
+Use a separate checkout at the implementation commit and run `python3 experiments/E005-benchmark-evidence-audit/code/audit.py`. It uses the standard library, checks pinned inputs, compares two full builds and refuses existing outputs. The figure derives from the audit summary; no raw GH Archive payload is included. Independent assessment, owner-reviewed author metadata and public release of the new analysis remain pending.
+
+## Use of generative AI
+
+Generative AI tools were used substantially for research planning, code implementation, audit analysis and manuscript drafting. The original harnesses and the separate metric audit share AI authorship and an environment; agreement is not independent human validation. This working draft still requires responsible human author review before submission.
+
+## References
+
+1. Sebastian Schelter, Dustin Lange, Philipp Schmidt, Meltem Celikel, Felix Biessmann and Andreas Grafberger. 2018. *Automating Large-Scale Data Quality Verification*. PVLDB 11(12), 1781-1794. DOI: 10.14778/3229863.3229867. [Publisher paper](https://www.vldb.org/pvldb/vol11/p1781-schelter.pdf).
+2. Eric Breck, Marty Zinkevich, Neoklis Polyzotis, Steven Whang and Sudip Roy. 2019. *Data Validation for Machine Learning*. Proceedings of SysML. [Author organization record](https://research.google/pubs/data-validation-for-machine-learning/).
+3. Earl T. Barr, Mark Harman, Phil McMinn, Muzammil Shahbaz and Shin Yoo. 2015. *The Oracle Problem in Software Testing: A Survey*. IEEE TSE 41(5), 507-525. DOI: 10.1109/TSE.2014.2372785. [Institutional record](https://discovery.ucl.ac.uk/id/eprint/1471263/).
+4. Allan H. Murphy. 1973. *A New Vector Partition of the Probability Score*. Journal of Applied Meteorology 12(4), 595-600. DOI: 10.1175/1520-0450(1973)012<0595:ANVPOT>2.0.CO;2. [Publisher record](https://journals.ametsoc.org/view/journals/apme/12/4/1520-0450_1973_012_0595_anvpot_2_0_co_2.xml).
+5. Chuan Guo, Geoff Pleiss, Yu Sun and Kilian Q. Weinberger. 2017. *On Calibration of Modern Neural Networks*. PMLR 70, 1321-1330. [Proceedings paper](https://proceedings.mlr.press/v70/guo17a.html).
+6. Jeremy Nixon, Mike Dusenberry, Ghassen Jerfel, Timothy Nguyen, Jeremiah Liu, Linchuan Zhang and Dustin Tran. 2020. *Measuring Calibration in Deep Learning*. arXiv:1904.01685v2 (first submitted 2019). [Author manuscript](https://arxiv.org/abs/1904.01685v2).
+7. GH Archive. *Public GitHub timeline archive*. Accessed 22 October 2026. [Official project](https://www.gharchive.org/).

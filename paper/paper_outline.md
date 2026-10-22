@@ -1,34 +1,29 @@
 # Paper outline and claim-evidence map
 
-Corrected 2026-09-17. The previous outline's universal guarantees, at-least-once
-causal claim, isotonic-method description, and self-approved review are withdrawn.
-The paper remains preliminary; public_claim_eligibility=false.
+Updated 2026-10-22 for the user-selected arXiv destination.
+Working framing is an AI-proposed methods case study. No novelty of invariant
+checking, the oracle problem or the Brier decomposition is claimed.
 
-## Outline
+1. Motivation: distinguish finite validator conformance from external truth.
+2. Related work: data validation, oracle problem and calibration measurement.
+3. E001/E002 designs; invalid E003 and exploratory E004 source diagnosis.
+4. Locked exploratory E005 audit and exact finite Brier identity.
+5. Verified recomputation, resolution/reliability changes and statistic diversity.
+6. Conditional explanations with explicit assumptions and falsifiers.
+7. Scope, common-author and external-label limitations.
+8. Bounded conclusions and reproduction/provenance.
 
-1. Question, positive=valid convention, and bounded B0/M1 comparison.
-2. Synthetic designs, Laplace-smoothed lookup, primary and secondary metrics.
-3. Valid E001/E002 results, source numbers, ablations and uncertainty limits.
-4. E003 source-gate invalidation and missing external performance evidence.
-5. Remaining source-policy, calibration, and external-transfer questions.
-
-## Evidence map
-
-| Claim | Evidence | Status and scope |
+| Claim | Evidence | Scope |
 | --- | --- | --- |
-| M1 improves the locked BA/FPR/FNR rule in E001 | E001 result, M02 | Supported in that finite synthetic design only |
-| M1 improves the E002 anchor and stress diagnostics pass | E002 run 002, M08 | Supported in that finite synthetic design only |
-| Probability calibration generally improves | Brier falls but ECE rises in both reports; E001 binary ablation is already perfect | Not established |
-| Confidence mapping uses isotonic regression | E001/E002/E003 protocol formulas | Incorrect; Laplace-smoothed empirical lookup |
-| E003 established external performance | M13 and invalid report | Incorrect; no H3 outcome or performance metrics |
-| The recovered 2021 shard has 537 byte-identical extra occurrences and no conflicting ID groups | E004 run e004-20260917-001, M15 | Exploratory source diagnostic only, not performance validation |
-| At-least-once delivery/retries caused duplicates | No supporting causal evidence in repository | Hypothesis only |
-| Harness guarantees absence of contamination or general reproducibility | Tests, hashes and recorded gates | No universal guarantee; bounded process checks |
+| Original B0/M1 finite metrics reproduce | E005, M18 at 8692937 | 195 overall comparisons; no new performance experiment |
+| Lower Brier coexists with higher REL and ECE | E005 summary, exact identity | Finite score groups only |
+| Binary ablation has zero Brier/ECE | E001/E002 plus E005 | Same perfect decisions on selected support |
+| E001 has 1 statistic signature / 64 clusters; E002 6 / 48 | E005 summary | Diagnostic, not effective sample size |
+| Identical sufficient statistics give degenerate resampling | Conditional algebra | Fixed cluster count and statistics determined by their sum |
+| Independent oracle code guarantees external correctness | No evidence | Explicitly rejected inference |
+| External evaluation succeeded | No evidence; E003 invalid | No external performance result |
+| Cause of exact repeated IDs | Not established by E004 | No retries/delivery attribution |
+| New general validation or calibration algorithm | Not proposed | Case-study contribution only |
 
-## Review obligations
-
-Check every numeric table against its immutable result artifact, distinguish
-percentage points from relative percentage changes, and preserve positive=valid
-terminology. Do not interpret lower Brier alone as better calibration. Keep
-source diagnostics distinct from valid external performance evaluation.
-Independent manuscript review and E003 implementation re-review remain open.
+See `review-status.md` for unresolved archival-interest and independent-review
+questions. Owner metadata and submission are pending; eligibility remains false.

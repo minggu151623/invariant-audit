@@ -1,5 +1,17 @@
 # Findings
 
+## Current manuscript state — 2026-10-22 (M19)
+
+An 8-page English working manuscript and a minimal LaTeX source ZIP now exist.
+All pages were visually inspected; the 3-file ZIP compiles in isolation with
+identical page text and no overflow or missing-character warnings. These are
+artifact checks, not independent scientific acceptance. The user tentatively
+expects sole authorship and has no arXiv account; exact name/affiliation are
+unknown. The goal remains active. See [M19](milestones/M19-arxiv-working-manuscript.md)
+and `paper/review-status.md`. The central next question is whether the narrow
+case study has enough archival interest; deepen the evidence if needed rather
+than equating formatting completion with a finished research goal.
+
 ## Current reading guide — 2026-10-22 arXiv evidence audit (M18)
 
 The user selected an arXiv paper as the research destination. E005, separately

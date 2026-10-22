@@ -2,36 +2,40 @@
 
 Research question: How can semantic and state invariants be validated while calibrating false positives and false negatives?
 
-Scope: local-only.
+Scope: local research; arXiv manuscript in preparation.
 
 Infrastructure: no paid API; no external GPU.
 
-Status: E001 and E002 have verified finite-synthetic results. E003-v1 run
-e003-20260903-001 is invalid after a duplicate-ID source-gate failure (M13).
-There is no external performance result. The 2026-09-17 continuation corrected
-the paper and completed separately locked E004: all 537 extra occurrences are
-byte-identical repeats; no conflicting ID groups or cross-shard repeated IDs
-were found. This is an exploratory source diagnostic only; see
-[M15](milestones/M15-E004-source-diagnosis.md). On 2026-09-21, E003-v2 was
-separately locked, its source-normalization component passed 22 synthetic tests
-(M16), and its source filtering and selection adapter was integrated and verified
-with 17 adapter tests (39 total synthetic tests passing); see current
-[M17](milestones/M17-E003-v2-adapter.md). Remaining pipeline stages
-(evaluation/calibration/bootstrap versioning, transactionality guards, guarded
-2019/2020 integration) and independent acceptance remain pending; no v2 run exists.
+Target (user-selected on 2026-10-22): an evidence-audited arXiv manuscript and
+source package. The candidate framing is a methods case study of finite
+benchmark construction and measurement, not a new validation algorithm. See
+[arXiv plan](paper/arxiv-plan.md), [working manuscript](paper/main.md), and
+[review status](paper/review-status.md).
 
-The repository contains verified local evidence for the finite synthetic E001
-and E002 designs. Those results are evidence for their locked constructions
-only; they do not establish production performance, external validity,
-generalization, novelty, safety, or public-claim eligibility.
+Current manuscript milestone: [M19](milestones/M19-arxiv-working-manuscript.md),
+with an 8-page [preview](paper/arxiv-preview.pdf) and minimal
+[source draft](paper/arxiv-source-draft.zip). The latest scientific audit is
+[M18](milestones/M18-arxiv-evidence-audit.md).
+A separately locked exploratory E005 audit independently reimplemented metric
+arithmetic on the frozen E001/E002 outputs: all 195 overall metric comparisons
+agree within declared rounding tolerances. Exact Brier decomposition explains
+why resolution improves while finite score-group reliability and ECE worsen.
+The binary M1 ablation has zero Brier/ECE in these constructions. E001 has
+one statistic signature among 64 evaluation clusters, E002 six among 48; those
+counts are diagnostics, not effective sample sizes.
 
-The current outer-loop decision is **BROADEN**: the largest unresolved gap is
-transfer to externally authored structured records. The historical source cache
-outside Git was missing at resumption and has now been recovered with all
-original byte hashes/counts and manifest digest matching. An invalid source
-gate is not H3 evidence. E003-v2 locks a conservative exact-repeat policy and
-discloses that reused shards are no longer an uninspected holdout. Full
-implementation/tests and independent acceptance are required before execution.
+E001/E002 remain the only valid performance experiments, restricted to finite
+synthetic designs. E003-v1 is invalid with no external hypothesis/performance
+result. E004 diagnosed 537 byte-identical extra occurrences in its fixed 2021
+source. E003-v2 remains at [M17](milestones/M17-E003-v2-adapter.md): the source
+normalizer and adapter are implemented with 39 passing synthetic tests, while
+full pipeline integration and independent acceptance remain pending. The new
+publication target does not bypass that gate or relabel inspected data as a
+pristine holdout.
+
+The new audit and manuscript have no independent scientific acceptance. Owner
+metadata, substantive review and the separate submission action remain open.
+`public_claim_eligibility=false`. No arXiv posting is guaranteed.
 
 ## Verified experiments
 

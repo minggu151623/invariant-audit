@@ -23,3 +23,20 @@ all 10,000 replicates; they are not evidence of external uncertainty.
 The E001 oracle is coupled to its synthetic recipes. These data do not support
 production validity, external validity, generalization, novelty, safety, or a
 public claim; `public_claim_eligibility` is `false`.
+
+## E005-v1 exploratory reanalysis
+
+The audit reuses hash-pinned E001/E002 inputs and preserves all original files.
+Run `e005-20261022-001`, implementation 167f721, result/verification 8692937.
+The four artifacts are one provenance-linked audit set; CSV identities are
+resolved through the companion checks JSON and result report.
+
+- [Summary](E005-v1-summary.csv): 39 split/method rows with exact-score
+  decomposition, metric values and cluster-statistic diversity.
+- [Score groups](E005-v1-score-groups.csv): 12 evaluation probability groups.
+- [Checks](E005-v1-checks.json): input hashes, protocol/implementation identity,
+  195 signed metric comparisons and bounded alignment/lookup checks.
+- [Result](../experiments/E005-benchmark-evidence-audit/results/run-e005-20261022-001.md).
+
+No row or source cache was used as a new pristine holdout. Same-author
+reimplementation is self-review, not independent acceptance.

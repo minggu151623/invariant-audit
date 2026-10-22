@@ -91,3 +91,10 @@ CSV/JSONL is row-data source.
   repeated IDs. Nineteen synthetic tests and dictionary/sort differential checks
   pass; no independent review or performance result is implied. See
   [M15](../milestones/M15-E004-source-diagnosis.md) for evidence and E003-v2 gates.
+
+## E005 — benchmark evidence audit (2026-10-22)
+
+[Locked protocol](E005-benchmark-evidence-audit/protocol.md) and
+[valid exploratory result](E005-benchmark-evidence-audit/results/run-e005-20261022-001.md).
+This audits existing E001/E002 rows with an independent metric implementation;
+it is not a new performance experiment or independent reviewer acceptance.

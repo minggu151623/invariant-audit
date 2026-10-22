@@ -47,6 +47,8 @@ Do not manufacture an external result merely to fill a paper section.
 - State positive=valid, binning and probability serialization precision.
 - Include falsification conditions, limitations and reproduction commands.
 - Independently review the analysis and manuscript; author tests are self-review.
+- Disclose significant generative-AI use and obtain responsible human author
+  review; AI tools are not authors (official moderation policy).
 - Verify references against primary sources, render the final PDF and inspect it.
 - Obtain real author names/order, affiliations, owner-approved acknowledgements,
   category, license and any required endorsement before upload. Do not invent them.

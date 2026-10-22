@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M18
+current_milestone: M19
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1289,3 +1289,26 @@ M18:
   independent_acceptance: absent
   public_claim_eligibility: false
   next_gate: related_work_manuscript_render_and_substantive_review
+
+M19:
+  path: milestones/M19-arxiv-working-manuscript.md
+  status: verified_rendered_draft_pending_scientific_review
+  date: 2026-10-22
+  manuscript: paper/main.md
+  preview: paper/arxiv-preview.pdf
+  source_archive: paper/arxiv-source-draft.zip
+  render_verification: paper/render-verification.json
+  pdf_pages: 8
+  standalone_source_compile: pass
+  scientific_acceptance: absent
+  author_name: not_supplied
+  intended_author_count: 1
+  author_count_status: tentative_user_reply
+  affiliation: not_supplied
+  arxiv_account_exists: false
+  category: unconfirmed_cs_SE_candidate
+  license: unconfirmed
+  goal_status: active
+  submitted: false
+  public_claim_eligibility: false
+  next_gate: strengthen_or_substantively_review_case_study_contribution

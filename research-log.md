@@ -794,3 +794,17 @@ resolution alongside worse score-group reliability; the binary ablation remains
 perfect on these constructions. Same-agent verification is bounded and is not
 independent acceptance. No original input, protocol, performance run or unrelated
 user artifact was changed. See M18 and the E005 result/checks.
+
+## 2026-10-22 — M19 arXiv-directed working manuscript
+
+Reframed the existing Markdown in place as a finite methods case study using
+E005/M18 evidence, seven source-verified references and explicit AI-use disclosure.
+Generated the Brier figure, LaTeX project, 8-page preview and three-file source
+ZIP. The initial native compile timed out on resource downloads; isolated
+hash-verified Tectonic 0.17.0 compiled the source. Corrected command wrapping and
+kept tables intact, rendered/inspected every final page, and successfully
+compiled the extracted ZIP with matching text and zero layout warnings.
+User replied that they have no arXiv account/materials yet and tentatively expect
+sole authorship; name and affiliation remain unknown. Recorded metadata without
+inventing identity. Scientific scope/novelty and independent review remain open.
+Goal stays active; no push, upload or account creation.

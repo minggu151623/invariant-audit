@@ -74,3 +74,12 @@ Milestone records and verification evidence; Markdown records are the source of 
   protocol-only record for the preceding stage. Its statement that no
   implementation or execution existed is retained as the M03-at-that-time
   state, not the current M06 state.
+
+## 2026-10-22 continuation
+
+- [M18: arXiv destination and E005 evidence audit](M18-arxiv-evidence-audit.md):
+  verified within exploratory numerical/artifact self-review. Independent
+  scientific acceptance and submission remain pending.
+
+- [M19: rendered arXiv-directed draft](M19-arxiv-working-manuscript.md):
+  verified PDF/source artifacts; scientific and owner review remain open.

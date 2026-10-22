@@ -293,3 +293,14 @@ count, line count, HTTP metadata, manifest, E003 implementation, run, result,
 prediction, metric, bootstrap, or public claim is asserted. See [the E003-v1
 protocol](../experiments/E003-external-transfer-validation/protocol.md) and
 [M10](../milestones/M10-E003-protocol-design.md) for the protocol-only gate.
+
+## 2026-10-22 — focused positioning for an arXiv methods case study
+
+The selected destination is now an arXiv manuscript. A verified-source
+comparison and individual paper notes are in
+[2026-10-22-arxiv-positioning](notes/2026-10-22-arxiv-positioning.md).
+Schelter/Breck establish prior data-validation systems; Barr grounds the oracle
+problem; Murphy's known decomposition and Guo/Nixon ground the measurement
+interpretation. No novelty claim for those concepts is made. E005 supplies the
+new repository-specific observations. This is not a systematic literature review;
+independent assessment of archival interest and generality remains open.
