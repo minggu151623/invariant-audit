@@ -1255,3 +1255,21 @@ M17:
   E003_v2_result: absent
   public_claim_eligibility: false
   next_gate: complete_eval_calibration_and_transactional_guards_then_independent_acceptance
+
+research_destination:
+  date: 2026-10-22
+  user_instruction: "/goal tiếp tục công việc nghiên cứu, chuyển mục đích sang đăng được báo lên arxiv"
+  target: arxiv_manuscript_and_submission_package
+  candidate_framing: finite_benchmark_evidence_audit
+  framing_provenance: ai_proposed
+  plan_path: paper/arxiv-plan.md
+  submission_status: not_ready
+  acceptance_guaranteed: false
+  public_claim_eligibility: false
+E005:
+  protocol_path: experiments/E005-benchmark-evidence-audit/protocol.md
+  protocol_id: E005-v1
+  status: protocol_pending_lock
+  classification: exploratory_reanalysis
+  implementation: absent
+  run: absent

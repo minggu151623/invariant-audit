@@ -773,3 +773,13 @@ outer-loop state; the current state is M17 above.
   Public claim eligibility remains `false`. Outer-loop reflection is required
   to decide between protocol revision E003-v2 (with realistic stream deduplication)
   or alternative collision-free fixture acquisition.
+
+## 2026-10-22 — arXiv destination and E005 protocol
+
+User explicitly changed the research destination to an arXiv paper. Read M17,
+canonical state, locked protocols and corrected manuscript. The destination
+does not establish a scientific result or guarantee posting. AI-proposed
+framing is a methods case study of benchmark construction and score behavior.
+Locked a separate exploratory reanalysis protocol for the already inspected
+E001/E002 row artifacts; no new performance run or E003 gate bypass. See
+[arXiv plan](paper/arxiv-plan.md) and [E005 protocol](experiments/E005-benchmark-evidence-audit/protocol.md).
