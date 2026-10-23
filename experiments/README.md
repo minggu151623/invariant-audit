@@ -110,3 +110,7 @@ This is not Raha replication, original M1 transfer or an E003 gate bypass.
 - [E007 FD decision stability](E007-fd-decision-stability/protocol.md): locked
   finite formulation check; [analysis](E007-fd-decision-stability/analysis.md)
   records validity, prior-work collision and the mutable-key next question.
+
+- [E008 mutable-key certificates](E008-mutable-key-certificates/protocol.md):
+  exact finite validation and [theorem draft](E008-mutable-key-certificates/theory.md);
+  originality and efficiency need further comparison.

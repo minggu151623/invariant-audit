@@ -1,5 +1,29 @@
 # Findings
 
+## Current candidate — 2026-10-23 mutable-key action reduction (M26)
+
+E008 extends decision-edit certification to mutable keys and RHS while protecting
+the target row. Under six fixed FD families all 30642 radius comparisons match
+unrestricted raw-cell edit search on 5107 tables, and all 61854 row-action
+dominance checks pass. Both complete builds agree; 30618 finite witnesses verify.
+210 finite protected-key radii decrease, and 7290 protected-key INF cases become
+finite. These are constructed-domain counts, not accuracy or prevalence claims.
+
+The theorem draft gives a cost-preserving target-relative key quotient and
+canonical accepting actions, at most 2^q+1 per context row, plus exact programs
+for both decision directions. Its proof assumes same RHS, unit cell costs and
+unrestricted independent context-cell edits. Large numbers of rules/RHS values
+can make the DP impractical. Originality and practical benefit remain open.
+Generic counterfactual/SAT explanations already have direct prior work, so the
+candidate must be judged on the specialized reduction rather than minimum edits.
+
+Next: compare with a generic exact optimization baseline and investigate scaling
+under a new protocol, while deepening the prior-work collision check. No external
+peer review or owner approval blocks this local research. See
+[M26](milestones/M26-E008-mutable-key-pilot.md),
+[theorem draft](experiments/E008-mutable-key-certificates/theory.md), and
+[Vietnamese progress explanation](to_human/M26-mutable-key-progress-vi.md).
+
 ## Current research priority — 2026-10-23 novelty reset, M24/M25
 
 The owner requires an original contribution and correctly notes that arXiv

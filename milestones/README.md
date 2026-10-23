@@ -103,3 +103,6 @@ Milestone records and verification evidence; Markdown records are the source of 
   an original contribution; primary-source collision check and protocol lock.
 - [M25: E007 finite pilot](M25-E007-finite-certificate-pilot.md): exhaustive
   mathematical agreement; novelty remains unestablished, mutable-key work next.
+
+- [M26: mutable-key certificate pilot](M26-E008-mutable-key-pilot.md): raw-edit
+  agreement, action-dominance checks and a scoped theorem draft; novelty open.

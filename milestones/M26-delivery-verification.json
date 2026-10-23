@@ -1,0 +1,20 @@
+{
+  "M22_bundle_unchanged": true,
+  "artifact_sha256": {
+    "data/E008-v1-checks.json": "227ecd8c7eeccdd47365d83fcb1fdb9075d0f09aeb7700c2fc551e71fa7c5fd5",
+    "data/E008-v1-domain-summary.csv": "fd0d08625bf5ea16f7ec01b3d21eac11dc3e963e9757fcce6f6db56104d86e0e",
+    "data/E008-v1-witnesses.json": "ae867c3cd59c03cd6b162ae81257c0351dee89e3ea5fcd1fe97ae6017822692b",
+    "experiments/E008-mutable-key-certificates/results/run-e008-20261023-001.md": "cb7d06cecb1553dbd5968f4ffc208e4d69c3e96f9b0aa89c3c8dc87575148f25"
+  },
+  "date": "2026-10-23",
+  "domain_summary_rows": 66,
+  "earlier_study_files_unchanged": 71,
+  "finite_witnesses": 30618,
+  "independent_review": false,
+  "maximum_observed_DP_states": 66,
+  "novelty_established": false,
+  "radius_comparisons": 30642,
+  "row_dominance_checks": 61854,
+  "scope": "post_run_delivery_counts_hashes_and_preservation_self_review",
+  "status": "pass"
+}

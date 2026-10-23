@@ -888,3 +888,20 @@ recorded. The fixed-key binary form is a standard covering problem, so this
 pilot alone is insufficient novelty. Next investigate certificates with shared
 mutable determinants under a new protocol. Earlier 60 study files and every
 M22 bundle member remain unchanged. No public submission or external message.
+
+## 2026-10-23 — E008 mutable-key formulation and theorem draft, M26
+
+Previous goal turn made progress through M24/M25. Extended the novelty collision
+check to view-conditioned causality and attribute-level database interventions;
+generic minimum changes and SAT are not new. Locked E008 at efc1365, implemented
+at 14fe214 with nine unit tests, and ran once. All 30642 radius comparisons,
+30618 concrete finite witnesses and 61854 dominance checks pass; two complete
+builds are byte-identical. Recorded strict reductions and protected-INF to finite
+scope differences without calling them certificate failures under protected keys.
+
+Wrote a general cost-preserving key quotient/dominance proof and exact margin-DP
+analysis, with at most 2^q+1 canonical accepting actions per row and explicit
+unfavorable rule/RHS scaling. This is a candidate structural contribution, not
+established novelty. Next compare generic exact optimization and useful scaling
+under a new design. Earlier 71 study files and M22 bundle members are unchanged;
+no manuscript/PDF revision, source acquisition, owner approval or external release.

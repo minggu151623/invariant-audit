@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M25
+current_milestone: M26
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_primary_source_collision_check_and_E007_protocol_design
+  current_turn: progress_E008_mutable_key_formulation_exhaustive_validation_and_theorem_draft
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: implement_and_falsify_candidate_mathematical_formulation
+  meaningful_independent_next_action: compare_specialized_reduction_to_generic_exact_optimization_and_test_scaling
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1517,4 +1517,36 @@ M25:
   owner_review_as_research_blocker: false
   external_peer_review_required_for_local_research: false
   original_study_artifacts: unchanged
+  public_claim_eligibility: false
+
+E008:
+  protocol: experiments/E008-mutable-key-certificates/protocol.md
+  protocol_commit: efc1365d7e6f2a18324d9e5d6ef3c5ea46ef0ebc
+  implementation_commit: 14fe2147f345b6f496e7b91b0bc6066748aa2b1b
+  run_id: e008-20261023-001
+  status: valid_finite_mathematical_check
+  constructed_tables: 5107
+  radius_comparisons: 30642
+  verified_finite_witnesses: 30618
+  row_dominance_comparisons: 61854
+  mismatches: 0
+  strict_finite_radius_reductions: 210
+  protected_INF_to_finite: 7290
+  synthetic_unit_tests: 9
+  double_build_byte_identical: true
+  performance_result: false
+  novelty_established: false
+  theorem_draft: experiments/E008-mutable-key-certificates/theory.md
+M26:
+  path: milestones/M26-E008-mutable-key-pilot.md
+  status: valid_finite_mathematical_check_theorem_draft
+  date: 2026-10-23
+  verification: milestones/M26-delivery-verification.json
+  progress_for_owner: to_human/M26-mutable-key-progress-vi.md
+  candidate_contribution: exact_canonical_action_reduction_with_mutable_shared_keys
+  candidate_scope: same_RHS_target_cell_unit_Hamming_cost_protected_target_row
+  novelty_established: false
+  next_gate: generic_exact_baseline_comparison_and_scaling_under_separate_protocol
+  peer_review_as_local_research_gate: false
+  owner_review_as_local_research_gate: false
   public_claim_eligibility: false

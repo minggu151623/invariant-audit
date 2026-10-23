@@ -60,3 +60,11 @@ alias correction are preserved. No independent reviewer acceptance is implied.
 - `E007-v1-witnesses.json`: joint/local gaps and determinant-scope control.
 
 These validate a restricted formulation, not detector performance or novelty.
+
+## E008 mutable-key mathematical pilot
+
+- `E008-v1-checks.json`: 30642 radius and 61854 dominance checks.
+- `E008-v1-domain-summary.csv`: 66 domain/family aggregates.
+- `E008-v1-witnesses.json`: raw-cell witnesses, key-edit scope and shared-key examples.
+
+Finite correctness evidence only; practical usefulness and novelty are open.
