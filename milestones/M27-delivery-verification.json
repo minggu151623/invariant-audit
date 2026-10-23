@@ -1,0 +1,25 @@
+{
+  "M22_bundle_members_unchanged": true,
+  "artifact_sha256": {
+    "data/E009-v1-baseline-cases.jsonl.gz": "1f02dac7728dfb9dc541169fb9389f462a7ed58ffce938850ae9102be7b4687d",
+    "data/E009-v1-checks.json": "436438ceb008b9bf6cb8506ff2fd0226d73fd176c4b10c95d97d9ec8c232f1e7",
+    "data/E009-v1-formula-summary.csv": "951aa5ab935628d9759bf082c36f61ac94b36c8a30117e192e4088fb57de9875",
+    "data/E009-v1-witnesses.json": "e056a4c37f629ae9af00abab8dbd3ae9096f91d3ae6baaf99d8ec0b7abbe5829",
+    "experiments/E009-singleton-characterization/results/run-e009-20261023-001.md": "1a335dc4b6a8c002d75bc6e8d82d51d5bb03fec5c06faf18cdbf3e03fdfb25ab"
+  },
+  "baseline_cases": 2118,
+  "baseline_status_counts": {
+    "0": 2100,
+    "2": 18
+  },
+  "date": "2026-10-23",
+  "formula_summary_rows": 66,
+  "independent_review": false,
+  "independently_rechecked_baseline_witnesses": 2100,
+  "novelty_established": false,
+  "preservation_base": "def5c6b",
+  "previous_files_unchanged": 121,
+  "scope": "post_run_serialized_counts_witnesses_and_preservation_self_review",
+  "status": "pass",
+  "synthetic_unit_tests": 9
+}

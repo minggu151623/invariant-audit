@@ -1,0 +1,49 @@
+{
+  "H9a_formula": true,
+  "H9b_singleton_characterization": true,
+  "H9c_scope_examples": true,
+  "H9d_generic_baseline": true,
+  "baseline_cases": 2118,
+  "baseline_failures": [],
+  "baseline_status_counts": {
+    "0": 2100,
+    "2": 18
+  },
+  "classification": "finite_mathematical_validation_and_baseline_verification",
+  "environment": {
+    "numpy": "2.1.3",
+    "python": "3.13.5",
+    "scipy": "1.17.1"
+  },
+  "formula_failures": [],
+  "formula_totals": {
+    "cases": 18779,
+    "finite_witnesses": 18755,
+    "no_singleton": 6509,
+    "protected_INF_to_finite": 7290,
+    "singleton_containing": 12270,
+    "singleton_without_reduction": 4800,
+    "strict_finite_reduction": 180
+  },
+  "implementation_commit": "05a2b071636b0d17f3e8441f81566c5a00a4bb5b",
+  "independent_review": false,
+  "maximum_MILP_constraint_residual": 8.881784197001252e-16,
+  "maximum_MILP_integrality_error": 6.661338147750939e-16,
+  "novelty_established": false,
+  "pinned_modules": {
+    "fixed": [
+      "experiments/E007-fd-decision-stability/code/certificate.py",
+      "aad95f5c6bed01e8741750f9d1d8ea792f97922c37ae01d27f255ca7a3eec70c"
+    ],
+    "reference": [
+      "experiments/E008-mutable-key-certificates/code/exhaustive_reference.py",
+      "a9955309307a1c10388f750494c2546312c3cfa568ff90834a031bec189beac2"
+    ]
+  },
+  "protocol_commit": "96962bee9eb2ca7680ec8a5a069baa78e65d686d",
+  "protocol_sha256": "1cd870035ecbe57ed38c3b22b36d3aedef98945dc152dc6ccfd67864287ed9f1",
+  "run_id": "e009-20261023-001",
+  "runtime_comparison": false,
+  "status": "valid",
+  "structure_failures": []
+}

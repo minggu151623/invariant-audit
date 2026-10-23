@@ -106,3 +106,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 
 - [M26: mutable-key certificate pilot](M26-E008-mutable-key-pilot.md): raw-edit
   agreement, action-dominance checks and a scoped theorem draft; novelty open.
+
+- [M27: accepted-target characterization](M27-E009-singleton-characterization.md):
+  exact singleton/import condition, complete finite verification and generic
+  baseline equivalence; novelty and larger-scale usefulness remain open.

@@ -947,3 +947,21 @@ The next gate requires an outer-loop decision:
 1. Formulate and lock `E003-v2` with realistic streaming deduplication (e.g., deduplicate upon first occurrence in line order or record duplicate delivery as an explicit natural exclusion class).
 2. Or acquire an alternative public hourly snapshot that happens to possess zero duplicates.
 Any future run requires a protocol lock, new run ID, and clean preflight.
+
+## M27 — singleton bottleneck for initially accepted targets
+
+Under protected targets, same-RHS unique plurality and independent unit-cost
+context edits, a nonsingleton target group's exact rejection cost is
+ceil((target_count-largest_rival_count)/2), even with editable keys. A singleton
+group's exact cost is the cheapest context-row import: differing determinant
+cells plus a needed RHS edit. Global rejection is a disjunction, so take the
+minimum rule cost. Equivalently rho_fixed=A and rho_full=min(A,S): keys help
+exactly when S<A. A singleton is necessary but not sufficient for a reduction.
+See the full E009 proof; this does not apply to the joint accepting direction.
+
+All 18779 initially accepted formula/oracle cases and 2118 generic raw-cell MILP
+comparisons pass. These are finite mathematical checks, not empirical accuracy,
+prevalence, runtime improvement or independent assessment. Generic vote
+operations and repair work substantially overlap the framing; originality of
+the specialized characterization/action reduction remains open. A separately
+locked direction-separated scaling comparison is the next falsification gate.

@@ -9,6 +9,10 @@ feedback. The audit draft remains a baseline; see the
 [novelty screen](literature/novelty-reset-20261023.md) and
 [E007 mathematical feasibility protocol](experiments/E007-fd-decision-stability/protocol.md).
 Local research continues without waiting for peer-review acceptance.
+Current mathematical work: [M27](milestones/M27-E009-singleton-characterization.md)
+records an exact accepted-target radius formula, the singleton bottleneck proof,
+and a verified generic raw-cell MILP baseline. Novelty and practical usefulness
+remain open; [Vietnamese progress](to_human/M27-singleton-result-vi.md).
 
 Earlier submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
 [reading guide in Vietnamese](paper/reading-guide-vi.md), and

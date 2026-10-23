@@ -905,3 +905,24 @@ unfavorable rule/RHS scaling. This is a candidate structural contribution, not
 established novelty. Next compare generic exact optimization and useful scaling
 under a new design. Earlier 71 study files and M22 bundle members are unchanged;
 no manuscript/PDF revision, source acquisition, owner approval or external release.
+
+## 2026-10-23 — exact accepted-target radius, E009/M27
+
+The preceding M26 goal turn made research progress. While preparing a generic
+baseline, derived a stronger accepted-direction prediction: nonsingleton groups
+retain the ordinary vote-margin radius despite mutable keys; singleton groups
+have an exact one-row import cost. Locked E009 before implementation (96962be,
+05a2b07), passed nine tests and executed one run. All 18779 formula comparisons,
+18755 finite formula witnesses and 2118 generic MILP/oracle comparisons pass;
+complete double builds are byte-identical. The generic baseline uses raw cells,
+not candidate actions or the formula. Wrote a general proof and the exact S<A
+condition. Post-run serialized checks revalidate all 2100 MILP witnesses, 66
+summary rows, 121 preserved earlier files and all M22 ZIP members.
+
+Primary voting-operation and repair-sampling sources reinforce that minimum
+edits, generic ILP, voting margins, trusted cells and singleton structure in
+general are not new. The specialized theorem/action reduction remains a
+candidate, not established novelty. The frozen eager-witness implementation is
+not yet a linear-scan algorithm. Next lock a bounded scaling study separating
+decision directions, then assess meaningful source usefulness. No manuscript
+change, external release or request for owner approval to continue research.

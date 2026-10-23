@@ -15,3 +15,8 @@ evidence.
 E003 literature discovery was capped at three directly relevant
 primary/official sources. The exact URLs and the narrow source-to-design
 boundary are recorded in the E003 section of the survey.
+
+Current novelty screens: [reset](novelty-reset-20261023.md),
+[mutable-key reduction](mutable-key-novelty-20261023.md), and
+[singleton characterization](singleton-collision-20261023.md). These retain
+prior-work overlaps; none establishes originality by itself.

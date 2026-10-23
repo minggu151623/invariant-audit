@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M26
+current_milestone: M27
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_E008_mutable_key_formulation_exhaustive_validation_and_theorem_draft
+  current_turn: progress_E009_exact_accepted_radius_characterization_and_generic_baseline_verification
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: compare_specialized_reduction_to_generic_exact_optimization_and_test_scaling
+  meaningful_independent_next_action: lock_and_execute_direction_separated_scaling_comparison
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1549,4 +1549,41 @@ M26:
   next_gate: generic_exact_baseline_comparison_and_scaling_under_separate_protocol
   peer_review_as_local_research_gate: false
   owner_review_as_local_research_gate: false
+  public_claim_eligibility: false
+
+E009:
+  protocol: experiments/E009-singleton-characterization/protocol.md
+  protocol_commit: 96962bee9eb2ca7680ec8a5a069baa78e65d686d
+  implementation_commit: 05a2b071636b0d17f3e8441f81566c5a00a4bb5b
+  run_id: e009-20261023-001
+  status: valid_finite_mathematical_and_baseline_formulation_check
+  initially_accepted_formula_cases: 18779
+  verified_formula_witnesses: 18755
+  no_singleton_cases: 6509
+  singleton_containing_cases: 12270
+  strict_finite_radius_reductions: 180
+  protected_INF_to_finite: 7290
+  singleton_cases_without_reduction: 4800
+  generic_MILP_cases: 2118
+  generic_MILP_optimal_witnesses: 2100
+  generic_MILP_infeasible_cases: 18
+  mismatches: 0
+  synthetic_unit_tests: 9
+  double_build_byte_identical: true
+  theorem: experiments/E009-singleton-characterization/theory.md
+  runtime_comparison: false
+  novelty_established: false
+M27:
+  path: milestones/M27-E009-singleton-characterization.md
+  status: accepted_target_characterization_and_verified_generic_baseline
+  date: 2026-10-23
+  verification: milestones/M27-delivery-verification.json
+  progress_for_owner: to_human/M27-singleton-result-vi.md
+  candidate_contribution: singleton_bottleneck_and_cost_preserving_accepting_action_reduction
+  candidate_scope: same_RHS_target_cell_unit_Hamming_cost_protected_target_row
+  literature_collision: literature/singleton-collision-20261023.md
+  novelty_established: false
+  next_gate: separately_locked_scaling_then_meaningful_source_evaluation
+  owner_review_as_local_research_gate: false
+  peer_review_as_local_research_gate: false
   public_claim_eligibility: false

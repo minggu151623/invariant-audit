@@ -68,3 +68,12 @@ These validate a restricted formulation, not detector performance or novelty.
 - `E008-v1-witnesses.json`: raw-cell witnesses, key-edit scope and shared-key examples.
 
 Finite correctness evidence only; practical usefulness and novelty are open.
+
+## E009 singleton characterization and generic baseline
+
+- `E009-v1-checks.json`: 18779 formula cases and 2118 raw-cell MILP cases.
+- `E009-v1-formula-summary.csv`: 66 complete domain/family aggregates.
+- `E009-v1-baseline-cases.jsonl.gz`: every generic solve, objective and witness.
+- `E009-v1-witnesses.json`: cost-1 and cost-4 singleton import examples.
+
+Finite mathematical/formulation validation; no runtime or detector-accuracy result.

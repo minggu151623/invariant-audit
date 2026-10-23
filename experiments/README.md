@@ -114,3 +114,7 @@ This is not Raha replication, original M1 transfer or an E003 gate bypass.
 - [E008 mutable-key certificates](E008-mutable-key-certificates/protocol.md):
   exact finite validation and [theorem draft](E008-mutable-key-certificates/theory.md);
   originality and efficiency need further comparison.
+
+- [E009 accepted-target characterization](E009-singleton-characterization/protocol.md):
+  [proof](E009-singleton-characterization/theory.md), 18779 formula/oracle cases
+  and 2118 independently formulated raw-cell MILP comparisons; no runtime claim.
