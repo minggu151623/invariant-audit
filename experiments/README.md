@@ -118,3 +118,8 @@ This is not Raha replication, original M1 transfer or an E003 gate bypass.
 - [E009 accepted-target characterization](E009-singleton-characterization/protocol.md):
   [proof](E009-singleton-characterization/theory.md), 18779 formula/oracle cases
   and 2118 independently formulated raw-cell MILP comparisons; no runtime claim.
+
+- [E010 directional algorithm comparison](E010-directional-scaling/protocol.md):
+  162 raw-oracle preflight fixtures and 72 constructed cases, both directions
+  analyzed separately; [analysis](E010-directional-scaling/analysis.md) retains
+  timeouts, a slower case and the limited generator scope.

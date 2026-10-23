@@ -110,3 +110,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M27: accepted-target characterization](M27-E009-singleton-characterization.md):
   exact singleton/import condition, complete finite verification and generic
   baseline equivalence; novelty and larger-scale usefulness remain open.
+
+- [M28: bounded directional algorithm study](M28-E010-directional-scaling.md):
+  exact specialized results on all 72 constructed cases, 14 generic timeout
+  observations and one slower specialized case retained; real-data work next.

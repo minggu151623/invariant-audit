@@ -77,3 +77,14 @@ Finite correctness evidence only; practical usefulness and novelty are open.
 - `E009-v1-witnesses.json`: cost-1 and cost-4 singleton import examples.
 
 Finite mathematical/formulation validation; no runtime or detector-accuracy result.
+
+## E010 constructed algorithm comparison
+
+- `E010-v1-preflight.json.gz`: 162 oracle/formulation fixtures with witnesses.
+- `E010-v1-cases.json.gz`: all 72 generated tables, rules and table hashes.
+- `E010-v1-observations.jsonl.gz`: all 288 measured calls, including timeouts.
+- `E010-v1-summary.csv`: 72 complete case summaries; censored speedups blank.
+- `E010-v1-checks.json`: statuses, exact-pair denominators and regime summaries.
+
+Two measured repetitions; one shared Mac; constructed cases, not real-data
+prevalence or detector accuracy. No study was rerun for favorable timings.

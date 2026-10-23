@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M27
+current_milestone: M28
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_E009_exact_accepted_radius_characterization_and_generic_baseline_verification
+  current_turn: progress_E009_theorem_and_E010_direction_separated_algorithm_study
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: lock_and_execute_direction_separated_scaling_comparison
+  meaningful_independent_next_action: lock_reused_source_table_study_and_compare_closest_prior_theorems
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1587,3 +1587,39 @@ M27:
   owner_review_as_local_research_gate: false
   peer_review_as_local_research_gate: false
   public_claim_eligibility: false
+
+E010:
+  protocol: experiments/E010-directional-scaling/protocol.md
+  protocol_commit: fbd04cbe13bd9d71cc84a4a97a278b4739c910bc
+  implementation_commit: 2212b58b9be55536417765e96ae93ac7242c54cf
+  run_id: e010-20261023-001
+  status: valid_bounded_constructed_computational_study
+  preflight_raw_oracle_cases: 162
+  benchmark_cases: 72
+  timing_repetitions: 2
+  measured_method_observations: 288
+  generic_optimal_observations: 130
+  generic_timeout_observations: 14
+  generic_timeout_cases: 7
+  specialized_optimal_observations: 144
+  rejected_paired_exact_cases: 24
+  rejected_median_paired_time_ratio: 2.996694809745792
+  rejected_specialized_slower_cases: 1
+  optimal_cost_disagreements: 0
+  witness_validation_failures: 0
+  runtime_comparison: true
+  real_data_validation: false
+  novelty_established: false
+M28:
+  path: milestones/M28-E010-directional-scaling.md
+  status: valid_bounded_algorithm_comparison_candidate_contribution
+  date: 2026-10-23
+  verification: milestones/M28-delivery-verification.json
+  progress_for_owner: to_human/M28-algorithm-results-vi.md
+  figure: figures/E010/paired-latencies.png
+  current_candidate: canonical_accepting_action_reduction_and_singleton_rejection_characterization
+  next_gate: reused_source_table_study_and_theorem_level_literature_comparison
+  novelty_established: false
+  public_claim_eligibility: false
+  peer_review_as_local_research_gate: false
+  owner_review_as_local_research_gate: false

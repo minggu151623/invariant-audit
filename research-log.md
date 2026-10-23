@@ -926,3 +926,23 @@ candidate, not established novelty. The frozen eager-witness implementation is
 not yet a linear-scan algorithm. Next lock a bounded scaling study separating
 decision directions, then assess meaningful source usefulness. No manuscript
 change, external release or request for owner approval to continue research.
+
+## 2026-10-23 — bounded directional algorithm comparison, E010/M28
+
+Locked E010 at fbd04cb before generalized implementation 2212b58. The generic
+raw-cell MILP builder remains hash-pinned to E009. All 162 generalized
+raw-destination oracle fixtures pass. Ran one 72-case constructed comparison
+with two order-balanced repetitions: 288 calls. All specialized calls finish
+exactly; 14 generic calls hit the one-second search limit across seven dense
+accepted cases. All timeout incumbents are feasible and explicitly not exact.
+No optimal costs disagree. On 24 rejected cases the median paired total-time
+ratio is 2.9967, with one specialized case slower; retained that case and all
+censoring. Current n<=128, q<=6 and controlled regimes restrict generalization.
+
+A post-run audit rechecks 612 serialized witnesses, summary arithmetic, solver
+bounds, hashes, 132 earlier files and M22 bundle members. Plotted the 65 cases
+exact in both methods and repetitions; visually checked the saved PNG. No
+extra solve or timing rerun. The candidate now has proofs and bounded algorithm
+evidence; next is a reused-source-table study and closest-theorem comparison,
+then a contribution-centered draft. Novelty is not inferred from speed or test
+counts. No manuscript/PDF, account, release or external message changed.

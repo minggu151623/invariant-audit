@@ -1,0 +1,21 @@
+{
+  "M22_bundle_members_unchanged": true,
+  "artifact_sha256": {
+    "data/E010-v1-cases.json.gz": "a057eb87e0f73b792717e80cad7988a48ba717467e9f4d50287e0fad42765933",
+    "data/E010-v1-checks.json": "07f35c674ba40e709c13ff7d6b702f32e1fad629ffe857aabe4843fb2adcff51",
+    "data/E010-v1-observations.jsonl.gz": "884b4844955ae69bcf12d748bdb82782e51fdfc12885f099c865dd26c953cb70",
+    "data/E010-v1-preflight.json.gz": "744cafe7e8d96134b88c9208368942e4357cbf9bc5f941da1594ba1635f4b831",
+    "data/E010-v1-summary.csv": "2901989499d65c7ac98fef7e27325b1586290e60f210476a5464c6eec02bb8c1"
+  },
+  "benchmark_cases": 72,
+  "date": "2026-10-23",
+  "independent_review": false,
+  "independently_rechecked_witnesses": 612,
+  "novelty_established": false,
+  "observations": 288,
+  "preflight_cases": 162,
+  "preservation_base": "c794125",
+  "prior_files_unchanged": 132,
+  "scope": "serialized_post_run_witness_arithmetic_hash_and_preservation_self_review",
+  "status": "pass"
+}

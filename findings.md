@@ -965,3 +965,21 @@ prevalence, runtime improvement or independent assessment. Generic vote
 operations and repair work substantially overlap the framing; originality of
 the specialized characterization/action reduction remains open. A separately
 locked direction-separated scaling comparison is the next falsification gate.
+
+## M28 — the structural candidate has bounded computational value
+
+E010 validates generalized implementations on 162 raw-oracle fixtures and
+compares a direct accepted formula / canonical accepting MILP against the
+verified generic raw-cell MILP on 72 constructed cases. All specialized calls
+are exact; the generic model times out 14 times across seven dense accepted
+cases. Among all 24 rejected cases, both methods finish exactly twice; median
+case-level total-time ratio generic/specialized is 2.9967, with one slower
+specialized case. Neither that case nor censored observations is omitted.
+
+The distinction between the easy rejection disjunction and the joint accepting
+problem yields a plausible contribution-centered story. This evidence is
+bounded by small n, q<=6, a shared machine and generator regimes that exclude
+mixed target-valued RHSs from rejected contexts. Practical prevalence, factual
+correctness and originality remain open. A meaningful reused-source study and
+closest-prior-theorem check are required next; neither old owner review nor
+external peer review blocks that local research.
