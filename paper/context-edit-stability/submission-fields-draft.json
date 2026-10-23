@@ -1,0 +1,43 @@
+{
+  "abstract": "A plurality-based functional-dependency check judges a target value using rows that match its determinant values. When determinant cells can change, group membership changes as well. We study the minimum number of context-cell edits that reverses a fixed target's decision, protecting its entire row. For checks with a common dependent attribute and independent unit-cost categorical edits, we prove a row-action dominance reduction for making a rejected target accept. For the opposite direction, we derive an exact formula: nonsingleton groups retain their ordinary vote-margin cost, and only singleton groups can make editable keys strictly reduce the global radius. Exhaustive finite checks and a bounded optimization comparison support the implementations. A reused-source study covers 18,734 target cells from Beers, Flights and Rayyan. Among 13,762 accepted targets, 1,133 fixed-key infinite radii become finite and one finite radius decreases. No strict reduction appears in 30 exact rejected-target pairs; two full models time out. Stability does not establish correctness: 1,493 accepted targets disagree with references despite radius at least two.",
+  "abstract_characters": 1159,
+  "actual_submission": "absent",
+  "affiliation": "Independent Researcher",
+  "artifact_sha256": {
+    "paper/context-edit-stability-preview.pdf": "e51a345860e46d448f647609a22700f43676ed8d64d073ced358d4526954e076",
+    "paper/context-edit-stability-source.zip": "bb9d648266e97f678aa14b776a1a56c0b29cfbf85b3dbf36aabdf2b496587175",
+    "paper/context-edit-stability/main.tex": "5bb77dd80b4fa200bf85c9a94c993a4f2d30690bbf82bc8b02afb6d6b8ab83bd"
+  },
+  "arxiv_identifier": null,
+  "authors_display": [
+    "Trần Vũ Bảo Minh"
+  ],
+  "authors_form_ascii_proposal": [
+    "Tran Vu Bao Minh"
+  ],
+  "authors_form_proposal_approved": false,
+  "authors_form_rendering_verified": false,
+  "category_basis": "Fixed FD detectors, database context edits and source-table analysis; technical recommendation, not moderator confirmation.",
+  "category_candidate": "cs.DB",
+  "category_confirmed": false,
+  "comments": "7 pages, 2 tables, no figures",
+  "cross_lists": [],
+  "doi": null,
+  "guidance_checked": "2026-10-23",
+  "journal_ref": null,
+  "license": null,
+  "official_sources": [
+    "https://info.arxiv.org/help/prep.html",
+    "https://info.arxiv.org/help/faq/texlive.html",
+    "https://info.arxiv.org/help/faq/font-info-tl2025.html",
+    "https://arxiv.org/category_taxonomy"
+  ],
+  "owner_content_approval": "not_given",
+  "processor": "xelatex",
+  "report_no": null,
+  "source_upload": "context-edit-stability-source.zip",
+  "status": "review_only_not_submitted",
+  "tex_live_candidate": "2025",
+  "title": "Exact Context-Edit Stability for Plurality-Based Functional-Dependency Checks",
+  "top_level_source": "main.tex"
+}

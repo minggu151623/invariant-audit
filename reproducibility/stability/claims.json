@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "manuscript": "paper/context-edit-stability/main.tex",
+  "baseline_commit": "5fe6d32",
+  "worldwide_priority_claim": false,
+  "independent_scientific_review": false,
+  "claims": [
+    {
+      "id": "T1",
+      "kind": "proof_under_stated_model",
+      "statement": "Exact rejection radius and singleton S<A characterization for initially accepted targets.",
+      "manuscript_anchors": ["thm:reject", "cor:singleton"],
+      "arguments": ["experiments/E009-singleton-characterization/theory.md"],
+      "evidence": ["data/E009-v1-checks.json", "data/E009-v1-formula-summary.csv"],
+      "verification": "--recheck-finite checks 18779 finite-domain cases; proof still requires mathematical assessment.",
+      "limitations": "Same RHS, protected target row, independent unit cell costs, ties reject; no generic classifier claim."
+    },
+    {
+      "id": "T2",
+      "kind": "proof_under_stated_model",
+      "statement": "Canonical accepting actions dominate arbitrary edits without higher cost; at most 2^q+1 actions per row preserve the optimum.",
+      "manuscript_anchors": ["lem:dominance", "thm:accepting"],
+      "arguments": ["experiments/E008-mutable-key-certificates/theory.md", "experiments/E011-reused-source-stability/sparse-rivals-proof.md"],
+      "evidence": ["data/E008-v1-checks.json", "data/E008-v1-domain-summary.csv"],
+      "verification": "--recheck-finite reconstructs 30642 radii, 30618 witnesses and 61854 row-action comparisons.",
+      "limitations": "Finite checks do not prove the general theorem. Action count is exponential in q; no universal speed guarantee."
+    },
+    {
+      "id": "N1",
+      "kind": "finite_observation",
+      "statement": "Separate generic raw-cell MILP agrees with raw enumeration on 2118 small cases, including 18 infeasible ones.",
+      "evidence": ["data/E009-v1-baseline-cases.jsonl.gz", "data/E009-v1-checks.json"],
+      "verification": "Default: recompute all 2118 raw optima and check 2100 witnesses; no solver rerun."
+    },
+    {
+      "id": "N2",
+      "kind": "bounded_computational_observation",
+      "statement": "E010 has 72 cases, 288 method observations, 14 generic timeout observations and one slower specialized rejected case; rejected paired median time ratio is 2.996694809745792.",
+      "evidence": ["data/E010-v1-cases.json.gz", "data/E010-v1-observations.jsonl.gz", "data/E010-v1-summary.csv", "data/E010-v1-checks.json"],
+      "verification": "Default: regenerate inputs and recompute timing arithmetic, statuses, exact-pair denominators and slower count.",
+      "limitations": "Two repetitions on one shared Mac; only exact pairs enter ratios; no new timing measurement or representative speedup claim."
+    },
+    {
+      "id": "N3",
+      "kind": "reused_source_finite_observation",
+      "statement": "E011 covers 18734 targets, including 13762 accepted; keys yield 1133 fixed-INF transitions and one finite 2-to-1 decrease.",
+      "evidence": ["data/E011-v1-targets.jsonl.gz", "data/E011-v1-summary.csv", "data/E011-v1-radius-distribution.csv"],
+      "verification": "Default checks coverage/arithmetic/coordinate costs. --source-root reconstructs raw decisions, radii and witnesses.",
+      "limitations": "Reused tables, ordinary-category empties, complete dirty-table contexts; no blind holdout or population prevalence."
+    },
+    {
+      "id": "N4",
+      "kind": "negative_and_censored_result",
+      "statement": "Of 32 selected rejected targets, 30 exact full/fixed pairs have no strict gain; two full Rayyan models time out without a primal/bound. Their full optima remain unknown.",
+      "evidence": ["data/E011-v1-rejected-solves.jsonl.gz", "data/E011-v1-checks.json"],
+      "verification": "Default: verify dirty-only selection, all statuses and exact-pair denominators; source option verifies existing witnesses.",
+      "limitations": "A fixed optimum of 104 is an upper bound for a timed-out full problem, not proof of its optimum; rejected subset is not representative."
+    },
+    {
+      "id": "N5",
+      "kind": "reused_source_finite_observation",
+      "statement": "1493 accepted targets differ from aligned references despite full radius at least two; stability is not reference correctness.",
+      "evidence": ["data/E011-v1-targets.jsonl.gz", "data/E011-v1-reference-buckets.csv"],
+      "verification": "Default checks label/bucket arithmetic; --source-root checks the labels against source references.",
+      "limitations": "Reference equality is not semantic truth adjudication or calibrated confidence."
+    },
+    {
+      "id": "S1",
+      "kind": "scope_and_prior_work_boundary",
+      "statement": "Minimum interventions, predicate partitions, generic optimization and voting margins are credited prior ingredients; no worldwide-first claim is made.",
+      "arguments": ["literature/structural-theorem-comparison-20261023.md", "literature/mutable-key-novelty-20261023.md", "literature/singleton-collision-20261023.md"],
+      "verification": "Source arguments and inspected primary references, not a numerical or originality certificate.",
+      "limitations": "A targeted literature screen does not prove absence of prior results."
+    }
+  ]
+}
