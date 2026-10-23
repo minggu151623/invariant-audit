@@ -1,0 +1,58 @@
+{
+  "bundle_members_hash_verified": 80,
+  "computation": {
+    "E010_cases_regenerated": 72,
+    "E010_observations_verified": 288,
+    "E010_preflight_optima_recomputed": 162,
+    "E011_preflight_optima_recomputed": 162,
+    "serialized_witnesses": 844,
+    "timing_rerun": false
+  },
+  "finite_reexecution": {
+    "E008_artifacts_reconstructed_byte_identically": 4,
+    "E008_dominance_comparisons": 61854,
+    "E008_radius_comparisons": 30642,
+    "E009_formula_cases_recomputed": 18779,
+    "E009_formula_witnesses_checked": 18755,
+    "original_study_outputs_written": false
+  },
+  "manuscript": {
+    "E011_table_rows_bound": 9,
+    "claims_mapped": 8,
+    "proof_anchors_present": 4,
+    "scope": "Text/artifact correspondence; mathematical proof and originality are not automatically certified.",
+    "source_preview_hashes_bound": true,
+    "submission_abstract_characters": 1159
+  },
+  "optimized_python": false,
+  "original_MILP_and_timing_runs_reexecuted": false,
+  "proof_or_novelty_certification": false,
+  "raw_source_verification": {
+    "accepted_radii_reconstructed": 13762,
+    "raw_coordinate_witnesses_checked": 26453,
+    "raw_target_decisions_checked": 18734,
+    "reference_labels_checked": 18734,
+    "scope": "Reuses frozen source-delivery helper; self-review, not independent assessment.",
+    "solvers_rerun": false,
+    "source_bytes_checked": 9
+  },
+  "scientific_independent_review": false,
+  "source_outputs": {
+    "accepted": 13762,
+    "coordinate_costs_checked": 26453,
+    "selected_rejected": 32,
+    "source_bytes_checked": false,
+    "source_raw_decisions_checked": false,
+    "source_reference_labels_checked": false,
+    "statement": "Raw source radii, witness flips and reference labels require --source-root.",
+    "targets": 18734
+  },
+  "status": "pass",
+  "synthetic": {
+    "E008_aggregate_checks": true,
+    "E008_comparisons_recorded": 30642,
+    "E009_complete_formula_reexecution": "see_separate_finite_reexecution_layer",
+    "E009_raw_optima_recomputed": 2118,
+    "serialized_witnesses": 2110
+  }
+}

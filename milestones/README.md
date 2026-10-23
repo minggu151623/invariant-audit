@@ -122,3 +122,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M30: structural preprint](M30-structural-preprint-draft.md): seven-page
   contribution-centered manuscript, standalone source ZIP and visual/font/
   numeric QA; new evidence companion and owner review remain open.
+
+- [M31: portable structural companion](M31-portable-structural-companion.md):
+  81-member packet, complete finite reconstruction, relocated-source checks,
+  four negative controls and exact claim/field audit; owner decisions pending.

@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M30
+current_milestone: M31
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_E011_source_evidence_and_new_seven_page_structural_preprint
+  current_turn: progress_M31_portable_companion_full_reproduction_and_concrete_claim_release_audit
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: portable_E008_E011_companion_and_claim_to_evidence_release_audit
+  meaningful_independent_next_action: process_owner_review_license_and_account_status_for_concrete_M31_packet
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1681,3 +1681,49 @@ M30:
   next_gate: portable_new_evidence_companion_and_claim_coverage_audit
   peer_review_as_research_blocker: false
   owner_review_as_research_blocker: false
+
+M31:
+  path: milestones/M31-portable-structural-companion.md
+  status: portable_reproduction_verified_review_packet_prepared_not_submitted
+  plan_commit: de099ad
+  companion_implementation_commit: eb55212
+  archive: paper/context-edit-stability-companion.zip
+  archive_sha256: 3436ded5bf9fd61da5892e7ae89593a23d27e7d757205decbdb8a2e3478f0a47
+  archive_members: 81
+  archive_bytes: 549800
+  verification: milestones/M31-delivery-verification.json
+  claim_map: reproducibility/stability/claims.json
+  claim_audit: paper/context-edit-stability/claim-audit.md
+  submission_fields: paper/context-edit-stability/submission-fields-draft.json
+  submission_readiness: paper/context-edit-stability/submission-readiness.json
+  submission_guide: paper/context-edit-stability/submission-guide-vi.md
+  normal_and_optimized_isolated_Python: pass
+  E008_four_artifacts_reconstructed_in_memory: true
+  all_18779_E009_formula_cases_rechecked: true
+  nine_source_files_relocated_and_pinned: true
+  original_code_source_witnesses_rechecked: 26453
+  original_solver_and_timing_runs_repeated: false
+  negative_controls_rejected: 4
+  previous_artifacts_unchanged: 163
+  proof_or_originality_certification: false
+  owner_content_approval: not_given
+  license: unselected
+  authenticated_account_evidence: absent
+  actual_submission: absent
+  public_arxiv_record: absent
+  goal_completion_proven: false
+  independent_peer_review_as_submission_gate: false
+
+new_packet_owner_dependency_audit:
+  date: 2026-10-23
+  baseline: new_structural_preprint_M30_and_completed_M31_companion
+  current_turn: progress_completed_portable_packet_and_refreshed_official_submission_fields
+  current_content_approval: not_given
+  license_selected: false
+  authenticated_account_state: unknown_user_previously_reported_none
+  concrete_request: new_draft_review_license_and_account_status
+  requested_once_after_local_packet_completed: true
+  consecutive_condition_turns: 1
+  consecutive_no_progress_turns: 0
+  blocked_threshold_met: false
+  goal_status: active

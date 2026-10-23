@@ -6,8 +6,12 @@ See [project](context-edit-stability/README.md),
 [seven-page preview](context-edit-stability-preview.pdf),
 [minimal source](context-edit-stability-source.zip), and
 [Vietnamese owner guide](context-edit-stability/owner-guide-vi.md).
-It is a new draft, not owner-approved or submitted. Next is a portable companion
-for the new E008--E011 evidence; external peer review is not a preparation gate.
+It is a new draft, not owner-approved or submitted. The [portable companion](context-edit-stability-companion.zip) now passes
+extracted offline/optimized, complete finite and relocated-source checks; see
+[claim audit](context-edit-stability/claim-audit.md) and
+[submission guide](context-edit-stability/submission-guide-vi.md).
+The remaining content/license/account decisions belong to the owner; external
+peer review is not a preparation gate.
 
 Preserved earlier audit manuscript: **Auditing Invariant Validation
 Benchmarks: Construction, Error Attribution, and Probability Scores**.

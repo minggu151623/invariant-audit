@@ -1,0 +1,64 @@
+{
+  "abstract_characters": 1159,
+  "artifacts": {
+    "paper/context-edit-stability-companion.zip": "3436ded5bf9fd61da5892e7ae89593a23d27e7d757205decbdb8a2e3478f0a47",
+    "paper/context-edit-stability-preview.pdf": "e51a345860e46d448f647609a22700f43676ed8d64d073ced358d4526954e076",
+    "paper/context-edit-stability-source.zip": "bb9d648266e97f678aa14b776a1a56c0b29cfbf85b3dbf36aabdf2b496587175",
+    "paper/context-edit-stability/main.tex": "5bb77dd80b4fa200bf85c9a94c993a4f2d30690bbf82bc8b02afb6d6b8ab83bd"
+  },
+  "claims_mapped": 8,
+  "companion_members": 81,
+  "completion_proven": false,
+  "current_turn": "progress_M31_portable_companion_full_reproduction_and_claim_audit",
+  "date": "2026-10-23",
+  "goal_complete": false,
+  "independent_peer_review_is_submission_gate": false,
+  "license_selected": false,
+  "official_guidance_checked": "2026-10-23",
+  "official_sources": [
+    "https://info.arxiv.org/help/submit/index.html",
+    "https://info.arxiv.org/help/prep.html",
+    "https://info.arxiv.org/help/faq/texlive.html",
+    "https://info.arxiv.org/help/moderation/index.html",
+    "https://info.arxiv.org/help/license/index.html",
+    "https://info.arxiv.org/help/endorsement.html",
+    "https://arxiv.org/category_taxonomy"
+  ],
+  "owner_review_dependency_first_concrete_new_packet_turn": true,
+  "previous_goal_turn": "progress_E011_source_study_and_M30_structural_preprint",
+  "publication_authorized_for_this_draft": false,
+  "remaining_external_steps": [
+    "account_and_endorsement_state",
+    "server_compile_and_metadata_review",
+    "submission_and_public_record_verification"
+  ],
+  "remaining_owner_decisions": [
+    "substantive_review_of_exact_new_draft",
+    "author_form_rendering_choice",
+    "license"
+  ],
+  "requirements": {
+    "actual_submission": "absent",
+    "arxiv_account": "no_authenticated_account_evidence_user_previously_reported_none",
+    "arxiv_server_compile_and_PDF_check": "not_run_local_XeLaTeX_only",
+    "author_name_and_affiliation": "user_supplied_display_preserved_form_ASCII_proposal_unapproved",
+    "category": "cs.DB_technical_candidate_not_moderator_confirmed",
+    "constructed_computation": "frozen_inputs_witnesses_censoring_and_arithmetic_verified_not_timing_rerun",
+    "endorsement": "unknown_requires_actual_account_flow",
+    "finite_mathematical_evidence": "pass_reconstructed_E008_and_all_18779_E009_formula_cases",
+    "generative_AI_disclosure": "present_author_responsibility_pending_owner_review",
+    "independent_peer_review": "not_required_for_preparation_not_claimed_as_obtained",
+    "license": "unselected_owner_decision_required",
+    "metadata_form_rendering": "not_tested_live",
+    "negative_and_censored_outcomes": "preserved_zero_rejected_gain_and_two_unresolved_full_models",
+    "new_document_and_source_package": "pass_seven_pages_M30_visual_fonts_and_independent_extracted_source_compile",
+    "portable_companion": "pass_extracted_isolated_normal_optimized_and_relocated_source_checks",
+    "public_arxiv_record": "absent",
+    "remove_draft_and_pending_review_markers": "after_owner_approval_then_recompile_repackage_and_reverify",
+    "reused_source_evidence": "pass_source_pins_original_code_radii_labels_and_26453_witnesses",
+    "scoped_structural_results": "theorems_and_proofs_present_under_explicit_model_self_review",
+    "substantive_owner_content_approval": "not_given_for_new_draft",
+    "worldwide_originality": "not_claimed_targeted_literature_comparison_only"
+  },
+  "status": "prepared_for_owner_review_not_submission_complete"
+}

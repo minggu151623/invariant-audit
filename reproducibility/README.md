@@ -41,3 +41,13 @@ historical outcome reports retain their original scope and dates.
 `paper/arxiv-source-draft.zip` is the separate four-file TeX submission draft.
 This larger evidence ZIP is for review/reproduction and is not an arXiv TeX
 source upload. Both remain unpublished owner-review artifacts.
+
+## Structural preprint companion (M31)
+
+The old M22 bundle above remains unchanged. The new
+[structural companion](stability/README.md) covers E008--E011 and the seven-page
+structural paper. Its extracted verifier supports standard-library-only offline
+checks, optional complete finite reproduction and a relocated source root.
+The archive is `paper/context-edit-stability-companion.zip`; read the exact
+layer limits before treating a pass as evidence. It does not certify novelty,
+independent scientific review or an arXiv submission.

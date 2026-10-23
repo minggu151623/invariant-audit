@@ -23,6 +23,14 @@ New contribution-centered manuscript: [M30](milestones/M30-structural-preprint-d
 It includes the negative source outcomes and scoped theorems. Owner content
 approval and external release remain pending; local artifact work continues.
 
+Current delivery: [M31](milestones/M31-portable-structural-companion.md),
+[81-member companion](paper/context-edit-stability-companion.zip),
+[claim audit](paper/context-edit-stability/claim-audit.md), and
+[new submission guide](paper/context-edit-stability/submission-guide-vi.md).
+Extracted offline/optimized checks, complete finite reconstruction and relocated
+source verification pass. The new packet awaits owner content/license/account
+decisions; no arXiv submission or public record exists.
+
 Earlier submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
 [reading guide in Vietnamese](paper/reading-guide-vi.md), and
 [submission instructions](paper/submission-guide-vi.md). Owner review is pending.

@@ -1,0 +1,56 @@
+{
+  "E008_four_artifacts_rebuilt_in_memory": true,
+  "actual_submission": "absent",
+  "all_18779_formula_cases_rechecked": true,
+  "archive_bytes": 549800,
+  "archive_members": 81,
+  "archive_sha256": "3436ded5bf9fd61da5892e7ae89593a23d27e7d757205decbdb8a2e3478f0a47",
+  "checks": {
+    "finite_and_relocated_source": {
+      "output_sha256": "e072e0ec20cead9364c1023bd5a9b5b0f8cc497fcd0c4a5bc1f2667b9aac716c",
+      "returncode": 0
+    },
+    "isolated_offline": {
+      "output_sha256": "cb8ea4a54cef1c29c6769d8f004ddfe9bdcdaaddaf46f20a0801412c2e968879",
+      "returncode": 0
+    },
+    "isolated_optimized": {
+      "output_sha256": "1c8861ef9ac6ff2356eb651890749ec6eef16a0df55dc1b237d03afa57bdd084",
+      "returncode": 0
+    },
+    "missing_source_no_cache_fallback": {
+      "error": "ValueError: Missing/nonregular source: datasets/beers/dirty.csv",
+      "rejected": true,
+      "returncode": 1
+    },
+    "tampered_member_optimized": {
+      "error": "ValueError: Member hash mismatch: data/E011-v1-summary.csv",
+      "rejected": true,
+      "returncode": 1
+    },
+    "unsafe_manifest_path": {
+      "error": "ValueError: Unsafe member path",
+      "rejected": true,
+      "returncode": 1
+    },
+    "wrong_source_pin": {
+      "error": "ValueError: Source pin mismatch: datasets/beers/dirty.csv",
+      "rejected": true,
+      "returncode": 1
+    }
+  },
+  "date": "2026-10-23",
+  "independent_scientific_review": false,
+  "isolated_python_with_site_disabled": true,
+  "negative_controls_rejected": 4,
+  "optimized_python_passes": true,
+  "original_MILP_or_timing_runs_reexecuted": false,
+  "original_code_source_witnesses_checked": 26453,
+  "original_study_files_unchanged": 163,
+  "proof_or_novelty_certification": false,
+  "scope": "extracted_portable_companion_reproduction_integrity_and_preservation_self_review",
+  "source_files_relocated_and_pinned": 9,
+  "status": "pass",
+  "tested_from_foreign_cwd": true,
+  "verifier_sha256": "1f41987490cbb89c715931532288de3434dbcd75a0515c5a7e735a9d45ae99b8"
+}

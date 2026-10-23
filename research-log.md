@@ -985,3 +985,22 @@ failed before input; corrected cwd passes. Bound the nine E011 table rows to
 source counts and checked 159 earlier artifacts unchanged. New source/PDF/ZIP
 and render audit are local only. Next package the portable companion and audit
 claim coverage; no owner question or peer-review gate blocks that work.
+
+## 2026-10-23 — portable structural companion and review packet, M31
+
+The previous E011/M30 goal turn made progress. Planned at de099ad and
+implemented at eb55212, an 81-member companion excludes raw source CSVs and
+unrelated files. The extracted verifier passes in isolated/site-disabled
+Python, normally and under -O. Rebuilt four E008 artifacts byte-identically in
+memory, rechecked all 18779 accepted E009 cases and 26453 source witnesses on
+nine relocated pinned files. No solver/timing run was repeated. Four negative
+controls reject, and 163 earlier artifacts are unchanged. Eight claim groups
+bind to proof/evidence layers without asserting automatic proof or novelty.
+
+Prepared new cs.DB/XeLaTeX review fields with a 1159-character abstract; checked
+official metadata, fonts/processors, endorsement, license, moderation and
+taxonomy guidance. The new packet preserves all negative/censored outcomes.
+Local preparation is concrete; new content approval, license and account/
+endorsement/server/submission steps are unresolved. Request those decisions
+once now, after completing the packet. Goal stays active; current turn is
+progress and the fresh new-packet dependency has not met a blocked threshold.

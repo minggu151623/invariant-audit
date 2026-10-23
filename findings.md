@@ -1019,3 +1019,20 @@ PDF/source compilation, all-page inspection, font embedding, exact author
 name and nine E011 table bindings pass. This is an editable working draft,
 not approved content or an arXiv record. Portable evidence packaging and
 claim-to-artifact coverage are the next local steps.
+
+## M31 — evidence is portable; publication remains unproven
+
+The new structural companion makes the finite evidence and source-dependent
+checks explicit. Default offline verification re-evaluates tiny raw optima,
+serialized witnesses, inputs, medians and censoring while marking source raw
+checks absent. The optional layers reconstruct E008/E009 finite evidence and
+E011 source radii/labels/witnesses without Git, solvers or hidden cache fallback.
+All extracted/optimized/relocated and negative-control checks pass. This is
+reproduction/self-review, not an all-input proof or novelty certificate.
+
+The completed review packet and exact new metadata now justify asking the
+owner about the new content, license and account status. Old audit approval
+was never given; supplying a name or a goal continuation does not approve
+publication. Independent peer review is not required for this preparation.
+No actual submission, server PDF or public arXiv record is present, so the
+original goal is not achieved.
