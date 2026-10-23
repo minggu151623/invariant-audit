@@ -1,0 +1,20 @@
+{
+  "M22_bundle_members_unchanged": true,
+  "artifacts": {
+    "data/E007-v1-checks.json": "ca7bc5422b33b5eb51501de6ba39f9592d2ba2cc209c4ead871da476587ae781",
+    "data/E007-v1-domain-summary.csv": "9f7005c83f4715a038de1dc7f16297105b4ed7230d062dc21ff0c6c25181b5cf",
+    "data/E007-v1-witnesses.json": "cf1bc4fde74dea445e8b229d3c63fc0271e6ecb9a7e991b86c1b98d4b086221b",
+    "experiments/E007-fd-decision-stability/results/run-e007-20261023-001.md": "85765ebc68f6ce593a339b783158911198efd0541c6274f4c35f4dc1bf210b94"
+  },
+  "comparison_count": 118002,
+  "date": "2026-10-23",
+  "domain_summary_rows": 30,
+  "finite_witness_count": 114651,
+  "independent_review": false,
+  "novelty_established": false,
+  "original_study_files_unchanged": 60,
+  "scope": "post_run_delivery_count_and_preservation_self_review",
+  "status": "pass",
+  "strict_joint_gap_tables": 1264,
+  "table_count": 39334
+}

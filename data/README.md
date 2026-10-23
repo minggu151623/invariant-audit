@@ -52,3 +52,11 @@ One valid run e006-20261022-001, implementation aa8e553, result/verification
 The source manifest records exact upstream commit and nine byte pins; source
 CSV payloads stay outside Git. The acquisition A1 header failure and A2 explicit
 alias correction are preserved. No independent reviewer acceptance is implied.
+
+## E007 finite mathematical pilot
+
+- `E007-v1-checks.json`: 39334 constructed tables and 118002 radius comparisons.
+- `E007-v1-domain-summary.csv`: complete finite domain aggregates.
+- `E007-v1-witnesses.json`: joint/local gaps and determinant-scope control.
+
+These validate a restricted formulation, not detector performance or novelty.

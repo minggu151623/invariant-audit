@@ -1,0 +1,74 @@
+{
+  "first_strict_gap": {
+    "alphabet": 2,
+    "gap_over_max_local": 1,
+    "joint_minimum": 2,
+    "single_rule_repair_minima": [
+      1,
+      1
+    ],
+    "table_mask_value": [
+      [
+        3,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ]
+    ]
+  },
+  "maximum_gap": {
+    "alphabet": 2,
+    "gap_over_max_local": 1,
+    "joint_minimum": 2,
+    "single_rule_repair_minima": [
+      1,
+      1
+    ],
+    "table_mask_value": [
+      [
+        3,
+        0
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        1
+      ]
+    ]
+  },
+  "scope_counterexample": {
+    "RHS_only_radius": null,
+    "decision_after": false,
+    "decision_before": true,
+    "determinant_edit_cost": 1,
+    "determinant_edited": [
+      [
+        3,
+        0
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "original": [
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ]
+  }
+}

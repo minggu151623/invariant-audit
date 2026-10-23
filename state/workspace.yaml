@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M24
+current_milestone: M25
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1489,3 +1489,32 @@ goal_execution_audit:
   meaningful_independent_next_action: implement_and_falsify_candidate_mathematical_formulation
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
+
+E007:
+  protocol: experiments/E007-fd-decision-stability/protocol.md
+  protocol_commit: 2599ec2e14faa106ac684799360955a2f4610f15
+  implementation_commit: b6f8494917831e3519ae2d71a0528929e145a967
+  run_id: e007-20261023-001
+  status: valid_finite_mathematical_check
+  classification: finite_constructed_mathematical_validation
+  constructed_tables: 39334
+  radius_comparisons: 118002
+  verified_finite_witnesses: 114651
+  mismatches: 0
+  strict_joint_gap_tables: 1264
+  synthetic_unit_tests: 9
+  double_build_byte_identical: true
+  performance_result: false
+  novelty_established: false
+  analysis: experiments/E007-fd-decision-stability/analysis.md
+M25:
+  path: milestones/M25-E007-finite-certificate-pilot.md
+  status: valid_finite_mathematical_check_novelty_unestablished
+  date: 2026-10-23
+  verification: milestones/M25-delivery-verification.json
+  next_candidate: mutable_shared_determinants_joint_decision_edit_certificate
+  next_gate: deeper_prior_work_comparison_then_lock_mutable_key_protocol
+  owner_review_as_research_blocker: false
+  external_peer_review_required_for_local_research: false
+  original_study_artifacts: unchanged
+  public_claim_eligibility: false

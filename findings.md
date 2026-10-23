@@ -1,5 +1,33 @@
 # Findings
 
+## Current research priority — 2026-10-23 novelty reset, M24/M25
+
+The owner requires an original contribution and correctly notes that arXiv
+posting does not require peer review. Further local research is authorized;
+waiting for approval of the weak audit draft is no longer the next action.
+The existing draft remains preserved, without a new novelty claim.
+
+A targeted primary-source search found direct overlap with October 2026 work
+on AFD strength versus detection value, including whole-group/non-majority
+semantics. Conformal cleaning, FD-repair certification and overlapping-vote
+optimization are also established. See the
+[collision matrix](literature/novelty-reset-20261023.md).
+
+E007's separately locked finite pilot checks a joint RHS-edit decision-radius
+formulation: all 118002 comparisons on 39334 tables match exhaustive enumeration;
+114651 finite witnesses verify; 1264 two-rule cases exhibit a strict joint/local
+gap. Nine unit tests and byte-identical double builds pass. This establishes
+finite mathematical feasibility, not newness or detector performance. The easy
+binary form is a familiar covering problem and is insufficient novelty alone.
+
+The next candidate addresses shared determinant edits that alter multiple
+rule groups, beyond protected-key certification. It still needs an exact threat
+model, unrestricted-edit falsification and deep prior-work comparison. See
+[M25](milestones/M25-E007-finite-certificate-pilot.md) and
+[E007 analysis](experiments/E007-fd-decision-stability/analysis.md).
+Earlier owner-review/submission-status sections below are historical preparation;
+no peer-review gate is imposed on this research. No public upload or claim.
+
 ## Current submission preparation — 2026-10-23 (M23)
 
 A Vietnamese reading walkthrough and concrete submission fields now accompany

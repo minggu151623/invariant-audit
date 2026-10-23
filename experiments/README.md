@@ -106,3 +106,7 @@ row inspection; [valid result](E006-external-reference-validation/results/run-e0
 Four simple attribution policies and binary/lookup probabilities on three fixed
 reference tables. H6b is mixed; task and FPR/FNR tradeoffs are retained.
 This is not Raha replication, original M1 transfer or an E003 gate bypass.
+
+- [E007 FD decision stability](E007-fd-decision-stability/protocol.md): locked
+  finite formulation check; [analysis](E007-fd-decision-stability/analysis.md)
+  records validity, prior-work collision and the mutable-key next question.

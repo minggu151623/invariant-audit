@@ -870,3 +870,21 @@ metadata, then explain the research question, synthetic-vs-reference evidence,
 attribution tradeoff, Brier interpretation and remaining scientific limits in
 chat. No experiment, PDF, source ZIP or M22 bundle member is changed. Owner
 understanding/approval remains unconfirmed.
+
+## 2026-10-23 — owner requires novelty; M24/M25 feasibility pilot
+
+The owner objects to weak novelty and points out that arXiv does not require
+peer review. Corrected the priority: deepen original research rather than stop
+at owner-review/submission paperwork. Kept eventual publication approval distinct
+from local research authorization. Targeted primary-source collision checking
+found close October 2026 whole-group/non-majority evaluation and earlier conformal,
+repair and voting-certification work; no generic technique is called new.
+
+Locked E007 at 2599ec2 before implementation b6f8494, passed nine tests and
+executed one finite run e007-20261023-001. All 118002 radius comparisons and
+114651 finite witnesses pass on 39334 tables; byte-identical double builds.
+1264 strict joint/local gaps and the editable-determinant scope control are
+recorded. The fixed-key binary form is a standard covering problem, so this
+pilot alone is insufficient novelty. Next investigate certificates with shared
+mutable determinants under a new protocol. Earlier 60 study files and every
+M22 bundle member remain unchanged. No public submission or external message.

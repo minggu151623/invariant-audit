@@ -98,3 +98,8 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M23: owner reading and submission preparation](M23-owner-reading-and-submission-preparation.md):
   Vietnamese walkthrough, concrete fields and current official-guidance check;
   owner-review request pending, goal not achieved.
+
+- [M24: novelty reset](M24-novelty-reset-and-E007-design.md): owner requests
+  an original contribution; primary-source collision check and protocol lock.
+- [M25: E007 finite pilot](M25-E007-finite-certificate-pilot.md): exhaustive
+  mathematical agreement; novelty remains unestablished, mutable-key work next.

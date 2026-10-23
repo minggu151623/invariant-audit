@@ -315,3 +315,11 @@ this project. E006/M20 adds a locked three-dataset attribution and probability
 contrast, with a preserved mixed calibration prediction; see its protocol and
 valid report. No comparison to the Raha implementation or causal M1 transfer
 claim is made.
+
+## 2026-10-23 novelty reset
+
+The owner requires an original contribution. The previous focused draft omitted
+close October 2026 AFD work that also compares attribution semantics. See
+[primary-source collision matrix](novelty-reset-20261023.md) and its source
+identity index. The old PDF remains a historical review draft; generic
+calibration, rule perturbation or voting certification is not claimed as new.

@@ -1,0 +1,19 @@
+{
+  "H7a_all_radii_and_witnesses": true,
+  "H7b_strict_joint_gap_exists": true,
+  "H7c_determinant_edit_scope_counterexample": true,
+  "classification": "finite_constructed_mathematical_validation",
+  "compositional_bound_failures": [],
+  "finite_witnesses_verified": 114651,
+  "implementation_commit": "b6f8494917831e3519ae2d71a0528929e145a967",
+  "independent_scientific_review": false,
+  "mismatches": [],
+  "novelty_established": false,
+  "performance_result": false,
+  "protocol_commit": "2599ec2e14faa106ac684799360955a2f4610f15",
+  "protocol_sha256": "5d19b0ea178f5d0aa9d2d75613dfd179d1f62a4818e78f5bd555ca76bc23ad51",
+  "radius_comparisons": 118002,
+  "run_id": "e007-20261023-001",
+  "status": "valid",
+  "tables": 39334
+}
