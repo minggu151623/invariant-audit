@@ -1,0 +1,10 @@
+dataset,rhs,rows,accepted,rejected,accepted_with_singleton,accepted_strict_finite_decreases,accepted_fixed_INF_to_finite,accepted_without_reduction,accepted_reference_incorrect,selected_rejected,selected_rejected_exact_pairs,selected_rejected_strict_decreases,full_timeouts,fixed_timeouts
+beers,brewery_name,2410,2410,0,127,0,127,2283,0,0,0,0,0,0
+beers,city,2410,2275,135,127,0,127,2148,8,4,4,0,0,0
+beers,state,2410,2275,135,127,0,127,2148,8,4,4,0,0,0
+flights,sched_dep_time,2376,1663,713,0,0,0,1663,403,4,4,0,0,0
+flights,act_dep_time,2376,1133,1243,0,0,0,1133,740,4,4,0,0,0
+flights,sched_arr_time,2376,1411,965,0,0,0,1411,399,4,4,0,0,0
+flights,act_arr_time,2376,1166,1210,0,0,0,1166,248,4,4,0,0,0
+rayyan,journal_issn,1000,768,232,384,0,384,384,6,4,4,0,0,0
+rayyan,journal_title,1000,661,339,383,1,368,292,4,4,2,0,2,0

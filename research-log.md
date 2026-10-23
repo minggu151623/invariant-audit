@@ -946,3 +946,24 @@ extra solve or timing rerun. The candidate now has proofs and bounded algorithm
 evidence; next is a reused-source-table study and closest-theorem comparison,
 then a contribution-centered draft. Novelty is not inferred from speed or test
 counts. No manuscript/PDF, account, release or external message changed.
+
+## 2026-10-23 — reused-source stability and focused contribution, E011/M29
+
+Previous E009/E010 goal turn made research progress. Locked E011 (86dad7d)
+before implementation fd341d4 and one source run. All 162 raw/fixed preflight
+fixtures pass. Computed all 18734 target decisions and 13762 accepted radii on
+nine reused-source tasks; complete accepted builds match bytes. Reference rows
+are parsed after the full dirty-stage freeze. Mutable keys cause 1133 fixed-INF
+transitions and one finite 2-to-1 decrease, at Rayyan title row 644. No accepted
+no-singleton reduction occurs. The 32 hash-selected rejected targets give 30
+exact pairs with no strict gain and two full-model timeouts without primal or
+bound. H11b is unsupported; no retry or target replacement. There are 1493
+accepted reference disagreements despite full radius>=2.
+
+Post-run verification on original categorical codes rechecks 26453 source
+witnesses, radii, selections, labels, dirty/reference hashes, all nine source
+pins, 145 earlier files and M22 bundle members. Reading VCC theorems 14/15/17
+shows predicate partitioning is established; removed that from proposed
+novelty. Dominance and singleton characterization remain the scoped candidate.
+Next write the structural preprint, retaining negative source outcomes, rather
+than launching studies until H11b becomes positive. No external release.

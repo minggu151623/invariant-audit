@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M28
+current_milestone: M29
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_E009_theorem_and_E010_direction_separated_algorithm_study
+  current_turn: progress_E011_reused_source_stability_and_theorem_level_novelty_comparison
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: lock_reused_source_table_study_and_compare_closest_prior_theorems
+  meaningful_independent_next_action: write_contribution_centered_manuscript_and_package_evidence
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1623,3 +1623,40 @@ M28:
   public_claim_eligibility: false
   peer_review_as_local_research_gate: false
   owner_review_as_local_research_gate: false
+
+E011:
+  protocol: experiments/E011-reused-source-stability/protocol.md
+  protocol_commit: 86dad7dd51830d25ff175f7a2b9f04847931de8b
+  implementation_commit: fd341d4f01049834ac0548b2505a7bcfd1f9ac61
+  run_id: e011-20261023-001
+  status: valid_exploratory_reused_source_study
+  preflight_cases: 162
+  targets: 18734
+  initially_accepted: 13762
+  initially_rejected: 4972
+  accepted_fixed_INF_to_finite: 1133
+  accepted_strict_finite_reductions: 1
+  selected_rejected: 32
+  selected_rejected_exact_pairs: 30
+  selected_rejected_strict_reductions: 0
+  full_model_timeouts: 2
+  accepted_incorrect_reference_with_radius_at_least_2: 1493
+  accepted_double_build_equal: true
+  dirty_reference_stage_hash_verified: true
+  independently_rechecked_source_witnesses: 26453
+  H11a: true
+  H11b: false
+  H11c: true
+  H11d: true
+  novelty_established: false
+M29:
+  path: milestones/M29-E011-source-stability.md
+  status: reused_source_result_with_negative_and_censored_outcomes_preserved
+  verification: milestones/M29-delivery-verification.json
+  progress_for_owner: to_human/M29-source-results-vi.md
+  theorem_comparison: literature/structural-theorem-comparison-20261023.md
+  removed_novelty_claim: predicate_equivalent_target_relative_key_quotient
+  next_gate: focused_structural_preprint_and_evidence_package
+  public_claim_eligibility: false
+  owner_review_as_research_blocker: false
+  peer_review_as_research_blocker: false

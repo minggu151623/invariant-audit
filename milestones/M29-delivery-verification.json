@@ -1,0 +1,24 @@
+{
+  "M22_bundle_members_unchanged": true,
+  "accepted_stage_hash_match": true,
+  "artifact_sha256": {
+    "data/E011-v1-checks.json": "ce0778b99495d17feaf9b659cf895caffb3a944f5ad323114aad7c30f39dffba",
+    "data/E011-v1-preflight.json.gz": "2ae4f5b34ec8f29574384379acdd66e18a32572daefd7452b92b76193eba3e69",
+    "data/E011-v1-reference-buckets.csv": "6b6cdda9a2a187c71e2d7d32ec034874c9009668b95a30afeeb7787cb9dc3fed",
+    "data/E011-v1-rejected-solves.jsonl.gz": "6b6e6b5c3e745b563f7cfeb48ec45c0a44a6b51ef602ea91c32307154909a257",
+    "data/E011-v1-summary.csv": "33069d1ddd3a0d2637cdc539ea191a6096e9e479316da41879a8c57aa35a190e",
+    "data/E011-v1-targets.jsonl.gz": "46762d2b3e0322d3428b29d064186c69ed40ca1d6cf9ce4a5aff749e3c6ccf7c"
+  },
+  "date": "2026-10-23",
+  "independent_review": false,
+  "independently_checked_source_witnesses": 26453,
+  "novelty_established": false,
+  "previous_files_unchanged": 145,
+  "radius_distribution_sha256": "9b0e1ffeb63fac663e6e73baf1f6108ccfc1fa8c7ae6a6eb35bfb229aa2cc61f",
+  "reference_stage_hash_match": true,
+  "scope": "post_run_original_code_radius_witness_label_selection_and_preservation_self_review",
+  "selected_rejected": 32,
+  "source_files_pinned": 9,
+  "status": "pass",
+  "targets": 18734
+}

@@ -20,3 +20,8 @@ Current novelty screens: [reset](novelty-reset-20261023.md),
 [mutable-key reduction](mutable-key-novelty-20261023.md), and
 [singleton characterization](singleton-collision-20261023.md). These retain
 prior-work overlaps; none establishes originality by itself.
+
+[Theorem-level comparison](structural-theorem-comparison-20261023.md) reads
+VCC cause-equivalence/partition results and vote-operation ILPs. Predicate
+quotients are now setup, not proposed novelty. The specialized dominance and
+singleton theorems remain candidate contributions without a first claim.

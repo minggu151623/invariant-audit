@@ -983,3 +983,24 @@ mixed target-valued RHSs from rejected contexts. Practical prevalence, factual
 correctness and originality remain open. A meaningful reused-source study and
 closest-prior-theorem check are required next; neither old owner review nor
 external peer review blocks that local research.
+
+## M29 — external-table impact is concentrated in singleton groups
+
+The complete reused-source census has 13762 accepted targets; 1134 have a
+strict key-related reduction, comprising 1133 fixed-INF transitions and only
+one finite 2-to-1 decrease. The exceptional finite case is Rayyan journal_title
+row 644, whose groups have sizes 4 and 1. The source result supports the exact
+singleton mechanism but does not suggest broad finite-radius improvements.
+
+All 30 exact pairs in the bounded rejected subset have equal costs. Two full
+Rayyan title models time out at five seconds; fixed-key optima are 104 and full
+optima remain unestablished. This narrows practical claims for accepting MILPs.
+The 1493 reference-disagreeing accepted targets with full radius>=2 reinforce
+that stability does not imply correctness. These are reused-source finite
+counts, not representative prevalence or accuracy improvements.
+
+Generic predicate partitions, minimum interventions and score-margin ILPs are
+prior ingredients. Remove the key quotient from novelty claims. A focused
+structural preprint can center on the specialized row-action dominance proof
+and singleton radius characterization, with complete assumptions and negative
+results. Further experiments solely seeking a positive H11b are unwarranted.

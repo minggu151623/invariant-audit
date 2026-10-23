@@ -9,12 +9,12 @@ feedback. The audit draft remains a baseline; see the
 [novelty screen](literature/novelty-reset-20261023.md) and
 [E007 mathematical feasibility protocol](experiments/E007-fd-decision-stability/protocol.md).
 Local research continues without waiting for peer-review acceptance.
-Current candidate work: [M28](milestones/M28-E010-directional-scaling.md)
-combines an exact singleton-bottleneck theorem with a canonical-action reduction
-and a 72-case constructed algorithm comparison. All specialized computations
-finish exactly; generic timeouts and a slower specialized case are retained.
-Originality and source-table usefulness remain open;
-[Vietnamese progress](to_human/M28-algorithm-results-vi.md).
+Current candidate work: [M29](milestones/M29-E011-source-stability.md)
+adds a complete accepted-target census on reused Beers/Flights/Rayyan tables:
+1133 fixed-INF transitions and one finite radius reduction. The rejected subset
+has no strict gain in 30 exact pairs and two full-model timeouts. These negative
+outcomes are retained. Predicate quotients are removed from proposed novelty;
+[Vietnamese explanation](to_human/M29-source-results-vi.md).
 
 Earlier submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
 [reading guide in Vietnamese](paper/reading-guide-vi.md), and

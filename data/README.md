@@ -88,3 +88,13 @@ Finite mathematical/formulation validation; no runtime or detector-accuracy resu
 
 Two measured repetitions; one shared Mac; constructed cases, not real-data
 prevalence or detector accuracy. No study was rerun for favorable timings.
+
+## E011 reused-source stability
+
+Seven locked artifacts contain preflight fixtures, every target decision,
+accepted witnesses/radii, every selected rejected solve, task summaries,
+reference buckets and provenance checks. `E011-v1-radius-distribution.csv` is
+a post-run exact histogram derived by the independent-code delivery checker.
+All source values remain outside Git; witnesses contain coordinates and
+target-relative integer destination codes. Two full-model timeouts and the
+unsupported H11b are retained. No E006 detector metrics are pooled here.

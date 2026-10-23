@@ -123,3 +123,8 @@ This is not Raha replication, original M1 transfer or an E003 gate bypass.
   162 raw-oracle preflight fixtures and 72 constructed cases, both directions
   analyzed separately; [analysis](E010-directional-scaling/analysis.md) retains
   timeouts, a slower case and the limited generator scope.
+
+- [E011 reused-source stability](E011-reused-source-stability/protocol.md):
+  18734 source targets; [analysis](E011-reused-source-stability/analysis.md) keeps
+  the single finite decrease, fixed-INF transitions, negative rejected-subset
+  outcome and two timeouts. This is reused evidence, not a blind holdout.
