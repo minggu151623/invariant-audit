@@ -1724,10 +1724,10 @@ new_packet_owner_dependency_audit:
   authenticated_account_state: unknown_user_previously_reported_none
   concrete_request: new_draft_review_license_and_account_status
   requested_once_after_local_packet_completed: true
-  consecutive_condition_turns: 2
-  consecutive_no_progress_turns: 1
-  blocked_threshold_met: false
-  goal_status: active
+  consecutive_condition_turns: 3
+  consecutive_no_progress_turns: 2
+  blocked_threshold_met: true
+  goal_status: blocked
   current_review_packet_hashes_match: true
   new_direct_owner_reply: absent_in_current_conversation
   live_external_process_or_submission_handle: none
@@ -1735,3 +1735,8 @@ new_packet_owner_dependency_audit:
   local_required_preparation_for_this_packet: completed_M31
   no_new_experiment_or_redundant_test_run: true
   no_repeated_approval_question: true
+  returned_goal_tool_status: blocked
+  blocking_condition: owner_content_approval_license_and_authenticated_account_flow
+  resume_condition: direct_owner_reply_to_existing_review_license_account_questions
+  original_arxiv_goal_complete: false
+  peer_review_as_blocker: false

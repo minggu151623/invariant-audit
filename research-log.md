@@ -1020,3 +1020,19 @@ no-progress turn. The blocked threshold is not met; keep the goal active. Do
 not repeat the already-sent three questions or rerun successful checks solely
 to manufacture progress. Process the owner's review/license/account answer
 when it arrives. No manuscript, evidence bundle or prior study was changed.
+
+## 2026-10-23 — new-packet blocker threshold reached
+
+The previous goal turn was no progress after M31 preparation, not a live wait.
+The same exact packet still matches all four artifact hashes; no direct owner
+approval, selected license, authenticated account/submission handle or public
+record is evidenced. No research/delivery process is running. The outstanding
+owner decisions now recur across three consecutive new-packet goal turns, with
+two no-progress turns. No meaningful authorized release action can proceed
+without those decisions; do not manufacture progress with repeated tests or
+repeat the already-sent questions. update_goal returned blocked.
+
+The original arXiv objective remains unachieved. Resume from the preserved
+M31 packet when the owner answers the existing content/license/account request.
+External peer review is not the blocker. No paper, source archive, companion,
+experiment or unrelated user file changed during this audit.
