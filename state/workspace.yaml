@@ -1717,13 +1717,21 @@ M31:
 new_packet_owner_dependency_audit:
   date: 2026-10-23
   baseline: new_structural_preprint_M30_and_completed_M31_companion
-  current_turn: progress_completed_portable_packet_and_refreshed_official_submission_fields
+  previous_turn: progress_completed_portable_packet_and_refreshed_official_submission_fields
+  current_turn: no_progress_same_pending_owner_decisions_revalidated
   current_content_approval: not_given
   license_selected: false
   authenticated_account_state: unknown_user_previously_reported_none
   concrete_request: new_draft_review_license_and_account_status
   requested_once_after_local_packet_completed: true
-  consecutive_condition_turns: 1
-  consecutive_no_progress_turns: 0
+  consecutive_condition_turns: 2
+  consecutive_no_progress_turns: 1
   blocked_threshold_met: false
   goal_status: active
+  current_review_packet_hashes_match: true
+  new_direct_owner_reply: absent_in_current_conversation
+  live_external_process_or_submission_handle: none
+  authorized_independent_release_action: unavailable_without_owner_decisions
+  local_required_preparation_for_this_packet: completed_M31
+  no_new_experiment_or_redundant_test_run: true
+  no_repeated_approval_question: true

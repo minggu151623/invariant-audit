@@ -1004,3 +1004,19 @@ Local preparation is concrete; new content approval, license and account/
 endorsement/server/submission steps are unresolved. Request those decisions
 once now, after completing the packet. Goal stays active; current turn is
 progress and the fresh new-packet dependency has not met a blocked threshold.
+
+## 2026-10-23 — M31 owner-decision revalidation, no progress
+
+Previous goal turn made progress by completing M31. Rechecked the exact four
+review-packet hashes and current source/readiness state: all match, content
+approval remains not given, license unselected and no authenticated account,
+submission or public record is evidenced. No direct owner reply has arrived
+in the current conversation. There is no live external process to poll and no
+authorization to remove pending-review markers or submit this draft.
+
+This turn is no progress, not a verified wait or scientific milestone. The
+same new-packet dependency now spans two consecutive goal turns, with one
+no-progress turn. The blocked threshold is not met; keep the goal active. Do
+not repeat the already-sent three questions or rerun successful checks solely
+to manufacture progress. Process the owner's review/license/account answer
+when it arrives. No manuscript, evidence bundle or prior study was changed.
