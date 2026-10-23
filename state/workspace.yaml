@@ -1444,12 +1444,15 @@ goal_execution_audit:
   resumed_user_turn: progress_requested_Vietnamese_explanation_delivered_in_chat
   current_turn: no_progress_no_new_owner_decision_or_scientific_feedback
   blocking_condition: owner_content_understanding_review_and_owner_controlled_submission_decisions
-  consecutive_resumed_condition_turns: 2
-  consecutive_resumed_no_progress_turns: 1
+  consecutive_resumed_condition_turns: 3
+  consecutive_resumed_no_progress_turns: 2
   owner_approval: not_given
   followup_question: optional_choice_of_scientific_topic_to_explain_further
   followup_reply: pending
   verified_live_process: none
-  current_goal_status: active
+  current_goal_status: blocked
   completion_proven: false
   next_action: explain_selected_topic_or_process_owner_revisions_when_received
+  blocked_audit: threshold_met_same_dependency_revalidated_no_reply_or_new_external_state
+  no_meaningful_independent_next_action: true
+  actual_submission: absent
