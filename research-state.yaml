@@ -2,4 +2,4 @@ schema_version: 1
 canonical_state_path: state/workspace.yaml
 pointer_only: true
 workspace_id: invariant-audit
-milestone_path: milestones/M23-owner-reading-and-submission-preparation.md
+milestone_path: milestones/M24-novelty-reset-and-E007-design.md

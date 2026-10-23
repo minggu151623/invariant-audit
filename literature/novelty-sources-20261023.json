@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-23",
+  "scope": "targeted_primary_source_novelty_scout_not_systematic_review",
+  "sources": [
+    {
+      "id": "strength-not-value-v1",
+      "url": "https://arxiv.org/html/2610.08189v1",
+      "bytes": 512076,
+      "sha256": "e7d3a16b4e71ac1f8ffd5447e89748f055b35f7b261915deebbfee7293afe4d9",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/strength-not-value-v1.html",
+      "status": "retrieved"
+    },
+    {
+      "id": "auto-relate-v1",
+      "url": "https://arxiv.org/html/2606.07060v1",
+      "bytes": 456046,
+      "sha256": "263b8051460f1b0aedc312d1ab09abcfeceaa6fcdaebd72ad659fc0acbdb332d",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/auto-relate-v1.html",
+      "status": "retrieved"
+    },
+    {
+      "id": "conformal-data-cleaning",
+      "url": "https://proceedings.mlr.press/v238/jager24a.html",
+      "bytes": 16320,
+      "sha256": "c9725792e6f70170f649031c5323b2be9698a694f7eb1ba0e7223b45f4b7c05f",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/conformal-data-cleaning.html",
+      "status": "retrieved"
+    },
+    {
+      "id": "knn-certification",
+      "url": "https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.ICDT.2022.6",
+      "bytes": 116766,
+      "sha256": "2f9b4cc789c412b2ee31d7cae1f5a134b243d366505994e7898bbe79523eb1e0",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/knn-certification.html",
+      "status": "retrieved"
+    },
+    {
+      "id": "query-mes-v2",
+      "url": "https://arxiv.org/abs/2603.08612v2",
+      "bytes": 44640,
+      "sha256": "17f3c00552aaece29a2e638cf00075f59899fafb79e66ec0654dac4f2bdd83c8",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/query-mes-v2.html",
+      "status": "retrieved"
+    },
+    {
+      "id": "overlapping-vote-certification",
+      "url": "https://arxiv.org/abs/2208.13904",
+      "bytes": 43484,
+      "sha256": "55fb0fa99fc5cfb07946cb54772ed0a20d60968d85ab8a8f8c0cd0ef51dfcbe8",
+      "cache_path": "/Users/mac/Library/Caches/InvariantAudit/literature-20261023/overlapping-vote-certification.html",
+      "status": "retrieved"
+    }
+  ]
+}

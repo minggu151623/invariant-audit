@@ -4,7 +4,13 @@ Research question: How can semantic and state invariants be validated while cali
 
 Scope: local research; arXiv manuscript in preparation.
 
-Current submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
+Current priority: develop an original contribution, per the owner's 2026-10-23
+feedback. The audit draft remains a baseline; see the
+[novelty screen](literature/novelty-reset-20261023.md) and
+[E007 mathematical feasibility protocol](experiments/E007-fd-decision-stability/protocol.md).
+Local research continues without waiting for peer-review acceptance.
+
+Earlier submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
 [reading guide in Vietnamese](paper/reading-guide-vi.md), and
 [submission instructions](paper/submission-guide-vi.md). Owner review is pending.
 

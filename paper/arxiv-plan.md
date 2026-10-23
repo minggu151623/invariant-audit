@@ -4,6 +4,17 @@ Updated: 2026-10-23 (Asia/Ho_Chi_Minh).
 User instruction: `/goal tiếp tục công việc nghiên cứu, chuyển mục đích sang đăng được báo lên arxiv`.
 The user selected the destination, not the technical framing below.
 
+## Owner correction and current research priority — 2026-10-23
+
+The owner requires an original research contribution and correctly notes that
+arXiv does not require peer review. Continue local scientific work autonomously;
+owner approval is an eventual release step, not a reason to stop novelty work.
+The existing audit draft is preserved as a baseline, not declared sufficient.
+See ../literature/novelty-reset-20261023.md and E007's separately locked finite
+mathematical feasibility protocol. An external reviewer can help but is not a
+new prerequisite for ordinary local research or arXiv submission preparation.
+E003-v2's specific locked historical execution gate is unchanged.
+
 ## Objective and candidate contribution
 
 Produce a self-contained, evidence-audited English research manuscript, a
@@ -50,7 +61,9 @@ Do not manufacture an external result merely to fill a paper section.
 - Distinguish previously locked results, exploratory reanalysis, and deductions.
 - State positive=valid, binning and probability serialization precision.
 - Include falsification conditions, limitations and reproduction commands.
-- Independently review the analysis and manuscript; author tests are self-review.
+- Critically assess the analysis and novelty against primary prior work; author
+  tests are self-review. External peer review is helpful, not a universal
+  arXiv submission requirement or a gate on further local research.
 - Disclose significant generative-AI use and obtain responsible human author
   review; AI tools are not authors (official moderation policy).
 - Verify references against primary sources, render the final PDF and inspect it.

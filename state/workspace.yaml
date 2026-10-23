@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M23
+current_milestone: M24
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1438,7 +1438,7 @@ owner_review_followup:
   understanding_confirmed: false
   publication_or_license_authorization: not_given
 
-goal_execution_audit:
+goal_execution_audit_before_novelty_feedback:
   date: 2026-10-23
   resumption: fresh_audit_after_blocked_goal
   resumed_user_turn: progress_requested_Vietnamese_explanation_delivered_in_chat
@@ -1456,3 +1456,36 @@ goal_execution_audit:
   blocked_audit: threshold_met_same_dependency_revalidated_no_reply_or_new_external_state
   no_meaningful_independent_next_action: true
   actual_submission: absent
+
+novelty_priority:
+  date: 2026-10-23
+  authority: direct_user_feedback_requires_new_research_contribution
+  user_text: "Tôi thấy điẻm yếu của bài là đáng lưu ý. Tôi muốn điểm mới trong nghiên cứu, ít nhất là vậy. Việc đăng lên arXiv không cần peer review đâu."
+  local_research_authorized: true
+  external_peer_review_gate_for_arxiv: false
+  owner_approval_gate: actual_public_release_only
+  current_manuscript: preserved_weak_novelty_baseline
+  novelty_claim: not_established
+  source_screen: literature/novelty-reset-20261023.md
+  candidate: joint_FD_plurality_decision_edit_radius
+  candidate_provenance: ai_proposed_not_user_selected_technical_design
+M24:
+  path: milestones/M24-novelty-reset-and-E007-design.md
+  status: novelty_screen_and_finite_feasibility_design
+  date: 2026-10-23
+  primary_sources_checked: 6
+  E007_protocol: experiments/E007-fd-decision-stability/protocol.md
+  E007_classification: finite_constructed_mathematical_validation
+  E007_implementation: absent_at_protocol_lock
+  E007_run: absent_at_protocol_lock
+  novelty_claim: not_established
+  original_study_artifacts: unchanged
+  next_gate: implement_locked_E007_then_deep_novelty_collision_check
+
+goal_execution_audit:
+  date: 2026-10-23
+  current_turn: progress_primary_source_collision_check_and_E007_protocol_design
+  earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
+  meaningful_independent_next_action: implement_and_falsify_candidate_mathematical_formulation
+  consecutive_resumed_no_progress_turns: 0
+  completion_proven: false
