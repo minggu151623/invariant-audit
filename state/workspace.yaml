@@ -1409,7 +1409,7 @@ M23:
   goal_complete: false
   next_gate: owner_substantive_review_then_account_and_license_submission_steps
 
-goal_execution_audit:
+goal_execution_audit_before_owner_explanation:
   date: 2026-10-23
   previous_turn_classification: progress_M23
   current_turn_classification: no_progress_pending_required_human_input
@@ -1437,3 +1437,19 @@ owner_review_followup:
   explanation_basis: paper/reading-guide-vi.md_and_current_verified_manuscript
   understanding_confirmed: false
   publication_or_license_authorization: not_given
+
+goal_execution_audit:
+  date: 2026-10-23
+  resumption: fresh_audit_after_blocked_goal
+  resumed_user_turn: progress_requested_Vietnamese_explanation_delivered_in_chat
+  current_turn: no_progress_no_new_owner_decision_or_scientific_feedback
+  blocking_condition: owner_content_understanding_review_and_owner_controlled_submission_decisions
+  consecutive_resumed_condition_turns: 2
+  consecutive_resumed_no_progress_turns: 1
+  owner_approval: not_given
+  followup_question: optional_choice_of_scientific_topic_to_explain_further
+  followup_reply: pending
+  verified_live_process: none
+  current_goal_status: active
+  completion_proven: false
+  next_action: explain_selected_topic_or_process_owner_revisions_when_received
