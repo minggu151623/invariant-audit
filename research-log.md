@@ -967,3 +967,21 @@ shows predicate partitioning is established; removed that from proposed
 novelty. Dominance and singleton characterization remain the scoped candidate.
 Next write the structural preprint, retaining negative source outcomes, rather
 than launching studies until H11b becomes positive. No external release.
+
+## 2026-10-23 — new structural manuscript, M30
+
+Drafted a dedicated seven-page LaTeX preprint centered on canonical accepting
+actions and exact singleton rejection, replacing the old audit framing as the
+current paper. The original audit source/PDF/ZIP stay preserved. Main results
+and abstract retain the source negative outcome and two censored full models.
+The draft credits generic predicates/interventions/voting optimization, states
+all model assumptions, discloses substantial AI use and pending owner review.
+
+Desktop compilation passes. Tectonic preview and the extracted one-file ZIP
+compile to identical page text; all 11 fonts embed and the exact Vietnamese
+author name extracts. Inspected all seven final pages after fixing initial
+layout warnings. An extracted-source command first used the wrong cwd and
+failed before input; corrected cwd passes. Bound the nine E011 table rows to
+source counts and checked 159 earlier artifacts unchanged. New source/PDF/ZIP
+and render audit are local only. Next package the portable companion and audit
+claim coverage; no owner question or peer-review gate blocks that work.

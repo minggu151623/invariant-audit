@@ -1,0 +1,34 @@
+{
+  "E011_table_rows_checked": 9,
+  "actual_submission": "absent",
+  "all_fonts_embedded": true,
+  "artifact_sha256": {
+    "paper/context-edit-stability-preview.pdf": "e51a345860e46d448f647609a22700f43676ed8d64d073ced358d4526954e076",
+    "paper/context-edit-stability-source.zip": "bb9d648266e97f678aa14b776a1a56c0b29cfbf85b3dbf36aabdf2b496587175",
+    "paper/context-edit-stability/main.tex": "5bb77dd80b4fa200bf85c9a94c993a4f2d30690bbf82bc8b02afb6d6b8ab83bd"
+  },
+  "author_exact_unicode_verified": true,
+  "date": "2026-10-23",
+  "font_count": 11,
+  "novelty_independently_assessed": false,
+  "overfull_underfull_undefined_warnings": 0,
+  "owner_approval": "not_given",
+  "pages": 7,
+  "previous_artifacts_preserved": 159,
+  "prior_baseline": "1054243",
+  "scope": "document_layout_numeric_bindings_fonts_source_archive_and_preservation_self_review",
+  "source_zip_members": [
+    "main.tex"
+  ],
+  "source_zip_pages_text_identical": true,
+  "status": "pass",
+  "visual_pages_inspected": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
+}

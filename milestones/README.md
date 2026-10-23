@@ -118,3 +118,7 @@ Milestone records and verification evidence; Markdown records are the source of 
 - [M29: reused-source stability](M29-E011-source-stability.md): complete accepted
   radii, bounded rejected subset with no observed strict gain, two timeouts and
   a narrowed novelty claim after theorem-level prior-work comparison.
+
+- [M30: structural preprint](M30-structural-preprint-draft.md): seven-page
+  contribution-centered manuscript, standalone source ZIP and visual/font/
+  numeric QA; new evidence companion and owner review remain open.

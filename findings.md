@@ -1004,3 +1004,18 @@ prior ingredients. Remove the key quotient from novelty claims. A focused
 structural preprint can center on the specialized row-action dominance proof
 and singleton radius characterization, with complete assumptions and negative
 results. Further experiments solely seeking a positive H11b are unwarranted.
+
+## M30 — manuscript now follows the structural result
+
+The current draft is Exact Context-Edit Stability for Plurality-Based
+Functional-Dependency Checks, a seven-page dedicated LaTeX project. It leads
+with the same-RHS protected-target unit-cost model, proves both specialized
+results and keeps reused-source negative/censored outcomes in the abstract
+and main results. It no longer presents benchmark auditing as sufficient
+method novelty. Generic predicate quotients and intervention optimization
+are expressly credited as prior ingredients.
+
+PDF/source compilation, all-page inspection, font embedding, exact author
+name and nine E011 table bindings pass. This is an editable working draft,
+not approved content or an arXiv record. Portable evidence packaging and
+claim-to-artifact coverage are the next local steps.

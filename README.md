@@ -16,6 +16,13 @@ has no strict gain in 30 exact pairs and two full-model timeouts. These negative
 outcomes are retained. Predicate quotients are removed from proposed novelty;
 [Vietnamese explanation](to_human/M29-source-results-vi.md).
 
+New contribution-centered manuscript: [M30](milestones/M30-structural-preprint-draft.md),
+[seven-page preview](paper/context-edit-stability-preview.pdf),
+[LaTeX source](paper/context-edit-stability/main.tex), and
+[Vietnamese walkthrough](paper/context-edit-stability/owner-guide-vi.md).
+It includes the negative source outcomes and scoped theorems. Owner content
+approval and external release remain pending; local artifact work continues.
+
 Earlier submission preparation: [M23](milestones/M23-owner-reading-and-submission-preparation.md),
 [reading guide in Vietnamese](paper/reading-guide-vi.md), and
 [submission instructions](paper/submission-guide-vi.md). Owner review is pending.

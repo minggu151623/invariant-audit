@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M29
+current_milestone: M30
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1484,9 +1484,9 @@ M24:
 
 goal_execution_audit:
   date: 2026-10-23
-  current_turn: progress_E011_reused_source_stability_and_theorem_level_novelty_comparison
+  current_turn: progress_E011_source_evidence_and_new_seven_page_structural_preprint
   earlier_owner_feedback_blocker: superseded_by_novelty_research_instruction
-  meaningful_independent_next_action: write_contribution_centered_manuscript_and_package_evidence
+  meaningful_independent_next_action: portable_E008_E011_companion_and_claim_to_evidence_release_audit
   consecutive_resumed_no_progress_turns: 0
   completion_proven: false
 
@@ -1660,3 +1660,24 @@ M29:
   public_claim_eligibility: false
   owner_review_as_research_blocker: false
   peer_review_as_research_blocker: false
+
+M30:
+  path: milestones/M30-structural-preprint-draft.md
+  status: compiled_visually_checked_structural_preprint_not_owner_approved
+  manuscript_project: paper/context-edit-stability
+  authoritative_source: paper/context-edit-stability/main.tex
+  preview: paper/context-edit-stability-preview.pdf
+  minimal_source_archive: paper/context-edit-stability-source.zip
+  render_verification: paper/context-edit-stability/render-verification.json
+  owner_walkthrough: paper/context-edit-stability/owner-guide-vi.md
+  pages: 7
+  embedded_fonts: 11
+  source_archive_compiles_independently: true
+  source_archive_page_text_matches: true
+  final_layout_warnings: 0
+  novelty_priority_claim: not_made
+  owner_content_approval: not_given
+  actual_submission: absent
+  next_gate: portable_new_evidence_companion_and_claim_coverage_audit
+  peer_review_as_research_blocker: false
+  owner_review_as_research_blocker: false

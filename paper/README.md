@@ -1,6 +1,15 @@
 # Paper
 
-Current working manuscript (2026-10-23): **Auditing Invariant Validation
+Current contribution-centered manuscript (2026-10-23):
+**Exact Context-Edit Stability for Plurality-Based Functional-Dependency Checks**.
+See [project](context-edit-stability/README.md),
+[seven-page preview](context-edit-stability-preview.pdf),
+[minimal source](context-edit-stability-source.zip), and
+[Vietnamese owner guide](context-edit-stability/owner-guide-vi.md).
+It is a new draft, not owner-approved or submitted. Next is a portable companion
+for the new E008--E011 evidence; external peer review is not a preparation gate.
+
+Preserved earlier audit manuscript: **Auditing Invariant Validation
 Benchmarks: Construction, Error Attribution, and Probability Scores**.
 The user selected arXiv as the destination; the framing is AI-proposed.
 
