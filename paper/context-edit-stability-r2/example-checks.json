@@ -1,0 +1,918 @@
+{
+  "all_predictions_match": true,
+  "case_count": 8,
+  "cases": [
+    {
+      "destinations_enumerated": 64,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 2
+        }
+      ],
+      "initial_accept": true,
+      "name": "A-h1",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 1,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "repair_distance": 1,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 1,
+          "row": 3
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 1024,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 3
+        },
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 4
+        }
+      ],
+      "initial_accept": true,
+      "name": "A-h2",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 2,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "repair_distance": 1,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 1,
+          "row": 5
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 16384,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 4
+        },
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 5
+        },
+        {
+          "after": 1,
+          "before": 0,
+          "column": 1,
+          "row": 6
+        }
+      ],
+      "initial_accept": true,
+      "name": "A-h3",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 3,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "repair_distance": 1,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 1,
+          "row": 7
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 16,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 2
+        }
+      ],
+      "initial_accept": true,
+      "name": "B-k1",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 1,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "repair_distance": 1,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 1
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 1296,
+      "domains": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 2
+        }
+      ],
+      "initial_accept": true,
+      "name": "B-k2",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 1,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "repair_distance": 2,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 1
+        },
+        {
+          "after": 0,
+          "before": 2,
+          "column": 0,
+          "row": 3
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 262144,
+      "domains": [
+        [
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 2
+        }
+      ],
+      "initial_accept": true,
+      "name": "B-k3",
+      "original": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 1,
+      "repair_destination": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "repair_distance": 3,
+      "repair_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 1
+        },
+        {
+          "after": 0,
+          "before": 2,
+          "column": 0,
+          "row": 3
+        },
+        {
+          "after": 0,
+          "before": 3,
+          "column": 0,
+          "row": 5
+        }
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 8,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": true,
+      "flip_destination": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 3,
+          "row": 1
+        },
+        {
+          "after": 0,
+          "before": 1,
+          "column": 3,
+          "row": 2
+        }
+      ],
+      "initial_accept": false,
+      "name": "coupled-fixed-True",
+      "original": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 2,
+      "rules": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "destinations_enumerated": 4096,
+      "domains": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "fixed_keys": false,
+      "flip_destination": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "flip_edits": [
+        {
+          "after": 0,
+          "before": 1,
+          "column": 0,
+          "row": 3
+        }
+      ],
+      "initial_accept": false,
+      "name": "coupled-fixed-False",
+      "original": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "prediction_matches": true,
+      "radius": 1,
+      "rules": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  ],
+  "destinations_enumerated": 285032,
+  "implementation_sha256": "d06d7db6bf2a9a529d967d51804c28cea9bbfb567ba0da74d8958e71afbcbb63",
+  "scope": "finite_checks_of_analytically_derived_examples_not_new_empirical_benchmark"
+}

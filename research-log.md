@@ -1090,3 +1090,41 @@ proof or negative result is not itself grounds for rejection. No requirement
 for independent peer review, a positive outcome, massive new experiments or
 worldwide-first proof was imposed. No frozen paper/archive, experiment or
 unrelated user file changed, and no scientific check was redundantly rerun.
+
+## 2026-11-05 — M32 direct positioning and verified revision
+
+Owner resumed the original goal and said "được rồi tiếp đi". get_goal returned
+active. The previous substantive turn was progress: a concrete review changed
+the next research action. Reset any old blocked audit; no local-work blocker.
+Saved October feedback/review records at f5c6a87, locked M32 at b94c599, and
+committed raw-example enumerator at 620d450 before executing the check.
+
+Read primary definitions and theorem statements in Debosschere/Geerts 2015,
+Bertossi v7, Xia v3 and Meliou et al. 2011 (recovered a working coauthor URL).
+Produced direct-positioning-20261105.md. Derived explanatory unbounded-ratio
+families for decision distance versus whole-table FD repair with the same
+protected target and identified rows. Raw enumeration for the declared small
+instances and coupled example matches 8 predictions across 285032 destinations;
+all records/witnesses retained. The universal proofs are in the text, not
+inferred from those checks. This is a scope comparison, not worldwide novelty.
+
+Created a separate dated R2 source/project and a nine-page working PDF. Added
+the close references, exact objective distinctions, budget-audit interpretation,
+an illustrative proposition and a coupled example. All original structural
+blocks and E008--E011 empirical text remain identical. No positive result was
+substituted for the 30 equal pairs or two timeouts. Original CSV cache is
+missing today; no fresh source reconstruction or optimization run is claimed.
+
+Desktop compiler passed. A standalone cold-cache process was confirmed live,
+then terminated to avoid unnecessary resource downloads; compile with the
+existing app cache and --only-cached passed. Nine rendered pages inspected,
+fonts embedded, exact Unicode author, no warnings, extracted-source compile
+page text identical. All 186 prior scientific files match the pre-edit hashes.
+Verification and a separate R2 supplement preserve the M30/M31 packet unchanged.
+
+The review gaps are addressed more explicitly but scientific significance
+is not established merely by this revision. Next investigate a sharper
+computational boundary. A Set Cover encoding for binary initially-rejected
+targets with singleton determinants is only a new unverified lead and is not
+claimed in R2. No approval question, submission, account creation, license
+selection, external message or paid action. Goal remains active and unachieved.

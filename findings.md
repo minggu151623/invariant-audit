@@ -1,5 +1,35 @@
 # Findings
 
+## Current revision — 2026-11-05, M32
+
+The owner resumed the arXiv goal and instructed continuation after the candid
+internal review. R2 now directly compares the specialized results to cell-based
+FD repairs (Debosschere/Geerts 2015), attribute-level/null-based causality
+(Bertossi v7), generic intervention partitions (Meliou et al.) and vote-operation
+optimization (Xia). Generic objectives/encodings remain prior art; no worldwide
+priority or independent assessment is established.
+
+Two elementary analytical families separate whole-table FD repair distance
+from protected-target decision radius by unbounded factors in either direction.
+Small raw enumerations check the examples (8 cases, 285032 destinations), not
+the universal proof or practical impact. The scoped use is a declared-budget
+sensitivity query, not error identification or improved cleaning accuracy.
+
+The nine-page R2 manuscript preserves the original structural statements and
+E008--E011 outcome text, including the negative accepting-direction source
+result. All pages visually checked; one-file extracted source compiles with
+identical text; 186 previous scientific artifacts unchanged. The original CSV
+cache is absent today; no fresh source reproduction is claimed. See
+[M32](milestones/M32-positioning-and-revision.md) and
+[R2](paper/context-edit-stability-r2/README.md).
+
+Scientific significance remains open. Next investigate whether the accepting
+direction has a sharp tractability/hardness boundary. A Set Cover construction
+using binary RHS and singleton determinant rules is an unverified lead, not
+included as a theorem yet. Do not obtain a favorable dataset/timing result
+merely to soften E011's negative outcome. No owner approval or external peer
+review gate blocks this local work. The actual arXiv publication is still absent.
+
 ## Current candidate — 2026-10-23 mutable-key action reduction (M26)
 
 E008 extends decision-edit certification to mutable keys and RHS while protecting

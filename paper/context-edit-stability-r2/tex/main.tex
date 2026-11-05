@@ -1,0 +1,521 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,
+  ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\usepackage{amsmath,amssymb,amsthm,booktabs,graphicx,array,float}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\INF}{\infty}
+\setlength{\emergencystretch}{2em}
+\title{Exact Context-Edit Stability for\\Plurality-Based Functional-Dependency Checks}
+\author{Trần Vũ Bảo Minh\\[0.4em]\small Independent Researcher}
+\date{Revised working preprint -- November 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A plurality-based functional-dependency check judges a target value using rows
+that match its determinant values. When determinant cells can change, group
+membership changes as well. We study the minimum number of context-cell edits
+that reverses a fixed target's decision, protecting its entire row. For checks
+with a common dependent attribute and independent unit-cost categorical edits,
+we prove a row-action dominance reduction for making a rejected target accept.
+For the opposite direction, we derive an exact formula: nonsingleton groups
+retain their ordinary vote-margin cost, and only singleton groups can make
+editable keys strictly reduce the global radius. Exhaustive finite checks and a
+bounded optimization comparison support the implementations. A reused-source
+study covers 18,734 target cells from Beers, Flights and Rayyan. Among 13,762
+accepted targets, 1,133 fixed-key infinite radii become finite and one finite
+radius decreases. No strict reduction appears in 30 exact rejected-target
+pairs; two full models time out. Stability does not establish correctness:
+1,493 accepted targets disagree with references despite radius at least two.
+\end{abstract}
+
+\section{Introduction}
+Functional dependencies (FDs) describe agreement constraints between attributes.
+In an imperfect table, a simple detector can compare an observed dependent
+value with the unique plurality among rows sharing its determinant values.
+Such a decision depends on context: changing another row's key can move that
+row into or out of the target's group. A certificate that protects all keys
+therefore answers a different question from one allowing key errors.
+
+We study this distinction as an exact decision-sensitivity problem. The target
+value is not corrected, the target row is immutable, and the edited table need
+not satisfy all FDs. We count changed cells in other rows, rather than insertions,
+deletions, changed records, or changes to an output label. A radius certifies
+stability under its stated edit model; it does not certify factual validity.
+
+Our technical results concern several checks sharing one dependent attribute.
+First, a componentwise dominance lemma reduces accepting counterfactuals to
+at most $2^q+1$ actions per context row, where $q$ is the number of key columns.
+Second, an exact rejection formula identifies a singleton bottleneck: keys
+strictly lower an accepted target's radius exactly when a singleton group's
+cheapest rival import costs less than every nonsingleton group's margin cost.
+This gives different algorithms for the two decision directions.
+
+Minimum interventions, predicate-equivalent domains, voting margins and integer
+optimization are established ingredients; we do not claim them as inventions.
+The contribution presented here is the specialized dominance and singleton
+characterization under explicit assumptions, with bounded computational and
+source-table evidence. In particular, our source results do not show a general
+accepting-direction advantage from mutable keys.
+
+
+The intended use is an edit-budget sensitivity audit, not a repair prescription.
+For a declared context-edit budget $B$, a radius greater than $B$ certifies that
+the present decision survives every permitted edit within that budget; a radius
+at most $B$ supplies an explicit counterexample to that certificate. This lets
+an auditor distinguish trusting determinant cells from allowing them to be
+wrong. It does not establish which cells are actually wrong, or validate the
+choice of budget and unit costs. We position the result as a restricted
+theory/algorithm note, rather than an accuracy-improving cleaning system.
+
+\section{Model and edit semantics}
+Let $T=(t,r_1,\ldots,r_{n-1})$ be identified rows with $q\geq1$ categorical key
+attributes and one dependent attribute $y$. The finite RHS domain has
+$d\geq2$ values. Each key domain contains the target value and an alternative.
+By independently relabeling column values, assume $t=(0,\ldots,0)$.
+Rules have nonempty determinants $X_g\subseteq\{1,\ldots,q\}$, $g=1,\ldots,m$,
+and common RHS $y\notin X_g$. Define
+\[
+ G_g(T)=\{r\in T:r[X_g]=t[X_g]\},\qquad
+ c_{gv}(T)=|\{r\in G_g(T):r_y=v\}|.
+\]
+The detector accepts the target iff
+\begin{equation}\label{eq:accept}
+ D(T,t)=1\quad\Longleftrightarrow\quad
+ c_{g0}(T)>c_{gv}(T)\quad\text{for all }g,\ v\ne0.
+\end{equation}
+Ties reject. Unique plurality does not require an absolute majority when $d>2$.
+
+An edited table $T'$ has the same identified rows, and $t$ is unchanged in every
+column. Context cells may independently take any value of their column's
+domain. The cost is cell Hamming distance
+\[
+ H(T,T')=\sum_{i=1}^{n-1}\sum_{j=1}^{q+1}\ind[r_{ij}\ne r'_{ij}].
+\]
+Let $\rho_{\rm full}$ minimize this cost subject to $D(T',t)\ne D(T,t)$.
+Let $\rho_{\rm fixed}$ impose the additional restriction that all key cells
+remain unchanged. An impossible flip has radius $\INF$. Every integer budget
+$k<\rho$ preserves the initial decision. At cost $\rho<\INF$, a witness flips it.
+
+There are no additional validity constraints, NULL semantics, insertion/deletion,
+unequal edit costs, or requirements to preserve other targets' decisions. These
+restrictions are essential to the results below.
+
+
+\paragraph{A coupled example.}
+Consider the binary table below, with rules $(a,b)\to y$ and $(a,c)\to y$.
+The first row is protected. Each target group initially has one zero and one
+one, so both checks reject.
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Row & $a$ & $b$ & $c$ & $y$\\
+\midrule
+Target &0&0&0&0\\
+$r_1$ &0&0&1&1\\
+$r_2$ &0&1&0&1\\
+$r_3$ &1&0&0&0\\
+\bottomrule
+\end{tabular}
+\caption{Constructed illustration of a shared key edit, not a source-data result.}
+\end{table}
+With fixed keys, both $r_1.y$ and $r_2.y$ must change to zero: editing either
+alone leaves the other check tied. Thus $\rho_{\rm fixed}=2$.
+Changing only $r_3.a$ to zero joins both groups simultaneously; each then has
+two zeros and one one, so $\rho_{\rm full}=1$. This example explains why
+rowwise group membership matters for accepting a rejected target. It does not
+show that such savings are prevalent in real tables.
+
+\section{Making an accepted target reject}
+Assume $D(T,t)=1$. Write $a_g=c_{g0}(T)$ and
+$b_g=\max_{v\ne0}c_{gv}(T)$, allowing absent values with count zero.
+For a context row $r$, let
+$h_g(r)=|\{j\in X_g:r_j\ne0\}|$.
+
+\begin{theorem}[Exact rejection radius]\label{thm:reject}
+Define
+\[
+ C_g=\begin{cases}
+ \left\lceil(a_g-b_g)/2\right\rceil,& |G_g(T)|\geq2,\\[3pt]
+ \displaystyle\min_{r\ne t}\bigl(h_g(r)+\ind[r_y=0]\bigr),&G_g(T)=\{t\},
+ \end{cases}
+\]
+where an empty minimum is $\INF$. Then
+$\rho_{\rm full}=\min_g C_g$.
+\end{theorem}
+\begin{proof}
+For a nonsingleton group, fix a rival $v$. A key-cell edit changes its target/rival
+margin by at most one: only one row can enter or leave this group. An RHS-cell
+edit changes it by at most two. These bounds hold at any intermediate table.
+A final Hamming edit can be implemented by changing each differing cell once.
+Rejection therefore costs at least $\lceil(a_g-b_g)/2\rceil$.
+
+Choose a strongest rival and change that many context RHS-0 cells in the group
+to it, keeping keys fixed. Each edit reduces the selected margin by two, reaching
+a tie or loss. There are enough editable zero cells: initial acceptance and a
+nonsingleton group imply $a_g\geq2$, and
+$\lceil(a_g-b_g)/2\rceil\leq\lceil a_g/2\rceil\leq a_g-1$.
+
+For a singleton group, a rejecting destination must contain at least one
+nonzero context RHS in the target group. That row must change its $h_g(r)$
+initially nonmatching keys and also its RHS if originally zero. This lower
+bound is attained by editing just that row; it then ties the protected target
+one-to-one. If there is no context row, no flip is possible.
+
+Finally, global rejection is a disjunction of rule rejections. Any flip rejects
+at least one rule; a minimum-cost witness for any one rule already suffices.
+Taking the minimum over rules proves the result without an independence
+assumption about their overlapping groups.
+\end{proof}
+
+\begin{corollary}[Exact condition for keys to help]\label{cor:singleton}
+Let $A$ be the minimum nonsingleton margin cost and $S$ the minimum singleton
+import cost, using $\INF$ for an absent kind. Then
+\[
+ \rho_{\rm fixed}=A,\qquad \rho_{\rm full}=\min(A,S).
+\]
+Thus keys strictly reduce the radius iff $S<A$. A singleton group is necessary,
+but not sufficient. With no singleton target groups, the radii are equal.
+\end{corollary}
+
+A scan obtains group counts and best singleton imports. After choosing the
+cheapest rule, it materializes only one witness. For fixed schema and alphabet,
+this is linear in $n$; the implementation also scans the RHS alphabet when
+choosing a rival. The condition is not a claim that singleton values are wrong.
+For example, with target $(0,0,0,0)$, context $(0,1,1,0)$, and rules
+$a\to y,b\to y$, a singleton exists but $A=1<S=2$, so both radii are one.
+
+
+\section{Decision distance versus whole-table repair}
+For comparison within our identified-row model, let $R(T)$ be the minimum
+context-cell cost making the entire edited table satisfy every FD as an
+agreement constraint, still protecting $t$. This comparison protects the same
+target in both objectives; it is not a redefinition of prior repair semantics.
+\begin{proposition}[No constant-factor substitution]\label{prop:separation}
+Even with one rule $x\to y$ and binary $y$, the ratios
+$\rho_{\rm full}/R(T)$ and $R(T)/\rho_{\rm full}$ can each be arbitrarily large
+on instances where both costs are positive and finite.
+\end{proposition}
+\begin{proof}
+For any $h\geq1$, use target $(0,0)$, $2h$ additional $(0,0)$ rows and one
+$(0,1)$ row, with binary domains. Changing the lone one to zero repairs the
+table; since it initially violates the FD, $R(T)=1$.
+Theorem~\ref{thm:reject} gives $\rho_{\rm full}=h$ from counts $2h+1$ and one.
+Thus the first ratio is $h$.
+
+For any $k\geq1$, use target $(0,0)$ and pairs $(i,0),(i,1)$ for
+$i=1,\ldots,k$, with key domain $\{0,\ldots,k\}$.
+Each original conflicting pair requires an edit in one of its own cells;
+otherwise that pair still violates the FD. The disjoint pairs require at
+least $k$ edits, and changing each pair's one to zero attains $R(T)=k$.
+The target's group is initially singleton. Changing the key of $(1,1)$ to
+zero creates a tie with one edit, so $\rho_{\rm full}=1$.
+The second ratio is $k$.
+\end{proof}
+These elementary families clarify the objective, rather than serve as another
+priority claim. A whole-table repair optimum cannot simply be reported as this
+decision radius. They do not exclude reductions between computational problems
+or the use of general repair/constraint machinery with a different encoding.
+For $h,k\in\{1,2,3\}$, unrestricted raw-destination enumeration checks both
+costs; together with the coupled example in both edit models, eight checks
+cover 285,032 destinations. These small illustrative checks are separate from
+the E008--E011 studies and are not additional source validation.
+
+\section{Making a rejected target accept}
+For row $r$ define the match mask $M(r)=\{j:r_j=0\}$ and contribution
+\[
+ A_{gv}(r)=\ind[X_g\subseteq M(r)]
+           \bigl(\ind[r_y=0]-\ind[r_y=v]\bigr).
+\]
+Since the target contributes one, acceptance means
+$1+\sum_{r\ne t}A_{gv}(r)\geq1$ for all $g,v\ne0$.
+Other nonmatching key values can retain their original identities; changing a
+matching key to nonmatching uses one allowed alternative. A prescribed mask
+change therefore costs its symmetric-difference size. This predicate quotient
+is setup rather than a claimed new generic reduction.
+
+\begin{lemma}[Canonical accepting actions]\label{lem:dominance}
+For every original row $r$ and arbitrary destination $u$, there is a row $c$
+with $H(r,c)\leq H(r,u)$ and $A_{gv}(c)\geq A_{gv}(u)$ for every rule and rival.
+It belongs to the following action set, writing $M_0=M(r)$:
+\begin{enumerate}
+\item if $r_y=0$: RHS 0 with any supermask of $M_0$;
+\item if $r_y\ne0$: unchanged RHS with any submask of $M_0$, or RHS 0 with any
+supermask of $M_0$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Write $M_*=M(u)$. If $r_y=0$, choose RHS 0 and mask $M_0\cup M_*$.
+Restoring originally matching keys and retaining the original RHS cannot
+increase cost. Every group containing $u$ also contains $c$; its contribution
+is positive instead of zero or negative, and no new negative contribution arises.
+
+If $r_y\ne0$ and $u_y=r_y$, retain that RHS and choose $M_0\cap M_*$.
+Restoring originally nonmatching keys removes edits. Group membership can only
+shrink relative to $u$, removing negative contributions and losing no positive
+one. If instead $u_y\ne r_y$, choose RHS 0 and $M_0\cup M_*$.
+Both destinations use one RHS edit. The chosen keys cost no more; expanding
+positive membership or replacing negative contributions cannot lower a margin.
+Concrete key values are reconstructed without gratuitous changes between
+different nonmatching values, so these abstract costs are attainable cell costs.
+\end{proof}
+
+\begin{theorem}[Exact reduced accepting optimization]\label{thm:accepting}
+The minimum accepting cost over the canonical actions equals the minimum over
+all permitted raw cell edits. Each row needs at most $2^q+1$ actions.
+\end{theorem}
+\begin{proof}
+Apply Lemma~\ref{lem:dominance} to every row of an arbitrary accepting witness.
+All margins weakly increase and cost weakly decreases, so the resulting
+canonical table still accepts. Conversely, canonical edits are allowed raw
+edits. If $p=|M_0|$, an original-zero row has $2^{q-p}$ actions; an original
+nonzero row has $2^p+2^{q-p}\leq2^q+1$ actions.
+\end{proof}
+
+For action $a$ of row $i$, use binary $z_{ia}$ with raw cost $w_{ia}$ and
+contribution $A_{gv}(i,a)$. An exact mixed-integer formulation is
+\begin{align*}
+ \min\ &\sum_{i,a}w_{ia}z_{ia},\\
+ \text{s.t. }&\sum_a z_{ia}=1\quad\text{for every context row }i,\\
+ &\sum_{i,a}A_{gv}(i,a)z_{ia}\geq0\quad\text{for every }g,v\ne0.
+\end{align*}
+For fixed keys, restrict each mask to its original value. Rivals absent from a
+group initially can be omitted in the accepting model: retaining a nonzero RHS
+only loses matches, while every RHS change goes to zero. Such a rival cannot
+enter the group, and the protected target ensures a positive target count.
+This pruning is invalid for rejection, where introducing an absent rival may
+create a tie.
+
+The reduction is independent of key-domain cardinality, but enumeration remains
+exponential in $q$, and the number of rival margins depends on $m(d-1)$.
+Neither exactness nor a smaller formulation guarantees a rapid solve.
+
+\section{Finite validation and constructed computation}
+Three locked studies precede the source evaluation. Their protocols were
+committed before implementations, and implementations before execution.
+E008 compares canonical-action programs with unrestricted raw-coordinate edits
+on 5,107 constructed tables and six rule families: all 30,642 radii, 30,618
+finite witnesses and 61,854 dominance checks agree. Binary and ternary key/RHS
+domains include actual changed nonmatching values.
+
+E009 checks Theorem~\ref{thm:reject} on all 18,779 accepted cases from that finite
+domain, including 24 impossible one-row cases. All 18,755 finite witnesses
+verify. These cases overlap E008; they are not independent replications.
+A separate raw-cell-factorized MILP agrees with raw enumeration in 2,118 cases,
+including 18 infeasible instances. It uses cell choices and conjunction
+linearizations, not canonical actions or the formula.
+
+E010 generalizes to 2, 4 and 6 keys. All 162 small raw-oracle fixtures pass
+before a 72-case constructed comparison with $n\in\{16,128\}$, key alphabet
+four, RHS alphabet two/four and two determinant families. Three designed
+regimes enforce dense acceptance, singleton acceptance or coupled rejection.
+Each method runs twice with reversed order, rebuilding models each time.
+SciPy~1.17.1 wraps HiGHS with presolve, zero requested relative gap and a
+one-second search limit. Total time includes construction and witness decoding;
+the search limit does not bound complete call time.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Regime & Cases & Both exact twice & Specialized slower\\
+\midrule
+Accepted, dense &24&17&0\\
+Accepted, singleton &24&24&0\\
+Rejected, coupled &24&24&1\\
+\bottomrule
+\end{tabular}
+\caption{Complete E010 denominators. Seven dense-accepted generic cases time
+out in both repetitions; all specialized calls are exact.}
+\end{table}
+
+All certified optima agree. For rejected cases, the median case-level ratio
+of generic to canonical median total time is 2.997, conditional on both
+repetitions being exact. One canonical case is slower: 124.92 versus 81.27 ms.
+No censored time is substituted into a speedup. The inexpensive accepted
+formula avoids generic optimization entirely. These are two repetitions on one
+shared Mac, not hardware-independent or representative timing estimates.
+The rejected generator contains no target-valued RHS context rows, and the
+smallest determinant families coincide; these controls limit generalization.
+
+\section{Reused-source study}
+E011 reuses Beers, Flights and Rayyan from the Raha repository~\cite{raha} at
+revision \href{https://github.com/BigDaMa/raha/tree/7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}{\texttt{7be1334b}}.
+All source hashes and positional alignment keys are checked. The data and
+earlier study outcomes had been inspected; this is an exploratory reused-source
+study, not a blind holdout or Raha-system replication.
+
+Nine fixed tasks use brewery\_id to check brewery\_name/city/state, flight to
+check four departure/arrival time columns, and Rayyan's original
+\texttt{jounral\_abbreviation} spelling to check journal\_issn.
+Rayyan journal\_title jointly uses abbreviation and ISSN determinants.
+Every target uses its complete dirty table as context. Empty strings are
+ordinary categories; no unary-format checks apply. Accordingly, these
+decisions differ from the project's earlier U/Rmode configuration.
+
+There are 18,734 target cells, 13,762 accepted and 4,972 rejected. All accepted
+full/fixed radii and finite witnesses are computed. The accepted stage is
+built twice with identical outcome bytes; dirty decisions and witnesses are
+hash-frozen before reference CSV rows are parsed. Normalization unescapes HTML,
+collapses runs of ASCII space/tab/newline, and strips those three characters.
+Reference correctness is normalized dirty/reference equality at the aligned
+target coordinate, not a semantic adjudication of truth.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Task & Accepted & Fixed $\INF$ to finite & Finite decrease\\
+\midrule
+Beers brewery\_name&2410&127&0\\
+Beers city&2275&127&0\\
+Beers state&2275&127&0\\
+Flights sched\_dep\_time&1663&0&0\\
+Flights act\_dep\_time&1133&0&0\\
+Flights sched\_arr\_time&1411&0&0\\
+Flights act\_arr\_time&1166&0&0\\
+Rayyan journal\_issn&768&384&0\\
+Rayyan journal\_title&661&368&1\\
+\midrule
+Total&13762&1133&1\\
+\bottomrule
+\end{tabular}
+\caption{Complete accepted-target census. Most key-related reductions change
+fixed-key impossibility; only one decreases an already finite radius.}
+\end{table}
+
+No accepted target without singleton groups has a reduction. The sole finite
+decrease is Rayyan row 644, journal\_title, with groups of sizes four and one.
+Its fixed radius is two. Changing journal\_issn at context row one to the
+target's value creates a singleton-group rival, giving full radius one.
+The target is reference-correct. This is a post-run illustrative selection
+from the complete census, not a separate confirmatory example.
+
+For rejected targets, a dirty-only hash orders row coordinates within each
+task; the first four are selected, or all if fewer. This yields 32 targets
+because Beers brewery\_name has no rejected cell. Each full/fixed canonical
+MILP runs once with a five-second search limit, without warm starts or retries.
+All 32 fixed solves are optimal; 30 full solves are optimal, and every exact
+pair has equal cost. Thus the declared prediction of at least one strict gain
+in the selected joint Rayyan task is unsupported. Its exact pairs, rows 271
+and 138, both have cost 104. Full models for rows 509 and 146 time out without
+a primal or bound; their fixed optima are 104. Each has 4,774 variables, 1,396
+constraints and 397 active rival margins. Their full optima remain unknown.
+
+Among accepted targets, 1,816 differ from their references; 1,493 of these have
+full radius at least two. Hence stable acceptance can disagree with a reference.
+These finite counts are not independent trials, calibrated error probabilities
+or an accuracy improvement. The rejected subset is not a representative census.
+
+\section{Related work and scope}
+Cell-level repair and intervention objectives substantially predate this work.
+Debosschere and Geerts~\cite{cellcauses}, Section 2, define cell modifications,
+their cardinality distance and repairs satisfying the FD set. Their
+Propositions 1--3 concern responsibility complexity and repair/cause
+correspondence. Our edited table may violate FDs: the goal is a protected
+target's plurality-decision flip, not consistency restoration.
+Proposition~\ref{prop:separation} makes the numerical distinction explicit.
+Bertossi~\cite{bertossi}, Sections 3.1 and 4, gives abstract repair semantics
+and an attribute-cause instantiation using NULL replacements. We instead allow
+arbitrary domain values, do not assign causal responsibility to a particular
+cell, and need not preserve other outputs.
+
+Meliou et al.~\cite{vcc}, Sections 4.1--4.4 and Theorems 14, 15 and 17,
+give predicate partitions, cause/responsibility equivalence and SAT-based
+reasoning about changed inputs. General vote operations already optimize
+constructive/destructive goals with score constraints~\cite{xia},
+Definitions 2--3 and Section 4. Those generic frameworks motivate an encoding;
+they are not claimed as new here. Our accepting proof additionally constructs
+a no-more-expensive row destination dominating every relevant margin, and our
+rejection proof constructs a witness attaining the margin/import lower bound.
+These are the specialized statements being presented; their absence from the
+inspected theorem statements is not a systematic originality certificate.
+
+FD repairs with immutable trusted cells are established~\cite{repairs}.
+Certified k-NN over FD repairs~\cite{knn} uses different possible worlds and
+edit semantics. Recent work distinguishes AFD strength from detection
+utility~\cite{wan}; our radius likewise must not be interpreted as accuracy.
+The practical evidence here concerns sensitivity and bounded computation,
+not a demonstrated improvement to a deployed auditing workflow.
+
+The same-RHS restriction permits a single change to zero to improve all
+relevant margins. Different dependents, weighted costs, additional constraints
+or mutable targets can invalidate the proofs. Empty-as-category source semantics
+are deliberate, and reference labels may themselves be imperfect. Source reuse,
+small synthetic sizes, sparse rejected sampling, two solver timeouts and the
+lack of independent scientific assessment limit the empirical conclusions.
+
+\section{Reproducibility and provenance}
+The frozen M31 companion preserves the original E008--E011 protocols, code,
+source manifests,
+all outcomes, witnesses and separate delivery checks. Its manuscript snapshot
+predates this revision. A separate R2 supplement provides the raw enumerator
+and all records for the new analytical examples, the comparison notes and
+revision verification. The original source CSV cache was unavailable at this
+revision; no new raw-source reconstruction or solver/timing run is claimed.
+No public code URL or
+arXiv submission is claimed in this working draft. E008 protocol/implementation
+commits are \texttt{efc1365}/\texttt{14fe214}; E009 uses
+\texttt{96962be}/\texttt{05a2b07}; E010 uses
+\texttt{fbd04cb}/\texttt{2212b58}; E011 uses
+\texttt{86dad7d}/\texttt{fd341d4}. The exact environment for E009--E011 is
+Python 3.13.5, NumPy 2.1.3 and SciPy 1.17.1 on an arm64 Mac.
+Solver-optimal results require a checked integer-feasible witness, objective
+agreement and bound/gap checks within $10^{-7}$. Time-limit outcomes stay censored.
+
+E011's separate checker uses original categorical codes, direct formulas and
+incremental group-count updates, rechecking 26,453 finite source witnesses,
+selection hashes, reference labels and stage hashes. Such separate code is
+self-review in one research environment, not independent human verification.
+Source cell strings remain outside the outputs; witnesses contain original
+row/column coordinates and target-relative destination codes. Exact radius
+histograms and reference buckets are retained, including all negative outcomes.
+Generative AI was used substantially for ideation, proofs, code and writing.
+The named human author's substantive review is pending; this draft is not
+authorization to submit or publish it.
+
+\section{Conclusion}
+Editable keys have a precisely characterized effect on accepted-target
+stability: only singleton groups can improve on the fixed-key rejection cost.
+For accepting counterfactuals, canonical row dominance preserves exact optima
+while reducing raw categorical choices. The implementations have finite
+validation and bounded computational value, but reused-source evidence is
+concentrated in fixed-infinite transitions and does not show a rejected-subset
+cost gain. Reporting these limits keeps decision stability distinct from
+correctness and the specialized result distinct from generic intervention ideas.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{cellcauses} M. Debosschere and F. Geerts.
+Cell-Based Causality for Data Repairs. TaPP, 2015.
+\href{https://www.usenix.org/conference/tapp15/workshop-program/presentation/debosschere}{USENIX proceedings}.
+\bibitem{bertossi} L. Bertossi. Specifying and Computing Causes for Query
+Answers in Databases via Database Repairs and Repair Programs.
+\href{https://arxiv.org/abs/1712.01001v7}{arXiv:1712.01001v7}, 2020.
+\bibitem{vcc} A. Meliou, W. Gatterbauer, S. Nath and D. Suciu.
+Tracing Data Errors with View-Conditioned Causality. SIGMOD, 2011.
+\href{https://doi.org/10.1145/1989323.1989376}{doi:10.1145/1989323.1989376}.
+\bibitem{xia} L. Xia. How Many Vote Operations Are Needed to Manipulate a
+Voting System? 2012. \href{https://arxiv.org/abs/1204.1231v3}{arXiv:1204.1231v3}.
+\bibitem{repairs} G. Beskales, I. F. Ilyas and L. Golab. Sampling the Repairs
+of Functional Dependency Violations under Hard Constraints. PVLDB 3(1),
+197--207, 2010. \href{https://doi.org/10.14778/1920841.1920870}{doi:10.14778/1920841.1920870}.
+\bibitem{knn} A. Z. Fan and P. Koutris. Certifiable Robustness for Nearest
+Neighbor Classifiers. ICDT, 2022.
+\href{https://doi.org/10.4230/LIPIcs.ICDT.2022.6}{doi:10.4230/LIPIcs.ICDT.2022.6}.
+\bibitem{wan} X. Wan and X. Han. Strength Is Not Value: Rethinking Approximate
+Functional Dependency Measures for Error Detection. 2026.
+\href{https://arxiv.org/abs/2610.08189v1}{arXiv:2610.08189v1}.
+\bibitem{raha} M. Mahdavi, Z. Abedjan, R. Castro Fernandez, S. Madden,
+M. Ouzzani, M. Stonebraker and N. Tang. Raha: A Configuration-Free Error
+Detection System. SIGMOD, 2019.
+\href{https://doi.org/10.1145/3299869.3324956}{doi:10.1145/3299869.3324956}.
+\end{thebibliography}
+\end{document}

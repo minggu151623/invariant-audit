@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M31
+current_milestone: M32
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1779,3 +1779,41 @@ owner_requested_self_assessment_20261024:
   independent_review_or_ARA_certification: false
   owner_approval_inferred: false
   actual_submission: absent
+
+M32:
+  date: 2026-11-05
+  owner_instruction_exact: "được rồi tiếp đi"
+  scope: authorized_local_research_and_revision_not_publication_approval
+  path: milestones/M32-positioning-and-revision.md
+  plan_commit: b94c599
+  example_implementation_commit: 620d450
+  status: positioning_and_analytical_examples_revised_manuscript_verified
+  current_source: paper/context-edit-stability-r2/tex/main.tex
+  current_pdf: paper/context-edit-stability-r2/preview.pdf
+  current_source_zip: paper/context-edit-stability-r2/source.zip
+  supplementary_archive: paper/context-edit-stability-r2/supplement.zip
+  verification: paper/context-edit-stability-r2/revision-verification.json
+  primary_source_comparison: literature/direct-positioning-20261105.md
+  owner_report: to_human/M32-revision-progress-vi.md
+  pages: 9
+  tables: 3
+  references: 8
+  analytical_examples_checked: 8
+  raw_destinations_enumerated: 285032
+  predictions_match: true
+  previous_scientific_artifacts_unchanged: 186
+  original_structural_and_empirical_text_unchanged: true
+  original_source_csv_cache: absent_at_previous_recorded_path
+  original_source_or_solver_runs_repeated: false
+  originality_or_significance_independently_certified: false
+  owner_content_approval: not_given
+  license: unselected
+  actual_submission: absent
+  goal_status: active
+  previous_goal_turn: progress_internal_review_changed_next_action
+  current_goal_turn: progress_completed_positioning_examples_and_verified_revision
+  consecutive_no_progress_turns: 0
+  fresh_blocked_audit_threshold_met: false
+  next_research: computational_boundary_for_acceptance_or_substantive_extension
+  unverified_lead: Set_Cover_reduction_binary_RHS_singleton_determinants
+  owner_review_as_local_research_gate: false
