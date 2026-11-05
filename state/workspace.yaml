@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M32
+current_milestone: M33
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1549,6 +1549,52 @@ M26:
   next_gate: generic_exact_baseline_comparison_and_scaling_under_separate_protocol
   peer_review_as_local_research_gate: false
   owner_review_as_local_research_gate: false
+
+M33:
+  date: 2026-11-05
+  path: milestones/M33-acceptance-complexity.md
+  status: internal_complexity_proof_and_R3_delivery_verified
+  authority: continued_local_research_not_publication_approval
+  experiment: E012-acceptance-complexity
+  protocol_commit: 9f14171
+  implementation_commit: 65ad518
+  theorem: accepting_budget_NP_complete_binary_singleton_varying_schema
+  reduction: optimum_preserving_Set_Cover_fixed_and_editable_keys
+  finite_cases: 111
+  finite_radii: 222
+  destinations_across_overlapping_edit_models: 147523
+  successful_cover_extractions: 25490
+  full_accepting_destinations_with_key_edits: 24288
+  all_predictions_match: true
+  universal_proof_distinct_from_finite_check: true
+  fixed_schema_DP: analytical_only_not_implemented
+  current_source: paper/context-edit-stability-r3/tex/main.tex
+  current_pdf: paper/context-edit-stability-r3/preview.pdf
+  current_source_zip: paper/context-edit-stability-r3/source.zip
+  supplementary_archive: paper/context-edit-stability-r3/supplement.zip
+  supplementary_archive_sha256: c30fd26b92fbb0f616a0bbb004e7e978a4e998219d5970a8e828c86875ed24bd
+  verification: paper/context-edit-stability-r3/revision-verification.json
+  supplement_verification: paper/context-edit-stability-r3/supplement-verification.json
+  primary_source_comparison: literature/acceptance-complexity-positioning-20261105.md
+  owner_report: to_human/M33-theory-progress-vi.md
+  pages: 10
+  tables: 3
+  references: 10
+  embedded_fonts: 12
+  prior_scientific_artifacts_unchanged: 197
+  original_structural_and_empirical_text_unchanged: true
+  original_source_or_solver_runs_repeated: false
+  independent_review_or_priority_certification: false
+  internal_assessment: coherent_limited_theory_preprint_for_substantive_owner_review
+  owner_content_approval: not_given
+  license: unselected
+  account: not_created_at_last_owner_confirmation
+  actual_submission: absent
+  goal_status: active
+  current_goal_turn: progress_proved_complexity_extension_and_verified_R3
+  consecutive_no_progress_turns: 0
+  fresh_blocked_audit_threshold_met: false
+  next_action: owner_explanation_and_content_review_then_license_and_submission_setup
   public_claim_eligibility: false
 
 E009:

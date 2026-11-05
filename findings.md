@@ -1,5 +1,38 @@
 # Findings
 
+## Current revision — 2026-11-05, M33
+
+The Set Cover lead is now a proved-internally complexity result: making a
+rejected target accept within a cell budget is NP-complete for varying binary
+singleton schemas, with every target group initially tied, in both fixed-key
+and editable-key models. The reduction preserves the optimum; its converse
+explicitly handles arbitrary key and support-row edits. Combined with the
+polynomial rejection formula, this clarifies the directional algorithmic story.
+It does not establish fixed-schema hardness or make key edits the source of
+hardness. A standard fixed-q,d margin DP is noted analytically, not benchmarked.
+
+E012's locked finite check passes all 111 instances / 222 radii and 147523
+destinations across overlapping edit models. All 25490 accepting destinations
+yield a budget-respecting cover; 24288 full-edit successes include key edits.
+These checks are not the universal proof or independent validation. Known Set
+Cover/lobbying techniques are credited, with no historical-priority guarantee.
+
+The new R3 working preprint has 10 checked pages and preserves 197 prior
+scientific artifacts, previous structural proofs and all E008--E011 empirical
+text. Source ZIP compiles identically; the 12-member supplement's extracted
+stdlib replay exactly reproduces the frozen grid. No new source reconstruction,
+speed benchmark or accuracy result. The 30 equal rejected pairs and two full
+timeouts remain. See [M33](milestones/M33-acceptance-complexity.md) and the
+[Vietnamese explanation](to_human/M33-theory-progress-vi.md).
+
+Internal assessment: now a coherent, narrow theory/algorithm preprint for
+substantive author review, not a demonstrated major discovery or cleaning
+system. Next resolve the owner's understanding/content questions and obtain
+content approval and license choice for submission. Those are not yet given;
+no account or external submission is evidenced. Independent peer review is not
+being imposed as a submission-preparation gate. Goal remains active; this turn
+made substantive progress, not a repeated blocked turn.
+
 ## Current revision — 2026-11-05, M32
 
 The owner resumed the arXiv goal and instructed continuation after the candid

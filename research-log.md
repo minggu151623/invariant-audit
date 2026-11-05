@@ -1128,3 +1128,39 @@ computational boundary. A Set Cover encoding for binary initially-rejected
 targets with singleton determinants is only a new unverified lead and is not
 claimed in R2. No approval question, submission, account creation, license
 selection, external message or paid action. Goal remains active and unachieved.
+
+## 2026-11-05 — M33 accepting complexity and R3
+
+Continued the Set Cover lead from M32. Derived and internally audited a
+polynomial optimum-preserving reduction proving accepting-budget NP-completeness
+for binary singleton determinants, initially tied groups, and varying schema.
+The converse extracts a cover from arbitrary key/RHS edits, including support
+rows. The same instance is hard with fixed keys; key mutability is not claimed
+as the cause. A standard fixed-q,d margin DP observation is analytical only.
+
+Protocol `9f14171` preceded implementation `65ad518` and E012 execution.
+All 111 constructed instances / 222 radii agree with separate set-subset optima.
+Raw checks cover 147523 destinations across overlapping edit models, and all
+25490 accepting destinations yield budget-respecting covers. Included 24288
+full-edit accepting destinations with key edits. No mismatches. Finite evidence
+is not the universal proof, independent review or a priority certificate.
+
+Inspected Karp's original Set Covering entry and Bredereck et al. AAAI 2012
+Sections 2-3 covering reductions; credited the known incidence/balancing method.
+Created R3 with Theorem 3, scoped complexity statement, credit and full proof.
+Ten PDF pages visually checked, twelve fonts embedded, no compile warnings;
+extracted source ZIP compiles with identical page text. The extracted 12-member
+supplement replays the frozen grid using stdlib only. All 197 old scientific
+artifacts, five prior structural blocks and E008--E011 empirical text unchanged.
+No source reconstruction, new speed/accuracy claim or publication action.
+
+Internal verdict is now a coherent narrow theory/algorithm preprint for
+substantive owner review. Vietnamese guide explains the theorem with a seven-row
+example and limitations. Content approval, license choice and arXiv account
+setup remain unfulfilled. No independent-review gate imposed. Goal active,
+unachieved; this is a substantive-progress turn, not a repeated blocked turn.
+
+Delivery-state check: the bundled Python lacked optional PyYAML, so that
+parser invocation did not run. Ruby's YAML parser then validated current M33
+and preserved M32 successfully; an unrelated ffi-extension warning did not
+prevent parsing. No research experiment or manuscript verification failed.

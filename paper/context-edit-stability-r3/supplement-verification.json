@@ -1,0 +1,14 @@
+{
+  "all_member_hashes_and_CRC_verified": true,
+  "date": "2026-11-05",
+  "extracted_portable_replay": {
+    "cases": 111,
+    "destinations": 147523,
+    "exact_replay": true,
+    "new_scientific_replication": false,
+    "radii": 222
+  },
+  "members": 12,
+  "no_git_or_third_party_imports_required": true,
+  "sha256": "c30fd26b92fbb0f616a0bbb004e7e978a4e998219d5970a8e828c86875ed24bd"
+}
