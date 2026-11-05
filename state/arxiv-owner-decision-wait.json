@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-05",
+  "goal": "actual_arxiv_publication_not_local_preparation",
+  "previous_goal_turn": "no_progress_owner_decisions_missing",
+  "current_goal_turn": "no_progress_same_owner_decision_blocker_revalidated",
+  "same_blocker": "explicit_owner_content_submission_consent_and_license_choice_missing; account_setup_also_outstanding",
+  "blocker_observations_in_consecutive_goal_turns": 3,
+  "observations": [
+    "M34: local preparation completed; R3 approval and license questions sent, no answers",
+    "Current continuation: bound R3 artifact hashes match; consent remains not_given, license null, no submission or public identifier; no new owner answer",
+    "Third consecutive observation: R3 hashes unchanged; no new owner answer, approval not_given, license null, actual submission absent. update_goal returned blocked."
+  ],
+  "consecutive_no_progress_turns": 2,
+  "blocked_threshold_met": true,
+  "goal_status": "blocked",
+  "pending_questions_reasked": false,
+  "scientific_work_repeated": false,
+  "verified_live_process_wait": false,
+  "remaining_safe_independent_work": "none material before owner decisions; do not invent more experiments or paperwork",
+  "next_action": "Explain research contribution, limitations and licensing directly in Vietnamese; resolve requested revisions before asking approval again.",
+  "audit_record_is_progress": false,
+  "goal_status_tool_confirmed": true,
+  "owner_reply_received": true,
+  "owner_reply_record": "paper/submission-r3/owner-review-status.json",
+  "record_scope": "historical_submission_goal_wait",
+  "superseded_by": "explicit_user_research_resumption",
+  "current_research_goal_status": "active",
+  "owner_approval_blocks_local_research": false,
+  "current_research_milestone": "M35"
+}

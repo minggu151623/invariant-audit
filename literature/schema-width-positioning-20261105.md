@@ -54,6 +54,29 @@ each listed family, and the resulting universal-equality characterization.
 
 ## Boundaries and unfinished search
 
+Palash Dey, *Gerrymandering: A Briber's Perspective*, arXiv:1909.01583v1
+(2019), https://arxiv.org/pdf/1909.01583: inspected the voting setting and
+Problem Definitions 1–4, plus the stated complexity map. These optimize
+voter transfers between districts, with graph restrictions in some variants,
+and aggregate district winners to determine the election winner. E013's
+target groups overlap and all must individually accept; a key edit may change
+membership in several of them. E013 also permits changing y votes and compares
+that restricted cost with the cost allowing both types of cell edit. This
+source establishes that membership-changing plurality interventions themselves
+are prior art; its inspected definitions do not state E013's exchange ratio.
+
+A second search found Adrian Miclaus, Luca Mureșan and Alexandru Popa,
+*Minimum-Cost Electoral Manipulation Under Media Influence: Hardness,
+Approximation, and Algorithms*, SYNASC 2026 author slide page:
+https://easychair.org/smart-slide/slide/TstX.
+Its abstract explicitly discusses laminar influence sets and chain-based
+parameterized algorithms. This is a closer methodological lead than a generic
+bribery citation. Only the abstract/slide landing page was inspected, not the
+proofs: do not assert theorem-level separation yet. Its described actions
+select media strategies that trigger voters after influence thresholds; E013
+instead bounds the exchange between key edits and RHS flips. Comparing those
+chain arguments is outstanding before a stronger originality assessment.
+
 Earlier R2/R3 comparisons to cell-based causality, vote operations and lobbying
 remain relevant (`direct-positioning-20261105.md` and the E012 comparison).
 The 2023 ICDT paper *The Consistency of Probabilistic Databases with Independent

@@ -1,5 +1,48 @@
 # Findings
 
+## Current research — 2026-11-05, M35
+
+The owner resumed research explicitly after declining submission approval.
+The old submission wait is historical and does not gate local research.
+R3 is not currently recommended for submission: its earlier readiness language
+was too optimistic. The current focus is a substantive structural contribution.
+
+E013 now has a full internal proof of a sharp schema-dependent gap. For each
+key j, let w_j be the inclusion-antichain width of the listed determinants
+containing j; let w=max_j w_j. Accepting radii satisfy
+rho_full <= rho_fixed <= w*rho_full, and every listed family has a binary table
+attaining ratio w. Universal equality is equivalent to laminarity of the
+determinant family. Strong normalization and a capped-margin exchange prove
+the upper bound; isolated critical groups with support rows prove sharpness.
+Dilworth's chain theorem is credited as prior art. Logical FD equivalence
+does not preserve these plurality checks; do not remove implied rules.
+
+The locked E013 finite check passes 81,893 rejected pairs, including 39,379
+laminar pairs, with 62 strict key gains. The raw oracles do not use the theorem.
+There are 1,641 single-row normalization checks and 139 sharp constructions.
+These overlapping finite cases are not independent samples or universal proof.
+
+A separately labeled post-result analysis audits all nine E011 schemas:
+each has w=1. Thus all 4,972 rejected targets must have equal full/fixed
+accepting costs, although numerical costs are not computed for the full census.
+The original accepting-gain prediction was structurally impossible for those
+schemas. Combining equality with the archived certified fixed optima gives
+full optimum 104 for Rayyan journal_title rows 509 and 146. The full solver
+runs remain timeouts. No CSV reconstruction or solver rerun occurred; numeric
+deductions rely on archived E011 certificates and the new internal proof.
+
+This is a stronger candidate paper center than more packaging or more samples.
+The direct comparison distinguishes w from the minimum lhs-cover repair bound
+of Livshits/Kimelfeld/Roy. A newly identified 2026 media-influence paper uses
+laminar sets and chain decompositions; its proofs still need inspection. Do
+not claim worldwide novelty from targeted search or call same-agent checks
+independent review. Next examine the closest chain-based interventions and
+then revise the manuscript if the structural claim survives scrutiny.
+
+See [M35](milestones/M35-schema-width.md), [proof](experiments/E013-schema-width/theory.md),
+and [Vietnamese explanation](to_human/M35-schema-width-progress-vi.md).
+The goal remains active. All earlier sections below are historical snapshots.
+
 ## Submission preparation — 2026-11-05, M34
 
 R3 remains the current scientific manuscript; no science or PDF changes this

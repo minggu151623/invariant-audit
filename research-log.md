@@ -1181,3 +1181,28 @@ server compile, actual submission and a public identifier absent. Goal remains
 active and incomplete. Previous turn and current turn both made concrete
 progress; blocked threshold not reached. Future continuations should not
 re-ask pending questions or manufacture work while owner decisions are missing.
+
+## 2026-11-05 — M35 sharp schema-width theorem
+
+Owner objective: “được rồi tiếp tục nghiên cứu thôi.” The historical submission
+wait no longer gates local research. The previous status-assessment turn was
+no progress; this turn supplies a universal proof, comparisons and deductions.
+
+E013 protocol e25655d and implementation b93695a precede the successful run.
+Recorded 81,893 rejected pairs, 39,379 laminar pairs, 62 strict gains, 1,641
+normalization pairs and 139 sharp constructions. The new proof shows a sharp
+width-factor gap for every listed schema and universal equality exactly for
+laminar families. Dilworth is credited; logical FD equivalence is explicitly
+distinguished from equivalence of plurality checks.
+
+Proof and post-result reanalysis code committed at 557f60d before the latter
+ran. The E011 audit checks frozen hashes and 32 archived fixed certificates.
+All nine schemas are laminar, implying equality for all 4,972 rejected targets.
+Two old full timeouts now have mathematically deduced optimum 104 using their
+archived fixed optima. This corrects the earlier impossible gain prediction.
+No solver rerun, source reconstruction or historical timeout alteration.
+
+Added Vietnamese explanation and direct primary-source comparison. Located a
+2026 laminar media-influence/chain-decomposition lead requiring proof-level
+inspection. R3 stays unchanged and is not recommended for submission yet.
+Goal active, no local research blocker, no approval question repeated.

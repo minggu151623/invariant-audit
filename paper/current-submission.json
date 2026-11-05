@@ -4,6 +4,8 @@
   "current_pdf": "paper/context-edit-stability-r3/preview.pdf",
   "submission_fields": "paper/submission-r3/submission-fields-draft.json",
   "guide": "paper/submission-r3/submission-guide-vi.md",
-  "status": "awaiting_owner_review_and_license_not_submitted",
-  "older_packets": "Preserved historical snapshots; do not use their metadata for R3."
+  "status": "research_resumed_not_recommended_for_submission",
+  "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
+  "current_research": "milestones/M35-schema-width.md",
+  "note": "R3 is a preserved historical candidate. E013 proof and results are not yet integrated into its PDF."
 }

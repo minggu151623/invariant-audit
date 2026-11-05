@@ -1,0 +1,197 @@
+{
+  "date": "2026-11-05",
+  "classification": "exploratory_post_result_analytical_reanalysis",
+  "theorem": "experiments/E013-schema-width/theory.md, Corollary 4",
+  "theorem_sha256": "5ae1c6d8985494a74c2ab2742fbb9c5dc88d14af0be5a3da4a2e03c42ca985c0",
+  "script_sha256": "6f5720dcf43b59dfe9bcaefd8c2732159608c1b79bbc96af2e163cd5b409fcdd",
+  "frozen_input_sha256": {
+    "experiments/E011-reused-source-stability/code/sources.py": "0eb0fee51af8dde4400e0506ef5fd6043d5284b0bea9b3992cbc2da662cadf10",
+    "data/E006-v1-source-manifest.json": "96e7529355eac100de47f2c957b8a1a5252d4c220c285d5fd46d871d62716342",
+    "data/E011-v1-checks.json": "ce0778b99495d17feaf9b659cf895caffb3a944f5ad323114aad7c30f39dffba",
+    "data/E011-v1-summary.csv": "33069d1ddd3a0d2637cdc539ea191a6096e9e479316da41879a8c57aa35a190e",
+    "data/E011-v1-rejected-solves.jsonl.gz": "6b6e6b5c3e745b563f7cfeb48ec45c0a44a6b51ef602ea91c32307154909a257"
+  },
+  "schemas": [
+    {
+      "dataset": "beers",
+      "rhs": "brewery_name",
+      "keys": [
+        "brewery_id"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2410,
+      "rejected": 0,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "beers",
+      "rhs": "city",
+      "keys": [
+        "brewery_id"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2410,
+      "rejected": 135,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "beers",
+      "rhs": "state",
+      "keys": [
+        "brewery_id"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2410,
+      "rejected": 135,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "flights",
+      "rhs": "sched_dep_time",
+      "keys": [
+        "flight"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2376,
+      "rejected": 713,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "flights",
+      "rhs": "act_dep_time",
+      "keys": [
+        "flight"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2376,
+      "rejected": 1243,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "flights",
+      "rhs": "sched_arr_time",
+      "keys": [
+        "flight"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2376,
+      "rejected": 965,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "flights",
+      "rhs": "act_arr_time",
+      "keys": [
+        "flight"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 2376,
+      "rejected": 1210,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "rayyan",
+      "rhs": "journal_issn",
+      "keys": [
+        "jounral_abbreviation"
+      ],
+      "rules": [
+        [
+          0
+        ]
+      ],
+      "width": 1,
+      "rows": 1000,
+      "rejected": 232,
+      "all_rejected_radii_equal_by_corollary": true
+    },
+    {
+      "dataset": "rayyan",
+      "rhs": "journal_title",
+      "keys": [
+        "jounral_abbreviation",
+        "journal_issn"
+      ],
+      "rules": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "width": 1,
+      "rows": 1000,
+      "rejected": 339,
+      "all_rejected_radii_equal_by_corollary": true
+    }
+  ],
+  "rejected_targets_with_analytical_equality": 4972,
+  "archived_fixed_certificates_checked": 32,
+  "previously_exact_pairs": 30,
+  "newly_deduced_full_optima": [
+    {
+      "dataset": "rayyan",
+      "rhs": "journal_title",
+      "row_index_one_based": 509,
+      "archived_full_solver_status": 1,
+      "archived_full_solver_message": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is None)",
+      "archived_fixed_optimum": 104,
+      "derived_full_optimum": 104,
+      "inference": "Corollary 4 equality plus archived certified fixed optimum",
+      "fixed_edit_list_sha256": "38fa09ff2223f67b44d1e09dabde4be26e83b8ab61a5a2f0dbf6e420f136dec5"
+    },
+    {
+      "dataset": "rayyan",
+      "rhs": "journal_title",
+      "row_index_one_based": 146,
+      "archived_full_solver_status": 1,
+      "archived_full_solver_message": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is None)",
+      "archived_fixed_optimum": 104,
+      "derived_full_optimum": 104,
+      "inference": "Corollary 4 equality plus archived certified fixed optimum",
+      "fixed_edit_list_sha256": "38fa09ff2223f67b44d1e09dabde4be26e83b8ab61a5a2f0dbf6e420f136dec5"
+    }
+  ],
+  "source_cache_present_at_check": false,
+  "source_rows_reconstructed": false,
+  "raw_source_witnesses_reverified": false,
+  "solver_runs": 0,
+  "historical_timeout_records_modified": false,
+  "limitation": "Numeric deductions rely on archived E011 fixed certificates and the internal E013 proof. Only record structure, stored bounds and hashes are freshly checked; source votes are not replayed."
+}

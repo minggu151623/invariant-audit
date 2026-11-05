@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M34
+current_milestone: M35
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1882,8 +1882,8 @@ M34:
   current_official_guidance_checked: true
   scientific_artifacts_changed: false
   scientific_experiments_repeated: false
-  owner_content_and_submission_approval: pending_async_answer
-  license_choice: pending_async_answer
+  owner_content_and_submission_approval: not_approved_explanation_requested_2026_11_05
+  license_choice: unselected_explanation_requested_2026_11_05
   account_status: absent_at_last_owner_confirmation_not_authenticated_now
   endorsement_status: unknown
   arxiv_server_compilation: absent
@@ -1896,3 +1896,49 @@ M34:
   consecutive_no_progress_turns: 0
   blocked_audit_threshold_met: false
   repeat_pending_questions_or_unchanged_experiments: false
+
+M35:
+  date: 2026-11-05
+  path: milestones/M35-schema-width.md
+  owner_objective_exact: "được rồi tiếp tục nghiên cứu thôi."
+  status: sharp_schema_width_theorem_and_post_result_reanalysis_completed_internally
+  goal_status: active
+  scope: local_research_not_external_submission
+  previous_goal_turn_classification: no_progress_read_only_status_assessment
+  current_goal_turn_classification: progress_proof_positioning_and_analytical_consequences
+  consecutive_no_progress_turns: 0
+  blocked_audit_threshold_met: false
+  owner_review_as_research_gate: false
+  submission_readiness_recommended: false
+  previous_submission_wait: superseded_by_explicit_research_resumption
+  protocol_commit: e25655d
+  implementation_commit: b93695a
+  proof_and_reanalysis_code_commit: 557f60d
+  proof: experiments/E013-schema-width/theory.md
+  finite_results: experiments/E013-schema-width/results/summary.json
+  analysis: experiments/E013-schema-width/analysis.md
+  prior_work_comparison: literature/schema-width-positioning-20261105.md
+  owner_report: to_human/M35-schema-width-progress-vi.md
+  confirmatory_rejected_pairs: 81893
+  confirmatory_laminar_pairs: 39379
+  strict_key_gains: 62
+  tightness_constructions: 139
+  all_finite_predictions_match: true
+  post_result_reanalysis: experiments/E013-schema-width/results/e011-analytical-reanalysis.json
+  E011_laminar_tasks: 9
+  E011_rejected_targets_with_analytical_equality: 4972
+  E011_archived_fixed_certificates_checked: 32
+  E011_newly_deduced_full_optima:
+    - {dataset: rayyan, rhs: journal_title, one_based_row: 509, cost: 104}
+    - {dataset: rayyan, rhs: journal_title, one_based_row: 146, cost: 104}
+  E011_new_solver_runs: 0
+  E011_raw_source_witnesses_reverified: false
+  E011_historical_timeout_records_modified: false
+  prior_scientific_artifacts_preserved: 197
+  R3_manuscript_and_packets: unchanged_historical_candidate
+  independent_review: false
+  historical_originality_certified: false
+  owner_submission_approval: not_given
+  license: unselected
+  actual_submission: absent
+  next_action: inspect_closest_chain_based_intervention_proofs_then_recenter_manuscript_if_claim_survives

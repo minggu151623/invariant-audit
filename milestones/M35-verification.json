@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-05",
+  "classification": "internal_delivery_audit_not_independent_review",
+  "stored_witness_records_checked": 81893,
+  "stored_strict_gains": 62,
+  "fresh_checks": "Decoded original categorical rows, direct group votes, actual Hamming costs, fixed-key preservation, ratio and conversion cost bounds; no reoptimization.",
+  "prior_scientific_artifacts_preserved": 197,
+  "R3_recorded_artifact_hashes_preserved": 5,
+  "artifact_sha256": {
+    "experiments/E013-schema-width/theory.md": "5ae1c6d8985494a74c2ab2742fbb9c5dc88d14af0be5a3da4a2e03c42ca985c0",
+    "experiments/E013-schema-width/analysis.md": "61a283e8fafd96abcb1c1362712826656085547b56d2055a28e063e525ab629d",
+    "experiments/E013-schema-width/results/summary.json": "903521220a109198319eab4a6b9178001b7282606d42c1692034eee05044a1d7",
+    "experiments/E013-schema-width/results/cases.jsonl.gz": "7502a9c180d9f7cbd80c6a6791249897c78619c7ba5b7fce9bb849b9736d7561",
+    "experiments/E013-schema-width/results/e011-analytical-reanalysis.json": "dc9fb9a8af47056715c0572058fbd9016cee5bd07b0a5da26c32bb3f2a203c62",
+    "literature/schema-width-positioning-20261105.md": "1804e8f2860338702aaba17d8519fd91e196b32d8beaad4eec760f3948b87929",
+    "to_human/M35-schema-width-progress-vi.md": "a80ea29db919ace5a95b77e346a830dcd4ce8dcbd697a244afa00ef3e54c369e"
+  },
+  "proof_reanalysis_hashes_match": true,
+  "source_reconstruction": false,
+  "solver_runs": 0,
+  "goal_complete": false
+}
