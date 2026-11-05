@@ -1,0 +1,49 @@
+{
+  "status": "review_only_not_submitted",
+  "guidance_checked": "2026-11-05",
+  "title": "Exact Context-Edit Stability for Plurality-Based Functional-Dependency Checks",
+  "abstract": "A plurality-based functional-dependency check judges a target value using rows that match its determinant values. When determinant cells can change, group membership changes as well. We study the minimum number of context-cell edits that reverses a fixed target's decision, protecting its entire row. For checks with a common dependent attribute and independent unit-cost categorical edits, we prove a row-action dominance reduction for making a rejected target accept. That decision problem is NP-complete when the schema varies, already for binary domains and singleton determinants, with keys either fixed or editable. For the opposite direction, we derive an exact formula: nonsingleton groups retain their ordinary vote-margin cost, and only singleton groups can make editable keys strictly reduce the global radius. Exhaustive finite checks and a bounded optimization comparison support the implementations. A reused-source study covers 18,734 target cells from Beers, Flights and Rayyan. Among 13,762 accepted targets, 1,133 fixed-key infinite radii become finite and one finite radius decreases. No strict reduction appears in 30 exact rejected-target pairs; two full models time out. Stability does not establish correctness: 1,493 accepted targets disagree with references despite radius at least two.",
+  "abstract_characters": 1311,
+  "authors_display": [
+    "Trần Vũ Bảo Minh"
+  ],
+  "authors_form_ascii_proposal": [
+    "Tran Vu Bao Minh"
+  ],
+  "authors_form_rendering_verified": false,
+  "affiliation": "Independent Researcher",
+  "category_candidate": "cs.DB",
+  "category_confirmed": false,
+  "category_basis": "FD-based database checks and cell edits; proposed technical fit, not moderator confirmation.",
+  "cross_lists": [],
+  "comments": "10 pages, 3 tables, no figures",
+  "license": null,
+  "owner_content_approval": "not_given",
+  "submission_authority": "not_given",
+  "processor": "xelatex",
+  "tex_live_candidate": "2025",
+  "top_level_source": "main.tex",
+  "source_upload": "paper/context-edit-stability-r3/source.zip",
+  "source_is_working_draft": true,
+  "release_editorial_change_pending": "After explicit approval, remove pending-author-review wording, rebuild, and verify before upload.",
+  "artifact_sha256": {
+    "paper/context-edit-stability-r3/tex/main.tex": "352c507c87ea42aa10643f6ec904a62aabb5b87bdba24aef57f072a4625794e1",
+    "paper/context-edit-stability-r3/preview.pdf": "110e9794259aeff849e536939b78040afe8692013dce4ab4ca79d269b7326fb0",
+    "paper/context-edit-stability-r3/source.zip": "e8dca95074497f29ca65d98957755d26bd5eac9b11c97bd54893a78c632085d3",
+    "paper/context-edit-stability-r3/supplement.zip": "c30fd26b92fbb0f616a0bbb004e7e978a4e998219d5970a8e828c86875ed24bd"
+  },
+  "doi": null,
+  "journal_ref": null,
+  "report_no": null,
+  "arxiv_identifier": null,
+  "actual_submission": "absent",
+  "official_sources": [
+    "https://info.arxiv.org/help/prep.html",
+    "https://info.arxiv.org/help/faq/texlive.html",
+    "https://info.arxiv.org/help/faq/font-info-tl2025.html",
+    "https://arxiv.org/category_taxonomy",
+    "https://info.arxiv.org/help/license/index.html",
+    "https://info.arxiv.org/help/moderation/index.html",
+    "https://info.arxiv.org/help/endorsement.html"
+  ]
+}

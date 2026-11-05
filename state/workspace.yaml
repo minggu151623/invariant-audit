@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M33
+current_milestone: M34
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1863,3 +1863,36 @@ M32:
   next_research: computational_boundary_for_acceptance_or_substantive_extension
   unverified_lead: Set_Cover_reduction_binary_RHS_singleton_determinants
   owner_review_as_local_research_gate: false
+
+M34:
+  date: 2026-11-05
+  path: milestones/M34-R3-submission-preparation.md
+  status: local_submission_prepared_owner_decisions_pending
+  prior_goal_turn_classification: progress
+  current_goal_turn_classification: progress
+  scientific_manuscript: paper/context-edit-stability-r3/tex/main.tex
+  submission_pointer: paper/current-submission.json
+  submission_fields: paper/submission-r3/submission-fields-draft.json
+  submission_guide: paper/submission-r3/submission-guide-vi.md
+  local_verification: paper/submission-r3/local-readiness.json
+  abstract_characters: 1311
+  category_proposal: cs.DB
+  processor_proposal: xelatex
+  tex_live_proposal: '2025'
+  current_official_guidance_checked: true
+  scientific_artifacts_changed: false
+  scientific_experiments_repeated: false
+  owner_content_and_submission_approval: pending_async_answer
+  license_choice: pending_async_answer
+  account_status: absent_at_last_owner_confirmation_not_authenticated_now
+  endorsement_status: unknown
+  arxiv_server_compilation: absent
+  submission_receipt: absent
+  public_identifier: absent
+  goal_status: active
+  next_action: await_existing_owner_decisions_then_prepare_release_and_account_submission
+  blocked_condition: owner_consent_license_and_account_state_required_for_external_steps
+  first_R3_submission_decision_request_this_turn: true
+  consecutive_no_progress_turns: 0
+  blocked_audit_threshold_met: false
+  repeat_pending_questions_or_unchanged_experiments: false

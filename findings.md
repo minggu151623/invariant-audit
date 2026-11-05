@@ -1,5 +1,24 @@
 # Findings
 
+## Submission preparation — 2026-11-05, M34
+
+R3 remains the current scientific manuscript; no science or PDF changes this
+turn. The new `paper/submission-r3/` fields/guide match its 10 pages, 3 tables,
+exact 1311-character abstract and current official arXiv instructions. Source
+ZIP contents/CRC and R3 hashes checked; cs.DB remains a recommendation,
+XeLaTeX/TeX Live 2025 and explicit font filenames match current guidance.
+`paper/current-submission.json` identifies the right packet among old versions.
+
+The owner has been asked once to approve R3 content/submission and select a
+license, with the Vietnamese explanation and license comparison linked. Both
+answers remain pending. No account/login, endorsement, upload, server compile,
+submission receipt or public identifier is evidenced. After approval, prepare
+release wording and recheck; do not remove the pending-review statement now.
+See [M34 completion audit](milestones/M34-R3-submission-preparation.md).
+Goal active and incomplete; this turn made concrete preparation progress.
+Remaining external actions depend on owner decisions. Do not repeat unchanged
+experiments or ask the same pending questions on every automatic continuation.
+
 ## Current revision — 2026-11-05, M33
 
 The Set Cover lead is now a proved-internally complexity result: making a

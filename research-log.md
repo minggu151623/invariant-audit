@@ -1164,3 +1164,20 @@ Delivery-state check: the bundled Python lacked optional PyYAML, so that
 parser invocation did not run. Ruby's YAML parser then validated current M33
 and preserved M32 successfully; an unrelated ffi-extension warning did not
 prevent parsing. No research experiment or manuscript verification failed.
+
+## 2026-11-05 — M34 R3 submission preparation
+
+Verified the current R3 hashes, exact source ZIP membership/CRC and 10-page PDF.
+Prepared matching metadata with the verbatim 1311-character ASCII abstract,
+cs.DB recommendation, XeLaTeX/TeX Live 2025, and a current-submission pointer.
+Inspected official metadata, licenses, moderation/AI, endorsement, taxonomy,
+TeX and font guidance. Added a Vietnamese submission/license guide. No paper,
+scientific evidence, source dataset or experiment was changed/repeated.
+
+Sent one asynchronous question bundle linking the prepared R3 and Vietnamese
+explanation, asking content/submission approval and license choice. Pending;
+no approval inferred. The new completion audit finds account/endorsement,
+server compile, actual submission and a public identifier absent. Goal remains
+active and incomplete. Previous turn and current turn both made concrete
+progress; blocked threshold not reached. Future continuations should not
+re-ask pending questions or manufacture work while owner decisions are missing.

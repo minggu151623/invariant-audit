@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-05",
+  "current_manuscript": "paper/context-edit-stability-r3/tex/main.tex",
+  "current_pdf": "paper/context-edit-stability-r3/preview.pdf",
+  "submission_fields": "paper/submission-r3/submission-fields-draft.json",
+  "guide": "paper/submission-r3/submission-guide-vi.md",
+  "status": "awaiting_owner_review_and_license_not_submitted",
+  "older_packets": "Preserved historical snapshots; do not use their metadata for R3."
+}
