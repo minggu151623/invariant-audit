@@ -1036,3 +1036,57 @@ The original arXiv objective remains unachieved. Resume from the preserved
 M31 packet when the owner answers the existing content/license/account request.
 External peer review is not the blocker. No paper, source archive, companion,
 experiment or unrelated user file changed during this audit.
+
+## 2026-10-24 — owner reply and Vietnamese explanation
+
+The owner directly answered the M31 request: content "Chưa; cần giải thích
+hoặc chỉnh sửa", license "Chưa chọn; cần giải thích thêm", account "Chưa có
+tài khoản". This is fresh substantive input requesting explanation, not
+approval of the content or selection of a license. The preceding three-turn
+dependency audit is historical; no fresh blocked threshold is inferred.
+get_goal still returned blocked at the start of this reply; no supported tool
+operation changes it to active and no new blocked/complete update was made.
+
+Prepared to_human/2026-10-24-paper-explanation-and-license-vi.md from the
+current manuscript, E011 analysis and theorem-level literature comparison.
+Explained the unit-cell-cost protected-target model, both proposed structural
+contributions, singleton-driven source effects, negative accepting-direction
+results, two unresolved timeouts and the distinction between stability and
+reference correctness. The judgment remains a narrow proposed contribution,
+not established worldwide originality or an accuracy improvement.
+
+Rechecked the official arXiv license, nonexclusive distribution, CC BY 4.0,
+moderation and endorsement pages on 2026-10-24. Explained copyright retention,
+free reading versus reuse permissions, commercial adaptations with attribution,
+and irrevocability per posted version. No license was selected for the owner.
+No repeated approval question, new experiment, scientific rerun, manuscript/
+archive edit or external action. Publication and the original goal remain
+unachieved; the next useful interaction is the owner's understanding or
+requested revision, rather than another automatic approval request.
+
+## 2026-10-24 — requested scientific self-assessment
+
+The owner asked "bạn tự đánh giá xem là nó đã đủ tốt hay chưa?". Read the
+current TeX proofs, claim audit, E008/E009 theory, E010 analysis and E011
+protocol/results interpretation. The proof walkthrough found no specific
+counterexample or invalid step under the stated assumptions; this is same-agent
+self-review, not a theorem/novelty certificate or independent assessment.
+
+Refreshed primary-source comparisons with Xia section 3–4 and Bertossi v7
+section 4, and read Debosschere/Geerts, Cell-Based Causality for Data Repairs,
+TaPP 2015, sections 2–3 and proposition statements (official USENIX PDF).
+The latter already defines cell-modification distance and cardinality repairs
+under FDs. Its consistency-restoration objective differs from our protected-row
+plurality-decision objective; no direct collision with the two specialized
+theorems was established. It is a missing close positioning reference, not
+evidence by itself that the new theorems are old. Two attempts to refresh the
+2011 author PDFs timed out; no new live inspection of them is claimed.
+
+Saved to_human/2026-10-24-self-review-vi.md. Recommendation: revise before
+recommending submission for the owner's stated novelty aim. Major concerns
+are defensible theorem-level positioning and significance; limited timing
+coverage is a narrower concern if retaining a performance argument. A short
+proof or negative result is not itself grounds for rejection. No requirement
+for independent peer review, a positive outcome, massive new experiments or
+worldwide-first proof was imposed. No frozen paper/archive, experiment or
+unrelated user file changed, and no scientific check was redundantly rerun.

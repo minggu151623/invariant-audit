@@ -1715,6 +1715,7 @@ M31:
   independent_peer_review_as_submission_gate: false
 
 new_packet_owner_dependency_audit:
+  historical_audit_superseded_by: owner_reply_20261024
   date: 2026-10-23
   baseline: new_structural_preprint_M30_and_completed_M31_companion
   previous_turn: progress_completed_portable_packet_and_refreshed_official_submission_fields
@@ -1740,3 +1741,41 @@ new_packet_owner_dependency_audit:
   resume_condition: direct_owner_reply_to_existing_review_license_account_questions
   original_arxiv_goal_complete: false
   peer_review_as_blocker: false
+
+owner_reply_20261024:
+  source: direct_human_reply_to_M31_review_questions
+  content_answer_exact: "Chưa; cần giải thích hoặc chỉnh sửa"
+  license_answer_exact: "Chưa chọn; cần giải thích thêm"
+  account_answer_exact: "Chưa có tài khoản"
+  content_approval: not_given
+  license: unselected
+  account_status: none_user_confirmed_20261024
+  requested_work: explain_contribution_limitations_and_license_choices_in_Vietnamese
+  explanation: to_human/2026-10-24-paper-explanation-and-license-vi.md
+  new_human_input_progress: explanation_prepared_no_new_approval_requested
+  previous_goal_tool_status_at_read: blocked
+  blocked_status_reapplied_this_turn: false
+  content_or_license_decision_inferred: false
+  manuscript_and_frozen_archives_changed: false
+  scientific_runs_repeated: false
+  external_submission: absent
+  peer_review_as_local_work_gate: false
+
+owner_requested_self_assessment_20261024:
+  source: direct_user_request
+  exact_text: "bạn tự đánh giá xem là nó đã đủ tốt hay chưa?"
+  report: to_human/2026-10-24-self-review-vi.md
+  judgment: revise_before_recommending_submission_for_owners_novelty_objective
+  specific_proof_error_found_in_this_read: false
+  originality_certified: false
+  major_gaps:
+    - direct_closest_prior_work_positioning
+    - convincing_significance_of_specialized_results
+  empirical_limit: mixed_target_RHS_context_not_covered_by_rejected_timing_generator
+  new_primary_source: https://www.usenix.org/system/files/tapp15-debosschere.pdf
+  new_source_interpretation: related_cell_repair_causality_not_a_demonstrated_theorem_collision
+  scientific_artifacts_changed: false
+  scientific_runs_repeated: false
+  independent_review_or_ARA_certification: false
+  owner_approval_inferred: false
+  actual_submission: absent
