@@ -1962,14 +1962,18 @@ M36:
   proof_errors_found: 0
   manuscript: paper/context-edit-stability-r4/tex/main.tex
   preview_pdf: paper/context-edit-stability-r4/preview.pdf
-  preview_pdf_sha256: 0c29aa914140e523b441f057d566d2c70822fb20f5378f476a50263110025dc8
+  preview_pdf_sha256: 780717b22a8b91d6c5ab86baeaef1f3efebdda73ca2ef3a645145918aed808b1
   supplement: paper/context-edit-stability-r4/supplement.zip
-  supplement_sha256: 3bd78ce1cc95edbf61324452f1ad778d2e7cb906d8e42fcac4b987e138f4cedd
+  supplement_sha256: 074b654b906ab09f5c08b96e62fc078d6b695535594317278bdcfc04d4d5481b
   pages: 10
   all_pages_visually_inspected: true
   compiler_warnings: 0
   fonts_embedded: true
   extracted_source_compile_text_identical: true
+  pdflatex_compatible: true
+  pdflatex_engine_checked: pdfTeX_1.40.29_TeX_Live_2026_via_TinyTeX_v2026.11
+  pdflatex_pages_visually_inspected: true
+  arxiv_server_compile_tried: false
   extracted_supplement_replay_records: passed
   extracted_supplement_reenumeration: passed_line_identical
   new_experiments_run: 0

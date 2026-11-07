@@ -5,8 +5,19 @@ Local manuscript for author review. Not approved, not submitted, no license
 chosen. R3 and every earlier packet are preserved unchanged.
 
 `tex/main.tex` is the source; `preview.pdf` is the compiled 10-page draft.
-`source.zip` contains only `main.tex` and compiles with XeLaTeX-compatible
-Tectonic using Latin Modern OpenType fonts. No arXiv server compile is claimed.
+`source.zip` contains only `main.tex`. It compiles with two engines:
+
+- XeTeX (Tectonic, Latin Modern OpenType fonts) produces `preview.pdf`.
+- pdfLaTeX, the engine arXiv uses, gets a separate preamble branch: T1 encoding
+  with `lmodern`, plus T5 (`vntex`) for the Vietnamese author name only.
+  `check_revision.py` builds the extracted source this way with TinyTeX
+  (TeX Live 2026): 10 pages, no log warnings, all fonts embedded.
+
+The pdfLaTeX pages were rendered and inspected. In that build, `ș` is
+assembled from "s" plus a comma accent, so the PDF text layer reads "s,".
+
+arXiv may run a different TeX Live version, and arXiv's own compile has not
+been tried.
 
 ## Change from R3
 

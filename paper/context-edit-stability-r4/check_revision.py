@@ -15,6 +15,8 @@ HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 COMPILER = '/Applications/ChatGPT.app/Contents/Resources/tectonic/tectonic'
 CACHE = '/Users/mac/Library/Application Support/ChatGPT/latex/tectonic'
+# arXiv compiles with pdfLaTeX; checked locally with TinyTeX (TeX Live 2026).
+PDFLATEX = shutil.which('pdflatex') or str(Path.home() / 'Library/TinyTeX/bin/universal-darwin/pdflatex')
 WARNING = r'Overfull|Underfull|undefined|Missing character|LaTeX Warning'
 PAGES = 10
 # Appended on 2026-11-07 (SYNASC slide addendum); intentionally not preserved.
@@ -37,6 +39,27 @@ def compile_tex(root):
     need(run.returncode == 0, 'Compilation failed: ' + run.stderr[-2000:])
     need(not re.search(WARNING, (root / 'main.log').read_text()), 'Compiler warning in log')
     return root / 'main.pdf'
+
+
+def compile_pdflatex(root):
+    for _ in range(2):
+        run = subprocess.run([PDFLATEX, '-interaction=nonstopmode', '-halt-on-error', 'main.tex'],
+                             cwd=root, capture_output=True, text=True)
+        need(run.returncode == 0, 'pdfLaTeX failed: ' + run.stdout[-2000:])
+    need(not re.search(WARNING + r'|Font Warning', (root / 'main.log').read_text(errors='replace')),
+         'pdfLaTeX warning in log')
+    return root / 'main.pdf'
+
+
+def embedded_fonts(reader):
+    fonts = {}
+    for page in reader.pages:
+        for value in page['/Resources'].get_object()['/Font'].get_object().values():
+            font = value.get_object()
+            for item in font.get('/DescendantFonts', [font]):
+                d = item.get_object()['/FontDescriptor'].get_object()
+                fonts[str(d['/FontName'])] = any(k in d for k in ('/FontFile', '/FontFile2', '/FontFile3'))
+    return fonts
 
 
 def replay(root, *flags):
@@ -78,13 +101,7 @@ def main():
     for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
                    '81,893', '39,379', 'Mureșan', 'Miclăuș'):
         need(phrase in text, f'Missing content: {phrase}')
-    fonts = {}
-    for page in pdf.pages:
-        for value in page['/Resources'].get_object()['/Font'].get_object().values():
-            font = value.get_object()
-            for item in font.get('/DescendantFonts', [font]):
-                d = item.get_object()['/FontDescriptor'].get_object()
-                fonts[str(d['/FontName'])] = any(k in d for k in ('/FontFile', '/FontFile2', '/FontFile3'))
+    fonts = embedded_fonts(pdf)
     need(fonts and all(fonts.values()), 'Unembedded font')
 
     # 3. Source ZIP compiles to the same text.
@@ -97,6 +114,17 @@ def main():
             archive.extractall(root)
         need([p.extract_text() for p in PdfReader(compile_tex(root)).pages] == pages,
              'Extracted source text differs')
+        # The same extracted source under pdfLaTeX (arXiv's engine).
+        version = subprocess.run([PDFLATEX, '--version'], capture_output=True, text=True).stdout.split('\n')[0]
+        latin = PdfReader(compile_pdflatex(root))
+        latin_text = '\n'.join(p.extract_text() for p in latin.pages)
+        latin_fonts = embedded_fonts(latin)
+        need(len(latin.pages) == PAGES and 'Trần Vũ Bảo Minh' in latin.pages[0].extract_text(),
+             'pdfLaTeX page count or author differs')
+        for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
+                       '81,893', '39,379', 'Miclăus', 'Mures'):
+            need(phrase in latin_text, f'pdfLaTeX missing content: {phrase}')
+        need(latin_fonts and all(latin_fonts.values()), 'pdfLaTeX unembedded font')
 
     report = dict(date='2026-11-07', pages=PAGES, tables=source.read_text().count(r'\begin{table}'),
                   references=source.read_text().count(r'\bibitem'), fonts=fonts,
@@ -105,6 +133,10 @@ def main():
                   m35_artifacts_unchanged=len(kept), intentionally_appended=sorted(APPENDED),
                   compiler='Tectonic with bundled cache (--only-cached)', compiler_warnings=0,
                   extracted_source_compile_text_identical=True,
+                  pdflatex=dict(engine=version, pages=PAGES, log_warnings=0,
+                                all_fonts_embedded=True, fonts=len(latin_fonts),
+                                note='comma-below s extracts as "s," (accent built from s and comma); '
+                                     'pages rendered and inspected, recorded in milestones/M36-R4.md'),
                   visual_pages_inspected='recorded separately in milestones/M36-R4.md',
                   independent_review=False, author_approval='not_given', license=None,
                   actual_submission='absent',

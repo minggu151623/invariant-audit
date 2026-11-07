@@ -1218,3 +1218,20 @@ warnings, fonts embedded, extracted source text identical, extracted supplement
 replay and re-enumeration pass. All pages inspected visually. No experiment run,
 no solver run, R3 and prior evidence unchanged (literature note appended by
 design). Not recommended for submission yet; no approval/license/account.
+
+### 2026-11-07 — M36 addendum: pdfLaTeX compatibility
+
+The owner asked whether R4 can go to arXiv. The answer was not yet: no
+external review of the proofs, no author read-through, no account,
+endorsement or license. A technical blocker was also found: the source needed
+XeTeX, and arXiv compiles with pdfLaTeX.
+
+With the owner's permission, TinyTeX v2026.11 was installed with `vntex`.
+The preamble now branches on the engine:
+- XeTeX: rebuild unchanged, with identical extracted text.
+- pdfLaTeX: T1 + lmodern, with T5 for the author name.
+
+The pdfLaTeX build of the extracted source ZIP gives 10 pages, no warnings and
+all fonts embedded; all pages were rendered and inspected. `check_revision.py`
+now includes this build, and the full check passes. arXiv's own compile has
+not been tried. No new experiment was run.
