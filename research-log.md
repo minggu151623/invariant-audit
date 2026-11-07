@@ -1261,3 +1261,17 @@ Full reread; no new mathematical error. Changes:
 
 The full check passed. Groups B and C were not done.
 
+### 2026-11-07 — M36: R4 content improvements, readiness verdict
+
+The owner delegated full authority over the paper. Changes:
+- motivation with verified citations;
+- w(F) computability;
+- DP bound;
+- related work on resilience, bribery and control;
+- open questions;
+- Section 6 tightened and wording clarified.
+
+The full check passed at 11 pages, and all pages were inspected. Verdict:
+ready for arXiv as a preprint once the author has read it. Metadata and a
+Vietnamese guide were added. Not submitted.
+

@@ -18,7 +18,7 @@ CACHE = '/Users/mac/Library/Application Support/ChatGPT/latex/tectonic'
 # arXiv compiles with pdfLaTeX; checked locally with TinyTeX (TeX Live 2026).
 PDFLATEX = shutil.which('pdflatex') or str(Path.home() / 'Library/TinyTeX/bin/universal-darwin/pdflatex')
 WARNING = r'Overfull|Underfull|undefined|Missing character|LaTeX Warning'
-PAGES = 10
+PAGES = 11
 # Appended on 2026-11-07 (SYNASC slide addendum); intentionally not preserved.
 APPENDED = {'literature/schema-width-positioning-20261105.md'}
 

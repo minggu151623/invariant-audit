@@ -2,10 +2,10 @@
   "actual_submission": "absent",
   "all_fonts_embedded": true,
   "artifact_sha256": {
-    "paper/context-edit-stability-r4/preview.pdf": "c50c5a8d2d2261236a7bd53ee5d70cc9a149d3c118bf19a046c60ce9c1ec415b",
+    "paper/context-edit-stability-r4/preview.pdf": "6c1215ed6b460dc09efb1ae22d0088d5d4adc727c106342d5c5d501f4171c5ff",
     "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
-    "paper/context-edit-stability-r4/source.zip": "b771f20dff31a3d21962c3ed19fac1464d598d20cb22e309228048fe70e86e92",
-    "paper/context-edit-stability-r4/tex/main.tex": "d2fd75aaea773e5a87aa1b7609d989cd205763d9821a057d74c6f1c804199791"
+    "paper/context-edit-stability-r4/source.zip": "389563806da2a02572e65ecddbb0dc82f2f6b017725105c2bc8dcf02617ff484",
+    "paper/context-edit-stability-r4/tex/main.tex": "97fec0453385612cd325d383098b77707c014fb8fe08a0c1e24705bd3122be12"
   },
   "author_approval": "not_given",
   "author_exact_unicode": true,
@@ -33,18 +33,18 @@
   ],
   "license": null,
   "m35_artifacts_unchanged": 6,
-  "pages": 10,
+  "pages": 11,
   "pdflatex": {
     "all_fonts_embedded": true,
     "engine": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
     "fonts": 15,
     "log_warnings": 0,
     "note": "comma-below s extracts as \"s,\" (accent built from s and comma); pages rendered and inspected, recorded in milestones/M36-R4.md",
-    "pages": 10
+    "pages": 11
   },
   "prior_artifacts_unchanged": 197,
   "r3_artifacts_unchanged": 5,
-  "references": 15,
-  "tables": 4,
+  "references": 21,
+  "tables": 3,
   "visual_pages_inspected": "recorded separately in milestones/M36-R4.md"
 }

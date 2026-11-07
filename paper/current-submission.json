@@ -3,11 +3,12 @@
   "current_manuscript": "paper/context-edit-stability-r4/tex/main.tex",
   "current_pdf": "paper/context-edit-stability-r4/preview.pdf",
   "submission_fields": "none_for_R4_yet; paper/submission-r3/ fields describe R3 only",
-  "guide": "to_human/M36-R4-progress-vi.md",
-  "status": "prepared_for_arxiv_pending_author_read_through_and_license",
+  "guide": "to_human/M36-arxiv-ready-vi.md",
+  "status": "ready_for_arxiv_preprint_pending_author_read_through_license_and_submission",
   "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
   "current_research": "milestones/M36-R4.md",
-  "note": "R4 integrates the E013 width theorem; scope fix and arXiv text prepared 2026-11-07 (see paper/context-edit-stability-r4/review/review-20261107.md). Owner reports an arXiv account. No license chosen, no submission.",
+  "note": "R4 improved and judged ready for arXiv on 2026-11-07 under owner delegation. Owner reports an arXiv account. No license chosen, not submitted.",
   "current_supplement": "paper/context-edit-stability-r4/supplement.zip",
-  "arxiv_source": "paper/context-edit-stability-r4/source.zip (main.tex only; pdfLaTeX-checked with TeX Live 2026)"
+  "arxiv_source": "paper/context-edit-stability-r4/source.zip (main.tex only; pdfLaTeX-checked with TeX Live 2026)",
+  "arxiv_metadata": "paper/context-edit-stability-r4/arxiv-metadata.md"
 }

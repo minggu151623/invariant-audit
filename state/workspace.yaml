@@ -1954,7 +1954,7 @@ M36:
   consecutive_no_progress_turns: 0
   blocked_audit_threshold_met: false
   owner_review_as_research_gate: false
-  submission_readiness_recommended: owner_decision_after_author_read_through
+  submission_readiness_recommended: ready_for_arxiv_preprint_after_author_read_through
   literature_addendum: literature/schema-width-positioning-20261105.md#addendum-2026-11-07-synasc-2026-slide-inspection
   synasc_slides_inspected: all_18_viewer_pages_full_paper_not_found
   synasc_theorem_level_overlap_visible: false
@@ -1962,10 +1962,10 @@ M36:
   proof_errors_found: 0
   manuscript: paper/context-edit-stability-r4/tex/main.tex
   preview_pdf: paper/context-edit-stability-r4/preview.pdf
-  preview_pdf_sha256: c50c5a8d2d2261236a7bd53ee5d70cc9a149d3c118bf19a046c60ce9c1ec415b
+  preview_pdf_sha256: 6c1215ed6b460dc09efb1ae22d0088d5d4adc727c106342d5c5d501f4171c5ff
   supplement: paper/context-edit-stability-r4/supplement.zip
-  supplement_sha256: 8d0cad9fa2e5bb2f5b3b2108e6c9e6af40e4a8aa1602a6f2800546832a3c1f57
-  pages: 10
+  supplement_sha256: 44d0b2725d3547cd08a01fec3136fe2d436c7ce12d81be097a223ce5c362c332
+  pages: 11
   all_pages_visually_inspected: true
   compiler_warnings: 0
   fonts_embedded: true
@@ -1993,6 +1993,12 @@ M36:
   draft_only_text_removed: true
   group_a_edits_20261107: repo_link_notation_remark2_references_d_gt_2_note
   repository_link_in_paper: https://github.com/minggu151623/invariant-audit
+  owner_delegation_20261107: full_authority_over_paper_and_readiness_judgment
+  group_b_c_edits_20261107: motivation_related_work_width_computability_dp_bound_open_questions_section6_tightened
+  arxiv_metadata: paper/context-edit-stability-r4/arxiv-metadata.md
+  arxiv_readiness_verdict: ready_as_preprint
+  source_zip_sha256: 389563806da2a02572e65ecddbb0dc82f2f6b017725105c2bc8dcf02617ff484
+  owner_guide_arxiv: to_human/M36-arxiv-ready-vi.md
   license: unselected
   actual_submission: absent
   next_action: seek_external_expert_reading_of_theorems_1_2_and_consider_nonlaminar_external_study_protocol

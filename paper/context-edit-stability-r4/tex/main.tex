@@ -39,7 +39,7 @@ determinant. We study the minimum number of context-cell edits that makes every
 listed check accept a protected, initially rejected target, and ask how much
 cheaper this becomes when determinant (key) cells may change as well as
 dependent cells. For a family $F$ of determinants sharing one dependent
-attribute, let $w(F)$ be the largest inclusion antichain among the determinants
+attribute, let $w(F)$ be the size of a largest inclusion antichain among the determinants
 that contain a common key. We prove that the fixed-key optimum is at most
 $w(F)$ times the editable-key optimum, and that every family has a binary table
 attaining exactly this factor. Hence the two optima agree on every such table if
@@ -49,16 +49,20 @@ The classification concerns the listed checks, not logical FD equivalence, and
 laminarity does not make optimization easy: acceptance within a budget remains
 NP-complete for singleton determinants. For the reverse direction we give an
 exact formula. Exhaustive finite checks cover 81,893 rejected table/family
-pairs. In a reused-source study on Beers, Flights and Rayyan all nine check
-families are laminar, which explains, post hoc, why a predicted accepting gain
-from editable keys could not occur.
+pairs. On Beers, Flights and Rayyan, all nine check families of an earlier study
+are laminar, which explains, post hoc, why a predicted accepting gain from
+editable keys could not occur.
 \end{abstract}
 
 \section{Introduction}
 Functional dependencies (FDs) describe agreement between attributes. A simple
 detector judges an observed dependent value by comparing it with the unique
-plurality among rows that share its determinant values. Such a decision depends
-on context. Editing another row's dependent cell changes a vote; editing one of
+plurality among rows that share its determinant values. Plurality choices are a
+common primitive in FD-based cleaning. Equivalence-class repair assigns each
+class the value of least total modification cost~\cite{bohannon}, which under
+unit weights and 0/1 distance is a most frequent value. Horizon chooses repairs
+that preserve the most frequent FD-induced patterns~\cite{horizon}. Such a
+decision depends on context. Editing another row's dependent cell changes a vote; editing one of
 its key cells moves the row into or out of the target's group. An audit that
 trusts all key cells therefore answers a different question from one that
 allows them to be wrong.
@@ -76,7 +80,8 @@ Table~\ref{tab:example}. Each target group contains the target and one
 rival, so both checks tie and reject. With fixed keys, $r_1.y$ and $r_2.y$
 must both change: $\rfix=2$. Changing only $r_3.a$ to $0$ moves $r_3$
 into both groups at once, giving $\rfull=1$. The two determinants share the key
-$a$ but neither contains the other. Our main result shows that this is the
+$a$ but neither contains the other. Such a family arises, for instance, when a
+city attribute is checked from both (zip, street) and (zip, phone prefix). Our main result shows that overlapping but non-nested determinants are the
 only source of a gap, and measures exactly how large it can become.
 
 \begin{table}[H]
@@ -111,8 +116,9 @@ tractability. Making a rejected target accept within a budget is NP-complete
 for binary singleton schemas, which are laminar (Theorem~\ref{thm:hardness}).
 For the opposite direction, rejection, an exact formula shows that keys help
 only through singleton groups (Theorem~\ref{thm:reject}).
-\item Locked exhaustive checks of raw edit spaces agree with every finite
-prediction. A post hoc reanalysis of an earlier source study shows that its
+\item Exhaustive checks of raw edit spaces, run under protocols fixed in
+advance, agree with every finite prediction. A post hoc reanalysis of an
+earlier benchmark study shows that its
 schemas were all laminar, so a predicted accepting gain was impossible; we
 report this design error rather than changing the rules after the fact.
 \end{enumerate}
@@ -167,8 +173,11 @@ empty) and
 \[
  w(F)=\max_j w_j\ \ge 1.
 \]
-$F$ is \emph{laminar} if any two intersecting determinants are nested.
-Table~\ref{tab:widths} lists simple cases. The last row uses Sperner's theorem
+$F$ is \emph{laminar} if any two intersecting determinants are nested. Each
+$w_j$ is the width of a poset with at most $|F|$ elements. By Dilworth's theorem
+it equals a minimum chain partition, which reduces to bipartite
+matching~\cite{fulkerson}, so $w(F)$ is computable in time polynomial in $|F|$
+and $q$. Table~\ref{tab:widths} lists simple cases. The last row uses Sperner's theorem
 on the subsets of the remaining $q-1$ keys.
 
 \begin{table}[H]
@@ -380,9 +389,14 @@ table is a polynomial certificate.
 \end{proof}
 
 Singleton families are laminar, consistent with both optima being $\tau$. For
-fixed $q$ and $d$ a standard dynamic program over the $|F|(d-1)$ margin
-coordinates, using the actions of Lemma~\ref{lem:norm}, is polynomial in $n$.
-We state this as an elementary observation and have not implemented it.
+fixed $q$ and $d$ the problem is polynomial in $n$. Margins are sums of
+per-row contributions, each margin lies in $[-n,n+1]$, and by
+Lemma~\ref{lem:norm} each row has at most $1+2^q$ useful actions. A dynamic
+program over rows that stores the least cost for each vector of the
+$|F|(d-1)$ margins therefore runs in time
+$O\bigl(n\,2^q(2n+2)^{|F|(d-1)}\bigr)$. With fixed keys the only useful
+action is setting $y$ to $0$. This elementary observation has not been
+implemented.
 
 \subsection{Decision distance is not repair distance}
 Let $\mathrm{rep}(T)$ be the minimum context-cell cost making the whole table satisfy
@@ -400,12 +414,12 @@ creates a tie at cost one.
 \end{proof}
 
 \section{Finite checks}
-All studies below were run under protocols committed before their
-implementations, and implementations committed before execution. Counts reuse
+Each check below followed a protocol fixed in the project repository before
+its implementation, and the implementation was fixed before execution. Counts reuse
 tables and overlap across edit models; they measure coverage of the checks,
 not probabilities, and they do not replace the proofs.
 
-\paragraph{E013: width theorem.}
+\paragraph{Exhaustive check of Theorems 1--2 (E013).}
 Three grids use an all-zero target, every multiset of context rows of the
 given size, and every family of distinct nonempty determinants: binary keys and
 RHS with $q\le3$ and up to three context rows; binary keys, ternary RHS,
@@ -442,13 +456,13 @@ Sharp constructions checked & 139\\
 \texttt{b93695a}).}\label{tab:e013}
 \end{table}
 
-\paragraph{E012: hardness reduction.}
+\paragraph{Exhaustive check of the reduction (E012).}
 Every coverable multiset of one to three subsets of universes of size one to
 three (111 instances) is checked by raw binary enumeration: all 222 radii and
 147,523 destinations across both edit models agree with independent minimum
 covers, and a cover is extracted from all 25,490 accepting destinations.
 
-\paragraph{E008--E010: earlier formulas and formulations.}
+\paragraph{Earlier checks (E008--E010).}
 E008 compares canonical-action programs with unrestricted raw edits on 5,107
 tables and six families (30,642 radii agree). E009 checks
 Theorem~\ref{thm:reject} on all 18,779 accepted cases of that domain. E010
@@ -457,9 +471,10 @@ six keys and 128 rows; certified optima agree, and seven generic dense-accepted
 cases time out. These timings are two repetitions on one machine and are not
 representative.
 
-\section{Reused-source study and its post hoc reinterpretation}
-E011 reuses Beers, Flights and Rayyan from the Raha repository~\cite{raha} at
-revision \href{https://github.com/BigDaMa/raha/tree/7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}{\texttt{7be1334b}}.
+\section{Benchmark study and its post hoc reinterpretation}
+An earlier study (E011) reused Beers, Flights and Rayyan from the Raha
+repository~\cite{raha} at revision
+\href{https://github.com/BigDaMa/raha/tree/7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}{\texttt{7be1334b}}.
 The data had been inspected earlier, so this is exploratory reuse, not a blind
 holdout. Nine tasks use brewery\_id to check brewery\_name, city and state;
 flight to check four time columns; Rayyan's \texttt{jounral\_abbreviation}
@@ -467,40 +482,18 @@ flight to check four time columns; Rayyan's \texttt{jounral\_abbreviation}
 separate determinants for journal\_title. Every target uses its full dirty
 table as context; empty strings are ordinary categories.
 
-There are 18,734 target cells: 13,762 accepted and 4,972 rejected. For accepted
-targets all radii were computed. Editable keys turn 1,133 fixed-key infinite
-radii finite (Table~\ref{tab:census}) and lower one finite radius, Rayyan
-journal\_title row 644, from two to one through a singleton group, as
-Theorem~\ref{thm:reject} predicts. Among accepted targets, 1,816 differ from
-the reference, and 1,493 of these have radius at least two: a stable
+Of 18,734 target cells, 13,762 were accepted and 4,972 rejected. For accepted
+targets every rejection radius was computed. Editable keys turned 1,133
+fixed-key infinite radii finite and lowered one finite radius (Rayyan
+journal\_title row 644, from two to one), always through singleton groups, as
+Theorem~\ref{thm:reject} predicts. Of the accepted targets, 1,816 differ from
+the reference value and 1,493 of these have radius at least two: a stable
 acceptance can still be wrong.
-
-\begin{table}[H]
-\centering\small
-\begin{tabular}{lrrr}
-\toprule
-Task & Accepted & Fixed $\INF$ to finite & Finite decrease\\
-\midrule
-Beers brewery\_name&2410&127&0\\
-Beers city&2275&127&0\\
-Beers state&2275&127&0\\
-Flights sched\_dep\_time&1663&0&0\\
-Flights act\_dep\_time&1133&0&0\\
-Flights sched\_arr\_time&1411&0&0\\
-Flights act\_arr\_time&1166&0&0\\
-Rayyan journal\_issn&768&384&0\\
-Rayyan journal\_title&661&368&1\\
-\midrule
-Total&13762&1133&1\\
-\bottomrule
-\end{tabular}
-\caption{Accepted-target census from E011.}\label{tab:census}
-\end{table}
 
 For rejected targets, a hash-ordered selection of up to four per task gave 32
 targets. Each editable-key and fixed-key MILP ran once with a five-second limit.
-All 32 fixed solves and 30 editable-key solves were optimal; every exact pair
-had equal cost. The declared prediction of at least one strict accepting
+All 32 fixed solves and 30 editable-key solves were optimal, and every exact
+pair had equal cost. The declared prediction of at least one strict accepting
 gain in the journal\_title task was therefore not supported. Two editable-key
 models, rows 509 and 146 (one-based), timed out without bounds; their fixed
 optima are 104.
@@ -543,6 +536,19 @@ Their objective restores consistency of the whole table; ours flips one
 protected decision without requiring consistency
 (Proposition~\ref{prop:separation}). The parameters differ: $\{\{a,b\},\{a,c\}\}$
 has $\mathrm{mlc}=1$ but $w=2$, and $q$ singletons have $\mathrm{mlc}=q$ but $w=1$.
+
+\paragraph{Resilience, bribery and control.}
+Resilience~\cite{resilience} is the minimum number of tuple deletions that
+makes a Boolean conjunctive query false, and is classified by query structure.
+Our radius is likewise a minimum intervention flipping a Boolean outcome, but
+it edits cells, concerns a plurality decision rather than a query, and our
+classification is of the gap between two edit spaces rather than of
+tractability. In social choice, dependent-cell edits resemble bribery that
+changes votes~\cite{bribery}. Key edits resemble control by adding or deleting
+voters~\cite{control}, with one row voting in every check whose group it
+matches. Unweighted plurality bribery in a single election is
+polynomial~\cite{bribery}. The overlap of target groups across checks is what
+Theorem~\ref{thm:hardness} exploits.
 
 \paragraph{Causality, vote operations and lobbying.}
 Cell-based causality for repairs~\cite{cellcauses}, repair-based causes for
@@ -593,7 +599,19 @@ attained for every schema, and the optima always agree exactly for laminar
 schemas. This explains a negative empirical outcome and separates the question
 of when key errors matter from the question of how hard the optimization is.
 
-\begin{thebibliography}{10}
+Several questions remain open.
+\begin{itemize}
+\item \emph{Scale.} Is the factor $w(F)$ attained with $\rfull=k$ for every
+$k$? Replicating the construction of Theorem~\ref{thm:sharp} does not suffice,
+because one dependent-cell flip can raise a binary margin by two.
+\item \emph{Approximation.} We have not studied approximation algorithms for
+either radius; Theorem~\ref{thm:exchange} only transfers a fixed-key
+approximation to $\rfull$ at a further loss of $w(F)$.
+\item \emph{Extensions.} How do weighted costs, different dependent attributes,
+or co-winner ties change the classification?
+\end{itemize}
+
+\begin{thebibliography}{99}
 \raggedright
 \bibitem{dilworth} R. P. Dilworth. A Decomposition Theorem for Partially
 Ordered Sets. \emph{Annals of Mathematics} 51(1):161--166, 1950.
@@ -641,6 +659,28 @@ Neighbor Classifiers. ICDT, 2022.
 \bibitem{wan} X. Wan and X. Han. Strength Is Not Value: Rethinking Approximate
 Functional Dependency Measures for Error Detection.
 \href{https://arxiv.org/abs/2610.08189v1}{arXiv:2610.08189v1}, 2026.
+\bibitem{bohannon} P. Bohannon, W. Fan, M. Flaster and R. Rastogi. A
+Cost-Based Model and Effective Heuristic for Repairing Constraints by Value
+Modification. SIGMOD, pp. 143--154, 2005.
+\href{https://doi.org/10.1145/1066157.1066175}{doi:10.1145/1066157.1066175}.
+\bibitem{horizon} E. K. Rezig, M. Ouzzani, W. G. Aref, A. Elmagarmid,
+A. Mahmood and M. Stonebraker. Horizon: Scalable Dependency-driven Data
+Cleaning. PVLDB 14(11), 2546--2554, 2021.
+\href{https://doi.org/10.14778/3476249.3476301}{doi:10.14778/3476249.3476301}.
+\bibitem{fulkerson} D. R. Fulkerson. Note on Dilworth's Decomposition Theorem
+for Partially Ordered Sets. \emph{Proceedings of the American Mathematical
+Society} 7(4):701--702, 1956.
+\bibitem{resilience} C. Freire, W. Gatterbauer, N. Immerman and A. Meliou.
+The Complexity of Resilience and Responsibility for Self-Join-Free
+Conjunctive Queries. PVLDB 9(3), 2015.
+\href{https://arxiv.org/abs/1507.00674}{arXiv:1507.00674}.
+\bibitem{bribery} P. Faliszewski, E. Hemaspaandra and L. A. Hemaspaandra.
+How Hard Is Bribery in Elections? \emph{Journal of Artificial Intelligence
+Research} 35:485--532, 2009.
+\href{https://doi.org/10.1613/jair.2676}{doi:10.1613/jair.2676}.
+\bibitem{control} J. J. Bartholdi III, C. A. Tovey and M. A. Trick. How Hard
+Is It to Control an Election? \emph{Mathematical and Computer Modelling}
+16(8--9):27--40, 1992.
 \bibitem{raha} M. Mahdavi, Z. Abedjan, R. Castro Fernandez, S. Madden,
 M. Ouzzani, M. Stonebraker and N. Tang. Raha: A Configuration-Free Error
 Detection System. SIGMOD, 2019.
