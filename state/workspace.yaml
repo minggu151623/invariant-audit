@@ -1954,7 +1954,7 @@ M36:
   consecutive_no_progress_turns: 0
   blocked_audit_threshold_met: false
   owner_review_as_research_gate: false
-  submission_readiness_recommended: false
+  submission_readiness_recommended: owner_decision_after_author_read_through
   literature_addendum: literature/schema-width-positioning-20261105.md#addendum-2026-11-07-synasc-2026-slide-inspection
   synasc_slides_inspected: all_18_viewer_pages_full_paper_not_found
   synasc_theorem_level_overlap_visible: false
@@ -1962,9 +1962,9 @@ M36:
   proof_errors_found: 0
   manuscript: paper/context-edit-stability-r4/tex/main.tex
   preview_pdf: paper/context-edit-stability-r4/preview.pdf
-  preview_pdf_sha256: 780717b22a8b91d6c5ab86baeaef1f3efebdda73ca2ef3a645145918aed808b1
+  preview_pdf_sha256: f6bb05a1b0cf10a0c9913cbc942d452013e17e13424f77eab49f0f03182a428d
   supplement: paper/context-edit-stability-r4/supplement.zip
-  supplement_sha256: 074b654b906ab09f5c08b96e62fc078d6b695535594317278bdcfc04d4d5481b
+  supplement_sha256: dd16bb7b5feff3c32686fd472eecfa08ca69684d3269029ae61ac98892405a9d
   pages: 10
   all_pages_visually_inspected: true
   compiler_warnings: 0
@@ -1984,6 +1984,13 @@ M36:
   historical_originality_certified: false
   owner_report: to_human/M36-R4-progress-vi.md
   owner_submission_approval: not_given
+  owner_arxiv_account: reported_present
+  proof_review_20261107: paper/context-edit-stability-r4/review/review-20261107.md
+  proof_review_independent: false
+  proof_review_math_errors: 0
+  proof_review_scope_fix: theorem1_corollary1_restricted_to_initially_rejected_target
+  review_bruteforce_tables: 10900
+  draft_only_text_removed: true
   license: unselected
   actual_submission: absent
   next_action: seek_external_expert_reading_of_theorems_1_2_and_consider_nonlaminar_external_study_protocol

@@ -1235,3 +1235,18 @@ The pdfLaTeX build of the extracted source ZIP gives 10 pages, no warnings and
 all fonts embedded; all pages were rendered and inspected. `check_revision.py`
 now includes this build, and the full check passes. arXiv's own compile has
 not been tried. No new experiment was run.
+
+### 2026-11-07 — M36 addendum: proof review, scope fix, arXiv text
+
+At the owner's request, an AI session in this project (not independent) read
+the R4 proofs line by line.
+
+- No mathematical error was found.
+- Theorem 1 and Corollary 1 were missing their scope, an initially rejected
+  target. A counterexample shows the scope is needed for accepted targets.
+  The scope was added throughout.
+- Draft-only text was removed.
+- A post hoc random brute force (10,900 tables, ternary keys and y) agreed
+  with Theorems 1–3.
+- The full check passed. No new experiment under protocol was run.
+

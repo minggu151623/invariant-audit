@@ -1,0 +1,5 @@
+1 4 400 any -> {'rejected': 247, 'accepted': 153, 'gaps': 0, 'laminar_rej': 141}
+2 5 3000 any -> {'rejected': 1936, 'accepted': 1064, 'gaps': 10, 'laminar_rej': 1037}
+3 5 3000 nonlam -> {'rejected': 2187, 'accepted': 813, 'gaps': 27, 'laminar_rej': 0}
+4 5 3000 gap -> {'rejected': 1932, 'accepted': 1068, 'gaps': 63, 'laminar_rej': 0}
+5 6 1500 gap -> {'rejected': 979, 'accepted': 521, 'gaps': 30, 'laminar_rej': 0}

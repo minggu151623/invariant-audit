@@ -2,10 +2,10 @@
   "actual_submission": "absent",
   "all_fonts_embedded": true,
   "artifact_sha256": {
-    "paper/context-edit-stability-r4/preview.pdf": "780717b22a8b91d6c5ab86baeaef1f3efebdda73ca2ef3a645145918aed808b1",
+    "paper/context-edit-stability-r4/preview.pdf": "f6bb05a1b0cf10a0c9913cbc942d452013e17e13424f77eab49f0f03182a428d",
     "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
-    "paper/context-edit-stability-r4/source.zip": "bbb3e1d79f63c9c8e808fdc39a4fc53115859ed3491a7262d9fafe0edb11bb77",
-    "paper/context-edit-stability-r4/tex/main.tex": "b33481c14cbe6404044c53cec074e842710db5a13f08fb5c2da1a1508274e6b5"
+    "paper/context-edit-stability-r4/source.zip": "679d626d8c4a9d4a3339e30efca0221bac566223ba45ed83f8bf4d3a672073c4",
+    "paper/context-edit-stability-r4/tex/main.tex": "9fb6ee0509b942625da2e6f8fd3a34aa235a095bdfe07d3fbde5cfe0115c7251"
   },
   "author_approval": "not_given",
   "author_exact_unicode": true,

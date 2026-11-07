@@ -1,8 +1,9 @@
 # Schema width and editable keys: R4 working preprint
 
 2026-11-07. Author: Trần Vũ Bảo Minh, Independent Researcher.
-Local manuscript for author review. Not approved, not submitted, no license
-chosen. R3 and every earlier packet are preserved unchanged.
+Prepared for arXiv: the draft-only status sentences have been removed from the
+text. It is not submitted, and no license has been chosen. R3 and every
+earlier packet are preserved unchanged.
 
 `tex/main.tex` is the source; `preview.pdf` is the compiled 10-page draft.
 `source.zip` contains only `main.tex`. It compiles with two engines:
@@ -71,3 +72,11 @@ peer review exists. The literature search is targeted; the closest neighbour
 (chain dominance in laminar election manipulation) was inspected from slides
 only. The source study is exploratory, and its accepting-gain prediction was
 structurally impossible, a disclosed design error.
+
+A post-draft proof review (`review/review-20261107.md`) was done by an AI
+session in the same project, so it is not independent. It found no
+mathematical error. It did find that Theorem 1 and Corollary 1 omitted their
+scope, an initially rejected target; this is now fixed, with a counterexample
+for accepted targets. An independent random brute force
+(`review/review_bruteforce.py`, ternary keys and y, 10,900 tables) agreed with
+Theorems 1–3. It was written and run after the fact; it is not preregistered.

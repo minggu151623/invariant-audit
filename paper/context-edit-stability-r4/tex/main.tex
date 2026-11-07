@@ -29,7 +29,7 @@
 \title{Schema Width Bounds the Benefit of Editable Keys\\
 for Plurality-Based Functional-Dependency Checks}
 \author{\vn{Trần Vũ Bảo Minh}\\[0.4em]\small Independent Researcher}
-\date{Working preprint R4 -- November 7, 2026}
+\date{November 7, 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -42,8 +42,8 @@ dependent cells. For a family $F$ of determinants sharing one dependent
 attribute, let $w(F)$ be the largest inclusion antichain among the determinants
 that contain a common key. We prove that the fixed-key optimum is at most
 $w(F)$ times the editable-key optimum, and that every family has a binary table
-attaining exactly this factor. Hence the two optima agree on every table if and
-only if $F$ is laminar. The upper bound uses a margin-capped exchange that
+attaining exactly this factor. Hence the two optima agree on every such table if
+and only if $F$ is laminar. The upper bound uses a margin-capped exchange that
 replaces each key edit by at most one dependent-cell flip per inclusion chain.
 The classification concerns the listed checks, not logical FD equivalence, and
 laminarity does not make optimization easy: acceptance within a budget remains
@@ -97,14 +97,14 @@ dependent-cell edits.}\label{tab:example}
 
 \paragraph{Contributions.}
 \begin{enumerate}
-\item For every listed family $F$ we prove
+\item For every listed family $F$ and every initially rejected target we prove
 $\rfull\le\rfix\le w(F)\,\rfull$, where $w(F)$ is the maximum, over keys
 $j$, of the inclusion width of the determinants containing $j$
 (Theorem~\ref{thm:exchange}). The proof converts any optimal editable-key
 witness into a fixed-key witness.
 \item The factor is sharp for each family separately: some binary table has
 $\rfull=1$ and $\rfix=w(F)$ (Theorem~\ref{thm:sharp}). Consequently the two
-optima coincide on every table exactly when $F$ is laminar
+optima coincide on every table with a rejected target exactly when $F$ is laminar
 (Corollary~\ref{cor:laminar}).
 \item The equality is a statement about worst cases and edit spaces, not about
 tractability. Making a rejected target accept within a budget is NP-complete
@@ -158,6 +158,9 @@ initially rejected target both radii are finite: changing every nonzero context
 $y$ to $0$ accepts.
 
 \section{Schema width and the accepting gap}\label{sec:width}
+Throughout this section the target is initially rejected, and $\rfull$, $\rfix$
+are the costs of making it accept.
+
 For a key $j$ let $F_j=\{X\in F:j\in X\}$, partially ordered by inclusion.
 Let $w_j$ be the size of a largest antichain in $F_j$ (zero if $F_j$ is
 empty) and
@@ -210,7 +213,7 @@ row, or set its $y$ to $0$ and add zero-key matches. A key edit never removes a
 rival from a group. Each row has at most $1+2^{q-|M(r)|}$ actions.
 
 \begin{theorem}[Exchange bound]\label{thm:exchange}
-For every table and listed family,
+For every listed family and every table whose target is initially rejected,
 \[
  \rfull\le\rfix\le w(F)\,\rfull.
 \]
@@ -287,7 +290,7 @@ Thus $\rfix=w$. The table has at most $w+1+w|F|$ context rows.
 \end{proof}
 
 \begin{corollary}[Laminar characterization]\label{cor:laminar}
-The following are equivalent: (1) $\rfix=\rfull$ for every table;
+The following are equivalent: (1) $\rfix=\rfull$ for every table with an initially rejected target;
 (2) $w(F)=1$; (3) $F$ is laminar.
 \end{corollary}
 \begin{proof}
@@ -295,6 +298,11 @@ Two intersecting incomparable determinants share some key $j$ and form a
 two-element antichain in $F_j$, and conversely. This gives (2)$\Leftrightarrow$(3).
 Theorems~\ref{thm:exchange} and~\ref{thm:sharp} give (1)$\Leftrightarrow$(2).
 \end{proof}
+
+The restriction to rejected targets is necessary. For the single rule $x\to y$,
+target $(0,0)$ and one context row $(1,1)$, the target is accepted; one key
+edit makes it reject, but with fixed keys its group stays $\{t\}$ and
+$\rfix=\INF$ (Theorem~\ref{thm:reject}), although $\{x\}$ is laminar.
 
 \begin{remark}[What the result does and does not say]
 The factor $w(F)$ is the largest \emph{possible} gain; nonlaminar schemas have
@@ -569,10 +577,8 @@ E009--E011 used Python 3.13.5, NumPy 2.1.3 and SciPy 1.17.1 (HiGHS). Solver
 optima required a checked integer witness and bound agreement within $10^{-7}$;
 timeouts stay censored. The supplement contains the E013 protocol, code,
 summary, compressed case records, proof and a read-only replay that rechecks
-every stored witness and can repeat the frozen raw enumeration. No public
-repository or arXiv submission is claimed. Generative AI was used substantially
-for ideation, proofs, code and writing. The named author's review is pending,
-and this draft is not an authorization to submit or publish it.
+every stored witness and can repeat the frozen raw enumeration. Generative AI was
+used substantially for ideation, proofs, code and writing.
 
 \section{Conclusion}
 For plurality-based FD checks with a protected target, the benefit of allowing

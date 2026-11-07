@@ -4,9 +4,10 @@
   "current_pdf": "paper/context-edit-stability-r4/preview.pdf",
   "submission_fields": "none_for_R4_yet; paper/submission-r3/ fields describe R3 only",
   "guide": "to_human/M36-R4-progress-vi.md",
-  "status": "research_resumed_not_recommended_for_submission",
+  "status": "prepared_for_arxiv_pending_author_read_through_and_license",
   "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
   "current_research": "milestones/M36-R4.md",
-  "note": "R4 integrates the E013 width theorem. R3 and older packets are preserved historical snapshots. No owner approval, license, account or submission.",
-  "current_supplement": "paper/context-edit-stability-r4/supplement.zip"
+  "note": "R4 integrates the E013 width theorem; scope fix and arXiv text prepared 2026-11-07 (see paper/context-edit-stability-r4/review/review-20261107.md). Owner reports an arXiv account. No license chosen, no submission.",
+  "current_supplement": "paper/context-edit-stability-r4/supplement.zip",
+  "arxiv_source": "paper/context-edit-stability-r4/source.zip (main.tex only; pdfLaTeX-checked with TeX Live 2026)"
 }
