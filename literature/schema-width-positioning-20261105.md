@@ -92,3 +92,59 @@ certificate. Next inspect fixed-versus-mutable intervention classifications
 and voting models with nested constituencies; compare formal statements and
 proofs, not titles alone. Historical priority and independent assessment
 remain unestablished. No external publication action follows from this note.
+
+## Addendum 2026-11-07: SYNASC 2026 slide inspection
+
+Inspected directly, in a browser, all 18 slide images of the Miclaus/Mureșan/
+Popa SYNASC 2026 deck (viewer pages 1–18; printed numbers 1/15–15/15, with
+overlay duplicates). Image URLs follow
+`https://easychair.org/slides/3501050135177721941/20432196-<k>-large.jpg`.
+Nothing was downloaded into the workspace. These are slides, not the full paper:
+no proof was read. Searches on 2026-11-07 found no public full text; the only
+other hit was the earlier Tao et al. FAW 2021 record (CORE, LNCS 12874,
+pp. 53–64), whose abstract was not inspected beyond a search snippet.
+
+Observed content (paraphrased):
+
+- Model (p.2): strategies s_h with costs q_h influence voter sets I_h; voter v_j
+  switches to target p once at least T_j selected strategies influence it;
+  minimize cost so p is a plurality **co-winner** (ties win; ours reject).
+- Prior work table (p.3) credits Tao et al. IJTCS-FAW 2021 with NP-hardness and
+  a polynomial DP on the laminar tree for every fixed number of candidates.
+- Their results (p.4): log-inapproximability via Set Cover; NP-hardness with
+  |I_h|=3; (1+ln n) greedy via submodular set cover; laminar NP-hardness for
+  variable m via X3C; exact laminar unit/unit algorithms via maximal-strategy
+  dominance plus DP; FPT for laminar unit-cost arbitrary thresholds via chain
+  decomposition plus prefix enumeration; ILP with LP gap at least two.
+- p.10 "Laminar DP": state D[a,tau] over the first a maximal strategies with
+  capped vector tau; caps L_i; complexity O(p m ((n+m)/m)^m).
+- p.11 "Laminar Chains": within a chain of nested influence sets, any t chosen
+  strategies can be shifted to the first t; enumerate prefix vectors with sum
+  at most B; FPT in B + k, k the number of chains.
+- p.12 ILP; p.13 open problems (parameter m alone; thresholds above one).
+
+Comparison with E013, at the level of these statements:
+
+- Shared technique: on a chain of nested sets, one action on the appropriate
+  end dominates others, and a chain decomposition bounds the work. Their use
+  is a dominance/enumeration device inside one action space. E013 also uses
+  nested-set dominance; this idea itself is not ours and must be credited as
+  a known technique family (with Dilworth for the partition).
+- Different object of laminarity: their laminar family is of voter sets. Ours
+  is of *column* sets; every induced target group contains the protected row,
+  so the row-group family always pairwise intersects and is laminar only if it
+  is a chain. Their laminar-tree DP therefore does not apply verbatim.
+- Different statement type: the slides give algorithms and hardness for one
+  intervention space. E013 compares the optima of two edit spaces (RHS-only vs
+  RHS-plus-key), gives the exact worst-case ratio w for every listed family,
+  and characterizes universal equality by laminarity. No such ratio,
+  per-family sharpness, or equality characterization appears on the slides.
+- Caps: their DP caps counts at requirements; our exchange proof caps margins
+  at one. Both are routine saturation devices; ours is used for an invariant,
+  not a DP state space.
+
+Conclusion: closest methodological neighbour found so far; no theorem-level
+overlap visible on the slides. This does not exclude a lemma in the unseen
+full paper or in Tao et al. 2021. The manuscript should cite the deck as
+related work (chain dominance in laminar influence) and claim only the
+specific exchange ratio, its sharp construction and the characterization.

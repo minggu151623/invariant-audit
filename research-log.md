@@ -1206,3 +1206,15 @@ Added Vietnamese explanation and direct primary-source comparison. Located a
 2026 laminar media-influence/chain-decomposition lead requiring proof-level
 inspection. R3 stays unchanged and is not recommended for submission yet.
 Goal active, no local research blocker, no approval question repeated.
+
+## 2026-11-07 — M36 R4 manuscript
+
+Owner: “bạn đọc file [AGENT_HANDOFF.md] và tiếp tục công việc nhé.” Continued
+from the handoff without restarting. Inspected all 18 SYNASC 2026 slide images
+and appended a comparison to the schema-width literature note. Re-audited the
+E013 proof; no error. Wrote R4 centered on the width theorem, with a new
+standalone `replay_e013.py` and `check_revision.py`. Build: 10 pages, zero log
+warnings, fonts embedded, extracted source text identical, extracted supplement
+replay and re-enumeration pass. All pages inspected visually. No experiment run,
+no solver run, R3 and prior evidence unchanged (literature note appended by
+design). Not recommended for submission yet; no approval/license/account.

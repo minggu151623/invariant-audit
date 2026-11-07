@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M35
+current_milestone: M36
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -1942,3 +1942,44 @@ M35:
   license: unselected
   actual_submission: absent
   next_action: inspect_closest_chain_based_intervention_proofs_then_recenter_manuscript_if_claim_survives
+
+M36:
+  date: 2026-11-07
+  path: milestones/M36-R4.md
+  owner_instruction_exact: "bạn đọc file [AGENT_HANDOFF.md] và tiếp tục công việc nhé"
+  status: R4_manuscript_recentered_on_width_theorem_built_and_checked_locally
+  goal_status: active
+  scope: local_research_and_manuscript_not_external_submission
+  current_goal_turn_classification: progress_literature_inspection_proof_reaudit_and_new_manuscript
+  consecutive_no_progress_turns: 0
+  blocked_audit_threshold_met: false
+  owner_review_as_research_gate: false
+  submission_readiness_recommended: false
+  literature_addendum: literature/schema-width-positioning-20261105.md#addendum-2026-11-07-synasc-2026-slide-inspection
+  synasc_slides_inspected: all_18_viewer_pages_full_paper_not_found
+  synasc_theorem_level_overlap_visible: false
+  proof_reaudit: experiments/E013-schema-width/proof-audit-20261107.md
+  proof_errors_found: 0
+  manuscript: paper/context-edit-stability-r4/tex/main.tex
+  preview_pdf: paper/context-edit-stability-r4/preview.pdf
+  preview_pdf_sha256: 0c29aa914140e523b441f057d566d2c70822fb20f5378f476a50263110025dc8
+  supplement: paper/context-edit-stability-r4/supplement.zip
+  supplement_sha256: 3bd78ce1cc95edbf61324452f1ad778d2e7cb906d8e42fcac4b987e138f4cedd
+  pages: 10
+  all_pages_visually_inspected: true
+  compiler_warnings: 0
+  fonts_embedded: true
+  extracted_source_compile_text_identical: true
+  extracted_supplement_replay_records: passed
+  extracted_supplement_reenumeration: passed_line_identical
+  new_experiments_run: 0
+  prior_scientific_artifacts_preserved: 197
+  R3_manuscript_and_packets: unchanged_historical_candidate
+  intentionally_appended_files: [literature/schema-width-positioning-20261105.md]
+  independent_review: false
+  historical_originality_certified: false
+  owner_report: to_human/M36-R4-progress-vi.md
+  owner_submission_approval: not_given
+  license: unselected
+  actual_submission: absent
+  next_action: seek_external_expert_reading_of_theorems_1_2_and_consider_nonlaminar_external_study_protocol

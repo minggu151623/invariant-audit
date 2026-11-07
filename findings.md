@@ -1,6 +1,27 @@
 # Findings
 
-## Current research — 2026-11-05, M35
+## Current research — 2026-11-07, M36
+
+R4 (`paper/context-edit-stability-r4/`) is now the current manuscript. It is
+centered on the E013 width theorem: rho_full <= rho_fixed <= w(F)*rho_full,
+sharp for every listed family, with universal equality exactly for laminar
+families. R3's rejection formula, binary singleton NP-completeness and repair
+separation are kept as complementary results. E011's post hoc reanalysis is
+reported separately from its original 30 exact pairs and two timeouts.
+
+The SYNASC 2026 media-influence slides were inspected in full (18 images).
+They share nested-chain dominance and chain decompositions, which R4 credits,
+but optimize one action space over laminar voter sets with co-winner ties.
+No theorem-level overlap is visible; the full paper was not found. A second
+line-by-line reading of the E013 proof found no error. Both are AI self-review.
+
+The R4 build, source ZIP, supplement and an extracted replay (record checks
+plus line-identical re-enumeration) pass; all 10 pages were inspected visually.
+No new experiment was run. Submission is not recommended before an external
+expert reads Theorems 1–2. See [M36](milestones/M36-R4.md) and the
+[Vietnamese report](to_human/M36-R4-progress-vi.md). Goal remains active.
+
+## Research — 2026-11-05, M35 (historical)
 
 The owner resumed research explicitly after declining submission approval.
 The old submission wait is historical and does not gate local research.

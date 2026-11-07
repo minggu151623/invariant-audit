@@ -1,11 +1,12 @@
 {
-  "date": "2026-11-05",
-  "current_manuscript": "paper/context-edit-stability-r3/tex/main.tex",
-  "current_pdf": "paper/context-edit-stability-r3/preview.pdf",
-  "submission_fields": "paper/submission-r3/submission-fields-draft.json",
-  "guide": "paper/submission-r3/submission-guide-vi.md",
+  "date": "2026-11-07",
+  "current_manuscript": "paper/context-edit-stability-r4/tex/main.tex",
+  "current_pdf": "paper/context-edit-stability-r4/preview.pdf",
+  "submission_fields": "none_for_R4_yet; paper/submission-r3/ fields describe R3 only",
+  "guide": "to_human/M36-R4-progress-vi.md",
   "status": "research_resumed_not_recommended_for_submission",
   "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
-  "current_research": "milestones/M35-schema-width.md",
-  "note": "R3 is a preserved historical candidate. E013 proof and results are not yet integrated into its PDF."
+  "current_research": "milestones/M36-R4.md",
+  "note": "R4 integrates the E013 width theorem. R3 and older packets are preserved historical snapshots. No owner approval, license, account or submission.",
+  "current_supplement": "paper/context-edit-stability-r4/supplement.zip"
 }

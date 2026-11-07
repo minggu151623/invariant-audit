@@ -1,0 +1,623 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,
+  ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,float}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\INF}{\infty}
+\newcommand{\rfull}{\rho_{\rm full}}
+\newcommand{\rfix}{\rho_{\rm fixed}}
+\setlength{\emergencystretch}{2em}
+\title{Schema Width Bounds the Benefit of Editable Keys\\
+for Plurality-Based Functional-Dependency Checks}
+\author{Trần Vũ Bảo Minh\\[0.4em]\small Independent Researcher}
+\date{Working preprint R4 -- November 7, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A plurality-based functional-dependency check accepts a target's dependent value
+when it is the unique plurality among rows that agree with the target on a
+determinant. We study the minimum number of context-cell edits that makes every
+listed check accept a protected, initially rejected target, and ask how much
+cheaper this becomes when determinant (key) cells may change as well as
+dependent cells. For a family $F$ of determinants sharing one dependent
+attribute, let $w(F)$ be the largest inclusion antichain among the determinants
+that contain a common key. We prove that the fixed-key optimum is at most
+$w(F)$ times the editable-key optimum, and that every family has a binary table
+attaining exactly this factor. Hence the two optima agree on every table if and
+only if $F$ is laminar. The upper bound uses a margin-capped exchange that
+replaces each key edit by at most one dependent-cell flip per inclusion chain.
+The classification concerns the listed checks, not logical FD equivalence, and
+laminarity does not make optimization easy: acceptance within a budget remains
+NP-complete for singleton determinants. For the reverse direction we give an
+exact formula. Exhaustive finite checks cover 81,893 rejected table/family
+pairs. In a reused-source study on Beers, Flights and Rayyan all nine check
+families are laminar, which explains, post hoc, why a predicted accepting gain
+from editable keys could not occur.
+\end{abstract}
+
+\section{Introduction}
+Functional dependencies (FDs) describe agreement between attributes. A simple
+detector judges an observed dependent value by comparing it with the unique
+plurality among rows that share its determinant values. Such a decision depends
+on context. Editing another row's dependent cell changes a vote; editing one of
+its key cells moves the row into or out of the target's group. An audit that
+trusts all key cells therefore answers a different question from one that
+allows them to be wrong.
+
+We measure this as an exact decision-sensitivity problem. The target row is
+immutable, every changed context cell costs one, and the edited table need not
+satisfy any FD. Let $\rfix$ be the minimum cost of making all checks accept a
+rejected target when only dependent cells may change, and $\rfull$ the minimum
+when key cells may change too. Always $\rfull\le\rfix$. The question is how
+large the gap can be, and which schemas allow a gap at all.
+
+\paragraph{A four-row example.}
+Take rules $(a,b)\to y$ and $(a,c)\to y$ and the binary table in
+Table~\ref{tab:example}. Each target group contains the target and one
+rival, so both checks tie and reject. With fixed keys, $r_1.y$ and $r_2.y$
+must both change: $\rfix=2$. Changing only $r_3.a$ to $0$ moves $r_3$
+into both groups at once, giving $\rfull=1$. The two determinants share the key
+$a$ but neither contains the other. Our main result shows that this is the
+only source of a gap, and measures exactly how large it can become.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrrr}
+\toprule
+Row & $a$ & $b$ & $c$ & $y$\\
+\midrule
+Target (protected) &0&0&0&0\\
+$r_1$ &0&0&1&1\\
+$r_2$ &0&1&0&1\\
+$r_3$ &1&0&0&0\\
+\bottomrule
+\end{tabular}
+\caption{Constructed illustration, not source data. One key edit replaces two
+dependent-cell edits.}\label{tab:example}
+\end{table}
+
+\paragraph{Contributions.}
+\begin{enumerate}
+\item For every listed family $F$ we prove
+$\rfull\le\rfix\le w(F)\,\rfull$, where $w(F)$ is the maximum, over keys
+$j$, of the inclusion width of the determinants containing $j$
+(Theorem~\ref{thm:exchange}). The proof converts any optimal editable-key
+witness into a fixed-key witness.
+\item The factor is sharp for each family separately: some binary table has
+$\rfull=1$ and $\rfix=w(F)$ (Theorem~\ref{thm:sharp}). Consequently the two
+optima coincide on every table exactly when $F$ is laminar
+(Corollary~\ref{cor:laminar}).
+\item The equality is a statement about worst cases and edit spaces, not about
+tractability. Making a rejected target accept within a budget is NP-complete
+for binary singleton schemas, which are laminar (Theorem~\ref{thm:hardness}).
+For the opposite direction, rejection, an exact formula shows that keys help
+only through singleton groups (Theorem~\ref{thm:reject}).
+\item Locked exhaustive checks of raw edit spaces agree with every finite
+prediction. A post hoc reanalysis of an earlier source study shows that its
+schemas were all laminar, so a predicted accepting gain was impossible; we
+report this design error rather than changing the rules after the fact.
+\end{enumerate}
+
+The chain-partition step uses Dilworth's theorem~\cite{dilworth}; nested-set
+dominance also appears in laminar election-manipulation
+algorithms~\cite{emmi2026}. We claim the specific exchange ratio, its sharpness
+for each family, and the laminar characterization, not these techniques.
+A targeted search found no identical statement (Section~\ref{sec:related});
+this is not a historical-priority guarantee. A radius certifies stability of a
+decision under a stated edit model. It does not say which cells are wrong and
+is not evidence of better cleaning accuracy.
+
+\section{Model}
+Let $T=(t,r_1,\ldots,r_{n-1})$ be identified rows with $q\ge1$ categorical key
+attributes and one dependent attribute $y$. Duplicate rows are allowed. The RHS
+domain has $d\ge2$ values; each key domain contains the target value and an
+alternative. By relabeling each column, assume the target is all zero. A
+nonempty family $F$ of distinct nonempty subsets of $\{1,\ldots,q\}$ lists the
+checks $X\to y$, $X\in F$. Define
+\[
+ G_X(T)=\{r\in T:r[X]=t[X]\},\qquad c_{Xv}(T)=|\{r\in G_X(T):r_y=v\}|.
+\]
+The target is accepted iff $c_{X0}(T)>c_{Xv}(T)$ for every $X\in F$ and
+$v\ne0$. Ties reject, and a plurality need not be a majority when $d>2$.
+
+An edited table keeps the same rows and leaves $t$ unchanged. Context cells may
+independently take any value in their domains. The cost is the cell Hamming
+distance $H(T,T')$. For a target whose decision is to be flipped, $\rfull$ is
+the minimum cost of a flip and $\rfix$ the minimum over edits that keep every
+key cell; an impossible flip has cost $\INF$. There are no insertions,
+deletions, unequal costs, validity constraints or requirements on other
+targets. These restrictions are used in the proofs.
+
+For the accepting direction write $M(r)=\{j:r_j=0\}$ for the zero-key mask of a
+context row and define its contribution to rule $X$ and rival $v\ne0$ as
+\[
+ a_{Xv}(r)=\ind[X\subseteq M(r)]\bigl(\ind[r_y=0]-\ind[r_y=v]\bigr).
+\]
+The margin is $m_{Xv}(T)=1+\sum_{r\ne t}a_{Xv}(r)$, where the $1$ is the
+protected target's vote. Acceptance means $m_{Xv}\ge1$ for all $X,v$. For an
+initially rejected target both radii are finite: changing every nonzero context
+$y$ to $0$ accepts.
+
+\section{Schema width and the accepting gap}\label{sec:width}
+For a key $j$ let $F_j=\{X\in F:j\in X\}$, partially ordered by inclusion.
+Let $w_j$ be the size of a largest antichain in $F_j$ (zero if $F_j$ is
+empty) and
+\[
+ w(F)=\max_j w_j\ \ge 1.
+\]
+$F$ is \emph{laminar} if any two intersecting determinants are nested.
+Table~\ref{tab:widths} lists simple cases. The last row uses Sperner's theorem
+on the subsets of the remaining $q-1$ keys.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Listed family $F$ & $w(F)$ & Laminar\\
+\midrule
+Singletons $\{1\},\ldots,\{q\}$ & 1 & yes\\
+A chain $\{1\}\subset\{1,2\}\subset\cdots\subset\{1,\ldots,q\}$ & 1 & yes\\
+$\{a,b\},\{a,c\}$ & 2 & no\\
+All $\binom{q}{2}$ pairs, $q\ge3$ & $q-1$ & no\\
+All nonempty subsets & $\binom{q-1}{\lfloor (q-1)/2\rfloor}$ & no for $q\ge3$\\
+\bottomrule
+\end{tabular}
+\caption{Width of some determinant families.}\label{tab:widths}
+\end{table}
+
+\begin{lemma}[Normalization]\label{lem:norm}
+For every original context row $r$ and destination $u$ there is a destination
+$c$ with $H(r,c)\le H(r,u)$ and $a_{Xv}(c)\ge a_{Xv}(u)$ for all $X,v$, of
+one of two forms: (i) $c=r$ and $r_y\ne0$; or (ii) $c_y=0$,
+$M(c)\supseteq M(r)$, and every changed key of $c$ is set to $0$.
+\end{lemma}
+\begin{proof}
+Suppose $r_y\ne0$ and $u_y=r_y$. If $u=r$, take form (i). Otherwise $u$
+changes a key, so $H(r,u)\ge1$; take $c$ with the original keys and $c_y=0$,
+which costs one. Every contribution of $c$ is nonnegative and every
+contribution of $u$ nonpositive.
+
+In all other cases let $c_y=0$, set the keys in $M(r)\cup M(u)$ to $0$, and
+keep the original value elsewhere. The key cells changed by $c$ lie in
+$M(u)\setminus M(r)$ and are also changed by $u$. If $r_y=0$ the $y$ cost of
+$c$ is zero; otherwise it is one and $u_y\ne r_y$ also costs one. If $u_y=0$,
+every group containing $u$ contains $c$. If $u_y\ne0$, the contributions of
+$u$ are nonpositive while those of $c$ are nonnegative. Since margins are sums over rows, rows can be replaced
+independently without increasing cost or decreasing any margin.
+\end{proof}
+
+Thus some optimal editable-key witness uses only two row actions: keep a rival
+row, or set its $y$ to $0$ and add zero-key matches. A key edit never removes a
+rival from a group. Each row has at most $1+2^{q-|M(r)|}$ actions.
+
+\begin{theorem}[Exchange bound]\label{thm:exchange}
+For every table and listed family,
+\[
+ \rfull\le\rfix\le w(F)\,\rfull.
+\]
+More precisely, a normalized accepting witness with $R$ dependent-cell edits
+and $K_j$ edits in key column $j$ yields a fixed-key accepting witness of cost
+at most $R+\sum_j w_jK_j$.
+\end{theorem}
+\begin{proof}
+The first inequality holds because fixed-key edits are a subset. For the second
+take an optimal editable-key witness, normalized by Lemma~\ref{lem:norm}. By
+Dilworth's theorem~\cite[Theorem 1.1]{dilworth}, partition each $F_j$ into $w_j$
+inclusion chains.
+
+Apply the $R$ dependent-cell edits first and copy the result into two tables:
+$H$, which will execute the key edits, and $L$, which keeps the original keys
+and may flip further nonzero $y$ values to $0$. Maintain for all $X,v$
+\begin{equation}\label{eq:inv}
+ \min\bigl(m_{Xv}(L),1\bigr)\ \ge\ \min\bigl(m_{Xv}(H),1\bigr).
+\end{equation}
+Initially equality holds. Consider the next key edit in $H$, in column $j$. By
+normalization it sets a key to $0$ in a row whose $y$ is already $0$. The row
+joins exactly the groups of some determinants in $F_j$, the \emph{affected}
+rules, and each of their margins rises by one. No other margin changes.
+
+For each chain of $F_j$, look at its affected rules whose $L$-group still
+contains a context row with nonzero $y$. If there is none, do nothing.
+Otherwise let $X$ be the largest such determinant and flip one nonzero-$y$ row
+of $G_X(L)$ to $0$. For any other such rule $Y$ in the chain, $Y\subseteq X$,
+so $G_Y(L)\supseteq G_X(L)$ contains the flipped row; each of its margins
+rises by at least one (by two for the row's former value). An affected rule
+whose $L$-group has no nonzero-$y$ context row already has $m_{Xv}(L)\ge1$ from
+the target. A flip to $0$ never lowers any margin.
+
+Hence for each affected margin either $m_{Xv}(L)\ge1$ already, or
+$m_{Xv}(L)\ge m_{Xv}(H)$ by~\eqref{eq:inv} and $L$ gains at least as much as
+$H$. Unaffected margins of $H$ do not change. So~\eqref{eq:inv} persists, using
+at most $w_j$ flips for this key edit. Flipped rows had nonzero $y$, so they are
+distinct from each other and from the $R$ edited rows. When all key edits are
+processed, $H$ accepts; by~\eqref{eq:inv} so does $L$, which never changed a key
+or the target. Its cost is at most
+$R+\sum_jw_jK_j\le w(F)(R+\sum_jK_j)=w(F)\,\rfull$.
+\end{proof}
+
+The cap at one in~\eqref{eq:inv} is needed: a group with no rival left in $L$
+may have a smaller margin than in $H$ yet already accepts.
+
+\begin{theorem}[Sharpness for every family]\label{thm:sharp}
+For every listed family $F$ there is a binary table with an initially rejected
+target such that $\rfull=1$ and $\rfix=w(F)$.
+\end{theorem}
+\begin{proof}
+Choose $j$ with $w_j=w=w(F)$ and an antichain $A_1,\ldots,A_w$ in $F_j$.
+In the rows below, every key outside the stated zero mask is $1$.
+\begin{itemize}
+\item For each $i$, a row $r_i$ with $y=1$ and zero mask exactly $A_i$.
+\item A row $p$ with $y=0$ and every key $0$ except key $j$.
+\item For each $C\in F$ that contains none of the $A_i$, $w$ support rows with
+$y=0$ and zero mask exactly $C$.
+\end{itemize}
+The group of $A_i$ is $\{t,r_i\}$: $r_l$ with $l\ne i$ would need
+$A_i\subseteq A_l$; $p$ fails key $j\in A_i$; a support row for $C$ would need
+$A_i\subseteq C$. So each such check ties and rejects.
+
+Every other check accepts. If $C$ contains no $A_i$, its group has the target
+and $w$ support rows with $y=0$, against at most $w$ rivals. If
+$A_i\subseteq C\ne A_i$ and a rival $r_l$ were in $G_C$, then
+$A_i\subseteq C\subseteq A_l$, forcing $l=i$ and $C=A_i$; so $G_C$ has no rival.
+
+Changing $p_j$ to $0$ puts $p$ into every group, making every critical group
+$2{:}1$ and harming no check; as the target was rejected, $\rfull=1$. With
+fixed keys each critical group contains only the target and its own $r_i$, so
+the $w$ distinct cells $r_i.y$ must all change, and changing them suffices.
+Thus $\rfix=w$. The table has at most $w+1+w|F|$ context rows.
+\end{proof}
+
+\begin{corollary}[Laminar characterization]\label{cor:laminar}
+The following are equivalent: (1) $\rfix=\rfull$ for every table;
+(2) $w(F)=1$; (3) $F$ is laminar.
+\end{corollary}
+\begin{proof}
+Two intersecting incomparable determinants share some key $j$ and form a
+two-element antichain in $F_j$, and conversely. This gives (2)$\Leftrightarrow$(3).
+Theorems~\ref{thm:exchange} and~\ref{thm:sharp} give (1)$\Leftrightarrow$(2).
+\end{proof}
+
+\begin{remark}[What the result does and does not say]
+The factor $w(F)$ is the largest \emph{possible} gain; nonlaminar schemas have
+many tables with no gain. For laminar schemas the editable-key search can be
+replaced by the fixed-key search, whose only variables are context dependent
+cells. That reduction removes key variables but not hardness
+(Theorem~\ref{thm:hardness}). For general $F$, any exact fixed-key value is a
+$w(F)$-approximation of $\rfull$. The exchange needs an optimal editable-key
+witness as input, so it is not itself an approximation algorithm.
+\end{remark}
+
+\begin{remark}[Listed checks versus logical FDs]
+The result is about the listed plurality checks. Logically implied FDs cannot
+be removed. Add rule $\{a\}$ to Table~\ref{tab:example} together with two rows
+$(a,b,c,y)=(0,1,1,0)$. The $\{a\}$ group has three zeros and two ones and
+accepts, while the two original groups still tie; the ratio is still two. As
+FDs, $a\to y$ implies $ab\to y$ and $ac\to y$, but the single plurality check
+for $\{a\}$ accepts this table and has width one.
+\end{remark}
+
+\section{Complementary results}
+\subsection{Making an accepted target reject}
+Assume the target is accepted. Write $a_X=c_{X0}(T)$,
+$b_X=\max_{v\ne0}c_{Xv}(T)$ and $h_X(r)=|\{j\in X:r_j\ne0\}|$.
+
+\begin{theorem}[Exact rejection radius]\label{thm:reject}
+Let $C_X=\lceil(a_X-b_X)/2\rceil$ if $|G_X(T)|\ge2$, and
+$C_X=\min_{r\ne t}\bigl(h_X(r)+\ind[r_y=0]\bigr)$ if $G_X(T)=\{t\}$, with an
+empty minimum equal to $\INF$. Then $\rfull=\min_XC_X$. With fixed keys,
+$\rfix$ is the minimum over nonsingleton groups only.
+\end{theorem}
+\begin{proof}
+In a nonsingleton group a key edit changes a target/rival margin by at most one
+and an RHS edit by at most two, so rejection costs at least
+$\lceil(a_X-b_X)/2\rceil$. Changing that many zero-valued context RHS cells in
+the group to a strongest rival attains it. There are enough, because
+acceptance with a nonsingleton group gives $a_X\ge2$ and
+$\lceil(a_X-b_X)/2\rceil\le a_X-1$. A singleton group must receive a context
+row with nonzero $y$, which pays for its $h_X(r)$ nonmatching keys and, if
+needed, its RHS; editing just that row creates a tie. Global rejection is a
+disjunction over rules, so the minimum over rules is exact. With fixed keys a
+singleton group cannot change.
+\end{proof}
+
+Thus editable keys strictly lower the rejection radius iff the cheapest
+singleton import costs less than every nonsingleton margin cost. The two
+decision directions behave differently: rejection depends on singleton groups,
+acceptance on the width of the family.
+
+\subsection{Complexity of acceptance}
+\begin{theorem}[Binary singleton acceptance is NP-complete]\label{thm:hardness}
+Deciding whether a rejected target can be accepted within budget $B$ is
+NP-complete in combined complexity, even with binary columns, singleton
+determinants and initially tied target groups, with fixed or editable keys.
+\end{theorem}
+\begin{proof}
+Reduce from Set Cover~\cite{karp} with universe $U=\{1,\ldots,q\}$ and sets
+$S_1,\ldots,S_\ell$ covering $U$. Let $c_g=|\{i:g\in S_i\}|$ and $\tau$ the
+minimum cover size. Use binary keys $x_1,\ldots,x_q$, rules $x_g\to y$ and an
+all-zero target. For each $S_i$ add a row with $y=1$ and $x_g=0$ exactly for
+$g\in S_i$; for each $g$ add $c_g-1$ rows with $y=0$, $x_g=0$ and all other
+keys $1$. Every group has $c_g$ zeros and $c_g$ ones. Flipping the $y$ cells of
+a cover's rows accepts, so both optima are at most $\tau$.
+
+Conversely, take an accepting table of cost $K$. For each changed key cell in
+column $x_g$ choose an input set containing $g$; for each set row whose final
+$y$ is $0$ choose its set. At most $K$ sets are chosen. If column $x_g$ has no
+key edit, its group membership is unchanged and, starting from a tie, some
+original $y=1$ member, a set row containing $g$, must end at $0$. So the
+chosen sets cover $U$ and $\tau\le K$. Both optima equal $\tau$. A destination
+table is a polynomial certificate.
+\end{proof}
+
+Singleton families are laminar, consistent with both optima being $\tau$. For
+fixed $q$ and $d$ a standard dynamic program over the $|F|(d-1)$ margin
+coordinates, using the actions of Lemma~\ref{lem:norm}, is polynomial in $n$.
+We state this as an elementary observation and have not implemented it.
+
+\subsection{Decision distance is not repair distance}
+Let $R(T)$ be the minimum context-cell cost making the whole table satisfy
+every FD, still protecting $t$.
+\begin{proposition}\label{prop:separation}
+Even for one rule $x\to y$ with binary $y$, both $\rfull/R(T)$ and
+$R(T)/\rfull$ are unbounded over instances where both are positive and finite.
+\end{proposition}
+\begin{proof}
+With target $(0,0)$, $2h$ rows $(0,0)$ and one row $(0,1)$, one edit repairs
+the table but Theorem~\ref{thm:reject} gives $\rfull=h$. With target $(0,0)$
+and pairs $(i,0),(i,1)$ for $i=1,\ldots,k$, each disjoint conflicting pair needs
+its own edit, so $R(T)=k$, while moving $(1,1)$ into the singleton target group
+creates a tie at cost one.
+\end{proof}
+
+\section{Finite checks}
+All studies below were run under protocols committed before their
+implementations, and implementations committed before execution. Counts reuse
+tables and overlap across edit models; they measure coverage of the checks,
+not probabilities, and they do not replace the proofs.
+
+\paragraph{E013: width theorem.}
+Three grids use an all-zero target, every multiset of context rows of the
+given size, and every family of distinct nonempty determinants: binary keys and
+RHS with $q\le3$ and up to three context rows; binary keys, ternary RHS,
+$q=3$, up to two rows; ternary keys and RHS, $q=2$, up to two rows. Two raw
+oracles enumerate all destination tables (editable keys) and all RHS-only
+destinations (fixed keys), counting votes directly; neither uses the theorem.
+Width is computed by exhaustive antichains and checked against an independent
+minimum chain cover. Every optimal editable-key witness is converted by the
+procedure of Theorem~\ref{thm:exchange}, checking cost, unchanged keys,
+acceptance and the invariant~\eqref{eq:inv} after each key edit.
+Table~\ref{tab:e013} gives the totals. All predictions hold; all 62 strict
+gains occur in the binary $q=3$, three-row grid. The sharp construction is
+checked for every family with $q\le3$ and four larger families with widths up
+to six; for these, the lower bound is checked by the isolated-group
+certificate rather than raw enumeration.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lr}
+\toprule
+Quantity & Count\\
+\midrule
+Source tables & 1,895\\
+Rejected table/family pairs checked & 81,893\\
+\quad of which laminar (equality predicted and observed) & 39,379\\
+Pairs with $\rfix>\rfull$ & 62\\
+Raw destinations, editable keys / fixed keys & 3,892,339 / 14,687\\
+Key edits converted / replacement flips & 11,944 / 12,014\\
+Single-row normalization checks & 1,641\\
+Sharp constructions checked & 139\\
+\bottomrule
+\end{tabular}
+\caption{E013 totals (protocol \texttt{e25655d}, implementation
+\texttt{b93695a}).}\label{tab:e013}
+\end{table}
+
+\paragraph{E012: hardness reduction.}
+Every coverable multiset of one to three subsets of universes of size one to
+three (111 instances) is checked by raw binary enumeration: all 222 radii and
+147,523 destinations across both edit models agree with independent minimum
+covers, and a cover is extracted from all 25,490 accepting destinations.
+
+\paragraph{E008--E010: earlier formulas and formulations.}
+E008 compares canonical-action programs with unrestricted raw edits on 5,107
+tables and six families (30,642 radii agree). E009 checks
+Theorem~\ref{thm:reject} on all 18,779 accepted cases of that domain. E010
+compares a specialized and a generic MILP on 72 constructed cases with up to
+six keys and 128 rows; certified optima agree, and seven generic dense-accepted
+cases time out. These timings are two repetitions on one machine and are not
+representative.
+
+\section{Reused-source study and its post hoc reinterpretation}
+E011 reuses Beers, Flights and Rayyan from the Raha repository~\cite{raha} at
+revision \href{https://github.com/BigDaMa/raha/tree/7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}{\texttt{7be1334b}}.
+The data had been inspected earlier, so this is exploratory reuse, not a blind
+holdout. Nine tasks use brewery\_id to check brewery\_name, city and state;
+flight to check four time columns; Rayyan's \texttt{jounral\_abbreviation}
+(original spelling) to check journal\_issn; and abbreviation and ISSN as two
+separate determinants for journal\_title. Every target uses its full dirty
+table as context; empty strings are ordinary categories.
+
+There are 18,734 target cells: 13,762 accepted and 4,972 rejected. For accepted
+targets all radii were computed. Editable keys turn 1,133 fixed-key infinite
+radii finite (Table~\ref{tab:census}) and lower one finite radius, Rayyan
+journal\_title row 644, from two to one through a singleton group, as
+Theorem~\ref{thm:reject} predicts. Among accepted targets, 1,816 differ from
+the reference, and 1,493 of these have radius at least two: a stable
+acceptance can still be wrong.
+
+\begin{table}[H]
+\centering\small
+\begin{tabular}{lrrr}
+\toprule
+Task & Accepted & Fixed $\INF$ to finite & Finite decrease\\
+\midrule
+Beers brewery\_name&2410&127&0\\
+Beers city&2275&127&0\\
+Beers state&2275&127&0\\
+Flights sched\_dep\_time&1663&0&0\\
+Flights act\_dep\_time&1133&0&0\\
+Flights sched\_arr\_time&1411&0&0\\
+Flights act\_arr\_time&1166&0&0\\
+Rayyan journal\_issn&768&384&0\\
+Rayyan journal\_title&661&368&1\\
+\midrule
+Total&13762&1133&1\\
+\bottomrule
+\end{tabular}
+\caption{Accepted-target census from E011.}\label{tab:census}
+\end{table}
+
+For rejected targets, a hash-ordered selection of up to four per task gave 32
+targets. Each editable-key and fixed-key MILP ran once with a five-second limit.
+All 32 fixed solves and 30 editable-key solves were optimal; every exact pair
+had equal cost. The declared prediction of at least one strict accepting
+gain in the journal\_title task was therefore not supported. Two editable-key
+models, rows 509 and 146 (one-based), timed out without bounds; their fixed
+optima are 104.
+
+\paragraph{Post hoc reanalysis.}
+After E013, we checked the archived E011 schemas. Every one is a singleton
+family, or two disjoint singletons for journal\_title, hence laminar. By
+Corollary~\ref{cor:laminar} all 4,972 rejected targets have equal fixed and
+editable-key accepting costs; the predicted gain could not occur under this edit
+model. Combining equality with the archived certified fixed optima gives
+editable-key optimum 104 for rows 509 and 146. This deduction rests on the
+proof and archived certificates. The solver records remain timeouts, the source
+CSV cache was unavailable, and no solver was rerun. The reanalysis was
+written after seeing the results and is labeled exploratory. Testing
+accepting gains on real data would require a nonlaminar check family justified
+and fixed before outcomes are seen.
+
+\section{Related work}\label{sec:related}
+\paragraph{Chains and laminar interventions.}
+Dilworth's theorem~\cite{dilworth} equates width with the minimum chain
+partition; we use it only for that step. In election manipulation under media
+influence, strategies sway voter sets. The slides of Miclăuș, Mureșan and
+Popa~\cite{emmi2026} credit Tao et al.~\cite{emmi2021} with a dynamic program
+for laminar influence sets, and show prefix dominance on chains of nested
+influence sets and chain-decomposition parameterized algorithms. We inspected
+the 2026 slides and abstract only; neither full paper was obtained. That work optimizes within
+one action space, uses co-winner ties, and its laminar family consists of voter
+sets. Here laminarity is over column sets; the induced row groups all contain
+the target and so are never disjoint. We compare two edit spaces and give the
+exact worst-case ratio for each schema. Gerrymandering~\cite{dey} studies
+interventions that move voters between districts, so membership-changing
+plurality interventions are established; the inspected problem definitions
+aggregate district winners and do not compare edit spaces.
+
+\paragraph{Repair bounds depending on the schema.}
+Livshits, Kimelfeld and Roy~\cite{livshits} (Proposition 4.4, Corollary 4.5)
+convert between optimal subset and update repairs of FD sets with a factor
+equal to the minimum lhs cover $\mathrm{mlc}$, and use it for approximation.
+Their objective restores consistency of the whole table; ours flips one
+protected decision without requiring consistency
+(Proposition~\ref{prop:separation}). The parameters differ: $\{\{a,b\},\{a,c\}\}$
+has $\mathrm{mlc}=1$ but $w=2$, and $q$ singletons have $\mathrm{mlc}=q$ but $w=1$.
+
+\paragraph{Causality, vote operations and lobbying.}
+Cell-based causality for repairs~\cite{cellcauses}, repair-based causes for
+query answers~\cite{bertossi} and view-conditioned causality~\cite{vcc} study
+minimum interventions on cells; general vote-operation frameworks~\cite{xia}
+optimize constructive and destructive goals. Set Cover incidence constructions
+are standard in multi-referendum lobbying~\cite{lobbying}; our hardness proof
+credits that technique and adds the argument for arbitrary key edits. FD repair
+with trusted cells~\cite{repairs}, certified nearest-neighbor robustness over
+repairs~\cite{knn}, and the distinction between dependency strength and
+detection value~\cite{wan} are further context; like the latter, our radius is
+not an accuracy measure.
+
+\section{Limitations}
+The proofs need a common dependent attribute, unit and independent cell costs,
+an immutable target with the accepting value, and ties that reject. Different
+dependents, weighted costs, validity constraints, insertions or deletions, or
+co-winner semantics fall outside the stated results; Theorem~\ref{thm:sharp}
+in particular uses ties. The width bound is worst case and says nothing about
+how often gaps occur. Laminarity does not give a fast algorithm. The finite
+checks are small, the source study reuses inspected data, its rejected sample is
+small, and its post hoc reanalysis is not a confirmatory test. All proofs and
+checks were produced and reviewed inside one AI-assisted project; no
+independent human review has taken place. The literature comparison is
+targeted, not systematic.
+
+\section{Reproducibility and provenance}
+E013 protocol and implementation commits are \texttt{e25655d} and
+\texttt{b93695a}; the proof and the E011 reanalysis script were committed at
+\texttt{557f60d} before the script ran. E013 used Python 3.14.5 with the
+standard library only. E012 uses \texttt{9f14171}/\texttt{65ad518}, E008
+\texttt{efc1365}/\texttt{14fe214}, E009 \texttt{96962be}/\texttt{05a2b07}, E010
+\texttt{fbd04cb}/\texttt{2212b58} and E011 \texttt{86dad7d}/\texttt{fd341d4};
+E009--E011 used Python 3.13.5, NumPy 2.1.3 and SciPy 1.17.1 (HiGHS). Solver
+optima required a checked integer witness and bound agreement within $10^{-7}$;
+timeouts stay censored. The supplement contains the E013 protocol, code,
+summary, compressed case records, proof and a read-only replay that rechecks
+every stored witness and can repeat the frozen raw enumeration. No public
+repository or arXiv submission is claimed. Generative AI was used substantially
+for ideation, proofs, code and writing. The named author's review is pending,
+and this draft is not an authorization to submit or publish it.
+
+\section{Conclusion}
+For plurality-based FD checks with a protected target, the benefit of allowing
+key edits when accepting a rejected target is governed by one schema parameter:
+the largest inclusion antichain among determinants sharing a key. The fixed-key
+optimum is within this factor of the editable-key optimum, the factor is
+attained for every schema, and the optima always agree exactly for laminar
+schemas. This explains a negative empirical outcome and separates the question
+of when key errors matter from the question of how hard the optimization is.
+
+\begin{thebibliography}{10}
+\raggedright
+\bibitem{dilworth} R. P. Dilworth. A Decomposition Theorem for Partially
+Ordered Sets. \emph{Annals of Mathematics} 51(1):161--166, 1950.
+\href{https://doi.org/10.2307/1969503}{doi:10.2307/1969503}.
+\bibitem{livshits} E. Livshits, B. Kimelfeld and S. Roy. Computing Optimal
+Repairs for Functional Dependencies.
+\href{https://arxiv.org/abs/1712.07705v1}{arXiv:1712.07705v1}, 2017.
+\bibitem{emmi2021} L. Tao, L. Chen, L. Xu, S. Xu, Z. Gao, W. Shi and D. Huang.
+Hardness and Algorithms for Electoral Manipulation Under Media Influence.
+IJTCS-FAW 2021, LNCS 12874, pp. 53--64, 2021.
+\bibitem{emmi2026} A. Miclăuș, L. Mureșan and A. Popa. Minimum-Cost
+Electoral Manipulation Under Media Influence: Hardness, Approximation, and
+Algorithms. SYNASC 2026, presentation slides.
+\href{https://easychair.org/smart-slide/slide/TstX}{EasyChair Smart Slide}.
+\bibitem{dey} P. Dey. Gerrymandering: A Briber's Perspective.
+\href{https://arxiv.org/abs/1909.01583v1}{arXiv:1909.01583v1}, 2019.
+\bibitem{karp} R. M. Karp. Reducibility Among Combinatorial Problems.
+In \emph{Complexity of Computer Computations}, pp. 85--103, 1972.
+\bibitem{lobbying} R. Bredereck, J. Chen, S. Hartung, R. Niedermeier,
+O. Such\'{y} and S. Kratsch. A Multivariate Complexity Analysis of Lobbying in
+Multiple Referenda. AAAI, pp. 1292--1298, 2012.
+\href{https://doi.org/10.1609/aaai.v26i1.8248}{doi:10.1609/aaai.v26i1.8248}.
+\bibitem{cellcauses} M. Debosschere and F. Geerts.
+Cell-Based Causality for Data Repairs. TaPP, 2015.
+\bibitem{bertossi} L. Bertossi. Specifying and Computing Causes for Query
+Answers in Databases via Database Repairs and Repair Programs.
+\href{https://arxiv.org/abs/1712.01001v7}{arXiv:1712.01001v7}, 2020.
+\bibitem{vcc} A. Meliou, W. Gatterbauer, S. Nath and D. Suciu.
+Tracing Data Errors with View-Conditioned Causality. SIGMOD, 2011.
+\href{https://doi.org/10.1145/1989323.1989376}{doi:10.1145/1989323.1989376}.
+\bibitem{xia} L. Xia. How Many Vote Operations Are Needed to Manipulate a
+Voting System? \href{https://arxiv.org/abs/1204.1231v3}{arXiv:1204.1231v3}, 2012.
+\bibitem{repairs} G. Beskales, I. F. Ilyas and L. Golab. Sampling the Repairs
+of Functional Dependency Violations under Hard Constraints. PVLDB 3(1),
+197--207, 2010. \href{https://doi.org/10.14778/1920841.1920870}{doi:10.14778/1920841.1920870}.
+\bibitem{knn} A. Z. Fan and P. Koutris. Certifiable Robustness for Nearest
+Neighbor Classifiers. ICDT, 2022.
+\href{https://doi.org/10.4230/LIPIcs.ICDT.2022.6}{doi:10.4230/LIPIcs.ICDT.2022.6}.
+\bibitem{wan} X. Wan and X. Han. Strength Is Not Value: Rethinking Approximate
+Functional Dependency Measures for Error Detection.
+\href{https://arxiv.org/abs/2610.08189v1}{arXiv:2610.08189v1}, 2026.
+\bibitem{raha} M. Mahdavi, Z. Abedjan, R. Castro Fernandez, S. Madden,
+M. Ouzzani, M. Stonebraker and N. Tang. Raha: A Configuration-Free Error
+Detection System. SIGMOD, 2019.
+\href{https://doi.org/10.1145/3299869.3324956}{doi:10.1145/3299869.3324956}.
+\end{thebibliography}
+\end{document}

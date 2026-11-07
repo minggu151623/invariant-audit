@@ -1,0 +1,31 @@
+{
+  "all_member_hashes_and_CRC_verified": true,
+  "date": "2026-11-07",
+  "extracted_record_replay": {
+    "constructions": 139,
+    "hashes_match": true,
+    "reenumerated": false,
+    "totals": {
+      "conversion_imports": 11944,
+      "conversion_replacement_flips": 12014,
+      "laminar_pairs_checked": 39379,
+      "rejected_pairs_checked": 81893,
+      "strict_key_gains": 62
+    }
+  },
+  "extracted_reenumeration": {
+    "constructions": 139,
+    "hashes_match": true,
+    "reenumerated": true,
+    "totals": {
+      "conversion_imports": 11944,
+      "conversion_replacement_flips": 12014,
+      "laminar_pairs_checked": 39379,
+      "rejected_pairs_checked": 81893,
+      "strict_key_gains": 62
+    }
+  },
+  "members": 16,
+  "no_git_or_third_party_imports_required": true,
+  "sha256": "3bd78ce1cc95edbf61324452f1ad778d2e7cb906d8e42fcac4b987e138f4cedd"
+}

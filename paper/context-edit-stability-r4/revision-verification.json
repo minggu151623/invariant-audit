@@ -1,0 +1,42 @@
+{
+  "actual_submission": "absent",
+  "all_fonts_embedded": true,
+  "artifact_sha256": {
+    "paper/context-edit-stability-r4/preview.pdf": "0c29aa914140e523b441f057d566d2c70822fb20f5378f476a50263110025dc8",
+    "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
+    "paper/context-edit-stability-r4/source.zip": "3d8529c3afbfc9957f666f92596225c963d9ae76a1c814b9f82cf2c3e4af9bd2",
+    "paper/context-edit-stability-r4/tex/main.tex": "871d1312ec5c69b8e363437a9f67d822dadb83bc9f082bdad2266a22c2b81d5c"
+  },
+  "author_approval": "not_given",
+  "author_exact_unicode": true,
+  "compiler": "Tectonic with bundled cache (--only-cached)",
+  "compiler_warnings": 0,
+  "date": "2026-11-07",
+  "extracted_source_compile_text_identical": true,
+  "fonts": {
+    "/AKHCZK+CMR10": true,
+    "/BZIVMZ+LMRoman10-Bold": true,
+    "/CAFSZL+CMR8": true,
+    "/DDIEWW+CMR7": true,
+    "/FKPJSN+CMMI8": true,
+    "/IHAIZV+LMRoman10-Regular": true,
+    "/IXFAWU+LMRoman10-Italic": true,
+    "/JAGKKY+CMEX10": true,
+    "/PVTTLK+CMSY8": true,
+    "/TQTHRL+LMMono10-Regular": true,
+    "/VDVGTR+CMSY10": true,
+    "/YEUUOC+CMMI10": true
+  },
+  "independent_review": false,
+  "intentionally_appended": [
+    "literature/schema-width-positioning-20261105.md"
+  ],
+  "license": null,
+  "m35_artifacts_unchanged": 6,
+  "pages": 10,
+  "prior_artifacts_unchanged": 197,
+  "r3_artifacts_unchanged": 5,
+  "references": 15,
+  "tables": 4,
+  "visual_pages_inspected": "recorded separately in milestones/M36-R4.md"
+}
