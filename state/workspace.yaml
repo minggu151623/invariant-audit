@@ -1962,9 +1962,9 @@ M36:
   proof_errors_found: 0
   manuscript: paper/context-edit-stability-r4/tex/main.tex
   preview_pdf: paper/context-edit-stability-r4/preview.pdf
-  preview_pdf_sha256: f6bb05a1b0cf10a0c9913cbc942d452013e17e13424f77eab49f0f03182a428d
+  preview_pdf_sha256: c50c5a8d2d2261236a7bd53ee5d70cc9a149d3c118bf19a046c60ce9c1ec415b
   supplement: paper/context-edit-stability-r4/supplement.zip
-  supplement_sha256: dd16bb7b5feff3c32686fd472eecfa08ca69684d3269029ae61ac98892405a9d
+  supplement_sha256: 8d0cad9fa2e5bb2f5b3b2108e6c9e6af40e4a8aa1602a6f2800546832a3c1f57
   pages: 10
   all_pages_visually_inspected: true
   compiler_warnings: 0
@@ -1991,6 +1991,8 @@ M36:
   proof_review_scope_fix: theorem1_corollary1_restricted_to_initially_rejected_target
   review_bruteforce_tables: 10900
   draft_only_text_removed: true
+  group_a_edits_20261107: repo_link_notation_remark2_references_d_gt_2_note
+  repository_link_in_paper: https://github.com/minggu151623/invariant-audit
   license: unselected
   actual_submission: absent
   next_action: seek_external_expert_reading_of_theorems_1_2_and_consider_nonlaminar_external_study_protocol

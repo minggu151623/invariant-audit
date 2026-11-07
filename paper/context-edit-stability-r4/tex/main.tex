@@ -141,7 +141,7 @@ $v\ne0$. Ties reject, and a plurality need not be a majority when $d>2$.
 
 An edited table keeps the same rows and leaves $t$ unchanged. Context cells may
 independently take any value in their domains. The cost is the cell Hamming
-distance $H(T,T')$. For a target whose decision is to be flipped, $\rfull$ is
+distance $\delta(T,T')$. For a target whose decision is to be flipped, $\rfull$ is
 the minimum cost of a flip and $\rfix$ the minimum over edits that keep every
 key cell; an impossible flip has cost $\INF$. There are no insertions,
 deletions, unequal costs, validity constraints or requirements on other
@@ -189,13 +189,13 @@ All nonempty subsets & $\binom{q-1}{\lfloor (q-1)/2\rfloor}$ & no for $q\ge3$\\
 
 \begin{lemma}[Normalization]\label{lem:norm}
 For every original context row $r$ and destination $u$ there is a destination
-$c$ with $H(r,c)\le H(r,u)$ and $a_{Xv}(c)\ge a_{Xv}(u)$ for all $X,v$, of
+$c$ with $\delta(r,c)\le \delta(r,u)$ and $a_{Xv}(c)\ge a_{Xv}(u)$ for all $X,v$, of
 one of two forms: (i) $c=r$ and $r_y\ne0$; or (ii) $c_y=0$,
 $M(c)\supseteq M(r)$, and every changed key of $c$ is set to $0$.
 \end{lemma}
 \begin{proof}
 Suppose $r_y\ne0$ and $u_y=r_y$. If $u=r$, take form (i). Otherwise $u$
-changes a key, so $H(r,u)\ge1$; take $c$ with the original keys and $c_y=0$,
+changes a key, so $\delta(r,u)\ge1$; take $c$ with the original keys and $c_y=0$,
 which costs one. Every contribution of $c$ is nonnegative and every
 contribution of $u$ nonpositive.
 
@@ -285,7 +285,8 @@ $A_i\subseteq C\subseteq A_l$, forcing $l=i$ and $C=A_i$; so $G_C$ has no rival.
 Changing $p_j$ to $0$ puts $p$ into every group, making every critical group
 $2{:}1$ and harming no check; as the target was rejected, $\rfull=1$. With
 fixed keys each critical group contains only the target and its own $r_i$, so
-the $w$ distinct cells $r_i.y$ must all change, and changing them suffices.
+the $w$ distinct cells $r_i.y$ must all change to $0$ (for $d>2$ a third value
+still ties), and changing them suffices.
 Thus $\rfix=w$. The table has at most $w+1+w|F|$ context rows.
 \end{proof}
 
@@ -315,32 +316,34 @@ witness as input, so it is not itself an approximation algorithm.
 \end{remark}
 
 \begin{remark}[Listed checks versus logical FDs]
-The result is about the listed plurality checks. Logically implied FDs cannot
-be removed. Add rule $\{a\}$ to Table~\ref{tab:example} together with two rows
-$(a,b,c,y)=(0,1,1,0)$. The $\{a\}$ group has three zeros and two ones and
-accepts, while the two original groups still tie; the ratio is still two. As
-FDs, $a\to y$ implies $ab\to y$ and $ac\to y$, but the single plurality check
-for $\{a\}$ accepts this table and has width one.
+The result concerns the listed plurality checks, not the FDs they express:
+logically equivalent families can behave differently. Add rule $\{a\}$ to
+Table~\ref{tab:example} together with two rows $(a,b,c,y)=(0,1,1,0)$. The
+$\{a\}$ group has three zeros and two ones and accepts, while the two original
+groups still tie, so $F=\{\{a\},\{a,b\},\{a,c\}\}$ still has $\rfix=2$,
+$\rfull=1$ and $w(F)=2$. As FDs, $a\to y$ implies $ab\to y$ and $ac\to y$, so
+$F$ is equivalent to $\{\{a\}\}$; yet the single check $\{a\}$ has width one
+and already accepts this table.
 \end{remark}
 
 \section{Complementary results}
 \subsection{Making an accepted target reject}
-Assume the target is accepted. Write $a_X=c_{X0}(T)$,
-$b_X=\max_{v\ne0}c_{Xv}(T)$ and $h_X(r)=|\{j\in X:r_j\ne0\}|$.
+Assume the target is accepted. Write $\alpha_X=c_{X0}(T)$,
+$\beta_X=\max_{v\ne0}c_{Xv}(T)$ and $h_X(r)=|\{j\in X:r_j\ne0\}|$.
 
 \begin{theorem}[Exact rejection radius]\label{thm:reject}
-Let $C_X=\lceil(a_X-b_X)/2\rceil$ if $|G_X(T)|\ge2$, and
-$C_X=\min_{r\ne t}\bigl(h_X(r)+\ind[r_y=0]\bigr)$ if $G_X(T)=\{t\}$, with an
-empty minimum equal to $\INF$. Then $\rfull=\min_XC_X$. With fixed keys,
+Let $\kappa_X=\lceil(\alpha_X-\beta_X)/2\rceil$ if $|G_X(T)|\ge2$, and
+$\kappa_X=\min_{r\ne t}\bigl(h_X(r)+\ind[r_y=0]\bigr)$ if $G_X(T)=\{t\}$, with an
+empty minimum equal to $\INF$. Then $\rfull=\min_X\kappa_X$. With fixed keys,
 $\rfix$ is the minimum over nonsingleton groups only.
 \end{theorem}
 \begin{proof}
 In a nonsingleton group a key edit changes a target/rival margin by at most one
 and an RHS edit by at most two, so rejection costs at least
-$\lceil(a_X-b_X)/2\rceil$. Changing that many zero-valued context RHS cells in
+$\lceil(\alpha_X-\beta_X)/2\rceil$. Changing that many zero-valued context RHS cells in
 the group to a strongest rival attains it. There are enough, because
-acceptance with a nonsingleton group gives $a_X\ge2$ and
-$\lceil(a_X-b_X)/2\rceil\le a_X-1$. A singleton group must receive a context
+acceptance with a nonsingleton group gives $\alpha_X\ge2$ and
+$\lceil(\alpha_X-\beta_X)/2\rceil\le \alpha_X-1$. A singleton group must receive a context
 row with nonzero $y$, which pays for its $h_X(r)$ nonmatching keys and, if
 needed, its RHS; editing just that row creates a tie. Global rejection is a
 disjunction over rules, so the minimum over rules is exact. With fixed keys a
@@ -382,17 +385,17 @@ coordinates, using the actions of Lemma~\ref{lem:norm}, is polynomial in $n$.
 We state this as an elementary observation and have not implemented it.
 
 \subsection{Decision distance is not repair distance}
-Let $R(T)$ be the minimum context-cell cost making the whole table satisfy
+Let $\mathrm{rep}(T)$ be the minimum context-cell cost making the whole table satisfy
 every FD, still protecting $t$.
 \begin{proposition}\label{prop:separation}
-Even for one rule $x\to y$ with binary $y$, both $\rfull/R(T)$ and
-$R(T)/\rfull$ are unbounded over instances where both are positive and finite.
+Even for one rule $x\to y$ with binary $y$, both $\rfull/\mathrm{rep}(T)$ and
+$\mathrm{rep}(T)/\rfull$ are unbounded over instances where both are positive and finite.
 \end{proposition}
 \begin{proof}
 With target $(0,0)$, $2h$ rows $(0,0)$ and one row $(0,1)$, one edit repairs
 the table but Theorem~\ref{thm:reject} gives $\rfull=h$. With target $(0,0)$
 and pairs $(i,0),(i,1)$ for $i=1,\ldots,k$, each disjoint conflicting pair needs
-its own edit, so $R(T)=k$, while moving $(1,1)$ into the singleton target group
+its own edit, so $\mathrm{rep}(T)=k$, while moving $(1,1)$ into the singleton target group
 creates a tie at cost one.
 \end{proof}
 
@@ -567,7 +570,8 @@ independent human review has taken place. The literature comparison is
 targeted, not systematic.
 
 \section{Reproducibility and provenance}
-E013 protocol and implementation commits are \texttt{e25655d} and
+Commit identifiers refer to the public project repository
+\url{https://github.com/minggu151623/invariant-audit}. E013 protocol and implementation commits are \texttt{e25655d} and
 \texttt{b93695a}; the proof and the E011 reanalysis script were committed at
 \texttt{557f60d} before the script ran. E013 used Python 3.14.5 with the
 standard library only. E012 uses \texttt{9f14171}/\texttt{65ad518}, E008
@@ -595,15 +599,19 @@ of when key errors matter from the question of how hard the optimization is.
 Ordered Sets. \emph{Annals of Mathematics} 51(1):161--166, 1950.
 \href{https://doi.org/10.2307/1969503}{doi:10.2307/1969503}.
 \bibitem{livshits} E. Livshits, B. Kimelfeld and S. Roy. Computing Optimal
-Repairs for Functional Dependencies.
-\href{https://arxiv.org/abs/1712.07705v1}{arXiv:1712.07705v1}, 2017.
+Repairs for Functional Dependencies. \emph{ACM Transactions on Database
+Systems} 45(1), 2020.
+\href{https://doi.org/10.1145/3360904}{doi:10.1145/3360904}. Conference
+version in PODS 2018. Result numbers cited here follow
+\href{https://arxiv.org/abs/1712.07705v1}{arXiv:1712.07705v1}.
 \bibitem{emmi2021} L. Tao, L. Chen, L. Xu, S. Xu, Z. Gao, W. Shi and D. Huang.
 Hardness and Algorithms for Electoral Manipulation Under Media Influence.
 IJTCS-FAW 2021, LNCS 12874, pp. 53--64, 2021.
 \bibitem{emmi2026} A. Miclăuș, L. Mureșan and A. Popa. Minimum-Cost
 Electoral Manipulation Under Media Influence: Hardness, Approximation, and
 Algorithms. SYNASC 2026, presentation slides.
-\href{https://easychair.org/smart-slide/slide/TstX}{EasyChair Smart Slide}.
+\href{https://easychair.org/smart-slide/slide/TstX}{EasyChair Smart Slide},
+accessed November 7, 2026.
 \bibitem{dey} P. Dey. Gerrymandering: A Briber's Perspective.
 \href{https://arxiv.org/abs/1909.01583v1}{arXiv:1909.01583v1}, 2019.
 \bibitem{karp} R. M. Karp. Reducibility Among Combinatorial Problems.
@@ -616,12 +624,14 @@ Multiple Referenda. AAAI, pp. 1292--1298, 2012.
 Cell-Based Causality for Data Repairs. TaPP, 2015.
 \bibitem{bertossi} L. Bertossi. Specifying and Computing Causes for Query
 Answers in Databases via Database Repairs and Repair Programs.
-\href{https://arxiv.org/abs/1712.01001v7}{arXiv:1712.01001v7}, 2020.
+\emph{Knowledge and Information Systems} 63, 2021.
+\href{https://doi.org/10.1007/s10115-020-01516-6}{doi:10.1007/s10115-020-01516-6}.
 \bibitem{vcc} A. Meliou, W. Gatterbauer, S. Nath and D. Suciu.
 Tracing Data Errors with View-Conditioned Causality. SIGMOD, 2011.
 \href{https://doi.org/10.1145/1989323.1989376}{doi:10.1145/1989323.1989376}.
 \bibitem{xia} L. Xia. How Many Vote Operations Are Needed to Manipulate a
-Voting System? \href{https://arxiv.org/abs/1204.1231v3}{arXiv:1204.1231v3}, 2012.
+Voting System? COMSOC 2012.
+\href{https://arxiv.org/abs/1204.1231v3}{arXiv:1204.1231v3}.
 \bibitem{repairs} G. Beskales, I. F. Ilyas and L. Golab. Sampling the Repairs
 of Functional Dependency Violations under Hard Constraints. PVLDB 3(1),
 197--207, 2010. \href{https://doi.org/10.14778/1920841.1920870}{doi:10.14778/1920841.1920870}.

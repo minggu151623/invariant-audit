@@ -1250,3 +1250,14 @@ the R4 proofs line by line.
   with Theorems 1–3.
 - The full check passed. No new experiment under protocol was run.
 
+### 2026-11-07 — M36 addendum: presentation fixes (group A)
+
+Full reread; no new mathematical error. Changes:
+- repository link added (all cited commits verified on origin/main);
+- notation clashes removed (δ, rep(T), α/β/κ);
+- Remark 2 rewritten;
+- d > 2 note added to Theorem 2;
+- published versions of references verified and cited.
+
+The full check passed. Groups B and C were not done.
+
