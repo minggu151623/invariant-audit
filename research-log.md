@@ -1275,3 +1275,19 @@ The full check passed at 11 pages, and all pages were inspected. Verdict:
 ready for arXiv as a preprint once the author has read it. Metadata and a
 Vietnamese guide were added. Not submitted.
 
+### 2026-11-10 — M37: review for Zenodo, Proposition 1, E014
+
+The owner decided to post on Zenodo first and asked for a review with
+rewriting where needed.
+
+- New Proposition 1 (larger optima): the factor w(F) is attained at every
+  optimum k when d >= k+1; for d = 2 and two overlapping determinants the
+  optima differ by at most one. d <= k is open in general.
+- E014: protocol `6c8827a`, implementation `d98e454`, one run recorded at
+  `27ca9b2`, all predictions matched, no fix commit.
+- Wording: the benchmark experiment is called our own; RHS defined; supplement
+  location stated; PDF metadata set; date 2026-11-10.
+- The full check passed at 12 pages in both engines, with the E014
+  recomputation from the extracted supplement.
+- Zenodo files, record fields and a Vietnamese guide were added. Nothing was
+  uploaded; the license is the owner's choice.

@@ -29,7 +29,10 @@
 \title{Schema Width Bounds the Benefit of Editable Keys\\
 for Plurality-Based Functional-Dependency Checks}
 \author{\vn{Trần Vũ Bảo Minh}\\[0.4em]\small Independent Researcher}
-\date{November 7, 2026}
+\date{November 10, 2026}
+\hypersetup{pdftitle={Schema Width Bounds the Benefit of Editable Keys for
+  Plurality-Based Functional-Dependency Checks},
+  pdfauthor={Trần Vũ Bảo Minh}}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -43,15 +46,19 @@ attribute, let $w(F)$ be the size of a largest inclusion antichain among the det
 that contain a common key. We prove that the fixed-key optimum is at most
 $w(F)$ times the editable-key optimum, and that every family has a binary table
 attaining exactly this factor. Hence the two optima agree on every such table if
-and only if $F$ is laminar. The upper bound uses a margin-capped exchange that
+and only if $F$ is laminar. With at least $k+1$ dependent values the factor
+is also attained at editable-key optimum $k$, whereas for a binary dependent
+attribute and two overlapping determinants the optima differ by at most one
+edit. The upper bound uses a margin-capped exchange that
 replaces each key edit by at most one dependent-cell flip per inclusion chain.
 The classification concerns the listed checks, not logical FD equivalence, and
 laminarity does not make optimization easy: acceptance within a budget remains
 NP-complete for singleton determinants. For the reverse direction we give an
-exact formula. Exhaustive finite checks cover 81,893 rejected table/family
-pairs. On Beers, Flights and Rayyan, all nine check families of an earlier study
-are laminar, which explains, post hoc, why a predicted accepting gain from
-editable keys could not occur.
+exact formula. Exhaustive finite checks of the main theorems cover 81,893
+rejected table/family pairs. On Beers, Flights and Rayyan, all nine check
+families of our own earlier benchmark experiment are laminar, which explains,
+post hoc, why the accepting gain it predicted from editable keys could not
+occur.
 \end{abstract}
 
 \section{Introduction}
@@ -110,17 +117,19 @@ witness into a fixed-key witness.
 \item The factor is sharp for each family separately: some binary table has
 $\rfull=1$ and $\rfix=w(F)$ (Theorem~\ref{thm:sharp}). Consequently the two
 optima coincide on every table with a rejected target exactly when $F$ is laminar
-(Corollary~\ref{cor:laminar}).
+(Corollary~\ref{cor:laminar}). The factor is also attained at every optimum
+$k$ when the dependent attribute has at least $k+1$ values, but not in general
+when it is binary (Proposition~\ref{prop:scale}).
 \item The equality is a statement about worst cases and edit spaces, not about
 tractability. Making a rejected target accept within a budget is NP-complete
 for binary singleton schemas, which are laminar (Theorem~\ref{thm:hardness}).
 For the opposite direction, rejection, an exact formula shows that keys help
 only through singleton groups (Theorem~\ref{thm:reject}).
 \item Exhaustive checks of raw edit spaces, run under protocols fixed in
-advance, agree with every finite prediction. A post hoc reanalysis of an
-earlier benchmark study shows that its
-schemas were all laminar, so a predicted accepting gain was impossible; we
-report this design error rather than changing the rules after the fact.
+advance, agree with every finite prediction. A post hoc reanalysis of our own
+earlier benchmark experiment shows that its schemas were all laminar, so the
+accepting gain we had predicted was impossible; we report this design error
+rather than changing the rules after the fact.
 \end{enumerate}
 
 The chain-partition step uses Dilworth's theorem~\cite{dilworth}; nested-set
@@ -134,8 +143,8 @@ is not evidence of better cleaning accuracy.
 
 \section{Model}
 Let $T=(t,r_1,\ldots,r_{n-1})$ be identified rows with $q\ge1$ categorical key
-attributes and one dependent attribute $y$. Duplicate rows are allowed. The RHS
-domain has $d\ge2$ values; each key domain contains the target value and an
+attributes and one dependent attribute $y$, the right-hand side (RHS) of every
+rule. Duplicate rows are allowed. The RHS domain has $d\ge2$ values; each key domain contains the target value and an
 alternative. By relabeling each column, assume the target is all zero. A
 nonempty family $F$ of distinct nonempty subsets of $\{1,\ldots,q\}$ lists the
 checks $X\to y$, $X\in F$. Define
@@ -314,6 +323,70 @@ target $(0,0)$ and one context row $(1,1)$, the target is accepted; one key
 edit makes it reject, but with fixed keys its group stays $\{t\}$ and
 $\rfix=\INF$ (Theorem~\ref{thm:reject}), although $\{x\}$ is laminar.
 
+\paragraph{Larger optima.}
+Theorem~\ref{thm:sharp} attains the factor with $\rfull=1$. Whether it is
+attained at larger optima depends on the number of RHS values.
+
+\begin{proposition}[Larger optima]\label{prop:scale}
+\begin{enumerate}
+\item[(a)] Let $k\ge1$ and $d\ge k+1$. For every listed family $F$ there is a
+table with binary keys and an initially rejected target such that $\rfull=k$
+and $\rfix=w(F)\,k$.
+\item[(b)] Let $d=2$ and $F=\{\{a,b\},\{a,c\}\}$. Every table with an initially
+rejected target has $\rfix\le\rfull+1$. In particular $\rfix=2\,\rfull$ forces
+$\rfull=1$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(a) Choose $j$ and the antichain $A_1,\ldots,A_w$ as in
+Theorem~\ref{thm:sharp}; every key outside a stated zero mask is $1$.
+\begin{itemize}
+\item For each $i$ and each value $v\in\{1,\ldots,k\}$, $k$ rows with $y=v$ and
+zero mask exactly $A_i$.
+\item $k$ rows with $y=0$ and every key $0$ except key $j$.
+\item For each $C\in F$ that contains none of the $A_i$, $wk$ support rows with
+$y=0$ and zero mask exactly $C$.
+\end{itemize}
+By the argument of Theorem~\ref{thm:sharp}, the group of $A_i$ is the target
+together with its own $k^2$ rivals: one zero against $k$ votes for each of $k$
+values, so the check rejects. A group of $C$ containing no $A_i$ has at least
+$1+wk$ zeros and at most $wk$ rows of any one rival value, and a group of
+$C\supseteq A_i$ with $C\ne A_i$ has no rival; these checks accept.
+
+Setting key $j$ of the $k$ zero rows to $0$ puts them into every group. Each
+critical group then has $k+1$ zeros against $k$ votes per rival value, and no
+check is harmed, so $\rfull\le k$. With fixed keys, suppose fewer than $k$
+dependent cells change among the rivals of one critical group. Some rival value
+keeps all $k$ of its rows, while the zeros number at most $1+(k-1)=k$, so the
+check still rejects. Hence each critical group needs $k$ changes among its own
+rows, and these row sets are disjoint: $\rfix\ge wk$. Changing one row of each
+rival value to $0$ in each critical group gives $k+1$ zeros against $k-1$, so
+$\rfix=wk$. Theorem~\ref{thm:exchange} now gives $\rfull\ge k$.
+
+(b) Take an optimal editable-key witness, normalized by Lemma~\ref{lem:norm},
+with $R$ dependent-cell edits and $K$ key edits, so $R+K=\rfull$. Apply the $R$
+dependent-cell edits, which keep every key, and call the result $T_1$. Since
+$d=2$ each rule $X$ has one margin $m_X=m_{X1}(T_1)$; let
+$n_X=\max(0,1-m_X)$. By normalization the key edits only move rows with $y=0$
+into groups. Each such row raises a margin by one and carries at least one of
+the $K$ key edits, so acceptance of the witness gives $n_X\le K$. With fixed
+keys, instead flip $\lceil n_X/2\rceil$ rows with $y=1$ in $G_X(T_1)$ to $0$,
+for each rule $X$. Each flip raises $m_X$ by two and lowers no margin. There
+are enough such rows: if $n_X>0$, the group has
+$c_{X1}=c_{X0}-m_X\ge1-m_X=n_X$ of them. The result accepts, so
+\[
+ \rfix\ \le\ R+\sum_{X\in F}\lceil n_X/2\rceil\ \le\ R+|F|\,\lceil K/2\rceil ,
+\]
+which for two rules is at most $R+K+1=\rfull+1$. If $\rfull\ge2$ then
+$\rfull+1<2\,\rfull$.
+\end{proof}
+
+For $k=1$ the table of (a) is that of Theorem~\ref{thm:sharp}. With $k$
+distinct rival values a flip to $0$ lowers only one of $k$ tied rivals, whereas
+one flip raises a binary margin by two. The displayed inequality in (b) holds
+for every family with binary RHS, but improves on Theorem~\ref{thm:exchange}
+only when $|F|$ is small. The case $d\le k$ is open in general.
+
 \begin{remark}[What the result does and does not say]
 The factor $w(F)$ is the largest \emph{possible} gain; nonlaminar schemas have
 many tables with no gain. For laminar schemas the editable-key search can be
@@ -395,8 +468,10 @@ Lemma~\ref{lem:norm} each row has at most $1+2^q$ useful actions. A dynamic
 program over rows that stores the least cost for each vector of the
 $|F|(d-1)$ margins therefore runs in time
 $O\bigl(n\,2^q(2n+2)^{|F|(d-1)}\bigr)$. With fixed keys the only useful
-action is setting $y$ to $0$. This elementary observation has not been
-implemented.
+action is setting $y$ to $0$. The finite check of
+Proposition~\ref{prop:scale} (Section~\ref{sec:checks}) uses a program of this
+kind over all row destinations, without the normalization; its running time was
+not studied.
 
 \subsection{Decision distance is not repair distance}
 Let $\mathrm{rep}(T)$ be the minimum context-cell cost making the whole table satisfy
@@ -413,7 +488,7 @@ its own edit, so $\mathrm{rep}(T)=k$, while moving $(1,1)$ into the singleton ta
 creates a tie at cost one.
 \end{proof}
 
-\section{Finite checks}
+\section{Finite checks}\label{sec:checks}
 Each check below followed a protocol fixed in the project repository before
 its implementation, and the implementation was fixed before execution. Counts reuse
 tables and overlap across edit models; they measure coverage of the checks,
@@ -456,6 +531,25 @@ Sharp constructions checked & 139\\
 \texttt{b93695a}).}\label{tab:e013}
 \end{table}
 
+\paragraph{Check of Proposition~\ref{prop:scale} (E014).}
+The construction of part (a) was built for nine cases: $\{\{a,b\},\{a,c\}\}$
+with $(k,d)=(1,2),(2,3),(2,4),(3,4)$, and five further families on three or
+four keys with $k=2$, $d=3$ and widths two and three, including all seven
+nonempty subsets of three keys. In every case $(\rfull,\rfix)=(k,wk)$. Both
+radii come from a dynamic program over all row destinations, which uses neither
+the normalization nor the exchange. A binary control with $k=2$ has
+$\rfull=\rfix=2$, so the condition $d\ge k+1$ cannot simply be dropped. In all
+ten tables every set of fewer cells than the editable-key radius, and of fewer
+dependent cells than the fixed-key radius, was also enumerated with direct vote
+counting: none of 5,594,099 edited tables accepts. For part (b), all 74,612
+multisets of one to six context rows over three binary keys and a binary RHS
+were solved for $\{\{a,b\},\{a,c\}\}$. Of the 34,393 tables with a rejected
+target, 332 have a strict gap: 309 with $(\rfull,\rfix)=(1,2)$ and 23 with
+$(2,3)$. So $\rfix\le\rfull+1$ throughout, and the slack of one is attained at
+$\rfull=2$. On the 968 tables with at most three rows the dynamic program
+agrees with raw enumeration of all 3,377,408 destination tables (protocol
+\texttt{6c8827a}, implementation \texttt{d98e454}, one run).
+
 \paragraph{Exhaustive check of the reduction (E012).}
 Every coverable multiset of one to three subsets of universes of size one to
 three (111 instances) is checked by raw binary enumeration: all 222 radii and
@@ -468,11 +562,11 @@ tables and six families (30,642 radii agree). E009 checks
 Theorem~\ref{thm:reject} on all 18,779 accepted cases of that domain. E010
 compares a specialized and a generic MILP on 72 constructed cases with up to
 six keys and 128 rows; certified optima agree, and seven generic dense-accepted
-cases time out. These timings are two repetitions on one machine and are not
-representative.
+cases time out (two repetitions on one machine, not representative).
 
 \section{Benchmark study and its post hoc reinterpretation}
-An earlier study (E011) reused Beers, Flights and Rayyan from the Raha
+Before the width theorem was found, we ran a benchmark experiment (E011) that
+reused Beers, Flights and Rayyan from the Raha
 repository~\cite{raha} at revision
 \href{https://github.com/BigDaMa/raha/tree/7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}{\texttt{7be1334b}}.
 The data had been inspected earlier, so this is exploratory reuse, not a blind
@@ -568,7 +662,8 @@ an immutable target with the accepting value, and ties that reject. Different
 dependents, weighted costs, validity constraints, insertions or deletions, or
 co-winner semantics fall outside the stated results; Theorem~\ref{thm:sharp}
 in particular uses ties. The width bound is worst case and says nothing about
-how often gaps occur. Laminarity does not give a fast algorithm. The finite
+how often gaps occur. Proposition~\ref{prop:scale}(b) treats one two-rule
+family only. Laminarity does not give a fast algorithm. The finite
 checks are small, the source study reuses inspected data, its rejected sample is
 small, and its post hoc reanalysis is not a confirmatory test. All proofs and
 checks were produced and reviewed inside one AI-assisted project; no
@@ -580,14 +675,18 @@ Commit identifiers refer to the public project repository
 \url{https://github.com/minggu151623/invariant-audit}. E013 protocol and implementation commits are \texttt{e25655d} and
 \texttt{b93695a}; the proof and the E011 reanalysis script were committed at
 \texttt{557f60d} before the script ran. E013 used Python 3.14.5 with the
-standard library only. E012 uses \texttt{9f14171}/\texttt{65ad518}, E008
+standard library only, and E014 (\texttt{6c8827a}/\texttt{d98e454}, run
+recorded at \texttt{27ca9b2}) Python 3.13.5 likewise. E012 uses \texttt{9f14171}/\texttt{65ad518}, E008
 \texttt{efc1365}/\texttt{14fe214}, E009 \texttt{96962be}/\texttt{05a2b07}, E010
 \texttt{fbd04cb}/\texttt{2212b58} and E011 \texttt{86dad7d}/\texttt{fd341d4};
 E009--E011 used Python 3.13.5, NumPy 2.1.3 and SciPy 1.17.1 (HiGHS). Solver
 optima required a checked integer witness and bound agreement within $10^{-7}$;
-timeouts stay censored. The supplement contains the E013 protocol, code,
-summary, compressed case records, proof and a read-only replay that rechecks
-every stored witness and can repeat the frozen raw enumeration. Generative AI was
+timeouts stay censored. The supplement is the file
+\nolinkurl{paper/context-edit-stability-r4/supplement.zip} in the repository. It
+contains the E013 protocol, code, summary, compressed case records, proof and a
+read-only replay that rechecks every stored witness and can repeat the frozen
+raw enumeration, and the E014 protocol, code and results, which the E014
+script can recompute. Generative AI was
 used substantially for ideation, proofs, code and writing.
 
 \section{Conclusion}
@@ -595,15 +694,15 @@ For plurality-based FD checks with a protected target, the benefit of allowing
 key edits when accepting a rejected target is governed by one schema parameter:
 the largest inclusion antichain among determinants sharing a key. The fixed-key
 optimum is within this factor of the editable-key optimum, the factor is
-attained for every schema, and the optima always agree exactly for laminar
-schemas. This explains a negative empirical outcome and separates the question
+attained for every schema (at every optimum $k$ when $d>k$), and the optima
+always agree exactly for laminar schemas. This explains a negative empirical outcome and separates the question
 of when key errors matter from the question of how hard the optimization is.
 
 Several questions remain open.
 \begin{itemize}
-\item \emph{Scale.} Is the factor $w(F)$ attained with $\rfull=k$ for every
-$k$? Replicating the construction of Theorem~\ref{thm:sharp} does not suffice,
-because one dependent-cell flip can raise a binary margin by two.
+\item \emph{Small RHS domains.} What is the largest ratio $\rfix/\rfull$ at
+$\rfull=k$ when $d\le k$? Proposition~\ref{prop:scale} settles $d\ge k+1$, and
+$d=2$ only for two overlapping determinants.
 \item \emph{Approximation.} We have not studied approximation algorithms for
 either radius; Theorem~\ref{thm:exchange} only transfers a fixed-key
 approximation to $\rfull$ at a further loss of $w(F)$.
@@ -612,6 +711,7 @@ or co-winner ties change the classification?
 \end{itemize}
 
 \begin{thebibliography}{99}
+\setlength{\itemsep}{1pt}
 \raggedright
 \bibitem{dilworth} R. P. Dilworth. A Decomposition Theorem for Partially
 Ordered Sets. \emph{Annals of Mathematics} 51(1):161--166, 1950.

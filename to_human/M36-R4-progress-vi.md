@@ -1,5 +1,8 @@
 # R4: bản thảo mới đặt kết quả "độ rộng schema" làm trọng tâm
 
+> Cập nhật 10/11/2026: đây là báo cáo ngày 07/11, đã cũ. Bản mới nhất là
+> `to_human/M37-zenodo-vi.md`.
+
 Ngày 07/11/2026. Đây là báo cáo tiến độ nghiên cứu, **không phải** đề nghị nộp
 bài. Bạn chưa duyệt nội dung, chưa chọn giấy phép; mình không suy ra hai việc đó.
 

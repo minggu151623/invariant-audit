@@ -1,14 +1,16 @@
 {
-  "date": "2026-11-07",
+  "date": "2026-11-10",
   "current_manuscript": "paper/context-edit-stability-r4/tex/main.tex",
   "current_pdf": "paper/context-edit-stability-r4/preview.pdf",
   "submission_fields": "none_for_R4_yet; paper/submission-r3/ fields describe R3 only",
-  "guide": "to_human/M36-arxiv-ready-vi.md",
-  "status": "ready_for_arxiv_preprint_pending_author_read_through_license_and_submission",
+  "guide": "to_human/M37-zenodo-vi.md",
+  "status": "prepared_for_zenodo_preprint_pending_author_read_through_license_and_upload",
   "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
-  "current_research": "milestones/M36-R4.md",
-  "note": "R4 improved and judged ready for arXiv on 2026-11-07 under owner delegation. Owner reports an arXiv account. No license chosen, not submitted.",
+  "current_research": "milestones/M37-scale-and-zenodo.md",
+  "note": "Owner decided on 2026-11-10 to post on Zenodo first. R4 reviewed again; Proposition 1 (larger optima) and E014 added; 12 pages. No license chosen, nothing uploaded.",
   "current_supplement": "paper/context-edit-stability-r4/supplement.zip",
   "arxiv_source": "paper/context-edit-stability-r4/source.zip (main.tex only; pdfLaTeX-checked with TeX Live 2026)",
-  "arxiv_metadata": "paper/context-edit-stability-r4/arxiv-metadata.md"
+  "arxiv_metadata": "paper/context-edit-stability-r4/arxiv-metadata.md",
+  "zenodo_files": "paper/context-edit-stability-r4/zenodo/ (PDF and supplement, copies of current_pdf and current_supplement)",
+  "zenodo_metadata": "paper/context-edit-stability-r4/zenodo-metadata.md"
 }

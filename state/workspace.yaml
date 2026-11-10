@@ -4,7 +4,7 @@ branch: main
 spec_path: docs/superpowers/specs/2026-08-19-invariant-audit-research-workspace-design.md
 canonical_state_path: state/workspace.yaml
 research_state_pointer: research-state.yaml
-current_milestone: M36
+current_milestone: M37
 design_commit: 995b318
 scaffold_commit: 5424d4c
 scaffold_commit_full: 5424d4c16443addb5a98cc0c1232cc542019fcbd
@@ -2002,3 +2002,44 @@ M36:
   license: unselected
   actual_submission: absent
   next_action: seek_external_expert_reading_of_theorems_1_2_and_consider_nonlaminar_external_study_protocol
+M37:
+  date: 2026-11-10
+  path: milestones/M37-scale-and-zenodo.md
+  owner_instruction_exact: "tôi đã quyết định đăng lên zenodo trước, nhưng tôi vẫn cần bạn rà soát bài báo xem còn gì cần phải làm và cần thiết thì viết lại bài báo"
+  status: R4_reviewed_proposition_on_larger_optima_added_zenodo_files_prepared
+  goal_status: active
+  scope: local_review_revision_and_upload_preparation_not_external_posting
+  new_experiments_run: 1
+  experiment: experiments/E014-scale-sharpness
+  e014_protocol_commit: 6c8827a
+  e014_implementation_commit: d98e454
+  e014_run_commit: 27ca9b2
+  e014_runs: 1
+  e014_fix_commits: 0
+  e014_all_predictions_match: true
+  new_result: proposition_larger_optima_d_ge_k_plus_1_attains_w_k_and_binary_two_rule_additive_one
+  open_case: d_le_k_in_general
+  manuscript: paper/context-edit-stability-r4/tex/main.tex
+  preview_pdf: paper/context-edit-stability-r4/preview.pdf
+  preview_pdf_sha256: f6d25576a7c318958b65d5c34b73e5ca3da47226409e87ba41c8a276fc0ee83a
+  supplement: paper/context-edit-stability-r4/supplement.zip
+  supplement_sha256: c50917fef6561bf96a69ccb5c70f5c4b7f1d4fcde608bf7a7d8510d0b339f84f
+  source_zip_sha256: 051c921bda068ffedf1d340d639238cb04d631e0e9d8bb3fa42132cd74c83142
+  pages: 12
+  compiler_warnings: 0
+  fonts_embedded: true
+  pdflatex_compatible: true
+  changed_pages_visually_inspected: true
+  extracted_supplement_replay_records: passed
+  extracted_supplement_reenumeration: passed_line_identical
+  extracted_supplement_e014_recomputation: passed
+  prior_scientific_artifacts_preserved: 197
+  independent_review: false
+  historical_originality_certified: false
+  owner_decision: post_on_zenodo_first
+  zenodo_files: paper/context-edit-stability-r4/zenodo
+  zenodo_metadata: paper/context-edit-stability-r4/zenodo-metadata.md
+  owner_guide_zenodo: to_human/M37-zenodo-vi.md
+  license: unselected
+  actual_upload: absent
+  next_action: owner_reads_pdf_chooses_license_and_uploads_after_commits_are_on_origin

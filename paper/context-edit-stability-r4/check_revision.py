@@ -1,4 +1,5 @@
-"""Build and check the R4 delivery: preserved evidence, PDF, source ZIP, supplement, replay."""
+"""Build and check the R4 delivery: preserved evidence, PDF, source ZIP, supplement, replay,
+and the two files prepared for the Zenodo upload."""
 from hashlib import sha256
 import json
 import os
@@ -18,7 +19,11 @@ CACHE = '/Users/mac/Library/Application Support/ChatGPT/latex/tectonic'
 # arXiv compiles with pdfLaTeX; checked locally with TinyTeX (TeX Live 2026).
 PDFLATEX = shutil.which('pdflatex') or str(Path.home() / 'Library/TinyTeX/bin/universal-darwin/pdflatex')
 WARNING = r'Overfull|Underfull|undefined|Missing character|LaTeX Warning'
-PAGES = 11
+PAGES = 12
+DATE = '2026-11-10'
+# Names of the two files the author uploads to Zenodo (copies of preview.pdf and supplement.zip).
+ZENODO_PDF = 'schema-width-editable-keys.pdf'
+ZENODO_SUPPLEMENT = 'schema-width-editable-keys-supplement.zip'
 # Appended on 2026-11-07 (SYNASC slide addendum); intentionally not preserved.
 APPENDED = {'literature/schema-width-positioning-20261105.md'}
 
@@ -70,6 +75,16 @@ def replay(root, *flags):
     return json.loads(run.stdout[:run.stdout.rindex('}') + 1])
 
 
+def recompute_e014(root):
+    run = subprocess.run(['python3', '-I', '-S', '-B', 'verify_scale.py', '--verify'], cwd=root / 'E014',
+                         capture_output=True, text=True)
+    need(run.returncode == 0, 'E014 recomputation failed: ' + run.stdout[-1000:] + run.stderr[-2000:])
+    result = json.loads(run.stdout.strip().splitlines()[-1])
+    need(result['status'] == 'passed' and result['results_match'] and result['hashes_match'],
+         'E014 recomputation differs from the stored summary')
+    return result
+
+
 def main():
     # 1. Earlier evidence and manuscripts are unchanged.
     baseline = json.loads((REPO / 'milestones/M33-preserved-artifacts.json').read_text())
@@ -87,6 +102,9 @@ def main():
     summary = json.loads((e013 / 'results/summary.json').read_text())
     need(summary['all_predictions_match'] and summary['totals']['rejected_pairs_checked'] == 81893,
          'Unexpected E013 summary')
+    e014 = REPO / 'experiments/E014-scale-sharpness'
+    need(json.loads((e014 / 'results/summary.json').read_text())['status'] == 'passed',
+         'Unexpected E014 summary')
 
     # 2. Build the PDF from the source.
     source = HERE / 'tex/main.tex'
@@ -99,7 +117,7 @@ def main():
     text = '\n'.join(pages)
     need(len(pages) == PAGES and 'Trần Vũ Bảo Minh' in pages[0], 'Page count or author differs')
     for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
-                   '81,893', '39,379', 'Mureșan', 'Miclăuș'):
+                   'Larger optima', '5,594,099', '81,893', '39,379', 'Mureșan', 'Miclăuș'):
         need(phrase in text, f'Missing content: {phrase}')
     fonts = embedded_fonts(pdf)
     need(fonts and all(fonts.values()), 'Unembedded font')
@@ -122,11 +140,11 @@ def main():
         need(len(latin.pages) == PAGES and 'Trần Vũ Bảo Minh' in latin.pages[0].extract_text(),
              'pdfLaTeX page count or author differs')
         for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
-                       '81,893', '39,379', 'Miclăus', 'Mures'):
+                       'Larger optima', '5,594,099', '81,893', '39,379', 'Miclăus', 'Mures'):
             need(phrase in latin_text, f'pdfLaTeX missing content: {phrase}')
         need(latin_fonts and all(latin_fonts.values()), 'pdfLaTeX unembedded font')
 
-    report = dict(date='2026-11-07', pages=PAGES, tables=source.read_text().count(r'\begin{table}'),
+    report = dict(date=DATE, pages=PAGES, tables=source.read_text().count(r'\begin{table}'),
                   references=source.read_text().count(r'\bibitem'), fonts=fonts,
                   all_fonts_embedded=True, author_exact_unicode=True,
                   prior_artifacts_unchanged=len(baseline), r3_artifacts_unchanged=len(r3['artifact_sha256']),
@@ -138,8 +156,10 @@ def main():
                                 note='comma-below s extracts as "s," (accent built from s and comma); '
                                      'pages rendered and inspected, recorded in milestones/M36-R4.md'),
                   visual_pages_inspected='recorded separately in milestones/M36-R4.md',
-                  independent_review=False, author_approval='not_given', license=None,
-                  actual_submission='absent',
+                  independent_review=False,
+                  owner_decision='2026-11-10: post on Zenodo first; the upload and the license '
+                                 'choice are the owner\'s own actions and are not performed here',
+                  license=None, posted_by_this_check=False,
                   artifact_sha256={str(p.relative_to(REPO)): digest(p) for p in
                                    [source, HERE / 'preview.pdf', HERE / 'source.zip',
                                     HERE / 'replay_e013.py']})
@@ -150,12 +170,13 @@ def main():
     members = {'main.tex': source, 'README.md': HERE / 'README.md',
                'replay_e013.py': HERE / 'replay_e013.py',
                'revision-verification.json': verification,
-               'schema-width-positioning.md': REPO / 'literature/schema-width-positioning-20261105.md',
-               'owner-guide-vi.md': REPO / 'to_human/M36-R4-progress-vi.md'}
+               'schema-width-positioning.md': REPO / 'literature/schema-width-positioning-20261105.md'}
     for name in ('protocol.md', 'verify_width.py', 'theory.md', 'analysis.md',
                  'proof-audit-20261107.md', 'reanalyze_e011.py', 'results/summary.json',
                  'results/cases.jsonl.gz', 'results/e011-analytical-reanalysis.json'):
         members['E013/' + name] = e013 / name
+    for name in ('protocol.md', 'verify_scale.py', 'analysis.md', 'results/summary.json'):
+        members['E014/' + name] = e014 / name
     manifest = {name: digest(path) for name, path in members.items()}
     with zipfile.ZipFile(HERE / 'supplement.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
         for name, path in members.items():
@@ -172,11 +193,24 @@ def main():
         records = replay(root)
         enumerated = replay(root, '--reenumerate')
         need(enumerated['reenumerated'], 'Re-enumeration not performed')
-    supplement = dict(date='2026-11-07', members=len(members) + 1,
+        scale = recompute_e014(root)
+    supplement = dict(date=DATE, members=len(members) + 1,
                       sha256=digest(HERE / 'supplement.zip'),
                       all_member_hashes_and_CRC_verified=True,
                       extracted_record_replay=records, extracted_reenumeration=enumerated,
+                      extracted_e014_recomputation=scale,
                       no_git_or_third_party_imports_required=True)
+
+    # 5. The two files for the Zenodo upload are byte-identical copies under descriptive names.
+    upload = HERE / 'zenodo'
+    upload.mkdir(exist_ok=True)
+    shutil.copyfile(HERE / 'preview.pdf', upload / ZENODO_PDF)
+    shutil.copyfile(HERE / 'supplement.zip', upload / ZENODO_SUPPLEMENT)
+    info = PdfReader(upload / ZENODO_PDF).metadata
+    need(info.title and info.title.startswith('Schema Width Bounds') and info.author == 'Trần Vũ Bảo Minh',
+         'PDF title or author metadata differs')
+    supplement['zenodo_upload'] = {ZENODO_PDF: digest(upload / ZENODO_PDF),
+                                   ZENODO_SUPPLEMENT: digest(upload / ZENODO_SUPPLEMENT)}
     (HERE / 'supplement-verification.json').write_text(json.dumps(supplement, indent=2, sort_keys=True) + '\n')
     print(json.dumps(dict(pages=PAGES, fonts_embedded=len(fonts),
                           prior_artifacts_unchanged=len(baseline), supplement=supplement), indent=2))

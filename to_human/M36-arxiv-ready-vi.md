@@ -1,5 +1,9 @@
 # R4 đã sẵn sàng để đăng arXiv
 
+> Cập nhật 10/11/2026: bài đã có thêm Proposition 1 và dài 12 trang. Bạn
+> quyết định đăng Zenodo trước; xem `to_human/M37-zenodo-vi.md`. Phần dưới là
+> báo cáo ngày 07/11.
+
 Ngày 07/11/2026. Bạn giao toàn quyền chỉnh bài và nhờ mình tự đánh giá. Kết
 luận của mình: **bài đã đủ để đăng arXiv dưới dạng preprint**. Việc bấm nộp do
 bạn làm, vì cần tài khoản của bạn, và chỉ nên làm sau khi bạn tự đọc bài.

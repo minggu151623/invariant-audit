@@ -1,6 +1,24 @@
 # Findings
 
-## Current research — 2026-11-07, M36
+## Current research — 2026-11-10, M37
+
+The owner decided to post R4 on Zenodo first and asked for another review.
+The review answered R4's first open question in part. Proposition 1: with at
+least k+1 dependent values, every listed family has a binary-key table with
+rho_full = k and rho_fixed = w(F)*k; with a binary dependent attribute and
+F = {{a,b},{a,c}}, rho_fixed <= rho_full + 1. The case d <= k is open.
+
+E014 checked both parts under a protocol committed before the code; the single
+run passed (nine constructions and a control with 5,594,099 edited tables
+enumerated; 74,612 binary tables, 332 strict gaps, none above one edit).
+Proof and check are AI work inside this project; no independent review exists.
+
+R4 is now 12 pages and the full delivery check passes. The upload files and
+record fields are prepared; nothing is uploaded and no license is chosen. See
+[M37](milestones/M37-scale-and-zenodo.md) and the
+[Vietnamese guide](to_human/M37-zenodo-vi.md).
+
+## Research — 2026-11-07, M36 (historical)
 
 R4 (`paper/context-edit-stability-r4/`) is now the current manuscript. It is
 centered on the E013 width theorem: rho_full <= rho_fixed <= w(F)*rho_full,

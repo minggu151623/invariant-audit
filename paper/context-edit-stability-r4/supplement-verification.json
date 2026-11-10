@@ -1,6 +1,12 @@
 {
   "all_member_hashes_and_CRC_verified": true,
-  "date": "2026-11-07",
+  "date": "2026-11-10",
+  "extracted_e014_recomputation": {
+    "elapsed_seconds": 30.2,
+    "hashes_match": true,
+    "results_match": true,
+    "status": "passed"
+  },
   "extracted_record_replay": {
     "constructions": 139,
     "hashes_match": true,
@@ -25,7 +31,11 @@
       "strict_key_gains": 62
     }
   },
-  "members": 16,
+  "members": 19,
   "no_git_or_third_party_imports_required": true,
-  "sha256": "44d0b2725d3547cd08a01fec3136fe2d436c7ce12d81be097a223ce5c362c332"
+  "sha256": "c50917fef6561bf96a69ccb5c70f5c4b7f1d4fcde608bf7a7d8510d0b339f84f",
+  "zenodo_upload": {
+    "schema-width-editable-keys-supplement.zip": "c50917fef6561bf96a69ccb5c70f5c4b7f1d4fcde608bf7a7d8510d0b339f84f",
+    "schema-width-editable-keys.pdf": "f6d25576a7c318958b65d5c34b73e5ca3da47226409e87ba41c8a276fc0ee83a"
+  }
 }

@@ -1,17 +1,15 @@
 {
-  "actual_submission": "absent",
   "all_fonts_embedded": true,
   "artifact_sha256": {
-    "paper/context-edit-stability-r4/preview.pdf": "6c1215ed6b460dc09efb1ae22d0088d5d4adc727c106342d5c5d501f4171c5ff",
+    "paper/context-edit-stability-r4/preview.pdf": "f6d25576a7c318958b65d5c34b73e5ca3da47226409e87ba41c8a276fc0ee83a",
     "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
-    "paper/context-edit-stability-r4/source.zip": "389563806da2a02572e65ecddbb0dc82f2f6b017725105c2bc8dcf02617ff484",
-    "paper/context-edit-stability-r4/tex/main.tex": "97fec0453385612cd325d383098b77707c014fb8fe08a0c1e24705bd3122be12"
+    "paper/context-edit-stability-r4/source.zip": "051c921bda068ffedf1d340d639238cb04d631e0e9d8bb3fa42132cd74c83142",
+    "paper/context-edit-stability-r4/tex/main.tex": "73e40de2a740bceed7dd7095e14156f3f3df6612da99a82925e9eacb08ede484"
   },
-  "author_approval": "not_given",
   "author_exact_unicode": true,
   "compiler": "Tectonic with bundled cache (--only-cached)",
   "compiler_warnings": 0,
-  "date": "2026-11-07",
+  "date": "2026-11-10",
   "extracted_source_compile_text_identical": true,
   "fonts": {
     "/AKHCZK+CMR10": true,
@@ -33,15 +31,17 @@
   ],
   "license": null,
   "m35_artifacts_unchanged": 6,
-  "pages": 11,
+  "owner_decision": "2026-11-10: post on Zenodo first; the upload and the license choice are the owner's own actions and are not performed here",
+  "pages": 12,
   "pdflatex": {
     "all_fonts_embedded": true,
     "engine": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
     "fonts": 15,
     "log_warnings": 0,
     "note": "comma-below s extracts as \"s,\" (accent built from s and comma); pages rendered and inspected, recorded in milestones/M36-R4.md",
-    "pages": 11
+    "pages": 12
   },
+  "posted_by_this_check": false,
   "prior_artifacts_unchanged": 197,
   "r3_artifacts_unchanged": 5,
   "references": 21,
