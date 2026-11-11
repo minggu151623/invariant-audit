@@ -1308,3 +1308,10 @@ rewriting where needed.
 - `check_revision.py` checks the DOI and passed in both engines. Hashes updated.
 - The DOI resolves only after the owner publishes the same draft. Nothing was
   uploaded here.
+
+## 2026-11-11 — M37 addendum: DOI kept in Section 9 only
+
+- At the owner's request the DOI was removed from the title page; it remains
+  in Section 9. The full check passed; hashes updated.
+- The files in the owner's Zenodo draft are now outdated and must be replaced
+  by the owner before Publish. Nothing was uploaded here.

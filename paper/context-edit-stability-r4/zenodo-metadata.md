@@ -19,7 +19,7 @@ Their SHA-256 hashes are in `supplement-verification.json` under
 
 | Field | Value |
 |---|---|
-| DOI | Reserved on 2026-11-11: `10.5281/zenodo.24124620`. It is printed on the title page and in Section 9 of the PDF. Keep the same draft (do not start a new upload, which would get a different DOI). The DOI is registered at Publish. |
+| DOI | Reserved on 2026-11-11: `10.5281/zenodo.24124620`. It is given in Section 9 of the PDF (not on the title page, at the author's request). Keep the same draft (do not start a new upload, which would get a different DOI). The DOI is registered at Publish. |
 | Resource type | Publication → Preprint |
 | Title | Schema Width Bounds the Benefit of Editable Keys for Plurality-Based Functional-Dependency Checks |
 | Publication date | The day you publish the record. The PDF is dated 2026-11-11. |

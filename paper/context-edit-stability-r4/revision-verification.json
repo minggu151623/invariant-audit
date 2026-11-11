@@ -1,10 +1,10 @@
 {
   "all_fonts_embedded": true,
   "artifact_sha256": {
-    "paper/context-edit-stability-r4/preview.pdf": "e97fe444e6b25d82b5d10affd92309037353a18ce4030d8a6026507af27fcaaa",
+    "paper/context-edit-stability-r4/preview.pdf": "42656c4503ee97212df46b3de56cee07acc53273eaad9bf22911c104a9de69e7",
     "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
-    "paper/context-edit-stability-r4/source.zip": "7c0defd5263e516dd6f392577066dc4c8c86c8fcc3645dd334ed2e4544f11de6",
-    "paper/context-edit-stability-r4/tex/main.tex": "7395243249622fbfefb2524bfab6efab97f66c5508d92b5827d3de448731bec4"
+    "paper/context-edit-stability-r4/source.zip": "5c5325f7dcb39c8252fe5cdf8414039965462e512b2a7b20868c01c1edda6f93",
+    "paper/context-edit-stability-r4/tex/main.tex": "47d5c5eedcda7e9c746d52c028409d9790604ed688268ec4dd1513a677479824"
   },
   "author_as_chosen": "Tran Vu Bao Minh",
   "compiler": "Tectonic with bundled cache (--only-cached)",

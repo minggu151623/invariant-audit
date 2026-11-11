@@ -109,3 +109,13 @@ The DOI does not resolve until the owner publishes that draft. If the owner
 starts a different upload, the DOI in the PDF will be wrong and the files must
 be rebuilt. Nothing has been uploaded from this workspace. The field notes
 were also aligned with a saved copy of the upload form that the owner shared.
+
+## Addendum: DOI removed from the title page (2026-11-11)
+
+The owner found the DOI on the date line unattractive and asked to remove it.
+The title page again shows only the title, author, affiliation and date. The
+DOI stays in Section 9 as a link. `check_revision.py` now requires exactly one
+occurrence and none on page 1; it passed (12 pages, both engines, zero
+warnings). The title block was rendered and inspected. New hashes are in
+`state/workspace.yaml`. The owner had already uploaded the previous files to
+the Zenodo draft, so both files there must be replaced before Publish.

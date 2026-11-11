@@ -2,8 +2,7 @@
 
 2026-11-11. Author: Tran Vu Bao Minh, Independent Researcher.
 Zenodo DOI reserved by the author: 10.5281/zenodo.24124620 (it resolves once
-the author has published the record). The paper prints it on the title page
-and in Section 9.
+the author has published the record). The paper gives it in Section 9.
 On 2026-11-10 the author decided to post the paper on Zenodo first. The upload
 and the license choice are the author's own actions; this directory only
 prepares the files. R3 and every earlier packet are preserved unchanged.
