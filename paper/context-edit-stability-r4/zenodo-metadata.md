@@ -19,13 +19,14 @@ Their SHA-256 hashes are in `supplement-verification.json` under
 
 | Field | Value |
 |---|---|
-| DOI | Choose "No" (the work has no DOI yet). Zenodo assigns one. |
+| DOI | Select "No, I need one". The form opens with "Yes, I already have one" selected, so this must be changed. Zenodo assigns the DOI at Publish. |
 | Resource type | Publication → Preprint |
 | Title | Schema Width Bounds the Benefit of Editable Keys for Plurality-Based Functional-Dependency Checks |
 | Publication date | The day you publish the record. The PDF is dated 2026-11-11. |
 | Creators | Family name: Tran. Given names: Vu Bao Minh (written without diacritics, as in the PDF). Affiliation: Independent Researcher. ORCID: optional. |
 | Languages | English |
-| Version | R4 (optional) |
+| Version | Leave empty. "R4" is an internal draft number and does not appear in the PDF. |
+| Publisher | Leave "Zenodo" (prefilled). |
 
 ## Description
 
@@ -46,7 +47,9 @@ distance; robustness; laminar families; Dilworth's theorem; NP-completeness
 
 ## License (the author's choice)
 
-Zenodo asks for a license on a public record and suggests CC BY 4.0.
+Zenodo asks for a license on a public record. The upload form (checked on
+2026-11-11 from a saved copy of the page) opens with CC BY 4.0 already
+selected, so publishing without touching the field means choosing CC BY 4.0.
 
 - **CC BY 4.0.** Anyone may reuse and adapt the work with attribution. It is
   the usual choice for preprints and is accepted by arXiv and most journals.
@@ -66,3 +69,10 @@ distributed.
    `d98e454`, `27ca9b2` are the new ones).
 3. Use Preview. After Publish the files cannot be replaced or deleted; a
    correction needs a new version, which gets its own DOI.
+
+## Fields to leave empty
+
+Checked against the upload form on 2026-11-11: Community, Copyright,
+Contributors, Dates, Funding, Alternate identifiers, References, Software,
+Publishing information (Journal, Imprint, Thesis, Conference) and Domain
+specific fields. Visibility stays Public; no embargo.
