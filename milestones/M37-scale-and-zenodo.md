@@ -88,3 +88,24 @@ The owner also asked whether to rename the GitHub repository. Advice given:
 not needed, because the repository holds the whole project and not only this
 paper. Renaming is the owner's own action; if done, the URL in Section 9 and
 in the field files must be updated and the files rebuilt before the upload.
+
+## Addendum: reserved Zenodo DOI printed in the paper (2026-11-11)
+
+The owner reserved a DOI in their Zenodo draft and supplied it:
+"DOI đây 10.5281/zenodo.24124620". It now appears on the date line of the title
+page and in Section 9, which also says that the supplement is archived with
+the paper under that DOI. Both occurrences are links to
+https://doi.org/10.5281/zenodo.24124620. A first layout with the DOI on its
+own line gave 13 pages; placing it on the date line keeps 12 pages in both
+engines.
+
+`check_revision.py` now requires the DOI on page 1 and exactly two occurrences
+in each build. It passed: 12 pages, zero warnings in both engines, fonts
+embedded, preserved artifacts unchanged, supplement replays pass. The title
+block and page 11 were rendered and inspected in both builds. New hashes are
+in `state/workspace.yaml` (M37).
+
+The DOI does not resolve until the owner publishes that draft. If the owner
+starts a different upload, the DOI in the PDF will be wrong and the files must
+be rebuilt. Nothing has been uploaded from this workspace. The field notes
+were also aligned with a saved copy of the upload form that the owner shared.

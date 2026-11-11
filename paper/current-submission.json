@@ -7,10 +7,11 @@
   "status": "prepared_for_zenodo_preprint_pending_author_read_through_license_and_upload",
   "older_packets": "Preserved historical snapshots; do not use their metadata for R3.",
   "current_research": "milestones/M37-scale-and-zenodo.md",
-  "note": "Owner decided on 2026-11-10 to post on Zenodo first. R4 reviewed again; Proposition 1 (larger optima) and E014 added; 12 pages. On 2026-11-11 the owner asked for the author name without diacritics (Tran Vu Bao Minh); files rebuilt. No license chosen, nothing uploaded.",
+  "note": "Owner decided on 2026-11-10 to post on Zenodo first. R4 reviewed again; Proposition 1 (larger optima) and E014 added; 12 pages. On 2026-11-11 the owner asked for the author name without diacritics (Tran Vu Bao Minh); files rebuilt. The owner reserved the Zenodo DOI 10.5281/zenodo.24124620 on 2026-11-11; it is printed in the PDF. Nothing published yet.",
   "current_supplement": "paper/context-edit-stability-r4/supplement.zip",
   "arxiv_source": "paper/context-edit-stability-r4/source.zip (main.tex only; pdfLaTeX-checked with TeX Live 2026)",
   "arxiv_metadata": "paper/context-edit-stability-r4/arxiv-metadata.md",
   "zenodo_files": "paper/context-edit-stability-r4/zenodo/ (PDF and supplement, copies of current_pdf and current_supplement)",
-  "zenodo_metadata": "paper/context-edit-stability-r4/zenodo-metadata.md"
+  "zenodo_metadata": "paper/context-edit-stability-r4/zenodo-metadata.md",
+  "zenodo_doi_reserved_by_owner": "10.5281/zenodo.24124620"
 }

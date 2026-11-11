@@ -1300,3 +1300,11 @@ rewriting where needed.
 - The full check passed (12 pages, both engines, zero warnings). Hashes in
   `state/workspace.yaml` were updated. No scientific change, no new run.
 - Nothing was uploaded. The repository was not renamed.
+
+## 2026-11-11 — M37 addendum: Zenodo DOI in the paper
+
+- The owner reserved DOI 10.5281/zenodo.24124620 and supplied it. It is printed
+  on the title page (date line) and in Section 9; 12 pages kept.
+- `check_revision.py` checks the DOI and passed in both engines. Hashes updated.
+- The DOI resolves only after the owner publishes the same draft. Nothing was
+  uploaded here.

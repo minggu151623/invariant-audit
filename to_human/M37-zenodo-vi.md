@@ -4,6 +4,10 @@
 > không dấu là "Tran Vu Bao Minh" (giữ thứ tự họ trước, tên sau). Ngày ghi
 > trên bài là 11/11/2026. Hai file trong thư mục `zenodo/` đã được dựng lại;
 > nội dung khoa học không đổi.
+>
+> Cùng ngày, bạn đã giữ trước DOI `10.5281/zenodo.24124620`. DOI này đã được in
+> ở trang 1 và mục 9 của PDF. Hãy tải file lên đúng bản nháp đã giữ DOI đó;
+> nếu tạo bản upload mới thì DOI sẽ khác với DOI in trong bài.
 
 Ngày 10/11/2026. Bạn quyết định đăng Zenodo trước và nhờ mình rà lại bài. Mình
 đã rà, sửa và chuẩn bị xong hai file để tải lên. Việc đăng nhập, chọn giấy

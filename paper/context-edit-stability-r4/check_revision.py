@@ -23,6 +23,9 @@ PAGES = 12
 DATE = '2026-11-11'
 # The author chose the unaccented form of the name on 2026-11-11.
 AUTHOR = 'Tran Vu Bao Minh'
+# Reserved by the author on Zenodo on 2026-11-11 and printed in the paper. Zenodo
+# registers it only when the author publishes the record.
+DOI = '10.5281/zenodo.24124620'
 # Names of the two files the author uploads to Zenodo (copies of preview.pdf and supplement.zip).
 ZENODO_PDF = 'schema-width-editable-keys.pdf'
 ZENODO_SUPPLEMENT = 'schema-width-editable-keys-supplement.zip'
@@ -118,6 +121,7 @@ def main():
     pages = [p.extract_text() for p in pdf.pages]
     text = '\n'.join(pages)
     need(len(pages) == PAGES and AUTHOR in pages[0], 'Page count or author differs')
+    need('doi:' + DOI in pages[0] and text.count(DOI) == 2, 'DOI missing or unexpected count')
     for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
                    'Larger optima', '5,594,099', '81,893', '39,379', 'Mureșan', 'Miclăuș'):
         need(phrase in text, f'Missing content: {phrase}')
@@ -141,6 +145,8 @@ def main():
         latin_fonts = embedded_fonts(latin)
         need(len(latin.pages) == PAGES and AUTHOR in latin.pages[0].extract_text(),
              'pdfLaTeX page count or author differs')
+        need('doi:' + DOI in latin.pages[0].extract_text() and latin_text.count(DOI) == 2,
+             'pdfLaTeX DOI missing or unexpected count')
         for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
                        'Larger optima', '5,594,099', '81,893', '39,379', 'Miclăus', 'Mures'):
             need(phrase in latin_text, f'pdfLaTeX missing content: {phrase}')
@@ -149,6 +155,7 @@ def main():
     report = dict(date=DATE, pages=PAGES, tables=source.read_text().count(r'\begin{table}'),
                   references=source.read_text().count(r'\bibitem'), fonts=fonts,
                   all_fonts_embedded=True, author_as_chosen=AUTHOR,
+                  zenodo_doi_reserved_by_owner=DOI, zenodo_doi_registered='not until the owner publishes',
                   prior_artifacts_unchanged=len(baseline), r3_artifacts_unchanged=len(r3['artifact_sha256']),
                   m35_artifacts_unchanged=len(kept), intentionally_appended=sorted(APPENDED),
                   compiler='Tectonic with bundled cache (--only-cached)', compiler_warnings=0,

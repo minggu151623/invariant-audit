@@ -2,7 +2,7 @@
   "all_member_hashes_and_CRC_verified": true,
   "date": "2026-11-11",
   "extracted_e014_recomputation": {
-    "elapsed_seconds": 29.9,
+    "elapsed_seconds": 29.0,
     "hashes_match": true,
     "results_match": true,
     "status": "passed"
@@ -33,9 +33,9 @@
   },
   "members": 19,
   "no_git_or_third_party_imports_required": true,
-  "sha256": "1a869c0c7932eba7f0a569be3a9197a63aaa9ca932d0ed209107eab8d8ee4286",
+  "sha256": "adb41b4f6e9f4c9886df73b5dd8672e27d8a0734144f7cebf53dc791041fe3fa",
   "zenodo_upload": {
-    "schema-width-editable-keys-supplement.zip": "1a869c0c7932eba7f0a569be3a9197a63aaa9ca932d0ed209107eab8d8ee4286",
-    "schema-width-editable-keys.pdf": "a15f2135e0e723fe588d7ddcf47f680e1a63cafecb0c7f7a50ca516054b2194e"
+    "schema-width-editable-keys-supplement.zip": "adb41b4f6e9f4c9886df73b5dd8672e27d8a0734144f7cebf53dc791041fe3fa",
+    "schema-width-editable-keys.pdf": "e97fe444e6b25d82b5d10affd92309037353a18ce4030d8a6026507af27fcaaa"
   }
 }

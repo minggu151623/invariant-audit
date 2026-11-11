@@ -33,7 +33,7 @@ The abstract is 1,677 characters; arXiv's limit is 1,920.
 ## Comments
 
 ```
-12 pages, 3 tables. Code, frozen protocols and a replay script: https://github.com/minggu151623/invariant-audit
+12 pages, 3 tables. Also archived at https://doi.org/10.5281/zenodo.24124620. Code, frozen protocols and a replay script: https://github.com/minggu151623/invariant-audit
 ```
 
 ## Categories
