@@ -1,5 +1,10 @@
 # Rà soát R4 và chuẩn bị đăng Zenodo
 
+> Cập nhật 11/11/2026: theo yêu cầu của bạn, tên tác giả trong bài nay viết
+> không dấu là "Tran Vu Bao Minh" (giữ thứ tự họ trước, tên sau). Ngày ghi
+> trên bài là 11/11/2026. Hai file trong thư mục `zenodo/` đã được dựng lại;
+> nội dung khoa học không đổi.
+
 Ngày 10/11/2026. Bạn quyết định đăng Zenodo trước và nhờ mình rà lại bài. Mình
 đã rà, sửa và chuẩn bị xong hai file để tải lên. Việc đăng nhập, chọn giấy
 phép và bấm Publish là của bạn.

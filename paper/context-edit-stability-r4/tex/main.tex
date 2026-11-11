@@ -5,13 +5,11 @@
   \usepackage{fontspec}
   \setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,
     ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
-  \newcommand{\vn}[1]{#1}
 \else
-  % pdfLaTeX (arXiv): T5 for the Vietnamese author name, T1 elsewhere.
-  \usepackage[T5,T1]{fontenc}
+  % pdfLaTeX (arXiv)
+  \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{lmodern}
-  \newcommand{\vn}[1]{{\fontencoding{T5}\selectfont #1}}
 \fi
 \usepackage{amsmath,amssymb,amsthm,booktabs,array,float}
 \usepackage[hidelinks]{hyperref}
@@ -28,11 +26,11 @@
 \setlength{\emergencystretch}{2em}
 \title{Schema Width Bounds the Benefit of Editable Keys\\
 for Plurality-Based Functional-Dependency Checks}
-\author{\vn{Trần Vũ Bảo Minh}\\[0.4em]\small Independent Researcher}
-\date{November 10, 2026}
+\author{Tran Vu Bao Minh\\[0.4em]\small Independent Researcher}
+\date{November 11, 2026}
 \hypersetup{pdftitle={Schema Width Bounds the Benefit of Editable Keys for
   Plurality-Based Functional-Dependency Checks},
-  pdfauthor={Trần Vũ Bảo Minh}}
+  pdfauthor={Tran Vu Bao Minh}}
 \begin{document}
 \maketitle
 \begin{abstract}

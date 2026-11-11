@@ -2021,10 +2021,13 @@ M37:
   open_case: d_le_k_in_general
   manuscript: paper/context-edit-stability-r4/tex/main.tex
   preview_pdf: paper/context-edit-stability-r4/preview.pdf
-  preview_pdf_sha256: f6d25576a7c318958b65d5c34b73e5ca3da47226409e87ba41c8a276fc0ee83a
+  preview_pdf_sha256: a15f2135e0e723fe588d7ddcf47f680e1a63cafecb0c7f7a50ca516054b2194e
   supplement: paper/context-edit-stability-r4/supplement.zip
-  supplement_sha256: c50917fef6561bf96a69ccb5c70f5c4b7f1d4fcde608bf7a7d8510d0b339f84f
-  source_zip_sha256: 051c921bda068ffedf1d340d639238cb04d631e0e9d8bb3fa42132cd74c83142
+  supplement_sha256: 1a869c0c7932eba7f0a569be3a9197a63aaa9ca932d0ed209107eab8d8ee4286
+  source_zip_sha256: 615adf91f0c542385cddc1095213df149d98b35b7442a99dded20e6103439ef6
+  rebuilt: 2026-11-11
+  author_name_in_paper: "Tran Vu Bao Minh"
+  author_name_note: owner_asked_on_2026-11-11_for_the_form_without_diacritics_same_word_order
   pages: 12
   compiler_warnings: 0
   fonts_embedded: true

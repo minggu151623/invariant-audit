@@ -1,6 +1,7 @@
 # arXiv submission fields for R4
 
-Prepared 2026-11-07, updated 2026-11-10 (new abstract, 12 pages). The author
+Prepared 2026-11-07, updated 2026-11-10 (new abstract, 12 pages) and
+2026-11-11 (author name without diacritics, at the author's request). The author
 decided to post on Zenodo first; see `zenodo-metadata.md`. These fields are
 kept for a later arXiv submission. The author submits; nothing here has been
 submitted.
@@ -17,7 +18,7 @@ Schema Width Bounds the Benefit of Editable Keys for Plurality-Based Functional-
 
 ## Authors
 
-Trần Vũ Bảo Minh
+Tran Vu Bao Minh
 
 Affiliation in the paper: Independent Researcher.
 

@@ -1,15 +1,15 @@
 {
   "all_fonts_embedded": true,
   "artifact_sha256": {
-    "paper/context-edit-stability-r4/preview.pdf": "f6d25576a7c318958b65d5c34b73e5ca3da47226409e87ba41c8a276fc0ee83a",
+    "paper/context-edit-stability-r4/preview.pdf": "a15f2135e0e723fe588d7ddcf47f680e1a63cafecb0c7f7a50ca516054b2194e",
     "paper/context-edit-stability-r4/replay_e013.py": "62f01900200d6a3cbd0c5a558614642253fe3410c41f92349b97e36308eafcb6",
-    "paper/context-edit-stability-r4/source.zip": "051c921bda068ffedf1d340d639238cb04d631e0e9d8bb3fa42132cd74c83142",
-    "paper/context-edit-stability-r4/tex/main.tex": "73e40de2a740bceed7dd7095e14156f3f3df6612da99a82925e9eacb08ede484"
+    "paper/context-edit-stability-r4/source.zip": "615adf91f0c542385cddc1095213df149d98b35b7442a99dded20e6103439ef6",
+    "paper/context-edit-stability-r4/tex/main.tex": "c79ccc3711a18e4e8867f4c0c1de398e4e4e3f9aae4a303c61b5ea4ee16825a9"
   },
-  "author_exact_unicode": true,
+  "author_as_chosen": "Tran Vu Bao Minh",
   "compiler": "Tectonic with bundled cache (--only-cached)",
   "compiler_warnings": 0,
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "extracted_source_compile_text_identical": true,
   "fonts": {
     "/AKHCZK+CMR10": true,

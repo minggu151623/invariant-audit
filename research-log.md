@@ -1291,3 +1291,12 @@ rewriting where needed.
   recomputation from the extracted supplement.
 - Zenodo files, record fields and a Vietnamese guide were added. Nothing was
   uploaded; the license is the owner's choice.
+
+## 2026-11-11 — M37 addendum: author name without diacritics
+
+- At the owner's request the author is written "Tran Vu Bao Minh" in the
+  paper, the PDF metadata, the README and the arXiv/Zenodo field files. The T5
+  encoding was dropped from the pdfLaTeX branch. Date on the paper: 2026-11-11.
+- The full check passed (12 pages, both engines, zero warnings). Hashes in
+  `state/workspace.yaml` were updated. No scientific change, no new run.
+- Nothing was uploaded. The repository was not renamed.

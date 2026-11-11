@@ -66,3 +66,25 @@ full text of Tao et al. (FAW 2021) was not obtained.
 
 Nothing has been uploaded. The three E014 commits and the paper commit must be
 on `origin/main` before the upload, because the PDF cites them.
+
+## Addendum: author name without diacritics (2026-11-11)
+
+The owner asked: "tôi muốn để tên mình ở dạng không dấu". The author line and
+the PDF metadata now read "Tran Vu Bao Minh" (same word order as before). The
+name is ASCII, so the pdfLaTeX branch no longer loads the T5 encoding
+(`vntex`); T1 with `lmodern` remains. The date on the paper is 2026-11-11. No
+scientific content changed.
+
+`check_revision.py` passed again on 2026-11-11: 12 pages, zero warnings, all
+fonts embedded, 197 preserved artifacts unchanged, the extracted supplement
+replays E013 and recomputes E014. A separate pdfLaTeX build has 12 pages and
+zero warnings. Page 1 was rendered and inspected in both builds; Miclăuș and
+Mureșan still display correctly without T5. New hashes are in
+`state/workspace.yaml` (M37). The README, the arXiv and Zenodo field files and
+the Vietnamese guide carry the new form of the name. Older records keep the
+accented name as written at the time.
+
+The owner also asked whether to rename the GitHub repository. Advice given:
+not needed, because the repository holds the whole project and not only this
+paper. Renaming is the owner's own action; if done, the URL in Section 9 and
+in the field files must be updated and the files rebuilt before the upload.

@@ -20,7 +20,9 @@ CACHE = '/Users/mac/Library/Application Support/ChatGPT/latex/tectonic'
 PDFLATEX = shutil.which('pdflatex') or str(Path.home() / 'Library/TinyTeX/bin/universal-darwin/pdflatex')
 WARNING = r'Overfull|Underfull|undefined|Missing character|LaTeX Warning'
 PAGES = 12
-DATE = '2026-11-10'
+DATE = '2026-11-11'
+# The author chose the unaccented form of the name on 2026-11-11.
+AUTHOR = 'Tran Vu Bao Minh'
 # Names of the two files the author uploads to Zenodo (copies of preview.pdf and supplement.zip).
 ZENODO_PDF = 'schema-width-editable-keys.pdf'
 ZENODO_SUPPLEMENT = 'schema-width-editable-keys-supplement.zip'
@@ -115,7 +117,7 @@ def main():
     pdf = PdfReader(HERE / 'preview.pdf')
     pages = [p.extract_text() for p in pdf.pages]
     text = '\n'.join(pages)
-    need(len(pages) == PAGES and 'Trần Vũ Bảo Minh' in pages[0], 'Page count or author differs')
+    need(len(pages) == PAGES and AUTHOR in pages[0], 'Page count or author differs')
     for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
                    'Larger optima', '5,594,099', '81,893', '39,379', 'Mureșan', 'Miclăuș'):
         need(phrase in text, f'Missing content: {phrase}')
@@ -137,7 +139,7 @@ def main():
         latin = PdfReader(compile_pdflatex(root))
         latin_text = '\n'.join(p.extract_text() for p in latin.pages)
         latin_fonts = embedded_fonts(latin)
-        need(len(latin.pages) == PAGES and 'Trần Vũ Bảo Minh' in latin.pages[0].extract_text(),
+        need(len(latin.pages) == PAGES and AUTHOR in latin.pages[0].extract_text(),
              'pdfLaTeX page count or author differs')
         for phrase in ('Exchange bound', 'Sharpness for every family', 'Laminar characterization',
                        'Larger optima', '5,594,099', '81,893', '39,379', 'Miclăus', 'Mures'):
@@ -146,7 +148,7 @@ def main():
 
     report = dict(date=DATE, pages=PAGES, tables=source.read_text().count(r'\begin{table}'),
                   references=source.read_text().count(r'\bibitem'), fonts=fonts,
-                  all_fonts_embedded=True, author_exact_unicode=True,
+                  all_fonts_embedded=True, author_as_chosen=AUTHOR,
                   prior_artifacts_unchanged=len(baseline), r3_artifacts_unchanged=len(r3['artifact_sha256']),
                   m35_artifacts_unchanged=len(kept), intentionally_appended=sorted(APPENDED),
                   compiler='Tectonic with bundled cache (--only-cached)', compiler_warnings=0,
@@ -207,7 +209,7 @@ def main():
     shutil.copyfile(HERE / 'preview.pdf', upload / ZENODO_PDF)
     shutil.copyfile(HERE / 'supplement.zip', upload / ZENODO_SUPPLEMENT)
     info = PdfReader(upload / ZENODO_PDF).metadata
-    need(info.title and info.title.startswith('Schema Width Bounds') and info.author == 'Trần Vũ Bảo Minh',
+    need(info.title and info.title.startswith('Schema Width Bounds') and info.author == AUTHOR,
          'PDF title or author metadata differs')
     supplement['zenodo_upload'] = {ZENODO_PDF: digest(upload / ZENODO_PDF),
                                    ZENODO_SUPPLEMENT: digest(upload / ZENODO_SUPPLEMENT)}

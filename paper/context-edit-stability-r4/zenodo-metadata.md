@@ -22,8 +22,8 @@ Their SHA-256 hashes are in `supplement-verification.json` under
 | DOI | Choose "No" (the work has no DOI yet). Zenodo assigns one. |
 | Resource type | Publication → Preprint |
 | Title | Schema Width Bounds the Benefit of Editable Keys for Plurality-Based Functional-Dependency Checks |
-| Publication date | The day you publish the record. The PDF is dated 2026-11-10. |
-| Creators | Family name: Trần. Given names: Vũ Bảo Minh. Affiliation: Independent Researcher. ORCID: optional. |
+| Publication date | The day you publish the record. The PDF is dated 2026-11-11. |
+| Creators | Family name: Tran. Given names: Vu Bao Minh (written without diacritics, as in the PDF). Affiliation: Independent Researcher. ORCID: optional. |
 | Languages | English |
 | Version | R4 (optional) |
 

@@ -1,6 +1,6 @@
 # Schema width and editable keys: R4 working preprint
 
-2026-11-10. Author: Trần Vũ Bảo Minh, Independent Researcher.
+2026-11-11. Author: Tran Vu Bao Minh, Independent Researcher.
 On 2026-11-10 the author decided to post the paper on Zenodo first. The upload
 and the license choice are the author's own actions; this directory only
 prepares the files. R3 and every earlier packet are preserved unchanged.
@@ -13,7 +13,9 @@ submission). The source compiles with two engines:
 
 - XeTeX (Tectonic, Latin Modern OpenType fonts) produces `preview.pdf`.
 - pdfLaTeX, the engine arXiv uses, gets a separate preamble branch: T1 encoding
-  with `lmodern`, plus T5 (`vntex`) for the Vietnamese author name only.
+  with `lmodern`. Since 2026-11-11 the author name is written without
+  diacritics, at the author's request, so the T5 encoding (`vntex`) is no
+  longer needed.
   `check_revision.py` builds the extracted source this way with TinyTeX
   (TeX Live 2026): 12 pages, no log warnings, all fonts embedded.
 
