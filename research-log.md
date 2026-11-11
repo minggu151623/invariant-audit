@@ -1315,3 +1315,11 @@ rewriting where needed.
   in Section 9. The full check passed; hashes updated.
 - The files in the owner's Zenodo draft are now outdated and must be replaced
   by the owner before Publish. Nothing was uploaded here.
+
+## 2026-11-11 — M37 addendum: published on Zenodo
+
+- The owner published record 24124620 (version v1, published 2026-11-11).
+  The Zenodo API lists the two expected files: the PDF (md5 c7fa4c8f...) and
+  the new supplement (md5 b6f5518a...). Both match the repository copies.
+- The record page returns HTTP 200. doi.org blocked this client with a bot
+  challenge, so the DOI redirect was not checked from here.

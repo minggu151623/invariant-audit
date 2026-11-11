@@ -2028,7 +2028,7 @@ M37:
   rebuilt: 2026-11-11
   zenodo_doi_reserved_by_owner: "10.5281/zenodo.24124620"
   zenodo_doi_printed_in_pdf: section_9_only_owner_asked_to_remove_it_from_title_page
-  zenodo_doi_registered: not_until_owner_publishes
+  zenodo_doi_registered: published_2026-11-11_by_owner_files_verified_via_api
   author_name_in_paper: "Tran Vu Bao Minh"
   author_name_note: owner_asked_on_2026-11-11_for_the_form_without_diacritics_same_word_order
   pages: 12
